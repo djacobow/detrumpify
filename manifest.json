@@ -1,0 +1,33 @@
+{
+"manifest_version": 2,
+    "name": "Detrumpify",
+    "short_name": "Detrumpify",
+    "description": "Replaces references to Donald Trump with more accurate descriptions.",
+    "version": "1.0.2",
+    "content_scripts": [
+        {
+            "matches": [
+                "*://*.nytimes.com/*",
+                "*://*.facebook.com/*",
+                "*://*.washingtonpost.com/*",
+                "*://*.salon.com/*",
+                "*://*.slate.com/*",
+                "*://*.buzzfeed.com/*",
+                "*://*.vox.com/*",
+                "*://*.huffingtonpost.com/*",
+                "*://*.wsj.com/*",
+                "*://*.economist.com/*"
+                "*://*.latimes.com/*"
+            ],
+            "js": [
+                "content.js"
+            ],
+            "run_at": "document_end"
+        }
+    ],
+    "icons": {
+        "128": "drumpf-128.png",
+        "200": "drumpf-200.png",
+        "400": "drumpf-200.png"
+    }
+}
