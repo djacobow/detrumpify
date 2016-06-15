@@ -1,0 +1,19 @@
+{
+  "title": "Detrumpify",
+  "name": "detrumpify",
+  "version": "0.0.4",
+  "description": "On various media sites, including Facebook and major US newspapers, Replaces the name \"Donald Trump\" with more accurate descriptors.",
+  "main": "index.js",
+  "author": "toolsofourtools.org",
+  "engines": {
+    "firefox": ">=38.0a1",
+    "fennec": ">=38.0a1"
+  },
+  "license": "MIT",
+  "permissions": {
+    "multiprocess": true
+  },
+  "keywords": [
+    "jetpack"
+  ]
+}
