@@ -54,7 +54,7 @@ var replacements = [
 'Carnivorous Plant Watered with Irradiated Bat Urine',
 'Sentient Waste Disposal Plant',
 'Disappointment',
-'Poorly-~rawn Fascist',
+'Poorly-Drawn Fascist',
 'Racist Teratoma',
 'Lamprey Eel Spray-Painted Gold',
 'Hair That You Pluck, Causing a Cluster of Hairs to Sprout in Its Place',
