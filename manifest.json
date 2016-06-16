@@ -7,6 +7,8 @@
     "content_scripts": [
         {
             "matches": [
+                "*://www.bbc.co.uk/news*",
+                "*://www.theguardian.com/*",
                 "*://*.nytimes.com/*",
                 "*://*.facebook.com/*",
                 "*://*.washingtonpost.com/*",
