@@ -1,10 +1,12 @@
 var self = require("sdk/self");
 var pageMod = require("sdk/page-mod");
 
-console.log("Starting index.js");
-
 pageMod.PageMod({
   include: [ 
+               /https?:\/\/(\w+\.)?bbc.com\//,
+               /https?:\/\/(\w+\.)?bbc.co.uk\//,
+               /https?:\/\/(\w+\.)?guardian.co.uk\//,
+               /https?:\/\/(\w+\.)?guardian.com\//,
                /https?:\/\/(\w+\.)?nytimes.com\//,
                /https?:\/\/(\w+\.)?facebook.com\//,
                /https?:\/\/(\w+\.)?washingtonpost.com\//,
