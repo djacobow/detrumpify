@@ -3,12 +3,14 @@
     "name": "Detrumpify",
     "short_name": "Detrumpify",
     "description": "Replaces references to Donald Trump with more accurate descriptions.",
-    "version": "1.0.5",
+    "version": "1.0.7",
     "content_scripts": [
         {
             "matches": [
-                "*://www.bbc.co.uk/news*",
+                "*://www.bbc.com/news/*",
+                "*://www.bbc.co.uk/news/*",
                 "*://www.theguardian.com/*",
+                "*://www.theguardian.co.uk/*",
                 "*://*.nytimes.com/*",
                 "*://*.facebook.com/*",
                 "*://*.washingtonpost.com/*",
