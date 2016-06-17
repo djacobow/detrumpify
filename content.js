@@ -1,4 +1,54 @@
 var replacements = [
+'Bone-in Ham',
+'Four-Time Bankruptcy Filer and Setthing Hernia Mass',
+'Sun-Dried Tomato',
+'Adult Blobfish',
+'Deflated Football',
+    'Fart-Infused Lump of Raw Meat',
+    'Melting Pig Carcass',
+    'Disgraced Racist',
+    'Talking Comb-Over',
+    'Human Equivalent of Cargo Pants that Zip Away into Shorts',
+    'Cheeto-Dusted Bloviator',
+    'Fuzzy Meat-Wad',
+    'Bag of Flour',
+    'Man who Cherishes Women',
+    'Futire Leader of the Free World',
+    'Decomposing Ear of Corn',
+    'Own Best Parody',
+    'Rich Idiot Willing to Allow Garbage to Fall Out of His Mouth Without Batting a Single Golden Lash',
+    'Pond Scum',
+    'Noted Troll',
+    'Class Clown that Everyone Wishes Would Be Quiet and Let The Class Learn',
+    'Melting Businessman',
+    'Wax Museum Figure on a Very Hot Day',
+    'Soggy Burlap Sack',
+    'Bag of Toxic Sludge',
+    'Your Next President and Ruler of Life',
+    'Brightly Burning Trash Fire',
+    'Great Judgement-Haver',
+    'Man-Sized Sebaceous Cyst',
+    'Enlarged Pee-Splattered Sno Cone',
+    'Empty Popcorn Bag Rotting in the Sun',
+    'Man-Shaped Asbestos Insulation Board',
+    'Hair Plug Swollen with Rancid Egg Whites',
+    'Inside-Out Lower Intestine',
+    'Dusty Barrel of Fermented Peepee',
+    'Usually Reasonable Burlap Sack Full of Rancid Peeps',
+    'Presidential Candidate and Bargain Bin Full of Yellowing Jean-Claude Van Damme Movies',
+    'Hairpiece Come to Life',
+    'Normal-Looking Human Man and Entirely Credible Choice as Future Leader of the Free World',
+    'Decomposing Pumpkin Pie Inhabited by Viciious Albino Squirrels',
+    'Dishrag that on Closer Inspection is Alive with Maggots',
+    'Lead Paint Factory Explosion',
+    'Candied Yam Riddled with Moldy Spider Carcasses',
+    'Enraged Gak Spill',
+    'Shriveled Pinto Bean You Had to Pluck out of Your Chipotle Burrito Basket',
+    'Human-Sized Infectious Microbe',
+    'Poorly-Trained Circus Organgutan',
+    'Chester Cheetah Impersonator',
+    'Lumbering Human-Life Tardigrade',
+    'Tiny Piece of Dried Cat Poop that You Found in Your Rug',
 'Seagull Dipped in Tikka Masala',
 'Bursting Landfill of Municipal Solid Waste',
 'Mountain of Rotting Whale Blubber',
@@ -71,10 +121,12 @@ var replacements = [
 'Unkempt Troll Doll Found Floating Facedown in a Tub of Rancid Beluga Caviar',
 ];
 
+var currTimeout = 1000;
+var maxTimeout = 60000;
 var count = 5;
 
 function switchem() {
-    console.log("run : " + count.toString());
+    // console.log("run : " + count.toString());
     var elements = document.getElementsByTagName('*');
     for (var i = 0; i < elements.length; i++) {
         var element = elements[i];
@@ -96,9 +148,10 @@ function switchem() {
     }
     count -= 1;
     if (count) {
-        setTimeout(switchem,4000);
+        setTimeout(switchem,currTimeout);
+        if (currTimeout < maxTimeout) currTimeout *= 2;
     }
 }
 
-setTimeout(switchem, 4000);
-
+setTimeout(switchem, currTimeout);
+if (currTimeout < maxTimeout) currTimeout *= 2;
