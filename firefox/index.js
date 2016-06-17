@@ -3,6 +3,7 @@ var pageMod = require("sdk/page-mod");
 
 pageMod.PageMod({
   include: [ 
+               /https?:\/\/(\w+\.)?cnn.com\//,
                /https?:\/\/(\w+\.)?bbc.com\//,
                /https?:\/\/(\w+\.)?bbc.co.uk\//,
                /https?:\/\/(\w+\.)?guardian.co.uk\//,
