@@ -1,5 +1,5 @@
 var replacements = [
-    'Cheetoh Jesus',
+    'Cheeto Jesus',
     'Bone-in Ham',
     'Four-Time Bankruptcy Filer and Setthing Hernia Mass',
     'Sun-Dried Tomato',
