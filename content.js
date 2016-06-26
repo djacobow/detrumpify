@@ -25,7 +25,7 @@ var replacements = [
     'Wax Museum Figure on a Very Hot Day',
     'Soggy Burlap Sack',
     'Bag of Toxic Sludge',
-    'Your Next President and Ruler of Life',
+    'Your Next President and Ruler for Life',
     'Brightly Burning Trash Fire',
     'Great Judgement-Haver',
     'Man-Sized Sebaceous Cyst',
