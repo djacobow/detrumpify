@@ -123,6 +123,10 @@ var replacements = [
     'Orange Muppet',
     'Mangled Apricot Hellbeast',
     'Little Gloves',
+    'Numpty',
+    'Weapons-Grade Plum',
+    'Hair Furor',
+    'Man-Baby',
 ];
 
 var currTimeout = 1000;
