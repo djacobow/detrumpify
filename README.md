@@ -7,9 +7,12 @@ This extension is based on minor modification of the code here:
 
 http://9to5google.com/2015/06/14/how-to-make-a-chrome-extensions/
 
-And the replacement text comes from here:
+And most of the replacement text comes from here:
 
 http://theslot.jezebel.com/in-honor-of-donald-trumps-70th-birthday-here-are-70-wa-1781899319
+
+However, I will continue to add new insults as I come by them throughout the
+2016 presidential election cycle.
 
 ## Installation
 

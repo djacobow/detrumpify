@@ -119,6 +119,10 @@ var replacements = [
     'Play-Doh Factory Explosion',
     'New Superfood Made of Finely-Ground Clown Wigs',
     'Unkempt Troll Doll Found Floating Facedown in a Tub of Rancid Beluga Caviar',
+    'Cheeto-Faced Ferret',
+    'Orange Muppet',
+    'Mangled Apricot Hellbeast',
+    'Little Gloves',
 ];
 
 var currTimeout = 1000;

@@ -25,7 +25,7 @@ var websites = [
   'insidedenver.com',
   'philly.com',
   'chron.com',
-  'detnews.com',
+  'detroitnews.com',
   'freep.com',
   'boston.com',
   'newsday.com',
@@ -44,6 +44,7 @@ var websites = [
   'contracostatimes.com',
   'insidebayarea.com',
   'feedly.com',
+  'reddit.com',
 ];
 
 var sformatted = websites.map(function(cv) { return '*.' + cv; });

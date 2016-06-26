@@ -3,7 +3,7 @@
     "name": "Detrumpify",
     "short_name": "Detrumpify",
     "description": "Replaces references to Donald Trump with more accurate descriptions.",
-    "version": "1.0.9",
+    "version": "1.0.10",
     "content_scripts": [
         {
             "matches": [
@@ -29,7 +29,7 @@
                 "*://*.insidedenver.com/*",
                 "*://*.philly.com/*",
                 "*://*.chron.com/*",
-                "*://*.detnews.com/*",
+                "*://*.detroitnews.com/*",
                 "*://*.freep.com/*",
                 "*://*.boston.com/*",
                 "*://*.newsday.com/*",
@@ -48,7 +48,8 @@
                 "*://*.mercurynews.com/*",
                 "*://*.contracostatimes.com/*",
                 "*://*.insidebayarea.com/*",
-                "*://*.feedly.com/*"
+                "*://*.feedly.com/*",
+                "*://*.reddit.com/*"
             ],
             "js": [
                 "content.js"
