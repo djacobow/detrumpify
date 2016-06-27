@@ -4,7 +4,7 @@ function log(t) {
 }
 
 //var url_base = 'http://localhost:8000/';
-var url_base = http://toolsofourtools.org/detrumpify2/';
+var url_base = 'http://toolsofourtools.org/detrumpify2/';
 
 var defaults = {
   'config_source': url_base + "clean.json",
