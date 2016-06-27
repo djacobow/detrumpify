@@ -1,6 +1,8 @@
 
 # Detrumpify2
 
+A partial-rewrite of Detrumpify, which hard-coded everything.
+
 ## Very simple Chrome Extension to replace instances of the words "Donald Trump" with more apt descriptors
 
 Ths initial batch (and still most of the replacement text) comes from here:
