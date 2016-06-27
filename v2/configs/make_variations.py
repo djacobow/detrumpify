@@ -13,8 +13,10 @@ base = {
       'count': 5,
       'startTimeout': 1000,
       'maxTimeout': 12000,
-      'timeMultiplier': 1.3,
+      'timeMultiplier': 1.8,
     },
+    'refresh_age': 604800000,
+    'randomize_mode': 'always',
     'whitelist': [
       "www.cnn.com",
       "www.bbc.com/news",
