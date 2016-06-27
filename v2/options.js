@@ -1,18 +1,20 @@
-
 function log(t) {
   sd = document.getElementById('statusdiv');
   sd.innerText += t + "\n";
 }
 
+//var url_base = 'http://localhost:8000/';
+var url_base = http://toolsofourtools.org/detrumpify2/';
+
 var defaults = {
-  'config_source': "http://localhost:8000/clean.json",
+  'config_source': url_base + "clean.json",
   'buttons': [
-   [ 'NSFW+Clean quoted', 'http://localhost:8000/combined-scare.json' ],
-   [ 'NSFW quoted', 'http://localhost:8000/dirty-scare.json' ],
-   [ 'Clean quoted', 'http://localhost:8000/clean-scare.json' ],
-   [ 'NSFW+Clean unquoted', 'http://localhost:8000/combined.json' ],
-   [ 'NSFW unquoted', 'http://localhost:8000/dirty.json' ],
-   [ 'Clean unquoted', 'http://localhost:8000/clean.json' ]
+   [ 'NSFW+Clean quoted', url_base + 'combined-scare.json' ],
+   [ 'NSFW quoted', url_base + 'dirty-scare.json' ],
+   [ 'Clean quoted', url_base + 'clean-scare.json' ],
+   [ 'NSFW+Clean unquoted', url_base + 'combined.json' ],
+   [ 'NSFW unquoted', url_base + 'dirty.json' ],
+   [ 'Clean unquoted', url_base + 'clean.json' ]
   ]
 };
 
