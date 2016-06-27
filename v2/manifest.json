@@ -1,7 +1,7 @@
 {
 "manifest_version": 2,
-    "name": "Detrumpify2",
-    "short_name": "Detrumpify2",
+    "name": "Detrumpify2-test",
+    "short_name": "Detrumpify2-test",
     "description": "Replaces references to Donald Trump with more accurate descriptions.",
     "author": "Dave Jacobowitz",
     "options_ui": {
