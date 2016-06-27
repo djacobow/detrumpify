@@ -4,28 +4,6 @@ var currTimeout = 1000;
 var maxTimeout  = 120000;
 var count       = 5;
 
-// for determining when to refetch the cached config
-// var max_age     = 7 * 24 * 60 * 60 * 1000;
-var max_age     = 180 * 1000;
-
-// where to get the config from
-var source = null;
-
-// sets the initial stored url for configuration fetching
-// if it is not already set. It also stores it to the local store.
-function set_initial_url() {
-  chrome.storage.local.get(['config_source'],function(items) {
-    if ('config_source' in items) {
-      source = items.config_source;
-    } else {
-      source = "http://localhost:8000/clean.json";
-      chrome.storage.loca.set({'config_source': source},function() {});
-    }
-  });
-};
-
-
-set_initial_url();
 
 // the config itself.
 var current_config = null;
@@ -68,41 +46,6 @@ function switchem() {
     }
 }
 
-function storeConfig(err,txt,cb) {
-  console.log("storeConfig");
-  if (err != null) {
-    cb(err,txt);
-    return;
-  } 
-
-  var data = {};
-
-  try {
-    data = JSON.parse(txt);
-  } catch(e) {
-    console.log("JSON parse error");
-    console.log(e);
-    cb(e,txt);
-    return;
-  }
- 
-
-  if (data.schema == 'InsultMarkupLanguage/0.1') {
-    chrome.storage.local.set({'cfgdata': data}, function() {
-      if (chrome.lastError) {
-        cb(chrome.lastError);
-      }	else {
-        date = (new Date).getTime();
-        chrome.storage.local.set({'config_date': date}, function() {});
-        chrome.storage.local.set({'config_valid': true}, function() {});
-	console.log("STORE SUCCESS");
-	// console.log("STORE DUMP:");
-	// chrome.storage.local.get(function(data) { console.log(data) });
-	loadConfig(cb,false);
-      }
-    });
-  }
-}
 
 function isThisPageRunnable() {
   console.log('isThisPageRunnable');
@@ -143,57 +86,10 @@ function startReplTries(err,res) {
   }
 }
 
-/*
- // experimental does not work yet
-chrome.runtime.onMessage.addListener(function(msg,sender,funcresp) {
-   console.log('receive message');
-   if (('message' in msg) && (msg.message == 'load_config')) {
-     console.log('message is for me!');
-     loadConfig(function(err,res) {
-       funcresp(res);
-     });
-   }
-});
-*/
-
-function loadConfig(cb,try_remote = true) {
-  chrome.storage.local.get(['cfgdata',
-		            'config_date',
-			    'config_valid'],
-	function(items) {
-          var now = (new Date).getTime();
-          if (('config_valid' in items) && 
-	      (items.config_valid) && 
-	      (now - items.config_date < max_age)) {
-	    console.log("LOAD FROM STORAGE");
-            cb(null,items.cfgdata);
-	  } else if (try_remote) {
-            loadConfigRemote(cb);
-	  } else {
-            cb('load_config_failed');
-	  }
-	});		
-}
-
-function loadConfigRemote(cb) {
-  var xhr = new XMLHttpRequest();
-  xhr.onreadystatechange = function() {
-    if (xhr.readyState == 4) {
-      text = xhr.responseText;
-      if (xhr.status == 200) {
-	console.log("FETCH SUCCESS");
-        storeConfig(null,text,cb)
-      } else {
-        cb('err',"status was " + xhr.status);
-      }
-    }
-  };
-  xhr.open('GET',source, true);
-  xhr.send();
-}
-
 function init() {
-  loadConfig(startReplTries);
+  set_initial_url(function() {
+    loadConfig(startReplTries);
+  });
 }
 
 console.log("starting");

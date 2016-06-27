@@ -5,10 +5,13 @@
     <title>ReDetrumpify Config</title>
   </head>
   <body>
-	  <p>Welcome to the extremely minimialist configuraton page for Detrumpify.<p>
-	  <p>This page lets you enter an URL from which the plugin will pull down a JSON file that contains all the insulting names it will use. The default upon installing this plugin is to use the "basic" clean insults list, but there are other options, and you can even create and specify your own.</p>
+      <div style="font-size:120%; font-weight:bold">Detrumpify Configuration Page</div><br>
+      <div>This page lets you enter an URL from which the plugin will pull down a JSON file that contains all the insulting names it will use. There are several options here, and you can provide your own by hosting a JSON file somewhere and pointing to it.</div><br>
+      <div><a href="mailto:dave@toolsofourtools.org">Feedback is always welcome.</a></div>
+
     <hr>
     <div id="urldiv">
+      <b>Configuration URL:</b>
       <table>
         <tr>
           <td>
@@ -21,7 +24,7 @@
       </table>
     </div>
     <hr>
-    <p>Pre-canned configurations:</p>
+    <div><b>Available canned configurations:</b></div>
     <div id="buttonsdiv">
     </div>
 
@@ -32,9 +35,21 @@
     <hr>
     -->
 
-    <div id="statusdiv" style="background-color: yellow">
-     hi.
+    <div id="configdiv" style="background-color: lightblue">
+        <b>Currently loaded configuration:</b>
+        <textarea id="configjson" rows="10" style="width: 100%" readonly="true">
+        </textarea>
     </div>
+
+    <hr>
+
+    <div id="statusdiv_container">
+      <b>Debug Messages</b>
+      <div id="statusdiv" style="background-color: lightyellow; width:100%; height:50px; overflow-y:scroll">
+      </div>
+    </div>
+    <script src="defaults.js"></script>
+    <script src="shared.js"></script>
     <script src="options.js"></script>
   </body>
 </html>
