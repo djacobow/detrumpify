@@ -71,7 +71,7 @@ function choose(cfg,choice) {
 }
 
 function switchem() {
-    log('switchem START'); 
+    log('switchem START, count:' + count); 
     if ((current_config == null) || !('monikers' in current_config)) {
       log("current_config is invalid");
       return;
@@ -102,14 +102,14 @@ function switchem() {
         }
       }
       store_updated_choice(choice);
-    });
 
-    count -= 1;
-    if (count) {
+      count -= 1;
+      if (count) {
         log('currTimeout:' + currTimeout);
         setTimeout(switchem,currTimeout);
         if (currTimeout < maxTimeout) currTimeout *= current_config.run_info.timeMultiplier;
-    }
+      }
+    });
 }
 
 
