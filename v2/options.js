@@ -40,6 +40,12 @@ function restore_plugin_options() {
 		      function() {});
       secelem.value = defaults.config_source;
     };
+    if (srcelem.value == '__local__') {
+      document.getElementById('editmode_lock').checked = true;
+      modeclick('lock');
+    } else {
+      modeclick('url');
+    }
   });
   loadConfig(showConfig);
   log('restore_plugin_options DONE');
@@ -48,6 +54,13 @@ function restore_plugin_options() {
 function showConfig(err,res) {
   log('showConfig START');
   var jselem = document.getElementById('configjson');  
+  var urlem =  document.getElementById('configsrc');
+  chrome.storage.local.get(['config_source'],function(items) {
+   if ('config_source' in items) {
+     urlem.value = items.config_source;
+   }
+  });
+
   if (err == null) {
     log('no error');
     jselem.value = JSON.stringify(res,null,2);
@@ -61,17 +74,85 @@ function showConfig(err,res) {
 function save_plugin_options() {
   log('save_plugin_options START');
   var srcelem = document.getElementById('configsrc');
-  chrome.storage.local.set({'config_source': srcelem.value}, function() {});
-  chrome.storage.local.set({'config_valid': false}, function() {});
-  chrome.storage.local.set({'config_date': 0.0}, function() {});
+
+  // if it's set to local, then it was set by the 'lock' button
+  // after validating and we should not do so here just because
+  // someone types __local__ into the url bar.
+  if (srcelem.value != '__local__') {
+    chrome.storage.local.set({'config_source': srcelem.value}, function() {});
+    chrome.storage.local.set({'config_valid': false}, function() {});
+    chrome.storage.local.set({'config_date': 0.0}, function() {});
+  };
 
   loadConfig(showConfig);
   log('save_plugin_options DONE');
 };
 
-log('adding handlers');
-document.addEventListener('DOMContentLoaded', restore_plugin_options);
-log('adding save handler');
-document.getElementById('savebutton').addEventListener('click',save_plugin_options);
+function modeclick(which) {
+ log('modeclick: ' + which);
+ cfjson = document.getElementById('configjson');
+ urlinp = document.getElementById('configsrc');
+ if (which == 'url') {
 
-	
+   cfjson.readOnly = true;
+   cfjson.style.backgroundColor = "#e0f0e0";
+   urlinp.readOnly = false;
+   urlinp.style.backgroundColor = '#ffffff';
+
+   // reset to default
+   src = defaults.config_source;
+   urlinp.value = src;
+   chrome.storage.local.set({'config_source': src, 'config_valid': false}, function() {
+     loadConfig(showConfig,true);
+   });
+
+ } else if (which == 'edit') {
+
+   cfjson.readOnly = false;
+   cfjson.style.backgroundColor = "#f0f0e0";
+   urlinp.readOnly = true;
+   urlinp.style.backgroundColor = '#d0d0d0';
+
+ } else if (which == 'lock') {
+
+   cfjson.readOnly = true;
+   cfjson.style.backgroundColor = "#f0e0e0";
+   urlinp.readOnly = true;
+   urlinp.style.backgroundColor = '#d0d0d0';
+
+   storeConfig(null,cfjson.value,function(err) {
+     if (err == null) {
+       log('setting to __local__');
+       urlinp.value = '__local__';
+       chrome.storage.local.set({'config_source': '__local__'}, function() {
+         loadConfig(showConfig,false);
+       });
+     } else {
+       log('custom json did not validate');
+       log('NOT setting to __local__');
+     }
+   });
+ }
+}
+
+
+function setup_handlers() {
+
+  log('adding handlers');
+  document.addEventListener('DOMContentLoaded', restore_plugin_options);
+  log('adding save handler');
+  document.getElementById('savebutton').addEventListener('click',save_plugin_options);
+
+  log('adding radiobutton handler');
+  var edit_radios = document.forms['editmodeform'].elements['editmode'];
+  for (var i=0;i<edit_radios.length;i++) {
+    radio = edit_radios[i];
+    radio.onchange = function(ev) {
+      modeclick(ev.target.value);
+    }
+  }
+}
+
+
+setup_handlers();
+
