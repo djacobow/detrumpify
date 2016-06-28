@@ -209,26 +209,37 @@ monikers = {
 combos = {
   'combined-scare.json': {
     'monikers': [ 'clean', 'dirty' ],
+    'randomize_mode': 'always',
     'scarequote': True,
   },
   'clean-scare.json': {
     'monikers': [ 'clean', ],
+    'randomize_mode': 'always',
     'scarequote': True,
   },
   'dirty-scare.json': {
     'monikers': [ 'dirty', ],
+    'randomize_mode': 'always',
     'scarequote': True,
   },
   'combined.json': {
     'monikers': [ 'clean', 'dirty' ],
+    'randomize_mode': 'always',
     'scarequote': False,
   },
   'clean.json': {
     'monikers': [ 'clean', ],
+    'randomize_mode': 'always',
     'scarequote': False,
   },
   'dirty.json': {
     'monikers': [ 'dirty', ],
+    'randomize_mode': 'always',
+    'scarequote': False,
+  },
+  'clean-daily.json': {
+    'monikers': [ 'clean', ],
+    'randomize_mode': 'daily',
     'scarequote': False,
   },
 }
@@ -245,6 +256,7 @@ for comboname in combos:
         outdata['monikers'].append(moniker)
 
   outdata['scarequote'] = combos[comboname]['scarequote']
+  outdata['randomize_mode'] = combos[comboname]['randomize_mode']
 
   jsd = json.dumps(outdata)
   ofile = open(comboname,'w')
