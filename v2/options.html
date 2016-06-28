@@ -6,19 +6,18 @@
   </head>
   <body>
       <div style="font-size:120%; font-weight:bold">Detrumpify Configuration Page</div><br>
-      <div>This page lets you enter an URL from which the plugin will pull down a JSON file that contains all the insulting names it will use. There are several options here, and you can provide your own by hosting a JSON file somewhere and pointing to it.</div><br>
-      <div><a href="mailto:dave@toolsofourtools.org">Feedback is always welcome.</a></div>
-
+      <div>You can enter an URL from which the plugin will pull down a configuration file that contains all the insulting names and a few other options. You can also customize by clicking the radio button below to "edit", making changes, and the clicking it to "lock." Hopefully the format is self-explanatory.</div><br>
+      <div><a href="mailto:dave@toolsofourtools.org">Feedback is most welcome.</a></div>
     <hr>
     <div id="urldiv">
       <b>Configuration URL:</b>
       <table>
         <tr>
           <td>
-            <input type="text" size="80" id="configsrc"></input>
+              <input type="text" size="80" id="configsrc">
 	  </td>
 	  <td>
-            <input type="button" id="savebutton" value="Save Config URL"></input>
+            <input type="button" id="savebutton" value="Save Config URL">
 	  </td>
 	</tr>
       </table>
@@ -39,6 +38,13 @@
         <b>Currently loaded configuration:</b>
         <textarea id="configjson" rows="10" style="width: 100%" readonly="true">
         </textarea>
+        <div>
+          <form id="editmodeform" name="editmodeform" action="">
+              <input type="radio" checked id="editmode_url" name="editmode" value="url">Use Config URL
+              <input type="radio" id="editmode_edit" name="editmode" value="edit">Edit Config
+              <input type="radio" id="editmode_lock" name="editmode" value="lock">Lock Changes
+          </form>
+        </div>
     </div>
 
     <hr>
