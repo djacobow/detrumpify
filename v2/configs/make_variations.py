@@ -81,7 +81,7 @@ monikers = {
 		"Fuzzy Meat-Wad",
 		"Bag of Flour",
 		"Man who Cherishes Women",
-		"Futire Leader of the Free World",
+		"Future Leader of the Free World",
 		"Decomposing Ear of Corn",
 		"Own Best Parody",
 		"Rich Idiot Willing to Allow Garbage to Fall Out of His Mouth Without Batting a Single Golden Lash",
