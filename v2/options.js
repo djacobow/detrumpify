@@ -24,6 +24,7 @@ function restore_plugin_options() {
     nb.type = 'button';
     nb.id = 'btnIdx_' + i;
     nb.value = defaults.buttons[i][0];
+    nb.title = defaults.buttons[i][2];
     nb.addEventListener('click',selectConfig);
     bd.appendChild(nb);
   };

@@ -7,6 +7,7 @@ function log(t) {
     sd.scrollTop = sd.scrollHeight;
     log_count += 1;
   } catch (e) { };
+  console.log(t);
 }
 
 // sets the initial stored url for configuration fetching
@@ -35,8 +36,7 @@ function loadConfigRemote(cb) {
     if (xhr.readyState == 4) {
       text = xhr.responseText;
       if (xhr.status == 200) {
-	    console.log("FETCH SUCCESS");
-        log('FETCH SUCCESS');
+	    log("FETCH SUCCESS");
         storeConfig(null,text,cb)
       } else {
         log('ERROR: ' + xhr.status);
@@ -63,11 +63,16 @@ function loadConfig(cb,try_remote = true) {
 	function(items) {
       log('loadConfig readLocal');
       var now = (new Date).getTime();
-      if (('config_valid' in items) && 
-	      (items.config_valid) && 
-	      (now - items.config_date < defaults.max_age)) {
-        log('loaded from storage');
-	    console.log("LOAD FROM STORAGE");
+      var have_config = ('config_valid' in items) && items.config_valid;
+      var max_age = defaults.max_age;
+      if (have_config) {
+        if ('refresh_age' in items) {
+          max_age = items.cfgdata.refresh_age;
+        }
+      };
+      if (have_config &&
+	      (now - items.config_date < max_age)) {
+        log('loading from storage');
         cb(null,items.cfgdata);
 	  } else if (try_remote) {
         log('calling loadConfigRemote');
@@ -82,7 +87,7 @@ function loadConfig(cb,try_remote = true) {
 
 
 function storeConfig(err,txt,cb) {
-  console.log("storeConfig START");
+  log("storeConfig START");
   if (err != null) {
     cb(err,txt);
     return;
@@ -93,8 +98,8 @@ function storeConfig(err,txt,cb) {
   try {
     data = JSON.parse(txt);
   } catch(e) {
-    console.log("JSON parse error");
-    console.log(e);
+    log("JSON parse error");
+    log(e);
     cb(e,txt);
     return;
   }
@@ -108,9 +113,8 @@ function storeConfig(err,txt,cb) {
         date = (new Date).getTime();
         chrome.storage.local.set({'config_date': date}, function() {});
         chrome.storage.local.set({'config_valid': true}, function() {});
-	console.log("STORE SUCCESS");
-	// console.log("STORE DUMP:");
-	// chrome.storage.local.get(function(data) { console.log(data) });
+        chrome.storage.local.set({'last_chosen_time': 0}, function() {});
+	log("STORE SUCCESS");
 	loadConfig(cb,false);
       }
     });
