@@ -19,6 +19,7 @@ function set_initial_url(cb) {
       source = items.config_source;
       cb(source);
     } else {
+      log('resetting config_source at set_initial_url');
       source = defaults.config_source;
       chrome.storage.local.set({'config_source': source},function() {
         cb(source);
@@ -32,7 +33,6 @@ function loadConfigRemote(cb) {
   log('loadConfigRemote START');
   var xhr = new XMLHttpRequest();
   xhr.onreadystatechange = function() {
-    log('readystatechange');
     if (xhr.readyState == 4) {
       text = xhr.responseText;
       if (xhr.status == 200) {
@@ -47,7 +47,7 @@ function loadConfigRemote(cb) {
   chrome.storage.local.get(['config_source'],function(items) {
     if ('config_source' in items) {
       var source = items.config_source;
-      source += '?_=' + (new Date).getTime();
+      source += '?dl=1&_=' + (new Date).getTime();
       log('loadConfigRemote fetching: ' + source);
       xhr.open('GET',source, true);
       xhr.send();
