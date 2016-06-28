@@ -68,7 +68,7 @@ monikers = {
   'clean': [
 		"Cheeto Jesus",
 		"Bone-in Ham",
-		"Four-Time Bankruptcy Filer and Setthing Hernia Mass",
+		"Four-Time Bankruptcy Filer and Seething Hernia Mass",
 		"Sun-Dried Tomato",
 		"Adult Blobfish",
 		"Deflated Football",
