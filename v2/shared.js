@@ -54,13 +54,13 @@ function loadConfigRemote(cb) {
     }
   });
   log('loadConfigRemote DONE');
-}
+};
 
 
 function loadConfig(cb,try_remote = true) {
   log('loadConfig START');
   chrome.storage.local.get(
-    ['cfgdata', 'config_date', 'config_valid'],
+    ['cfgdata', 'config_date', 'config_valid', 'config_source'],
 	function(items) {
       log('loadConfig readLocal');
       var now = (new Date).getTime();
@@ -71,9 +71,16 @@ function loadConfig(cb,try_remote = true) {
           max_age = items.cfgdata.refresh_age;
         }
       };
-      if (have_config &&
-	      (now - items.config_date < max_age)) {
-        log('loading from storage');
+      var force_local = (have_config &&
+                        ('config_source' in items) &&
+                        (items.config_source == '__local__')) ;
+      // if max_age is set to negative then we never refresh
+      var use_local = force_local ? true :
+                     max_age < 0 ? true :
+        ((now - items.config_date) < max_age);
+
+      if (have_config && use_local) {
+        log('loading from local storage');
         cb(null,items.cfgdata);
 	  } else if (try_remote) {
         log('calling loadConfigRemote');
@@ -82,7 +89,7 @@ function loadConfig(cb,try_remote = true) {
         log('loadConfig FAILED');
         cb('load_config_failed');
 	  }
-	});		
+	});
     log('loadConfig DONE');
 }
 
@@ -92,7 +99,7 @@ function storeConfig(err,txt,cb) {
   if (err != null) {
     cb(err,txt);
     return;
-  } 
+  }
 
   var data = {};
 
@@ -104,7 +111,6 @@ function storeConfig(err,txt,cb) {
     cb(e,txt);
     return;
   }
- 
 
   if (data.schema == 'InsultMarkupLanguage/0.1') {
     chrome.storage.local.set({'cfgdata': data}, function() {
@@ -115,8 +121,8 @@ function storeConfig(err,txt,cb) {
         chrome.storage.local.set({'config_date': date}, function() {});
         chrome.storage.local.set({'config_valid': true}, function() {});
         chrome.storage.local.set({'last_chosen_time': 0}, function() {});
-	log("STORE SUCCESS");
-	loadConfig(cb,false);
+	    log("STORE SUCCESS");
+	    loadConfig(cb,false);
       }
     });
   }
