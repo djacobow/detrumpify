@@ -6,7 +6,7 @@ function selectConfig(e) {
   var id  = tgt.id;
   var idx = parseInt(id.substr(7,id.length-1));
   var url = defaults.buttons[idx][1];
-  log(url);
+  log('selectConfig(): ' + url);
   srcelem = document.getElementById('configsrc');
   srcelem.value = url;
   save_plugin_options();
@@ -36,6 +36,7 @@ function restore_plugin_options() {
     if ('config_source' in items) {
       srcelem.value = items.config_source;
     } else {
+      log('resetting config_source in restore_plugin_options');
       chrome.storage.local.set({'config_source': defaults.config_source},
 		      function() {});
       secelem.value = defaults.config_source;
@@ -74,14 +75,19 @@ function showConfig(err,res) {
 function save_plugin_options() {
   log('save_plugin_options START');
   var srcelem = document.getElementById('configsrc');
-
+  var url = srcelem.value;
   // if it's set to local, then it was set by the 'lock' button
   // after validating and we should not do so here just because
   // someone types __local__ into the url bar.
   if (srcelem.value != '__local__') {
-    chrome.storage.local.set({'config_source': srcelem.value}, function() {});
-    chrome.storage.local.set({'config_valid': false}, function() {});
-    chrome.storage.local.set({'config_date': 0.0}, function() {});
+    chrome.storage.local.set(
+      {'config_source': url,
+       'config_valid': false,
+       'config_date': 0
+      },
+      function() {
+        log('config_source saved');
+      });
   };
 
   loadConfig(showConfig);
@@ -100,8 +106,11 @@ function modeclick(which) {
    urlinp.style.backgroundColor = '#ffffff';
 
    // reset to default
-   src = defaults.config_source;
-   urlinp.value = src;
+   var src = urlinp.value;
+   if (src == '__local__') {
+     src = defaults.config_source;
+     urlinp.value = src;
+   };
    chrome.storage.local.set({'config_source': src, 'config_valid': false}, function() {
      loadConfig(showConfig,true);
    });
