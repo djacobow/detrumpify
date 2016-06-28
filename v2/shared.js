@@ -47,6 +47,7 @@ function loadConfigRemote(cb) {
   chrome.storage.local.get(['config_source'],function(items) {
     if ('config_source' in items) {
       var source = items.config_source;
+      source += '?_=' + (new Date).getTime();
       log('loadConfigRemote fetching: ' + source);
       xhr.open('GET',source, true);
       xhr.send();
