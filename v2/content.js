@@ -80,7 +80,6 @@ function switchem() {
     var search_regex = new RegExp(current_config.find_regex[0],
 		                  current_config.find_regex[1]);
     var elements = document.getElementsByTagName('*');
-    var randomize_wait = get_randomize_time(current_config);
 
     get_stored_choice(current_config,function(choice) {
       for (var i = 0; i < elements.length; i++) {
