@@ -42,6 +42,10 @@ var defaults = {
      url_base + '3qr1gr1hklloa42/clean-daily.json',
      'Clean names only. Changes only once a day.',
    ],
+   [ 'clean - unquoted - highlight',
+     url_base + '9uqvrozh0jo65jj/clean-highlight.json',
+     'Clean names only. Highlight.',
+   ],
   ],
 };
 
