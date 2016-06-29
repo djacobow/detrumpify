@@ -70,6 +70,71 @@ function choose(cfg,choice) {
   return choice;
 }
 
+// convert a text string into an array of 
+// elements that represent the bits and pieces
+// that do and do not match the regex
+function find_match_nonmatch_chunks(text,re) {
+  var match;
+  var broken_texts = [];
+  var end = 0;
+  // first, break what was a text node into an
+  // array of text chunks representing trump and
+  // non-trump sections
+  while (match = re.exec(text)) {
+    var start = match.index;
+    var new_end = re.lastIndex;
+    log("start: " + start + ' end: ' + end);
+    var before_text = text.substr(end,start-end);
+    if (before_text.length) {
+      broken_texts.push({'match':false, 'text': before_text});
+    }
+    var match_text = text.substr(start,new_end-start-1);
+    broken_texts.push({'match':true, 'text': match_text});
+    end = new_end;
+  }
+  if (broken_texts.length && (end < text.length-1)) {
+    var after_text = text.substr(end,text.length-1); 
+    broken_texts.push({'match':false, 'text':after_text});
+  }
+  return broken_texts;
+}
+
+function make_replacement_elems_array(broken_texts,orig_node,choice) {
+  var repl_array = [];
+  for (var k=0;k<broken_texts.length;k++) {
+    chunk = broken_texts[k];
+    if (chunk.match) {
+      choose(current_config, choice);
+      var replacement = current_config.monikers[choice.last_chosen_item];
+      if (('scarequote' in current_config) && current_config.scarequote) {
+        replacement = '\u201c' + replacement + '\u201d';
+      }
+      var unode = document.createElement('span');
+      unode.style = "";
+      if ('match_style' in current_config) {
+        unode.style = current_config.match_style;
+      }
+      unode.appendChild(document.createTextNode(replacement));
+      repl_array.push(unode);
+    } else {
+      var newnode = orig_node.cloneNode(false);
+      newnode.nodeValue = chunk.text;
+      repl_array.push(newnode);
+    }
+  }
+  console.log(repl_array);
+  return repl_array;
+}
+
+function replace_elem_with_array_of_elems(orig, arry) {
+  var newnode = document.createElement('span');
+  for (var k=0;k<repl_array.length;k++) {
+    newnode.appendChild(repl_array[k]);
+  }
+  orig.parentNode.replaceChild(newnode,orig);
+}
+
+
 function switchem() {
     log('switchem START, count:' + count); 
     if ((current_config == null) || !('monikers' in current_config)) {
@@ -88,14 +153,11 @@ function switchem() {
           var node = element.childNodes[j];
           if (node.nodeType === 3) {
             var text = node.nodeValue;
-            choose(current_config, choice);
-            var replacement = current_config.monikers[choice.last_chosen_item];
-		    if (('scarequote' in current_config) && (current_config.scarequote)) {
-              replacement = '\u201c' + replacement + '\u201d';
-		    }
-            var replacedText = text.replace(search_regex, replacement);
-            if (replacedText !== text) {
-              element.replaceChild(document.createTextNode(replacedText), node);
+            broken_texts = find_match_nonmatch_chunks(text,search_regex);
+
+	    if (broken_texts.length) {
+              repl_array = make_replacement_elems_array(broken_texts, node, choice);
+	      replace_elem_with_array_of_elems(node,repl_array);
             }
           }
         }
