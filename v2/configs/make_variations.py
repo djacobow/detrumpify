@@ -107,7 +107,7 @@ monikers = {
 		"Presidential Candidate and Bargain Bin Full of Yellowing Jean-Claude Van Damme Movies",
 		"Hairpiece Come to Life",
 		"Normal-Looking Human Man and Entirely Credible Choice as Future Leader of the Free World",
-		"Decomposing Pumpkin Pie Inhabited by Viciious Albino Squirrels",
+		"Decomposing Pumpkin Pie Inhabited by Vicious Albino Squirrels",
 		"Dishrag that on Closer Inspection is Alive with Maggots",
 		"Lead Paint Factory Explosion",
 		"Candied Yam Riddled with Moldy Spider Carcasses",
