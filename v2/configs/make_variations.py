@@ -66,6 +66,7 @@ base = {
 
 monikers = {
   'clean': [
+                "70's-Vintage Carpet Your Parents Finally Tore Out Last Year",
 		"Cheeto Jesus",
 		"Bone-in Ham",
 		"Four-Time Bankruptcy Filer and Seething Hernia Mass",
@@ -200,7 +201,7 @@ monikers = {
 	        "Ferret-Wearing Shitgibbon",
 	        "Fucking Cocksplat",
 		"Buttplug Face",
-		"Touped Fucktrumpet"
+		"Toupeed Fucktrumpet"
   ],
 }
 
