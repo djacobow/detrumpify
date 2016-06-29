@@ -7,7 +7,7 @@ import json
 base = {
     'schema': 'InsultMarkupLanguage/0.1',
     'find_regex': [
-      "(Donald\\s*(J\\.?\\s*)?)?Trump", "g"
+      "(Donald\\s*(J\\.?\\s*)?)?Trump(?!\\w)", "g"
     ],
     'run_info': {
       'count': 5,
@@ -210,38 +210,32 @@ monikers = {
 combos = {
   'combined-scare.json': {
     'monikers': [ 'clean', 'dirty' ],
-    'randomize_mode': 'always',
     'scarequote': True,
   },
   'clean-scare.json': {
     'monikers': [ 'clean', ],
-    'randomize_mode': 'always',
     'scarequote': True,
   },
   'dirty-scare.json': {
     'monikers': [ 'dirty', ],
-    'randomize_mode': 'always',
     'scarequote': True,
   },
   'combined.json': {
     'monikers': [ 'clean', 'dirty' ],
-    'randomize_mode': 'always',
-    'scarequote': False,
   },
   'clean.json': {
     'monikers': [ 'clean', ],
-    'randomize_mode': 'always',
-    'scarequote': False,
   },
   'dirty.json': {
     'monikers': [ 'dirty', ],
-    'randomize_mode': 'always',
-    'scarequote': False,
   },
   'clean-daily.json': {
     'monikers': [ 'clean', ],
     'randomize_mode': 'daily',
-    'scarequote': False,
+  },
+  'clean-highlight.json': {
+    'monikers': [ 'clean', ],
+    'match_style': 'color: red;',
   },
 }
 
@@ -256,8 +250,9 @@ for comboname in combos:
     for moniker in monikers[moniker_group]:
         outdata['monikers'].append(moniker)
 
-  outdata['scarequote'] = combos[comboname]['scarequote']
-  outdata['randomize_mode'] = combos[comboname]['randomize_mode']
+  for v in ['scarequote', 'randomize_mode', 'match_style']:
+    if v in combos[comboname]:
+      outdata[v] = combos[comboname][v]
 
   jsd = json.dumps(outdata)
   ofile = open(comboname,'w')
