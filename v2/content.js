@@ -109,6 +109,9 @@ function make_replacement_elems_array(broken_texts,orig_node,choice) {
       if (('scarequote' in current_config) && current_config.scarequote) {
         replacement = '\u201c' + replacement + '\u201d';
       }
+      if (('bracket' in current_config) && (current_config.bracket.length >= 2)) {
+        replacement = current_config.bracket[0] + replacement + current_config.bracket[1];
+      }
       var unode = document.createElement('span');
       unode.style = "";
       if ('match_style' in current_config) {
