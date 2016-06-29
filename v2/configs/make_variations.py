@@ -210,15 +210,18 @@ monikers = {
 combos = {
   'combined-scare.json': {
     'monikers': [ 'clean', 'dirty' ],
-    'scarequote': True,
+    'bracket': [ u'\u201c', u'\u201d' ],
+    # 'scarequote': True,
   },
   'clean-scare.json': {
     'monikers': [ 'clean', ],
-    'scarequote': True,
+    'bracket': [ u'\u201c', u'\u201d' ],
+    # 'scarequote': True,
   },
   'dirty-scare.json': {
     'monikers': [ 'dirty', ],
-    'scarequote': True,
+    'bracket': [ u'\u201c', u'\u201d' ],
+    # 'scarequote': True,
   },
   'combined.json': {
     'monikers': [ 'clean', 'dirty' ],
@@ -250,7 +253,7 @@ for comboname in combos:
     for moniker in monikers[moniker_group]:
         outdata['monikers'].append(moniker)
 
-  for v in ['scarequote', 'randomize_mode', 'match_style']:
+  for v in ['scarequote', 'randomize_mode', 'match_style', 'bracket']:
     if v in combos[comboname]:
       outdata[v] = combos[comboname][v]
 
