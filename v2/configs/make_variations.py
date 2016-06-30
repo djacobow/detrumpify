@@ -70,6 +70,7 @@ base = {
 
 monikers = {
   'clean': [
+        "Used Q-tip",
         "Idiot Magnet",
         "Gender-Threatened Lead Paint Factory Explosion",
         "70's-Vintage Umber Shag Carpet",
