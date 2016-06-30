@@ -3,7 +3,7 @@
     "name": "Detrumpify",
     "short_name": "Detrumpify",
     "description": "Replaces references to Donald Trump with more accurate descriptions.",
-    "version": "1.0.10",
+    "version": "1.0.11",
     "content_scripts": [
         {
             "matches": [
