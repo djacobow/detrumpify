@@ -8,10 +8,10 @@ var count       = 5;
 // the config itself.
 var current_config = null;
 
-function get_randomize_time(cfg) {
+function get_randomize_time(action) {
   var wait = 0;
-  if ('randomize_mode' in cfg) {
-    var potential_mode = cfg.randomize_mode;
+  if ('randomize_mode' in action) {
+    var potential_mode = action.randomize_mode;
     if (potential_mode == 'always') {
       wait = 0;
     } else if (potential_mode == '15min') {
@@ -31,41 +31,18 @@ function get_randomize_time(cfg) {
   return wait;
 }
 
-function get_stored_choice(cfg,cb) {
- log('get_stored_choice START');
- chrome.storage.local.get(
-   ['last_chosen_time', 'last_chosen_item'],
-   function(existing_choice) {
-     if (('last_chosen_time' in existing_choice) &&
-         (existing_choice.last_chosen_time != 0)) {
-       cb(existing_choice);
-     } else {
-       var new_choice = {};
-       choose_now(cfg,new_choice);
-       cb(new_choice);
-     }
-   }
- );
-};
 
-function store_updated_choice(choice) {
-  log('store_updated_choice START');
-  log(JSON.stringify(choice));
-  chrome.storage.local.set(choice, function() { });
-};
-
-
-function choose_now(cfg,choice) {
-  var whichever = Math.floor(cfg.monikers.length * Math.random());
+function choose_now(action,choice) {
+  var whichever = Math.floor(action.monikers.length * Math.random());
   choice.last_chosen_item = whichever;
   choice.last_chosen_time = (new Date).getTime();
 };
 
-function choose(cfg,choice) {
-  var wait = get_randomize_time(cfg);
+function choose(action,choice) {
+  var wait = get_randomize_time(action);
   var now = (new Date).getTime();
   if ((now - choice.last_chosen_time) >= wait) {
-    choose_now(cfg,choice);
+    choose_now(action,choice);
   }
   return choice;
 }
@@ -83,7 +60,7 @@ function find_match_nonmatch_chunks(text,re) {
   while (match = re.exec(text)) {
     var start = match.index;
     var new_end = re.lastIndex;
-    log("start: " + start + ' end: ' + end);
+    // log("start: " + start + ' end: ' + end);
     var before_text = text.substr(end,start-end);
     if (before_text.length) {
       broken_texts.push({'match':false, 'text': before_text});
@@ -99,23 +76,23 @@ function find_match_nonmatch_chunks(text,re) {
   return broken_texts;
 }
 
-function make_replacement_elems_array(broken_texts,orig_node,choice) {
+function make_replacement_elems_array(action,broken_texts,orig_node,choice) {
   var repl_array = [];
   for (var k=0;k<broken_texts.length;k++) {
     chunk = broken_texts[k];
     if (chunk.match) {
-      choose(current_config, choice);
-      var replacement = current_config.monikers[choice.last_chosen_item];
-      if (('scarequote' in current_config) && current_config.scarequote) {
+      choose(action, choice);
+      var replacement = action.monikers[choice.last_chosen_item];
+      if (('scarequote' in action) && action.scarequote) {
         replacement = '\u201c' + replacement + '\u201d';
       }
-      if (('bracket' in current_config) && (current_config.bracket.length >= 2)) {
-        replacement = current_config.bracket[0] + replacement + current_config.bracket[1];
+      if (('bracket' in action) && (action.bracket.length >= 2)) {
+        replacement = action.bracket[0] + replacement + action.bracket[1];
       }
       var unode = document.createElement('span');
       unode.style = "";
-      if ('match_style' in current_config) {
-        unode.style = current_config.match_style;
+      if ('match_style' in action) {
+        unode.style = action.match_style;
       }
       unode.appendChild(document.createTextNode(replacement));
       repl_array.push(unode);
@@ -125,7 +102,7 @@ function make_replacement_elems_array(broken_texts,orig_node,choice) {
       repl_array.push(newnode);
     }
   }
-  console.log(repl_array);
+  // console.log(repl_array);
   return repl_array;
 }
 
@@ -140,38 +117,69 @@ function replace_elem_with_array_of_elems(orig, arry) {
 
 function switchem() {
     log('switchem START, count:' + count);
-    if ((current_config == null) || !('monikers' in current_config)) {
+
+    if (current_config == null) {
       log("current_config is invalid");
       return;
     }
 
-    var search_regex = new RegExp(current_config.find_regex[0],
-                                  current_config.find_regex[1]);
-    var elements = document.getElementsByTagName('*');
 
-    get_stored_choice(current_config,function(choice) {
-      for (var i = 0; i < elements.length; i++) {
-        var element = elements[i];
-        for (var j =0; j < element.childNodes.length; j++) {
-          var node = element.childNodes[j];
-          if (node.nodeType === 3) {
-            var text = node.nodeValue;
-            broken_texts = find_match_nonmatch_chunks(text,search_regex);
+    chrome.storage.local.get(['stored_choices'],function(stored_choices_holder) {
+      var action_count = 0;
+      for (var action_name in current_config.actions) {
+        log('action_name: ' + action_name);
+        var action = current_config.actions[action_name];
+        if (!('monikers' in action)) {
+          log("action is invalid");
+          return;
+        }
 
-            if (broken_texts.length) {
-              repl_array = make_replacement_elems_array(broken_texts, node, choice);
-              replace_elem_with_array_of_elems(node,repl_array);
+        var search_regex = new RegExp(action.find_regex[0],
+                                      action.find_regex[1]);
+        var elements = document.getElementsByTagName('*');
+
+        if (!('stored_choices' in stored_choices_holder)) {
+          stored_choices_holder.stored_choices = {};
+        }
+
+        if (!(action_name in stored_choices_holder.stored_choices)) {
+          stored_choices_holder.stored_choices[action_name] = {};
+          choose_now(action,stored_choices_holder.stored_choices[action_name]);
+        }
+
+        for (var i = 0; i < elements.length; i++) {
+          var element = elements[i];
+          for (var j =0; j < element.childNodes.length; j++) {
+            var node = element.childNodes[j];
+            if (node.nodeType === 3) {
+              var text = node.nodeValue;
+              broken_texts = find_match_nonmatch_chunks(text,search_regex);
+
+              if (broken_texts.length) {
+                repl_array = make_replacement_elems_array(
+                        action,
+                        broken_texts,
+                        node,
+                        stored_choices_holder.stored_choices[action_name]);
+                replace_elem_with_array_of_elems(node,repl_array);
+              }
             }
           }
         }
-      }
-      store_updated_choice(choice);
 
-      count -= 1;
-      if (count) {
-        log('currTimeout:' + currTimeout);
-        setTimeout(switchem,currTimeout);
-        if (currTimeout < maxTimeout) currTimeout *= current_config.run_info.timeMultiplier;
+        if (action_count == (Object.keys(current_config.actions).length-1)) {
+          console.log("iteration done; storing choices");
+          console.log(stored_choices_holder);
+          chrome.storage.local.set(stored_choices_holder, function() { });
+
+          count -= 1;
+          if (count) {
+            log('currTimeout:' + currTimeout);
+            setTimeout(switchem,currTimeout);
+            if (currTimeout < maxTimeout) currTimeout *= current_config.run_info.timeMultiplier;
+          }
+        }
+        action_count += 1;
       }
     });
 }

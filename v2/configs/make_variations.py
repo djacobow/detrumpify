@@ -6,17 +6,13 @@ import json
 
 base = {
     'schema': 'InsultMarkupLanguage/0.1',
-    'find_regex': [
-      "(Donald\\s*(J\\.?\\s*)?)?Trump(?!\\w)", "g"
-    ],
+    'refresh_age': 604800000,
     'run_info': {
       'count': 5,
       'startTimeout': 1000,
       'maxTimeout': 12000,
       'timeMultiplier': 1.8,
     },
-    'refresh_age': 604800000,
-    'randomize_mode': 'always',
     'whitelist': [
       "www.cnn.com",
       "www.bbc.com/news",
@@ -62,6 +58,14 @@ base = {
       "feedly.com",
       "reddit.com"
     ],
+    'actions': {
+      'trump': {
+        'find_regex': [
+          "(Donald\\s*(J\\.?\\s*)?)?Trump(?!\\w)", "g"
+        ],
+        'randomize_mode': 'always',
+      },
+    }
 }
 
 monikers = {
@@ -185,7 +189,7 @@ monikers = {
         "Fossilized Meatball",
         "Horking Mole-Creature Suffering from Radioactive Spray-Tan",
         "Tattered Craigslist Sofa",
-        "full-Grown Monopoly Dog Carefully Balancing a Spongecake Atop His Head",
+        "Full-Grown Monopoly Dog Carefully Balancing a Spongecake Atop His Head",
         "Play-Doh Factory Explosion",
         "New Superfood Made of Finely-Ground Clown Wigs",
         "Unkempt Troll Doll Found Floating Facedown in a Tub of Rancid Beluga Caviar",
@@ -214,17 +218,14 @@ combos = {
   'combined-scare.json': {
     'monikers': [ 'clean', 'dirty' ],
     'bracket': [ u'\u201c', u'\u201d' ],
-    # 'scarequote': True,
   },
   'clean-scare.json': {
     'monikers': [ 'clean', ],
     'bracket': [ u'\u201c', u'\u201d' ],
-    # 'scarequote': True,
   },
   'dirty-scare.json': {
     'monikers': [ 'dirty', ],
     'bracket': [ u'\u201c', u'\u201d' ],
-    # 'scarequote': True,
   },
   'combined.json': {
     'monikers': [ 'clean', 'dirty' ],
@@ -251,14 +252,14 @@ for comboname in combos:
 
   outdata = copy.deepcopy(base)
 
-  outdata['monikers'] = [];
+  outdata['actions']['trump']['monikers'] = [];
   for moniker_group in combos[comboname]['monikers']:
     for moniker in monikers[moniker_group]:
-        outdata['monikers'].append(moniker)
+        outdata['actions']['trump']['monikers'].append(moniker)
 
-  for v in ['scarequote', 'randomize_mode', 'match_style', 'bracket']:
+  for v in ['randomize_mode', 'match_style', 'bracket']:
     if v in combos[comboname]:
-      outdata[v] = combos[comboname][v]
+      outdata['actions']['trump'][v] = combos[comboname][v]
 
   jsd = json.dumps(outdata)
   ofile = open(comboname,'w')
