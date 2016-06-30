@@ -150,7 +150,7 @@ function switchem() {
                 var text = node.nodeValue;
                 var whichever = Math.floor(replacements.length * Math.random());
                 var replacement = replacements[whichever];
-                var replacedText = text.replace(/(Donald\s*(J\.?\s*)?)?Trump/g, replacement);
+                var replacedText = text.replace(/(Donald\s*(J\.?\s*)?)?Trump(?!\w)/g, replacement);
                 if (replacedText !== text) {
                     // console.log("REPL: " + replacedText);
                     element.replaceChild(document.createTextNode(replacedText), node);
