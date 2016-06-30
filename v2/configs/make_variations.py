@@ -66,7 +66,9 @@ base = {
 
 monikers = {
   'clean': [
-                "70's-Vintage Carpet Your Parents Finally Tore Out Last Year",
+        "Idiot Magnet",
+        "Gender-Threatened Lead Paint Factory Explosion",
+        "70's-Vintage Umber Shag Carpet",
 		"Cheeto Jesus",
 		"Bone-in Ham",
 		"Four-Time Bankruptcy Filer and Seething Hernia Mass",
@@ -197,9 +199,10 @@ monikers = {
 		"Man-Baby"
   ],
   'dirty': [
-                "Incompressible Jizztrumpet",
-	        "Ferret-Wearing Shitgibbon",
-	        "Fucking Cocksplat",
+        "Ludicrous Tangerine Ballbag",
+        "Incompressible Jizztrumpet",
+	    "Ferret-Wearing Shitgibbon",
+	    "Witless Fucking Cocksplat",
 		"Buttplug Face",
 		"Toupeed Fucktrumpet"
   ],

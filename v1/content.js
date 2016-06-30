@@ -1,4 +1,7 @@
 var replacements = [
+    '70s Vintage Shag Carpet',
+    'Idiot Magnet',
+    'Gender-Threatened Lead Paint Factory Explosion',
     'Cheeto Jesus',
     'Bone-in Ham',
     'Four-Time Bankruptcy Filer and Setthing Hernia Mass',
