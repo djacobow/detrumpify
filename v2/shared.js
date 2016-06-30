@@ -29,8 +29,40 @@ function set_initial_url(cb) {
 };
 
 
+// send a message to an event page to have it do an xhr for us
+function loadConfigRemote(cb) {
+  chrome.storage.local.get(['config_source'],function(items) {
+    if ('config_source' in items) {
+      chrome.runtime.sendMessage(
+        null,
+        {'cmd':'get',
+        'url': items.config_source},
+        null,
+        function(resp) {
+          if (resp.err == 'OK') {
+            storeConfig(null,resp.text,cb)
+          } else {
+            cb('err',resp.status);
+          }
+       });
+    } else {
+      cb('err','no config source');
+    }
+  });
+};
+
+/*
+
+ // Old routine does the fetch from the content script,
+ // which can be blocked by sites with content security
+ // policies. If we do the fetch from a background page,
+ // it can follow *our* content security policy as specified
+ // in the manifest
+
 function loadConfigRemote(cb) {
   log('loadConfigRemote START');
+
+
   var xhr = new XMLHttpRequest();
   xhr.onreadystatechange = function() {
     if (xhr.readyState == 4) {
@@ -55,7 +87,7 @@ function loadConfigRemote(cb) {
   });
   log('loadConfigRemote DONE');
 };
-
+*/
 
 function loadConfig(cb,try_remote = true) {
   log('loadConfig START');

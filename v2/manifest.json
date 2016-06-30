@@ -8,15 +8,19 @@
       "page": "options.html",
       "chrome_style": true
     },
-    "version": "1.1.6",
+    "version": "1.1.7",
     "content_security_policy": "script-src 'self'; connect-src https://*.dropbox.com https://dl.dropboxusercontent.com https://toolsofourtools.org http://localhost:8000 'self'; object-src 'self'",
     "permissions": [
         "https://dropbox.com/",
-	"https://dl.dropboxusercontent.com/",
+        "https://dl.dropboxusercontent.com/",
         "http://toolsofourtools.org/",
         "https://toolsofourtools.org/",
-	"storage"
+        "storage"
     ],
+    "background": {
+      "persistent": false,
+      "scripts": [ "event.js" ]
+    },
     "content_scripts": [
         {
             "matches": [
