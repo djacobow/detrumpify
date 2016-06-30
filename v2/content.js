@@ -26,7 +26,7 @@ function get_randomize_time(cfg) {
       wait = 30 * 24 * 60 * 60 * 1000;
     } else if (potential_mode == 'yearly') {
       wait = 365 * 24 * 60 * 60 * 1000;
-    }         
+    }
   }
   return wait;
 }
@@ -36,7 +36,7 @@ function get_stored_choice(cfg,cb) {
  chrome.storage.local.get(
    ['last_chosen_time', 'last_chosen_item'],
    function(existing_choice) {
-     if (('last_chosen_time' in existing_choice) && 
+     if (('last_chosen_time' in existing_choice) &&
          (existing_choice.last_chosen_time != 0)) {
        cb(existing_choice);
      } else {
@@ -70,7 +70,7 @@ function choose(cfg,choice) {
   return choice;
 }
 
-// convert a text string into an array of 
+// convert a text string into an array of
 // elements that represent the bits and pieces
 // that do and do not match the regex
 function find_match_nonmatch_chunks(text,re) {
@@ -93,7 +93,7 @@ function find_match_nonmatch_chunks(text,re) {
     end = new_end;
   }
   if (broken_texts.length && (end < text.length-1)) {
-    var after_text = text.substr(end,text.length-1); 
+    var after_text = text.substr(end,text.length-1);
     broken_texts.push({'match':false, 'text':after_text});
   }
   return broken_texts;
@@ -139,14 +139,14 @@ function replace_elem_with_array_of_elems(orig, arry) {
 
 
 function switchem() {
-    log('switchem START, count:' + count); 
+    log('switchem START, count:' + count);
     if ((current_config == null) || !('monikers' in current_config)) {
       log("current_config is invalid");
       return;
     }
 
     var search_regex = new RegExp(current_config.find_regex[0],
-		                  current_config.find_regex[1]);
+                                  current_config.find_regex[1]);
     var elements = document.getElementsByTagName('*');
 
     get_stored_choice(current_config,function(choice) {
@@ -158,9 +158,9 @@ function switchem() {
             var text = node.nodeValue;
             broken_texts = find_match_nonmatch_chunks(text,search_regex);
 
-	    if (broken_texts.length) {
+            if (broken_texts.length) {
               repl_array = make_replacement_elems_array(broken_texts, node, choice);
-	      replace_elem_with_array_of_elems(node,repl_array);
+              replace_elem_with_array_of_elems(node,repl_array);
             }
           }
         }
@@ -184,12 +184,12 @@ function isThisPageRunnable() {
   for (var i=0;i<current_config.whitelist.length;i++) {
     var item = current_config.whitelist[i];
     var re   = new RegExp('https?://(\\w+\\.)?' + item);
-    if (url.match(re)) { 
+    if (url.match(re)) {
       match = true;
       log("IS RUNNABLE: " + url);
       break;
     }
-  } 
+  }
   return match;
 }
 
@@ -205,7 +205,7 @@ function startReplTries(err,res) {
         count = current_config.run_info.count;
       } catch(e) {
         log("config probably doesn't have run_info");
-      } 
+      }
     } else {
       log("this page is not whitelisted");
     }
