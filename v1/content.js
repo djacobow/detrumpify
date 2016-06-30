@@ -1,4 +1,5 @@
 var replacements = [
+    'Idiot Cockwomble',
     'Used Q-tip',
     '70s Vintage Shag Carpet',
     'Idiot Magnet',

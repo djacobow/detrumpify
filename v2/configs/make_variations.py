@@ -204,6 +204,7 @@ monikers = {
         "Man-Baby"
   ],
   'dirty': [
+        "Idiot Cockwomble",
         "Ludicrous Tangerine Ballbag",
         "Incompressible Jizztrumpet",
         "Ferret-Wearing Shitgibbon",
