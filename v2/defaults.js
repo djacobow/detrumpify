@@ -46,6 +46,10 @@ var defaults = {
      url_base + '9uqvrozh0jo65jj/clean-highlight.json',
      'Clean names only. Highlight.',
    ],
+   [ 'Drumpf',
+     url_base + 'yejjt5nsoc1ooqo/drumpf.json',
+     'Always Drumpf (John Oliver mode)',
+   ],
   ],
 };
 
