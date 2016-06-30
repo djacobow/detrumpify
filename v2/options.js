@@ -2,7 +2,7 @@
 set_initial_url();
 
 function selectConfig(e) {
-  var tgt = e.target || e.srcElement; 
+  var tgt = e.target || e.srcElement;
   var id  = tgt.id;
   var idx = parseInt(id.substr(7,id.length-1));
   var url = defaults.buttons[idx][1];
@@ -38,7 +38,7 @@ function restore_plugin_options() {
     } else {
       log('resetting config_source in restore_plugin_options');
       chrome.storage.local.set({'config_source': defaults.config_source},
-		      function() {});
+              function() {});
       secelem.value = defaults.config_source;
     };
     if (srcelem.value == '__local__') {
@@ -54,7 +54,7 @@ function restore_plugin_options() {
 
 function showConfig(err,res) {
   log('showConfig START');
-  var jselem = document.getElementById('configjson');  
+  var jselem = document.getElementById('configjson');
   var urlem =  document.getElementById('configsrc');
   chrome.storage.local.get(['config_source'],function(items) {
    if ('config_source' in items) {
