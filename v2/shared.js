@@ -36,7 +36,7 @@ function loadConfigRemote(cb) {
     if (xhr.readyState == 4) {
       text = xhr.responseText;
       if (xhr.status == 200) {
-	    log("FETCH SUCCESS");
+        log("FETCH SUCCESS");
         storeConfig(null,text,cb)
       } else {
         log('ERROR: ' + xhr.status);
@@ -61,7 +61,7 @@ function loadConfig(cb,try_remote = true) {
   log('loadConfig START');
   chrome.storage.local.get(
     ['cfgdata', 'config_date', 'config_valid', 'config_source'],
-	function(items) {
+    function(items) {
       log('loadConfig readLocal');
       var now = (new Date).getTime();
       var have_config = ('config_valid' in items) && items.config_valid;
@@ -82,14 +82,14 @@ function loadConfig(cb,try_remote = true) {
       if (have_config && use_local) {
         log('loading from local storage');
         cb(null,items.cfgdata);
-	  } else if (try_remote) {
+      } else if (try_remote) {
         log('calling loadConfigRemote');
         loadConfigRemote(cb);
-	  } else {
+      } else {
         log('loadConfig FAILED');
         cb('load_config_failed');
-	  }
-	});
+      }
+    });
     log('loadConfig DONE');
 }
 
@@ -116,13 +116,13 @@ function storeConfig(err,txt,cb) {
     chrome.storage.local.set({'cfgdata': data}, function() {
       if (chrome.lastError) {
         cb(chrome.lastError);
-      }	else {
+      } else {
         date = (new Date).getTime();
         chrome.storage.local.set({'config_date': date}, function() {});
         chrome.storage.local.set({'config_valid': true}, function() {});
         chrome.storage.local.set({'last_chosen_time': 0}, function() {});
-	    log("STORE SUCCESS");
-	    loadConfig(cb,false);
+        log("STORE SUCCESS");
+        loadConfig(cb,false);
       }
     });
   }
