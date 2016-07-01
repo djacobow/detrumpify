@@ -39,7 +39,9 @@ function loadConfigRemote(cb) {
         'url': items.config_source},
         null,
         function(resp) {
-          if (resp.err == 'OK') {
+          if ((resp == null) || (resp.err == null)) {
+            cb('err','error in eventpage code');
+          } else if (resp.err == 'OK') {
             storeConfig(null,resp.text,cb)
           } else {
             cb('err',resp.status);

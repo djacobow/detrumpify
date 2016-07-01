@@ -10,9 +10,7 @@ chrome.runtime.onMessage.addListener(function(msg,sender,cb) {
    rv = {};
    rv.text = xhr.responseText;
    rv.status = xhr.status;
-   rv.err = ((xhr.status < 200) || (xhr.status >= 300)) ? 'not_200' : 'OK';;
-   // console.log('got');
-   // console.log(rv);
+   rv.err = ((xhr.status < 200) || (xhr.status >= 300)) ? 'not_2xx' : 'OK';;
    cb(rv);
   };
  };
