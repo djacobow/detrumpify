@@ -5,12 +5,22 @@
     <title>ReDetrumpify Config</title>
   </head>
   <body>
-      <div style="font-size:120%; font-weight:bold">Detrumpify Configuration Page</div><br>
-      <div>You can enter an URL from which the plugin will pull down a configuration file that contains all the insulting names and a few other options. You can also customize by clicking the radio button below to "edit", making changes, and the clicking it to "lock." Hopefully the format is self-explanatory.</div><br>
-      <div><a href="mailto:dave@toolsofourtools.org">Feedback is most welcome.</a></div>
+      <table width="100%">
+          <tr>
+              <td valign="top">
+                  <div style="font-size:120%; font-weight:bold">Detrumpify Configuration Page</div>
+              </td>
+              <td valign="top" align="right">
+                  <a href="http://toolsofourtools.org/detrumpify-about">About</a>,
+                  <a href="https://github.com/djacobow/detrumpify">Browse the code</a>,
+                  <a href="mailto:dave@toolsofourtools.org">Feedback</a>
+              </td>
+          </tr>
+      </table>
+      <div>You can enter an URL from which the plugin will pull its configuration. You can paste a configuration directly by clicking the radio button "edit", pasting, and the clicking it to "lock."</div>
     <hr>
     <div id="urldiv">
-      <b>Configuration URL:</b>
+      <b>Configuration URL: </b>(insults loaded from here)
       <table>
         <tr>
           <td>
@@ -23,7 +33,7 @@
       </table>
     </div>
     <hr>
-    <div><b>Available canned configurations:</b></div>
+    <div><b>Pre-canned configurations from <a href="toolsofourtools.org">toolsofourtools.org</a>:</b></div>
     <div id="buttonsdiv">
     </div>
 
@@ -51,7 +61,7 @@
 
     <div id="statusdiv_container">
       <b>Debug Messages</b>
-      <div id="statusdiv" style="background-color: lightyellow; width:100%; height:50px; overflow-y:scroll">
+      <div id="statusdiv" style="background-color: lightyellow; width:100%; height:30px; overflow-y:scroll">
       </div>
     </div>
     <script src="defaults.js"></script>

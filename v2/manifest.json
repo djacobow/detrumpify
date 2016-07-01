@@ -1,14 +1,14 @@
 {
 "manifest_version": 2,
-    "name": "Detrumpify2-test",
-    "short_name": "Detrumpify2-test",
+    "name": "Detrumpify2",
+    "short_name": "Detrumpify2",
     "description": "Replaces references to Donald Trump with more accurate descriptions.",
     "author": "Dave Jacobowitz",
     "options_ui": {
       "page": "options.html",
       "chrome_style": true
     },
-    "version": "1.1.8",
+    "version": "1.1.9",
     "content_security_policy": "script-src 'self'; connect-src https://*.dropbox.com https://dl.dropboxusercontent.com https://toolsofourtools.org http://localhost:8000 'self'; object-src 'self'",
     "permissions": [
         "https://dropbox.com/",

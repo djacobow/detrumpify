@@ -9,6 +9,8 @@ function selectConfig(e) {
   log('selectConfig(): ' + url);
   srcelem = document.getElementById('configsrc');
   srcelem.value = url;
+  modeclick('url');
+  document.getElementById('editmode_url').checked = true;
   save_plugin_options();
 }
 
