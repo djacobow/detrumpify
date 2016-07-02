@@ -70,6 +70,9 @@ base = {
 
 monikers = {
   'clean': [
+        "Unconvincing Presidential Simulation",
+        "Scab You Wish You Hadn't Picked",
+        "Idiot Media Savant",
         "Fiberglass-Topped Tantrum Thrower",
         "Used Q-tip",
         "Idiot Magnet",

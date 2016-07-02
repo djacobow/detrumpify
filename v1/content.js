@@ -1,6 +1,7 @@
 var replacements = [
+    'Unconvincing Presidential Simulation',
+    'Scab You Wish You Hadn\'t Picked',
     'Fiberglass-Topped Tantrum Thrower',
-    'Idiot Cockwomble',
     'Used Q-tip',
     '70s Vintage Shag Carpet',
     'Idiot Magnet',
