@@ -1,9 +1,9 @@
 {
 "manifest_version": 2,
-    "name": "Detrumpify",
-    "short_name": "Detrumpify",
+    "name": "Detrumpify Classic",
+    "short_name": "Detrumpify Classic",
     "description": "Replaces references to Donald Trump with more accurate descriptions.",
-    "version": "1.0.12",
+    "version": "1.0.13",
     "content_scripts": [
         {
             "matches": [
