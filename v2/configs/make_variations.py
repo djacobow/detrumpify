@@ -93,7 +93,7 @@ monikers = {
         "Cheeto-Dusted Bloviator",
         "Fuzzy Meat-Wad",
         "Bag of Flour",
-        "Man who Cherishes Women",
+        "Man Who Cherishes Women",
         "Future Leader of the Free World",
         "Decomposing Ear of Corn",
         "Own Best Parody",
@@ -206,16 +206,21 @@ monikers = {
         "Numpty",
         "Weapons-Grade Plum",
         "Hair Furor",
-        "Man-Baby"
+        "Man-Baby",
+        "Ambitious Corn Dog that Escaped from the Concession Stand at a Rural Alabama Fairgroud, Stole an Unattended Wig, Hopped a Freight Train to Atlantic City and Never Looked Back",
   ],
   'dirty': [
+        "Degloved Zoo Penis",
+        "Shithead",
+        "Orange Asshat",
         "Idiot Cockwomble",
         "Ludicrous Tangerine Ballbag",
         "Incompressible Jizztrumpet",
         "Ferret-Wearing Shitgibbon",
         "Witless Fucking Cocksplat",
         "Buttplug Face",
-        "Toupeed Fucktrumpet"
+        "Toupeed Fucktrumpet",
+        "Human Turd",
   ],
 }
 
