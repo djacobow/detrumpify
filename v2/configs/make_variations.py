@@ -71,6 +71,7 @@ base = {
 
 monikers = {
   'clean': [
+        "Rage Tribble",
         "Unconvincing Presidential Simulation",
         "Scab You Wish You Hadn't Picked",
         "Idiot Media Savant",
