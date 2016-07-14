@@ -71,6 +71,16 @@ base = {
 
 monikers = {
   'clean': [
+        "Real-Estate Tycoon with Plan to Defeat ISIS",
+        "Self-Proclaimed Ponderer of Incest",
+        "Wall Construction Expert",
+        "Frequent Provider of Unsolicited Judgements Regarding Female Attractiveness",
+        "Unrepentant Birther",
+        "Serial Propogator of Demonstrable Falsehoods",
+        "Harkener to Unspecified Moment of American Greatness",
+        "Master of Zero-Sum Business Deals",
+        "Purveyor of Lousy Steak",
+        "Billionaire and Presidential Nominee Who Inexplicably Believes the World is Set Against Him",
         "Angrily Reanimated Christmas Ham",
         "Short-Findered Vulgarian",
         "Weirdly Authoritarian Gingerbread Man",
