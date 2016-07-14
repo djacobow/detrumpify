@@ -283,4 +283,8 @@ for comboname in combos:
   ofile.close()
 
 
+ofile = open("insults.txt","wb")
+for moniker in sorted(monikers['clean']):
+    ofile.write('"' + moniker + '",' + "\n")
+ofile.close()
 
