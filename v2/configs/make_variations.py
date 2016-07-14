@@ -71,6 +71,7 @@ base = {
 
 monikers = {
   'clean': [
+        "Angrily Reanimated Christmas Ham",
         "Short-Findered Vulgarian",
         "Weirdly Authoritarian Gingerbread Man",
         "Traditional Values Adulterer with Two Ex-Wives",
