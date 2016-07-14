@@ -71,6 +71,9 @@ base = {
 
 monikers = {
   'clean': [
+        "Short-Findered Vulgarian",
+        "Weirdly Authoritarian Gingerbread Man",
+        "Traditional Values Adulterer with Two Ex-Wives",
         "Rage Tribble",
         "Unconvincing Presidential Simulation",
         "Scab You Wish You Hadn't Picked",
