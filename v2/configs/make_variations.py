@@ -71,6 +71,7 @@ base = {
 
 monikers = {
   'clean': [
+        "Walking Faux Luxury Brand",
         "Real-Estate Tycoon with Plan to Defeat ISIS",
         "Self-Proclaimed Ponderer of Incest",
         "Wall Construction Expert",
