@@ -40,7 +40,7 @@
                 "*://*.nj.com/*",
                 "*://*.sfgate.com/*",
                 "*://*.sfchronicle.com/*",
-                "://*.azcentral.com/*",
+                "*://*.azcentral.com/*",
                 "*://*.chicagotribune.com/*",
                 "*://*.cleveland.com/*",
                 "*://*.oregonlive.com/*",
