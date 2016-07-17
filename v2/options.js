@@ -5,7 +5,7 @@ function selectConfig(e) {
   var tgt = e.target || e.srcElement;
   var id  = tgt.id;
   var idx = parseInt(id.substr(7,id.length-1));
-  var url = defaults.buttons[idx][1];
+  var url = tgt.getAttribute('data-url');
   log('selectConfig(): ' + url);
   srcelem = document.getElementById('configsrc');
   srcelem.value = url;
@@ -14,23 +14,62 @@ function selectConfig(e) {
   save_plugin_options();
 }
 
+function dumb_cb(err,msg) {
+ console.log('dumb_cb');
+}
 
-function restore_plugin_options() {
-  log('restore_plugin_options START');
+function getCannedList(cb) {
+  chrome.runtime.sendMessage(
+    null,
+    {'cmd':'get',
+    'url': defaults.buttons_fetch_url, },
+    null,
+    function(resp) {
+      if ((resp == null) || (resp.err == null)) {
+        cb('err','error in eventpage code');
+      } else if (resp.err == 'OK') {
+        var data = {};
+        try {
+          resp.text += "\n";
+          data = JSON.parse(resp.text);
+          log(resp.text);
+        } catch(e) {
+          log("Button JSON parse error");
+          log(e);
+          cb(e,resp.txt);
+          return;
+        }
+        elaborate_canned_buttons(data,cb);
+      } else {
+        cb('err',resp.status);
+      }
+      var bd = document.getElementsById('buttonsdiv');
+      bd.innerHTML = '<p>Could not load button metadata. How is our Internet connection?</p>';
+    }
+  );
+}
 
+function elaborate_canned_buttons(data,cb) {
   bd = document.getElementById('buttonsdiv');
   bd.innerHTML = '';
-  for (var i=0;i<defaults.buttons.length;i++) {
+  for (var i=0;i<data.length;i++) {
     log('added button');
     var nb = document.createElement('input');
     nb.type = 'button';
     nb.id = 'btnIdx_' + i;
-    nb.value = defaults.buttons[i][0];
-    nb.title = defaults.buttons[i][2];
+    nb.value = data[i]['name'];
+    nb.title = data[i]['description'];
+    nb.setAttribute('data-url',data[i]['url']);
     nb.addEventListener('click',selectConfig);
     bd.appendChild(nb);
   };
+  cb('null','yay!');
+}
 
+function restore_plugin_options() {
+  log('restore_plugin_options START');
+
+  getCannedList(dumb_cb);
   log('restore_plugin_options buttons created ');
 
   chrome.storage.local.get(['config_source'], function(items) {
