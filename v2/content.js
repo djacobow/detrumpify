@@ -62,17 +62,20 @@ function find_match_nonmatch_chunks(text,re) {
     var new_end = re.lastIndex;
     // log("start: " + start + ' end: ' + end);
     var before_text = text.substr(end,start-end);
-    if (before_text.length) {
+    if (before_text.length > 0) {
       broken_texts.push({'match':false, 'text': before_text});
     }
-    var match_text = text.substr(start,new_end-start-1);
+    var match_text = text.substr(start,new_end-start);
     broken_texts.push({'match':true, 'text': match_text});
     end = new_end;
   }
-  if (broken_texts.length && (end < text.length-1)) {
+  if (broken_texts.length && (end < text.length)) {
     var after_text = text.substr(end,text.length-1);
     broken_texts.push({'match':false, 'text':after_text});
   }
+  // if (broken_texts.length) {
+  //   console.log(broken_texts);
+  // }
   return broken_texts;
 }
 
