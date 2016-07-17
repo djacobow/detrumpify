@@ -3,7 +3,7 @@
     "name": "Detrumpify Classic",
     "short_name": "Detrumpify Classic",
     "description": "Replaces references to Donald Trump with more accurate descriptions.",
-    "version": "1.0.13",
+    "version": "1.0.14",
     "content_scripts": [
         {
             "matches": [
@@ -40,7 +40,7 @@
                 "*://*.nj.com/*",
                 "*://*.sfgate.com/*",
                 "*://*.sfchronicle.com/*",
-                "*://*.azcentral.com/*",
+                "://*.azcentral.com/*",
                 "*://*.chicagotribune.com/*",
                 "*://*.cleveland.com/*",
                 "*://*.oregonlive.com/*",
