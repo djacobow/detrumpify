@@ -199,7 +199,7 @@ monikers = {
       "Weapons-Grade Plum",
       "Hair Furor",
       "Man-Baby",
-      "Ambitious Corn Dog that Escaped from the Concession Stand at a Rural Alabama Fairgroud, Stole an Unattended Wig, Hopped a Freight Train to Atlantic City and Never Looked Back",
+      "Ambitious Corn Dog that Escaped from the Concession Stand at a Rural Alabama Fairground, Stole an Unattended Wig, Hopped a Freight Train to Atlantic City and Never Looked Back",
     ],
     'dirty': [
       "Degloved Zoo Penis",
@@ -269,21 +269,29 @@ combos = {
     'combined.json': {
         'monikers': ['clean', 'dirty'],
         'button': {
-          'name': 'clean+NSFW | unquoted',
+          'name': 'clean+NSFW | unquoted | always changing',
           'description': 'Combined list of clean and dirty names. Changes with every mention.',
+        }
+    },
+    'combined-daily.json': {
+        'monikers': ['clean', 'dirty'],
+        'randomize_mode': 'daily',
+        'button': {
+          'name': 'clean+NSFW | unquoted | changing daily',
+          'description': 'Combined list of clean and dirty names. Changes daily.',
         }
     },
     'clean.json': {
         'monikers': ['clean', ],
         'button': {
-          'name': 'clean | unquoted',
+          'name': 'clean | unquoted | always changing',
           'description': 'Clean names only. Changes with every mention.',
         }
     },
     'dirty.json': {
         'monikers': ['dirty', ],
         'button': {
-          'name': 'NSFW | unquoted',
+          'name': 'NSFW | unquoted | always changing',
           'description': 'Only curseword names. Changes with every mention.',
         }
     },
@@ -291,7 +299,7 @@ combos = {
         'monikers': ['clean', ],
         'randomize_mode': 'daily',
         'button': {
-          'name': 'clean | unquoted | daily',
+          'name': 'clean | unquoted | changing daily',
           'description': 'Clean names only. Changes only once a day.',
         }
     },
@@ -299,7 +307,7 @@ combos = {
         'monikers': ['clean', ],
         'match_style': 'color: red;',
         'button': {
-          'name': 'clean | unquoted | highlight',
+          'name': 'clean | highlight | always changing',
           'description': 'Clean names only. Highlight.',
         }
     },
@@ -343,7 +351,7 @@ for comboname in combos:
   bconfig.append(combos[comboname]['button'])
 
 bconfig.append({
-  'name': 'Dumpf',
+  'name': 'Drumpf',
   'url': url_base + 'drumpf.json',
   'description': 'Always Drumpf (John Oliver mode)'
 });
