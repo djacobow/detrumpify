@@ -1,7 +1,8 @@
 
-# Detrumpify2
+# Detrumpify
 
-A partial-rewrite of Detrumpify, which hard-coded everything.
+A Rewrite of Detrumpify Classic (v1), which hard-coded everything. This
+version, v2, allows users to configure the insults.
 
 ## Very simple Chrome Extension to replace instances of the words "Donald Trump" with more apt descriptors
 
@@ -14,8 +15,9 @@ However, I will continue to add new insults as I come by them throughout the
 
 ## Installation
 
-You can clone the folder and just load the extension by going to chrome://extensions.  You'll also have to enable developer mode.
+You can clone the folder and just load the extension by going to
+chrome://extensions.  You'll also have to enable developer mode.
 
-Or you can just get the published version here: <TBD>
-
+Or you can just get the published version on the Chrome Web store here:
+https://chrome.google.com/webstore/detail/detrumpify/flekeckcgklibaplikocggegkhgaimea
 
