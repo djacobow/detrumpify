@@ -46,6 +46,9 @@ base = {
 monikers = {
   'trump': {
     'clean': [
+      "Human-Toupee Hybrid",
+      "Decomposing Jack-O-Lantern",
+      "Angry Creamsicle",
       "The Kindest, Bravest, Warmest, Most Wonderful Human Being You'll Ever Know in Your Life",
       "Walking Faux Luxury Brand",
       "Real-Estate Tycoon with Simple, Stupid Plan to Defeat ISIS",
@@ -202,6 +205,7 @@ monikers = {
       "Ambitious Corn Dog that Escaped from the Concession Stand at a Rural Alabama Fairground, Stole an Unattended Wig, Hopped a Freight Train to Atlantic City and Never Looked Back",
     ],
     'dirty': [
+      "Vacuous Dipshit",
       "Degloved Zoo Penis",
       "Shithead",
       "Orange Asshat",
