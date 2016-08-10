@@ -217,6 +217,7 @@ monikers = {
       "Buttplug Face",
       "Toupeed Fucktrumpet",
       "Human Turd",
+      "Microwaved Circus Peanut",
     ],
   },
   'pence': {
