@@ -46,6 +46,7 @@ base = {
 monikers = {
   'trump': {
     'clean': [
+      "Gaffe-Prone Lunatic",
       "Human-Toupee Hybrid",
       "Decomposing Jack-O-Lantern",
       "Angry Creamsicle",
