@@ -204,8 +204,15 @@ monikers = {
       "Hair Fuehrer",
       "Man-Baby",
       "Ambitious Corn Dog that Escaped from the Concession Stand at a Rural Alabama Fairground, Stole an Unattended Wig, Hopped a Freight Train to Atlantic City and Never Looked Back",
+      "Ugly Racist",
+      "Wealthy Inheritor Disguised as Successful Businessman",
+      "National Embarrassment",
+      "Wart We Can't Freeze Off Until November",
+      "Microwaved Circus Peanut",
+      "Talking Dingleberry",
     ],
     'dirty': [
+      "Political Ass Clown",
       "Vacuous Dipshit",
       "Degloved Zoo Penis",
       "Shithead",
@@ -218,7 +225,6 @@ monikers = {
       "Buttplug Face",
       "Toupeed Fucktrumpet",
       "Human Turd",
-      "Microwaved Circus Peanut",
     ],
   },
   'pence': {
