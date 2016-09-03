@@ -101,7 +101,7 @@ function loadConfig(cb,try_remote = true) {
       var have_config = ('config_valid' in items) && items.config_valid;
       var max_age = defaults.max_age;
       if (have_config) {
-        if ('refresh_age' in items) {
+        if ('refresh_age' in items.cfgdata) {
           max_age = items.cfgdata.refresh_age;
         }
       };
