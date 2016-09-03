@@ -210,6 +210,7 @@ monikers = {
       "Wart We Can't Freeze Off Until November",
       "Microwaved Circus Peanut",
       "Talking Dingleberry",
+      "Republican Babadook",
     ],
     'dirty': [
       "Political Ass Clown",
