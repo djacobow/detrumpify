@@ -52,6 +52,7 @@ var sformatted = websites.map(function(cv) { return '*.' + cv; });
 
 pageMod.PageMod({
   include: sformatted,
-  contentScriptFile: self.data.url("content.js")
+  contentScriptFile: [ self.data.url("replacements.js"), 
+                       self.data.url("content.js") ]
 });
 
