@@ -1,4 +1,4 @@
-
+var debug_mode = false;
 var log_count = 0;
 function log(t) {
   try {
@@ -7,7 +7,9 @@ function log(t) {
     sd.scrollTop = sd.scrollHeight;
     log_count += 1;
   } catch (e) { };
-  console.log(t);
+  if (debug_mode) {
+    console.log(t);
+  }
 }
 
 // sets the initial stored url for configuration fetching
