@@ -171,8 +171,8 @@ function switchem() {
         }
 
         if (action_count == (Object.keys(current_config.actions).length-1)) {
-          console.log("iteration done; storing choices");
-          console.log(stored_choices_holder);
+          // console.log("iteration done; storing choices");
+          // console.log(stored_choices_holder);
           chrome.storage.local.set(stored_choices_holder, function() { });
 
           count -= 1;
