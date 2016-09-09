@@ -2,7 +2,7 @@
 // just a simple script to do an xhr, but on a background page,
 // getting away from content page restrictions
 chrome.runtime.onMessage.addListener(function(msg,sender,cb) {
- console.log(msg);
+ // console.log(msg);
  var xhr = new XMLHttpRequest();
  xhr.onreadystatechange = function() {
   if (xhr.readyState == 4) {
