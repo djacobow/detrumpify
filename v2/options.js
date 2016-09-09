@@ -15,7 +15,7 @@ function selectConfig(e) {
 }
 
 function dumb_cb(err,msg) {
- console.log('dumb_cb');
+ // console.log('dumb_cb');
 }
 
 function getCannedList(cb) {
