@@ -211,6 +211,7 @@ monikers = {
       "Microwaved Circus Peanut",
       "Talking Dingleberry",
       "Republican Babadook",
+      "El Caudillo de Mar-a-Lago",
     ],
     'dirty': [
       "Political Ass Clown",
