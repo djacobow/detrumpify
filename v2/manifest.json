@@ -22,6 +22,13 @@
       "persistent": false,
       "scripts": [ "event.js" ]
     },
+    "browser_action": {
+     "default_icon": {
+      "128": "drumpf-128.png"
+     },
+     "default_title": "Configure Detrumpify",
+     "default_popup": "options.html"
+    },
     "content_scripts": [
         {
             "matches": [
