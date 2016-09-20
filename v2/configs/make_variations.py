@@ -14,7 +14,7 @@ base = {
         'timeMultiplier': 1.8,
     },
     'whitelist': [
-        "www.foxnews.com", "www.cnn.com", "www.bbc.com/news",
+        "www.foxnews.com", "cnn.com", "www.bbc.com/news",
         "www.bbc.co.uk/news", "www.theguardian.com", "www.theguardian.co.uk",
         "nytimes.com", "facebook.com", "washingtonpost.com", "salon.com",
         "slate.com", "buzzfeed.com", "vox.com", "huffingtonpost.com",
