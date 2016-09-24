@@ -212,6 +212,11 @@ monikers = {
       "Talking Dingleberry",
       "Republican Babadook",
       "El Caudillo de Mar-a-Lago",
+      "Shouting, Rotting Papaya",
+      "Impotent Orangutan",
+      "Famed Shouting Tycoon",
+      "Mutant Carrot",
+      "Spittle-Flecked Carrot",
     ],
     'dirty': [
       "Political Ass Clown",
