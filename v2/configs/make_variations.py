@@ -158,7 +158,7 @@ monikers = {
       "Cryogenically Frozen Bog Man",
       "Glistening, Shouting Gristle Mass with a History of Saying Terrible and Stupid Things",
       "Screaming Giant Cheese Wedge",
-      "Republican Frontrunner and 250-pound Accumulation of Rancid Beef",
+      "Republican Nominee and 250-pound Accumulation of Rancid Beef",
       "Day-Glo Roadside Billboard About Jock Itch",
       "Temperamental Gelatinous Sponge",
       "Sentient Hate-Balloon",
