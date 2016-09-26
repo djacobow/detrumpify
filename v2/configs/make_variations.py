@@ -217,6 +217,7 @@ monikers = {
       "Famed Shouting Tycoon",
       "Mutant Carrot",
       "Spittle-Flecked Carrot",
+      "Epic Fart that Just Won't Dissipate",
     ],
     'dirty': [
       "Political Ass Clown",
