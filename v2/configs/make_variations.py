@@ -219,6 +219,8 @@ monikers = {
       "Spittle-Flecked Carrot",
       "Epic Fart that Just Won't Dissipate",
       "Gibberish Volcano",
+      "Shaved Tribble",
+      "Pile of Rotten Orange Peels in a Suit",
     ],
     'dirty': [
       "Political Ass Clown",
