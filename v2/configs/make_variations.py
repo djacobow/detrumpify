@@ -30,7 +30,7 @@ base = {
     'actions': {
         'trump': {
             'find_regex': [
-                "(Donald\\s*(J\\.?\\s*)?)?Trump(?!\\w)", "g"
+                "((Donald|DONALD)\\s*(J\\.?\\s*)?)?(Trump|TRUMP)(?!\\w)", "g"
             ],
             'randomize_mode': 'always',
         },
@@ -61,7 +61,6 @@ monikers = {
       "Harkener to Unspecified Moment of American Greatness",
       "Master of Zero-Sum Business Deals",
       "Purveyor of Lousy Steak",
-      "Billionaire and Presidential Nominee Who Inexplicably Believes the World is Set Against Him",
       "Angrily Reanimated Christmas Ham",
       "Short-Findered Vulgarian",
       "Weirdly Authoritarian Gingerbread Man",
@@ -158,7 +157,7 @@ monikers = {
       "Cryogenically Frozen Bog Man",
       "Glistening, Shouting Gristle Mass with a History of Saying Terrible and Stupid Things",
       "Screaming Giant Cheese Wedge",
-      "Republican Nominee and 250-pound Accumulation of Rancid Beef",
+      "250-pound Accumulation of Rancid Beef",
       "Day-Glo Roadside Billboard About Jock Itch",
       "Temperamental Gelatinous Sponge",
       "Sentient Hate-Balloon",
@@ -233,6 +232,8 @@ monikers = {
     ],
     'dirty': [
       "Fuckface von Clownstick",
+      "President Worse than W, Despite How Improbably That Sounds",
+      "Billionaire and Person Who Won the Fucking Presidency Despite Having No Qualifications Who Inexplicably Believes the World is Set Against Him",
       "Political Ass Clown",
       "Vacuous Dipshit",
       "Degloved Zoo Penis",
