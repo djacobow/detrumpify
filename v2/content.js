@@ -35,12 +35,12 @@ function get_randomize_time(action) {
 function choose_now(action,choice) {
   var whichever = Math.floor(action.monikers.length * Math.random());
   choice.last_chosen_item = whichever;
-  choice.last_chosen_time = (new Date).getTime();
-};
+  choice.last_chosen_time = (new Date()).getTime();
+}
 
 function choose(action,choice) {
   var wait = get_randomize_time(action);
-  var now = (new Date).getTime();
+  var now = (new Date()).getTime();
   if ((now - choice.last_chosen_time) >= wait) {
     choose_now(action,choice);
   }
@@ -57,6 +57,7 @@ function find_match_nonmatch_chunks(text,re) {
   // first, break what was a text node into an
   // array of text chunks representing trump and
   // non-trump sections
+  /*jshint boss:true */
   while (match = re.exec(text)) {
     var start = match.index;
     var new_end = re.lastIndex;
@@ -121,7 +122,7 @@ function replace_elem_with_array_of_elems(orig, arry) {
 function switchem() {
     log('switchem START, count:' + count);
 
-    if (current_config == null) {
+    if (current_config === null) {
       log("current_config is invalid");
       return;
     }
@@ -206,7 +207,7 @@ function isThisPageRunnable() {
 
 function startReplTries(err,res) {
   log("startReplTries()");
-  if (err == null) {
+  if (err === null) {
     current_config = res;
     if (isThisPageRunnable()) {
       setTimeout(switchem, currTimeout);

@@ -1,3 +1,4 @@
+/*jshint esversion:6 */
 var debug_mode = false;
 var log_count = 0;
 function log(t) {
@@ -6,7 +7,7 @@ function log(t) {
     sd.innerText += '(' + log_count + '): ' + t + "\n";
     sd.scrollTop = sd.scrollHeight;
     log_count += 1;
-  } catch (e) { };
+  } catch (e) { }
   if (debug_mode) {
     console.log(t);
   }
@@ -28,7 +29,7 @@ function set_initial_url(cb) {
       });
     }
   });
-};
+}
 
 
 // send a message to an event page to have it do an xhr for us
@@ -41,10 +42,10 @@ function loadConfigRemote(cb) {
         'url': items.config_source},
         null,
         function(resp) {
-          if ((resp == null) || (resp.err == null)) {
+          if ((resp === null) || (resp.err === null)) {
             cb('err','error in eventpage code');
           } else if (resp.err == 'OK') {
-            storeConfig(null,resp.text,cb)
+            storeConfig(null,resp.text,cb);
           } else {
             cb('err',resp.status);
           }
@@ -53,7 +54,7 @@ function loadConfigRemote(cb) {
       cb('err','no config source');
     }
   });
-};
+}
 
 /*
 
@@ -99,14 +100,14 @@ function loadConfig(cb,try_remote = true) {
     ['cfgdata', 'config_date', 'config_valid', 'config_source'],
     function(items) {
       log('loadConfig readLocal');
-      var now = (new Date).getTime();
+      var now = (new Date()).getTime();
       var have_config = ('config_valid' in items) && items.config_valid;
       var max_age = defaults.max_age;
       if (have_config) {
         if ('refresh_age' in items.cfgdata) {
           max_age = items.cfgdata.refresh_age;
         }
-      };
+      }
       var force_local = (have_config &&
                         ('config_source' in items) &&
                         (items.config_source == '__local__')) ;
@@ -132,7 +133,7 @@ function loadConfig(cb,try_remote = true) {
 
 function storeConfig(err,txt,cb) {
   log("storeConfig START");
-  if (err != null) {
+  if (err !== null) {
     cb(err,txt);
     return;
   }
@@ -153,7 +154,7 @@ function storeConfig(err,txt,cb) {
       if (chrome.lastError) {
         cb(chrome.lastError);
       } else {
-        date = (new Date).getTime();
+        date = (new Date()).getTime();
         chrome.storage.local.set({'config_date': date}, function() {});
         chrome.storage.local.set({'config_valid': true}, function() {});
         chrome.storage.local.set({'last_chosen_time': 0}, function() {});

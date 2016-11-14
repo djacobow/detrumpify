@@ -25,7 +25,13 @@ base = {
         "sfgate.com", "sfchronicle.com", "azcentral.com", "chicagotribune.com",
         "cleveland.com", "oregonlive.com", "tampatribune.com",
         "signonsandiego.com", "mercurynews.com", "contracostatimes.com",
-        "insidebayarea.com", "feedly.com", "reddit.com"
+        "insidebayarea.com", "feedly.com", "reddit.com",
+        "drudgereport.com", "theblaze.com", "breitbart.com","ijreview.com",
+        "newsmax.com", "wnd.com", "dailycaller.com", "washingtontimes.com",
+        "nationalreview.com", "townhall.com", "freerepublic.com",
+        "pjmedia.com", "hotair.com", "cnsnews.com", "westernjournalism.com",
+        "washingtonexaminer.com", "tpnn.com", "newsbusters.org",
+        "twitchy.com",
     ],
     'actions': {
         'trump': {
@@ -229,10 +235,10 @@ monikers = {
       "Biff Tannen",
       "Swirling Black Hole that Eats Good Sense",
       "Self-Avowed Perpetrator of Sexual Assault",
+      "President Worse than W, Despite How Improbable That Sounded Until Recently",
     ],
     'dirty': [
       "Fuckface von Clownstick",
-      "President Worse than W, Despite How Improbably That Sounds",
       "Billionaire and Person Who Won the Fucking Presidency Despite Having No Qualifications Who Inexplicably Believes the World is Set Against Him",
       "Political Ass Clown",
       "Vacuous Dipshit",

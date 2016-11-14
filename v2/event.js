@@ -10,16 +10,16 @@ chrome.runtime.onMessage.addListener(function(msg,sender,cb) {
    rv = {};
    rv.text = xhr.responseText;
    rv.status = xhr.status;
-   rv.err = ((xhr.status < 200) || (xhr.status >= 300)) ? 'not_2xx' : 'OK';;
+   rv.err = ((xhr.status < 200) || (xhr.status >= 300)) ? 'not_2xx' : 'OK';
    cb(rv);
-  };
+  }
  };
  if (msg.cmd == 'get') {
    // console.log("getting: " + msg.url);
    var source = msg.url;
    // extra weirdness to force dropbox to download rather than page,
    // and the date to force no cache
-   source += '?dl=1&_=' + (new Date).getTime();
+   source += '?dl=1&_=' + (new Date()).getTime();
    xhr.open('GET',source,true);
    xhr.send();
  } else {

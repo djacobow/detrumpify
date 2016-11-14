@@ -1,17 +1,20 @@
 
-set_initial_url();
+set_initial_url(function(src) { log('set_initial_url cb: ' + src); });
 
 function selectConfig(e) {
   var tgt = e.target || e.srcElement;
   var id  = tgt.id;
-  var idx = parseInt(id.substr(7,id.length-1));
-  var url = tgt.getAttribute('data-url');
-  log('selectConfig(): ' + url);
-  srcelem = document.getElementById('configsrc');
-  srcelem.value = url;
-  modeclick('url');
-  document.getElementById('editmode_url').checked = true;
-  save_plugin_options();
+  var new_url = tgt.value;
+  log('selectConfig(): ' + new_url);
+  var srcelem = document.getElementById('configsrc');
+  var curr_url = srcelem.value;
+
+  if (new_url !== curr_url) {
+      modeclick('url');
+      document.getElementById('editmode_url').checked = true;
+      srcelem.value = new_url;
+      save_plugin_options();
+  }
 }
 
 function dumb_cb(err,msg) {
@@ -25,44 +28,63 @@ function getCannedList(cb) {
     'url': defaults.buttons_fetch_url, },
     null,
     function(resp) {
-      if ((resp == null) || (resp.err == null)) {
+      var bd = document.getElementById('buttonsdiv');
+      if ((resp === null) || (resp.err === null)) {
         cb('err','error in eventpage code');
       } else if (resp.err == 'OK') {
         var data = {};
         try {
           resp.text += "\n";
           data = JSON.parse(resp.text);
+          bd.innerHTML = '';
           log(resp.text);
         } catch(e) {
+          bd.innerHTML = '<p>Could not load button metadata. How is our Internet connection?</p>';
           log("Button JSON parse error");
           log(e);
           cb(e,resp.txt);
           return;
         }
-        elaborate_canned_buttons(data,cb);
+        elaborate_selector(data,cb);
       } else {
+        bd.innerHTML = '<p>Could not load button metadata. How is our Internet connection?</p>';
         cb('err',resp.status);
       }
-      var bd = document.getElementsById('buttonsdiv');
-      bd.innerHTML = '<p>Could not load button metadata. How is our Internet connection?</p>';
     }
   );
 }
 
-function elaborate_canned_buttons(data,cb) {
-  bd = document.getElementById('buttonsdiv');
-  bd.innerHTML = '';
-  for (var i=0;i<data.length;i++) {
-    log('added button');
-    var nb = document.createElement('input');
-    nb.type = 'button';
-    nb.id = 'btnIdx_' + i;
-    nb.value = data[i]['name'];
-    nb.title = data[i]['description'];
-    nb.setAttribute('data-url',data[i]['url']);
-    nb.addEventListener('click',selectConfig);
-    bd.appendChild(nb);
-  };
+function elaborate_selector(data,cb) {
+  var selector = document.getElementById('confselect');
+
+  for(var i=selector.options.length-1; i>=0 ;i--) {
+     selector.remove(i);
+  }
+
+  var current_url = document.getElementById('configsrc').value;
+
+  var opt = document.createElement('option');
+  opt.id = 'selIdx_0';
+  opt.value = current_url;
+  opt.text= "Use currently set config.";
+  selector.options.add(opt);
+
+  var set_value = false;
+  for (i=0;i<data.length;i++) {
+    opt = document.createElement('option');
+    opt.id = 'selIdx_' + (i+1).toString();
+    opt.value = data[i].url;
+    opt.text= data[i].description;
+    opt.setAttribute('short-name',data[i].name);
+    if (data[i].url === current_url) {
+        set_value = opt.value;
+    }
+    selector.addEventListener('change',selectConfig);
+    selector.options.add(opt);
+  }
+  if (set_value) {
+      selector.value = set_value;
+  }
   cb('null','yay!');
 }
 
@@ -81,7 +103,7 @@ function restore_plugin_options() {
       chrome.storage.local.set({'config_source': defaults.config_source},
               function() {});
       secelem.value = defaults.config_source;
-    };
+    }
     if (srcelem.value == '__local__') {
       document.getElementById('editmode_lock').checked = true;
       modeclick('lock');
@@ -91,7 +113,7 @@ function restore_plugin_options() {
   });
   loadConfig(showConfig);
   log('restore_plugin_options DONE');
-};
+}
 
 function showConfig(err,res) {
   log('showConfig START');
@@ -103,7 +125,7 @@ function showConfig(err,res) {
    }
   });
 
-  if (err == null) {
+  if (err === null) {
     log('no error');
     jselem.value = JSON.stringify(res,null,2);
   } else {
@@ -111,7 +133,7 @@ function showConfig(err,res) {
     jselem.value = "ERROR:" + err;
   }
   log('showConfig DONE');
-};
+}
 
 function save_plugin_options() {
   log('save_plugin_options START');
@@ -129,11 +151,11 @@ function save_plugin_options() {
       function() {
         log('config_source saved');
       });
-  };
+  }
 
   loadConfig(showConfig);
   log('save_plugin_options DONE');
-};
+}
 
 function modeclick(which) {
  log('modeclick: ' + which);
@@ -151,7 +173,7 @@ function modeclick(which) {
    if (src == '__local__') {
      src = defaults.config_source;
      urlinp.value = src;
-   };
+   }
    chrome.storage.local.set({'config_source': src, 'config_valid': false}, function() {
      loadConfig(showConfig,true);
    });
@@ -171,7 +193,7 @@ function modeclick(which) {
    urlinp.style.backgroundColor = '#d0d0d0';
 
    storeConfig(null,cfjson.value,function(err) {
-     if (err == null) {
+     if (err === null) {
        log('setting to __local__');
        urlinp.value = '__local__';
        chrome.storage.local.set({'config_source': '__local__'}, function() {
@@ -194,13 +216,24 @@ function setup_handlers() {
   document.getElementById('savebutton').addEventListener('click',save_plugin_options);
 
   log('adding radiobutton handler');
-  var edit_radios = document.forms['editmodeform'].elements['editmode'];
+  var edit_radios = document.forms.editmodeform.elements.editmode;
   for (var i=0;i<edit_radios.length;i++) {
     radio = edit_radios[i];
+    /*jshint loopfunc:true */
     radio.onchange = function(ev) {
       modeclick(ev.target.value);
-    }
+    };
   }
+
+  document.getElementById('showconfigcheck').addEventListener('change', function(ev) {
+    var configdiv = document.getElementById('configdiv');
+    var tgt = ev.target || ev.srcElement;
+    if (tgt.checked) {
+        configdiv.style.display = 'block';
+    } else {
+        configdiv.style.display = 'none';
+    }
+  });
 }
 
 

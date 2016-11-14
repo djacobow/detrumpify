@@ -17,10 +17,16 @@
               </td>
           </tr>
       </table>
-      <div>You can enter an URL from which the plugin will pull its configuration. You can paste a configuration directly by clicking the radio button "edit", pasting, and the clicking it to "lock."</div>
+      <div>Choose a configuration from the drop-down below, or if you want, you can provide your own configuration with your own pattern to match and insults. There are two ways to do this: 1) host your own config file and enter the URL below. 2) Show configuration details below and edit the config directly.</div>
+    <hr>
+    <div><b>Canned configurations from <a href="http://toolsofourtools.org/detrumpify2">toolsofourtools.org</a>:</b></div>
+    <div id="confselectdiv">
+        <select id="confselect" name="confselect"></select>
+        <div id="buttonsdiv"></div>
+    </div>
     <hr>
     <div id="urldiv">
-      <b>Configuration URL: </b>(insults loaded from here)
+      <b>Configuration URL: </b>(edit directly to use a non-canned configuration file)
       <table>
         <tr>
           <td>
@@ -33,33 +39,26 @@
       </table>
     </div>
     <hr>
-    <div><b>Pre-canned configurations from <a href="http://toolsofourtools.org/detrumpify2">toolsofourtools.org</a>:</b></div>
-    <div id="buttonsdiv">
-    </div>
 
-    <hr>
-
-    <!--
-    <input type="button" id="loadbutton" value="Test loading config now"></input>
-    <hr>
-    -->
-
-    <div id="configdiv" style="background-color: lightblue">
-        <b>Currently loaded configuration:</b>
-        <textarea id="configjson" rows="10" style="width: 100%" readonly="true">
-        </textarea>
-        <div>
-          <form id="editmodeform" name="editmodeform" action="">
-              <input type="radio" checked id="editmode_url" name="editmode" value="url">Use Config URL
-              <input type="radio" id="editmode_edit" name="editmode" value="edit">Edit Config
-              <input type="radio" id="editmode_lock" name="editmode" value="lock">Lock Changes
-          </form>
+    <div id="configdetaildiv">
+        <input type="checkbox" id="showconfigcheck" name="showconfigcheck" value="bloop">Show configuration details. Check if you want to edit the config directly.<br>
+        <div id="configdiv" style="background-color: lightblue; display: none;">
+            <b>Currently loaded configuration:</b>
+            <textarea id="configjson" rows="10" style="width: 100%" readonly="true">
+            </textarea>
+            <div>
+              <form id="editmodeform" name="editmodeform" action="">
+                  <input type="radio" checked id="editmode_url" name="editmode" value="url">Use Config URL
+                  <input type="radio" id="editmode_edit" name="editmode" value="edit">Edit Config
+                  <input type="radio" id="editmode_lock" name="editmode" value="lock">Lock Changes
+              </form>
+            </div>
         </div>
     </div>
 
     <hr>
 
-    <div id="statusdiv_container">
+    <div id="statusdiv_container" style="display: none;">
       <b>Debug Messages</b>
       <div id="statusdiv" style="background-color: lightyellow; width:100%; height:30px; overflow-y:scroll">
       </div>
