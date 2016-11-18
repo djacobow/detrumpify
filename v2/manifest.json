@@ -8,7 +8,7 @@
       "page": "options.html",
       "chrome_style": true
     },
-    "version": "1.1.16",
+    "version": "1.1.17",
     "permissions": [
         "https://dropbox.com/",
         "https://dl.dropboxusercontent.com/",
@@ -24,7 +24,7 @@
     },
     "browser_action": {
      "default_icon": {
-      "128": "drumpf-128.png"
+      "128": "icons/dt-128.png"
      },
      "default_title": "Configure Detrumpify",
      "default_popup": "options.html"
@@ -42,9 +42,9 @@
         }
     ],
     "icons": {
-        "128": "drumpf-128.png",
-        "200": "drumpf-200.png",
-        "400": "drumpf-200.png"
+        "128": "icons/dt-128.png",
+        "200": "icons/dt-200.png",
+        "400": "icons/dt-400.png"
     },
     "applications": {
       "gecko": {
