@@ -3,6 +3,7 @@
 
 import copy
 import json
+import re
 
 base = {
     'schema': 'InsultMarkupLanguage/0.1',
@@ -45,7 +46,13 @@ base = {
                 "\\b((Mike|Michael)\\s*)?Pence(?!\\w)", "g"
             ],
             'randomize_mode': 'always',
-        }
+        },
+#        'alt-right': {
+#            'find_regex': [
+#                "\\b([Aa]lt-[Rr]ight(?!\\w)", "g"
+#            ],
+#            'randomize_mode': 'always',
+#        }
     }
 }
 
@@ -106,7 +113,7 @@ monikers = {
       "Wax Museum Figure on a Very Hot Day",
       "Soggy Burlap Sack",
       "Bag of Toxic Sludge",
-      "Your Next President and Ruler for Life",
+      "President and Ruler for Life",
       "Brightly Burning Trash Fire",
       "Great Judgement-Haver",
       "Man-Sized Sebaceous Cyst",
@@ -176,7 +183,7 @@ monikers = {
       "Uncooked Chicken Breast",
       "KKK Rally Port-a-Potty Holding Tank",
       "Neon-Tinted Hellion",
-      "Plentiful Field of Dung Piled into the Shape of a Presidential Candidate",
+      "Plentiful Field of Dung Piled into the Shape of a President",
       "Malfunctioning Wind Turbine",
       "Seeping Fleabag",
       "Sloshing Styrofoam Takeout Container Filled with Three-Day-Old Mac and Cheese",
@@ -235,11 +242,13 @@ monikers = {
       "Biff Tannen",
       "Swirling Black Hole that Eats Good Sense",
       "Self-Avowed Perpetrator of Sexual Assault",
-      "President Worse than W, Despite How Improbable That Sounded Until Recently",
+      "President Worse than W, Despite How Improbable Used to Sound",
+      "Sociopathic Operating System Installed on a Frightened Child",
+      "Everything Wrong with America, Made into Living Flesh,"
     ],
     'dirty': [
       "Fuckface von Clownstick",
-      "Billionaire and Person Who Won the Fucking Presidency Despite Having No Qualifications Who Inexplicably Believes the World is Set Against Him",
+      "Billionaire and Person Who, Having Won the Fucking Presidency Without Any Qualifications, Inexplicably Believes the World is Set Against Him",
       "Political Ass Clown",
       "Vacuous Dipshit",
       "Degloved Zoo Penis",
@@ -257,6 +266,16 @@ monikers = {
       "Anus Lips",
     ],
   },
+#  'alt-right': {
+#    'clean': [
+#      "white supremacist",
+#      "racist",
+#      "anti-semitic",
+#      "sexist",
+#    ],
+#    'dirty': [
+#    ],
+#  },
   'pence': {
     'clean': [
       "Dead-Ended Politician with Apparently Very Little to Lose",
@@ -284,6 +303,13 @@ monikers = {
 url_base = 'http://toolsofourtools.org/detrumpify2/'
 
 combos = {
+    'disable.json': {
+        'monikers': [],
+        'button': {
+            'name': 'Disable Detrumpify',
+            'description': 'Temporarily disable Detrumpify',
+        },
+    },
     'combined-scare.json': {
         'monikers': ['clean', 'dirty'],
         'bracket': [u'\u201c', u'\u201d'],
@@ -321,6 +347,14 @@ combos = {
         'button': {
           'name': 'clean+NSFW | unquoted | changing daily',
           'description': 'Combined list of clean and dirty names. Changes daily.',
+        }
+    },
+    'clean-short.json': {
+        'monikers': ['clean', ],
+        'max_len': 3,
+        'button': {
+          'name': 'clean | unquoted | always changing | three words or fewer',
+          'description': 'Short, clean names only. Change every mention.',
         }
     },
     'clean.json': {
@@ -363,7 +397,13 @@ for comboname in combos:
       outdata['actions'][person]['monikers'] = []
       for moniker_group in combos[comboname]['monikers']:
         for moniker in monikers[person][moniker_group]:
-          outdata['actions'][person]['monikers'].append(moniker)
+          max_len = combos[comboname].get('max_len',0)
+          if max_len:
+              act_len = len(re.split(r'[\s\-]',moniker))
+              if act_len <= max_len:
+                  outdata['actions'][person]['monikers'].append(moniker)
+          else:
+              outdata['actions'][person]['monikers'].append(moniker)
 
       for v in ['randomize_mode', 'match_style', 'bracket']:
         if v in combos[comboname]:
