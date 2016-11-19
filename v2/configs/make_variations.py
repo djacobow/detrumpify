@@ -245,6 +245,8 @@ monikers = {
       "President Worse than W, Despite How Improbable Used to Sound",
       "Sociopathic Operating System Installed on a Frightened Child",
       "Everything Wrong with America, Made into Living Flesh,"
+      "Manchurian Combover",
+      "Cheeto Benito",
     ],
     'dirty': [
       "Fuckface von Clownstick",
@@ -355,6 +357,14 @@ combos = {
         'button': {
           'name': 'clean | unquoted | always changing | three words or fewer',
           'description': 'Short, clean names only. Change every mention.',
+        }
+    },
+    'combined-short.json': {
+        'monikers': ['clean', 'dirty', ],
+        'max_len': 3,
+        'button': {
+          'name': 'clean+NSFW | unquoted | always changing | three words or fewer',
+          'description': 'Short, clean+NSFW names. Change every mention.',
         }
     },
     'clean.json': {
