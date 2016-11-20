@@ -10,10 +10,10 @@ function selectConfig(e) {
   var curr_url = srcelem.value;
 
   if (new_url !== curr_url) {
-      modeclick('url');
+      editModeClick('url');
       document.getElementById('editmode_url').checked = true;
       srcelem.value = new_url;
-      save_config_options();
+      saveConfigURL();
   }
 }
 
@@ -45,7 +45,7 @@ function getCannedList(cb) {
           cb(e,resp.txt);
           return;
         }
-        elaborate_selector(data,cb);
+        elaborateConfigSelector(data,cb);
       } else {
         bd.innerHTML = '<p>Could not load button metadata. How is our Internet connection?</p>';
         cb('err',resp.status);
@@ -54,7 +54,7 @@ function getCannedList(cb) {
   );
 }
 
-function elaborate_selector(data,cb) {
+function elaborateConfigSelector(data,cb) {
   var selector = document.getElementById('confselect');
 
   for(var i=selector.options.length-1; i>=0 ;i--) {
@@ -88,11 +88,11 @@ function elaborate_selector(data,cb) {
   cb('null','yay!');
 }
 
-function restore_plugin_options() {
-  log('restore_plugin_options START');
+function restorePluginOptions() {
+  log('restorePluginOptions START');
 
   getCannedList(dumb_cb);
-  log('restore_plugin_options buttons created ');
+  log('restorePluginOptions buttons created ');
 
   chrome.storage.local.get(['insult_style'], function(items) {
     styleelem = document.getElementById('styleinput');
@@ -110,43 +110,141 @@ function restore_plugin_options() {
     if ('config_source' in items) {
       srcelem.value = items.config_source;
     } else {
-      log('resetting config_source in restore_plugin_options');
+      log('resetting config_source in restorePluginOptions');
       chrome.storage.local.set({'config_source': defaults.config_source},
               function() {});
       secelem.value = defaults.config_source;
     }
     if (srcelem.value == '__local__') {
       document.getElementById('editmode_lock').checked = true;
-      modeclick('lock');
+      editModeClick('lock');
     } else {
-      modeclick('url');
+      editModeClick('url');
     }
   });
   loadConfig(showConfig);
-  log('restore_plugin_options DONE');
+  log('restorePluginOptions DONE');
+}
+
+function saveEnabledActions() {
+  console.log('saveEnabledActions');
+  var enelem = document.getElementById('actionstd');
+  var children = enelem.childNodes;
+  enabled = {};
+  for (var i=0;i<children.length;i++) {
+    var child = children[i];
+    var m = child.id.match(/^([\w-]+)_check/);
+    if (m) {
+      console.log(action);
+      var action = m[1];
+      enabled[action] = child.checked;
+      log(action);
+    }
+  }
+  chrome.storage.local.set({'enabled_actions': enabled}, function() {
+   console.log('saved action changes');
+  });
+}
+
+
+function arraysEqual(arr1, arr2) {
+    if(arr1.length !== arr2.length)
+        return false;
+    for(var i = arr1.length; i--;) {
+        if(arr1[i] !== arr2[i])
+            return false;
+    }
+
+    return true;
+}
+
+function showEnabledActionsList(items,cfg_actions) {
+      var enelem = document.getElementById('actionstd');
+
+      var enabled = {};
+      var action;
+      var i;
+
+      // first, check to see if the list of actions in the config even matches
+      // the list of enabled actions stored. If it does, keep the stored list,
+      // but if it doesn't, reset the stored list to what is in the config
+      // (with everything enabled)
+      var enabled_exist_list = [];
+      if ('enabled_actions' in items) {
+        enabled_exist_list = Object.keys(items.enabled_actions);
+      }
+      var config_and_stored_actions_match = arraysEqual(cfg_actions, enabled_exist_list);
+
+      if (!config_and_stored_actions_match) {
+        console.log('resetting actions list from config');
+        for (i=0; i<cfg_actions.length; i++) {
+          action = cfg_actions[i];
+          enabled[action] = true;
+        }   
+        chrome.storage.local.set({'enabled_actions': enabled},function() {
+          log('stored reset enabled actions');
+        });
+      } else {
+        for (i=0; i<cfg_actions.length; i++) {
+          action = cfg_actions[i];
+          var enable_this = true;
+          if (('enabled_actions' in items) && (action in items.enabled_actions)) {
+            enable_this = items.enabled_actions[action];
+          }
+          enabled[action] = enable_this;
+        }    
+      }
+
+      enelem.innerHTML = '';
+      for (i=0; i<cfg_actions.length; i++) {
+        action = cfg_actions[i];
+        var label_elem = document.createElement('span');
+        label_elem.innerHTML = action + ' ';
+        var check_elem = document.createElement('input');
+        check_elem.type = 'checkbox';
+        check_elem.name = action + '_check';
+        check_elem.value = action;
+        check_elem.id = action + '_check';
+        check_elem.checked = enabled[action];
+        check_elem.onchange = saveEnabledActions;
+        enelem.appendChild(label_elem);
+        enelem.appendChild(check_elem);
+        if (i !== cfg_actions.length-1) {
+          var pipe_elem = document.createElement('span');
+          pipe_elem.innerHTML = ' | ';
+          enelem.appendChild(pipe_elem);
+        }
+
+      }
 }
 
 function showConfig(err,res) {
   log('showConfig START');
   var jselem = document.getElementById('configjson');
   var urlem =  document.getElementById('configsrc');
-  chrome.storage.local.get(['config_source'],function(items) {
-   if ('config_source' in items) {
-     urlem.value = items.config_source;
-   }
-  });
+  chrome.storage.local.get(['config_source','stored_config_source','enabled_actions'],function(items) {
 
-  if (err === null) {
-    log('no error');
-    jselem.value = JSON.stringify(res,null,2);
-  } else {
-    log('error');
-    jselem.value = "ERROR:" + err;
-  }
-  log('showConfig DONE');
+    if ('config_source' in items) {
+      urlem.value = items.config_source;
+    }
+
+    if (err === null) {
+      log('no error');
+      var actions = Object.keys(res.actions);
+      // this is here rather than in earlier in restorePluginOptions
+      // becauase generating this list requires the config as well as
+      // the plugin options
+      showEnabledActionsList(items,actions);
+      jselem.value = JSON.stringify(res,null,2);
+    } else {
+      log('error');
+      jselem.value = "ERROR:" + err;
+    }
+    log('showConfig DONE');
+  });
 }
 
-function save_style() {
+function saveStyle() {
   var styleelem = document.getElementById('styleinput');
   var style = styleelem.value;
   chrome.storage.local.set(
@@ -157,8 +255,8 @@ function save_style() {
     });
 }
 
-function save_config_options() {
-  log('save_config_options START');
+function saveConfigURL() {
+  log('saveConfigURL START');
   var srcelem = document.getElementById('configsrc');
   var url = srcelem.value;
   // if it's set to local, then it was set by the 'lock' button
@@ -176,11 +274,11 @@ function save_config_options() {
   }
 
   loadConfig(showConfig);
-  log('save_config_options DONE');
+  log('saveConfigURL DONE');
 }
 
-function modeclick(which) {
- log('modeclick: ' + which);
+function editModeClick(which) {
+ log('editModeClick: ' + which);
  cfjson = document.getElementById('configjson');
  urlinp = document.getElementById('configsrc');
  if (which == 'url') {
@@ -233,10 +331,10 @@ function modeclick(which) {
 function setup_handlers() {
 
   log('adding handlers');
-  document.addEventListener('DOMContentLoaded', restore_plugin_options);
+  document.addEventListener('DOMContentLoaded', restorePluginOptions);
   log('adding save handler');
-  document.getElementById('config_save_button').addEventListener('click',save_config_options);
-  document.getElementById('style_save_button').addEventListener('click',save_style);
+  document.getElementById('config_save_button').addEventListener('click',saveConfigURL);
+  document.getElementById('style_save_button').addEventListener('click',saveStyle);
 
   log('adding radiobutton handler');
   var edit_radios = document.forms.editmodeform.elements.editmode;
@@ -244,7 +342,7 @@ function setup_handlers() {
     radio = edit_radios[i];
     /*jshint loopfunc:true */
     radio.onchange = function(ev) {
-      modeclick(ev.target.value);
+      editModeClick(ev.target.value);
     };
   }
 
