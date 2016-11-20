@@ -13,7 +13,7 @@ function selectConfig(e) {
       modeclick('url');
       document.getElementById('editmode_url').checked = true;
       srcelem.value = new_url;
-      save_plugin_options();
+      save_config_options();
   }
 }
 
@@ -94,6 +94,17 @@ function restore_plugin_options() {
   getCannedList(dumb_cb);
   log('restore_plugin_options buttons created ');
 
+  chrome.storage.local.get(['insult_style'], function(items) {
+    styleelem = document.getElementById('styleinput');
+      if ('insult_style' in items) {
+          styleelem.value = items.insult_style;
+      } else {
+          chrome.storage.local.set({'insult_style': defaults.insult_style},
+              function() {});
+          styleelem.value = defaults.insult_style;
+      }
+  });
+
   chrome.storage.local.get(['config_source'], function(items) {
     srcelem = document.getElementById('configsrc');
     if ('config_source' in items) {
@@ -135,8 +146,19 @@ function showConfig(err,res) {
   log('showConfig DONE');
 }
 
-function save_plugin_options() {
-  log('save_plugin_options START');
+function save_style() {
+  var styleelem = document.getElementById('styleinput');
+  var style = styleelem.value;
+  chrome.storage.local.set(
+    {'insult_style': style,
+    },
+    function() {
+      log('style saved');
+    });
+}
+
+function save_config_options() {
+  log('save_config_options START');
   var srcelem = document.getElementById('configsrc');
   var url = srcelem.value;
   // if it's set to local, then it was set by the 'lock' button
@@ -154,7 +176,7 @@ function save_plugin_options() {
   }
 
   loadConfig(showConfig);
-  log('save_plugin_options DONE');
+  log('save_config_options DONE');
 }
 
 function modeclick(which) {
@@ -213,7 +235,8 @@ function setup_handlers() {
   log('adding handlers');
   document.addEventListener('DOMContentLoaded', restore_plugin_options);
   log('adding save handler');
-  document.getElementById('savebutton').addEventListener('click',save_plugin_options);
+  document.getElementById('config_save_button').addEventListener('click',save_config_options);
+  document.getElementById('style_save_button').addEventListener('click',save_style);
 
   log('adding radiobutton handler');
   var edit_radios = document.forms.editmodeform.elements.editmode;

@@ -17,28 +17,34 @@
               </td>
           </tr>
       </table>
-      <div>Choose a configuration from the drop-down below, or if you want, you can provide your own configuration with your own pattern to match and insults. There are two ways to do this: 1) host your own config file and enter the URL below. 2) Show configuration details below and edit the config directly.</div>
+      <div>Choose a configuration from the drop-down, or optionally, you can provide your own configuration one of two ways. 1) Host a config file somewhere and enter the URL below. 2) "Show configuration details" and edit a local copy of the selected config.</div>
     <hr>
-    <div><b>Canned configurations from <a href="http://toolsofourtools.org/detrumpify2">toolsofourtools.org</a>:</b></div>
+    <div>Choose configurations from <a href="http://toolsofourtools.org/detrumpify2">toolsofourtools.org</a>, or enter own URL:</div>
     <div id="confselectdiv">
-        <select id="confselect" name="confselect"></select>
+        <select id="confselect" name="confselect"></select><br>
         <div id="buttonsdiv"></div>
     </div>
-    <hr>
     <div id="urldiv">
-      <b>Configuration URL: </b>(edit directly to use a non-canned configuration file)
-      <table>
-        <tr>
-          <td>
-              <input type="text" size="80" id="configsrc">
-      </td>
-      <td>
-            <input type="button" id="savebutton" value="Save Config URL">
-      </td>
-    </tr>
-      </table>
+        <table width="100%">
+            <tr>
+                <td width="25%"><b>URL</b></td>
+                <td width="52%"><input type="text" id="configsrc" size="60"></td>
+                <td width="23%"><input type="button" value="Save URL" id="config_save_button"></td>
+            </tr>
+        </table>
     </div>
     <hr>
+    <span>You may also specify custom <a href="http://toolsofourtools.org/detrumpify-styles" target="_blank">styles</a> to be applied to the insults.</span>
+    <div id="inputstylediv">
+        <table width="100%">
+            <tr>
+                <td width="25%"><b>Style</b></td>
+                <td width="52%"><input type="text" id="styleinput" size="60"></td>
+                <td width="23%"><input type="button" value="Save style" id="style_save_button"></td>
+            </tr>
+        </table>
+    <hr>
+    </div>
 
     <div id="configdetaildiv">
         <input type="checkbox" id="showconfigcheck" name="showconfigcheck" value="bloop">Show configuration details. Check if you want to edit the config directly.<br>
