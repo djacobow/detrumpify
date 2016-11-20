@@ -236,7 +236,17 @@ function setup_handlers() {
   document.addEventListener('DOMContentLoaded', restore_plugin_options);
   log('adding save handler');
   document.getElementById('config_save_button').addEventListener('click',save_config_options);
+  document.getElementById('configsrc').addEventListener('keypress',function(ev) {
+    if (ev.keyCode === 13) {
+      save_config_options();
+    }
+  });
   document.getElementById('style_save_button').addEventListener('click',save_style);
+  document.getElementById('styleinput').addEventListener('keypress',function(ev) {
+    if (ev.keyCode === 13) {
+      save_style();
+    }
+  });
 
   log('adding radiobutton handler');
   var edit_radios = document.forms.editmodeform.elements.editmode;
