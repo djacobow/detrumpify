@@ -9,6 +9,10 @@ var defaults = {
   // 'max_age': 7 * 24 * 60 * 60 * 1000
   'max_age': 180 * 1000,
   'buttons_fetch_url': url_base + 'buttons_config.json',
+  // default blanket style for all insults
+  'insult_style': '',
+  // classname for all insult styles
+  'insult_cssname': 'span.detrumpified',
 };
 
 
