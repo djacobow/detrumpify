@@ -49,7 +49,7 @@ base = {
         },
 #        'alt-right': {
 #            'find_regex': [
-#                "\\b([Aa]lt-[Rr]ight(?!\\w)", "g"
+#                "\\b(?!([Aa]|[Aa]n|[Tt]he)\\s)[Aa]lt[- ][Rr]ight(?!\\w)", "g",
 #            ],
 #            'randomize_mode': 'always',
 #        }
@@ -270,6 +270,8 @@ monikers = {
   },
 #  'alt-right': {
 #    'clean': [
+#      "rebranded white nationalist",
+#      "hate filled",
 #      "white supremacist",
 #      "racist",
 #      "anti-semitic",
@@ -311,6 +313,7 @@ combos = {
             'name': 'Disable Detrumpify',
             'description': 'Temporarily disable Detrumpify',
         },
+        'match_class': 'detrumpified',
     },
     'combined-scare.json': {
         'monikers': ['clean', 'dirty'],
@@ -318,7 +321,8 @@ combos = {
         'button': {
           'name': 'clean+NSFW | quoted | always changing',
           'description': 'Combined list of clean and dirty names, quoted. Changes with every mention.',
-        }
+        },
+        'match_class': 'detrumpified',
     },
     'clean-scare.json': {
         'monikers': ['clean', ],
@@ -326,7 +330,8 @@ combos = {
         'button': {
           'name': 'clean | quoted | always changing',
           'description': 'Clean names only, with scare quotes. Changes on every mention.',
-        }
+        },
+        'match_class': 'detrumpified',
     },
     'dirty-scare.json': {
         'monikers': ['dirty', ],
@@ -334,14 +339,16 @@ combos = {
         'button': {
           'name': 'NSFW | quoted | always changing',
           'description': 'Only curseword names, with scare quotes. Changes on every mention.',
-        }
+        },
+        'match_class': 'detrumpified',
     },
     'combined.json': {
         'monikers': ['clean', 'dirty'],
         'button': {
           'name': 'clean+NSFW | unquoted | always changing',
           'description': 'Combined list of clean and dirty names. Changes with every mention.',
-        }
+        },
+        'match_class': 'detrumpified',
     },
     'combined-daily.json': {
         'monikers': ['clean', 'dirty'],
@@ -349,7 +356,8 @@ combos = {
         'button': {
           'name': 'clean+NSFW | unquoted | changing daily',
           'description': 'Combined list of clean and dirty names. Changes daily.',
-        }
+        },
+        'match_class': 'detrumpified',
     },
     'clean-short.json': {
         'monikers': ['clean', ],
@@ -357,7 +365,8 @@ combos = {
         'button': {
           'name': 'clean | unquoted | always changing | three words or fewer',
           'description': 'Short, clean names only. Change every mention.',
-        }
+        },
+        'match_class': 'detrumpified',
     },
     'combined-short.json': {
         'monikers': ['clean', 'dirty', ],
@@ -365,21 +374,24 @@ combos = {
         'button': {
           'name': 'clean+NSFW | unquoted | always changing | three words or fewer',
           'description': 'Short, clean+NSFW names. Change every mention.',
-        }
+        },
+        'match_class': 'detrumpified',
     },
     'clean.json': {
         'monikers': ['clean', ],
         'button': {
           'name': 'clean | unquoted | always changing',
           'description': 'Clean names only. Changes with every mention.',
-        }
+        },
+        'match_class': 'detrumpified',
     },
     'dirty.json': {
         'monikers': ['dirty', ],
         'button': {
           'name': 'NSFW | unquoted | always changing',
           'description': 'Only curseword names. Changes with every mention.',
-        }
+        },
+        'match_class': 'detrumpified',
     },
     'clean-daily.json': {
         'monikers': ['clean', ],
@@ -387,7 +399,8 @@ combos = {
         'button': {
           'name': 'clean | unquoted | changing daily',
           'description': 'Clean names only. Changes only once a day.',
-        }
+        },
+        'match_class': 'detrumpified',
     },
     'clean-highlight.json': {
         'monikers': ['clean', ],
@@ -395,7 +408,8 @@ combos = {
         'button': {
           'name': 'clean | highlight | always changing',
           'description': 'Clean names only. Highlight.',
-        }
+        },
+        'match_class': 'detrumpified',
     },
 }
 
@@ -415,7 +429,7 @@ for comboname in combos:
           else:
               outdata['actions'][person]['monikers'].append(moniker)
 
-      for v in ['randomize_mode', 'match_style', 'bracket']:
+      for v in ['randomize_mode', 'match_style', 'match_class', 'bracket']:
         if v in combos[comboname]:
           outdata['actions'][person][v] = combos[comboname][v]
 
