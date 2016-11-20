@@ -127,3 +127,16 @@ function storeConfig(err,txt,cb) {
     });
   }
 }
+
+function createAndSetStyle(name,style_text) {
+    var style_element_id = 'detrumpify_style_element';
+    var se = document.getElementById(style_element_id);
+    if (se === null) {
+      se = document.createElement('style');
+      se.setAttribute('id',style_element_id);
+      se.type = 'text/css';
+      document.getElementsByTagName('head')[0].appendChild(se);
+    }
+    se.innerHTML = name + ' { ' + style_text + ' } ';
+}
+

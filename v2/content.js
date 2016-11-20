@@ -80,18 +80,6 @@ function find_match_nonmatch_chunks(text,re) {
   return broken_texts;
 }
 
-function createAndSetStyle(name,style_text) {
-    var style_element_id = 'detrumpify_style_element';
-    var se = document.getElementById(style_element_id);
-    if (se === null) {
-      se = document.createElement('style');
-      se.setAttribute('id',style_element_id);
-      se.type = 'text/css';
-      document.getElementsByTagName('head')[0].appendChild(se);
-    }
-    se.innerHTML = name + ' { ' + style_text + ' } ';
-}
-
 
 function make_replacement_elems_array(action,broken_texts,orig_node,choice) {
   var repl_array = [];
@@ -146,11 +134,32 @@ function switchem() {
     }
 
 
-    chrome.storage.local.get(['stored_choices'],function(stored_choices_holder) {
+    var action_name;
+    var n;
+
+    chrome.storage.local.get(['stored_choices','enabled_actions'],function(items) {
       var action_count = 0;
-      for (var action_name in current_config.actions) {
+      var stored_choices_holder = items.stored_choices;
+
+      // generate a shortened list of actions that the use has enabled
+      var actions_to_run = Object.keys(current_config.actions);
+      if ('enabled_actions' in items) {
+        temp_actions_to_run = Object.keys(items.enabled_actions);
+        actions_to_run = [];
+        for (n=0;n<temp_actions_to_run.length; n++) {
+          action_name = temp_actions_to_run[n];
+          if ((action_name in current_config.actions) &&
+              (items.enabled_actions[action_name])) {
+            actions_to_run.push(action_name);
+          }
+        }
+      }
+
+      for (var n=0; n<actions_to_run.length; n++) {
+        action_name = actions_to_run[n];
         log('action_name: ' + action_name);
         var action = current_config.actions[action_name];
+        console.log(action);
         if (!('monikers' in action)) {
           log("action is invalid");
           return;

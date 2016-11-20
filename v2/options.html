@@ -28,24 +28,35 @@
     <div id="urldiv">
         <table width="100%">
             <tr>
-                <td width="25%"><b>URL</b></td>
-                <td width="52%"><input type="text" id="configsrc" size="60"></td>
+                <td width="15%"><b>URL</b></td>
+                <td width="62%"><input type="text" id="configsrc" size="60"></td>
                 <td width="23%"><input type="button" value="Save URL" id="config_save_button"></td>
             </tr>
         </table>
     </div>
     <hr>
-    <span>You may also specify custom <a href="http://toolsofourtools.org/detrumpify-styles" target="_blank">styles</a> to be applied to the insults.</span>
+    <span>You may also specify custom <a href="http://toolsofourtools.org/detrumpify-styles" target="_blank">styles</a> to be applied to the insults:</span>
     <div id="inputstylediv">
         <table width="100%">
             <tr>
-                <td width="25%"><b>Style</b></td>
-                <td width="52%"><input type="text" id="styleinput" size="60"></td>
+                <td width="15%"><b>Style</b></td>
+                <td width="62%"><input type="text" id="styleinput" size="60"></td>
                 <td width="23%"><input type="button" value="Save style" id="style_save_button"></td>
             </tr>
         </table>
-    <hr>
     </div>
+    <hr>
+
+    <span>You may also choose which actions from this config to enable:</span>
+    <div id="actionsenablediv">
+        <table width="100%">
+            <tr>
+                <td width="15%"><b>Action</b></td>
+                <td width="75%" id="actionstd"></td>
+            </tr>
+        </table>
+    </div>
+    <hr>
 
     <div id="configdetaildiv">
         <input type="checkbox" id="showconfigcheck" name="showconfigcheck" value="bloop">Show configuration details. Check if you want to edit the config directly.<br>
