@@ -56,43 +56,6 @@ function loadConfigRemote(cb) {
   });
 }
 
-/*
-
- // Old routine does the fetch from the content script,
- // which can be blocked by sites with content security
- // policies. If we do the fetch from a background page,
- // it can follow *our* content security policy as specified
- // in the manifest
-
-function loadConfigRemote(cb) {
-  log('loadConfigRemote START');
-
-
-  var xhr = new XMLHttpRequest();
-  xhr.onreadystatechange = function() {
-    if (xhr.readyState == 4) {
-      text = xhr.responseText;
-      if (xhr.status == 200) {
-        log("FETCH SUCCESS");
-        storeConfig(null,text,cb)
-      } else {
-        log('ERROR: ' + xhr.status);
-        cb('err',"status was " + xhr.status);
-      }
-    }
-  };
-  chrome.storage.local.get(['config_source'],function(items) {
-    if ('config_source' in items) {
-      var source = items.config_source;
-      source += '?dl=1&_=' + (new Date).getTime();
-      log('loadConfigRemote fetching: ' + source);
-      xhr.open('GET',source, true);
-      xhr.send();
-    }
-  });
-  log('loadConfigRemote DONE');
-};
-*/
 
 function loadConfig(cb,try_remote = true) {
   log('loadConfig START');
