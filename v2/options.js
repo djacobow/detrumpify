@@ -88,6 +88,32 @@ function elaborateConfigSelector(data,cb) {
   cb('null','yay!');
 }
 
+// since this is static, it should probably be done in straight
+// html
+function createStyleSuggestions() {    
+    // attempt to populate a datalist
+    styleelem = document.getElementById('styleinput');
+    list = document.getElementById('style_suggestions');
+    if (list === null) {
+        list = document.createElement('datalist');
+        list.id = 'style_suggestions';
+        document.getElementById('inputstylediv').appendChild(list);
+        var some_styles = [
+            'color: red;',
+            'background-color: yellow;',
+            'font-size: 80%',
+            'color: #f8ded2; background-color: #6f402a;',
+        ];
+        for (var i=0; i<some_styles.length; i++) {
+            var opt = document.createElement('option');
+            opt.value = some_styles[i];
+            list.appendChild(opt);
+        }
+    }
+    styleelem.setAttribute('list','style_suggestions');
+    styleelem.setAttribute('autocomplete','off');
+} 
+
 function restorePluginOptions() {
   log('restorePluginOptions START');
 
@@ -103,6 +129,17 @@ function restorePluginOptions() {
               function() {});
           styleelem.value = defaults.insult_style;
       }
+
+      // if this fails, then the browser didn't support data lists 
+      // anyway
+      try {
+          createStyleSuggestions();
+      } catch (e) {
+          log('oh well');
+          log(e);
+      }
+
+
   });
 
   chrome.storage.local.get(['config_source'], function(items) {
@@ -245,6 +282,7 @@ function showConfig(err,res) {
 }
 
 function saveStyle() {
+  log('saving style');
   var styleelem = document.getElementById('styleinput');
   var style = styleelem.value;
   chrome.storage.local.set(
@@ -333,18 +371,27 @@ function setup_handlers() {
   log('adding handlers');
   document.addEventListener('DOMContentLoaded', restorePluginOptions);
   log('adding save handler');
+
   document.getElementById('config_save_button').addEventListener('click',saveConfigURL);
+  document.getElementById('configsrc').addEventListener('change',saveConfigURL);
+
+  /*
+  // onchange is probably better than this keypress/enter nonsense
   document.getElementById('configsrc').addEventListener('keypress',function(ev) {
     if (ev.keyCode === 13) {
       saveConfigURL();
     }
   });
-  document.getElementById('style_save_button').addEventListener('click',saveStyle);
+
   document.getElementById('styleinput').addEventListener('keypress',function(ev) {
     if (ev.keyCode === 13) {
       saveStyle();
     }
   });
+  */
+
+  document.getElementById('style_save_button').addEventListener('click',saveStyle);
+  document.getElementById('styleinput').addEventListener('change',saveStyle);
 
   log('adding radiobutton handler');
   var edit_radios = document.forms.editmodeform.elements.editmode;
