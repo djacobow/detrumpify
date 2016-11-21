@@ -47,12 +47,12 @@ base = {
             ],
             'randomize_mode': 'always',
         },
-#        'alt-right': {
-#            'find_regex': [
-#                "\\b(?!([Aa]|[Aa]n|[Tt]he)\\s)[Aa]lt[- ][Rr]ight(?!\\w)", "g",
-#            ],
-#            'randomize_mode': 'always',
-#        }
+        'alt-right': {
+            'find_regex': [
+                "\\b(?!([Aa]|[Aa]n|[Tt]he)\\s)[Aa]lt[- ][Rr]ight(?!\\w)", "g",
+            ],
+            'randomize_mode': 'always',
+        }
     }
 }
 
@@ -236,7 +236,7 @@ monikers = {
       "Rotting Pumpkin",
       "Deplorables Coach",
       "Putin Puppet",
-      "Projector-in-chief",
+      "Projector-in-Chief",
       "Soon-to-be-Fired Reality Show Contestant",
       "Unreliable Narrator of Awful Story",
       "Biff Tannen",
@@ -247,6 +247,7 @@ monikers = {
       "Everything Wrong with America, Made into Living Flesh,"
       "Manchurian Combover",
       "Cheeto Benito",
+      "Scammer-in-Chief",
     ],
     'dirty': [
       "Fuckface von Clownstick",
@@ -268,18 +269,18 @@ monikers = {
       "Anus Lips",
     ],
   },
-#  'alt-right': {
-#    'clean': [
-#      "rebranded white nationalist",
-#      "hate filled",
-#      "white supremacist",
-#      "racist",
-#      "anti-semitic",
-#      "sexist",
-#    ],
-#    'dirty': [
-#    ],
-#  },
+  'alt-right': {
+    'clean': [
+      "rebranded white nationalist",
+      "hate filled",
+      "white supremacist",
+      "racist",
+      "anti-semitic",
+      "sexist",
+    ],
+    'dirty': [
+    ],
+  },
   'pence': {
     'clean': [
       "Dead-Ended Politician with Apparently Very Little to Lose",
