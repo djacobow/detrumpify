@@ -1,0 +1,5 @@
+v2/configs/*.json
+v2/configs/*.txt
+v2/configs/v2/*.json
+v2/configs/v2/*.txt
+
