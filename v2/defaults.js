@@ -1,6 +1,6 @@
 
 //var url_base = 'http://localhost:8000/';
-var url_base = 'http://toolsofourtools.org/detrumpify2/';
+var url_base = 'http://toolsofourtools.org/detrumpify2/v2/';
 // var url_base = 'https://www.dropbox.com/s/';
 
 var defaults = {
@@ -9,10 +9,23 @@ var defaults = {
   // 'max_age': 7 * 24 * 60 * 60 * 1000
   'max_age': 180 * 1000,
   'buttons_fetch_url': url_base + 'buttons_config.json',
+
   // default blanket style for all insults
   'insult_style': '',
+
+  // default brevity. 0 == any length. Note that it is a string,
+  // since html form will also return string
+  'brevity': "0",
+
+  // default brackets: none
+  'brackets': 'none',
+
   // classname for all insult styles
   'insult_cssname': 'span.detrumpified',
+  'insult_classname': 'detrumpified',
+
+  // how often to change insults on page
+  'rand_mode': 'always', 
 };
 
 

@@ -8,41 +8,42 @@ var count       = 5;
 // the config itself.
 var current_config = null;
 
-function get_randomize_time(action) {
+function get_randomize_time(mode) {
   var wait = 0;
-  if ('randomize_mode' in action) {
-    var potential_mode = action.randomize_mode;
-    if (potential_mode == 'always') {
-      wait = 0;
-    } else if (potential_mode == '15min') {
-      wait = 15 * 60 * 1000;
-    } else if (potential_mode == 'hourly') {
-      wait = 60 * 60 * 1000;
-    } else if (potential_mode == 'daily') {
-      wait = 24 * 60 * 60 * 1000;
-    } else if (potential_mode == 'weekly') {
-      wait = 7 * 24 * 60 * 60 * 1000;
-    } else if (potential_mode == 'monthly') {
-      wait = 30 * 24 * 60 * 60 * 1000;
-    } else if (potential_mode == 'yearly') {
-      wait = 365 * 24 * 60 * 60 * 1000;
-    }
+  var potential_mode = mode;
+  if (potential_mode == 'always') {
+    wait = 0;
+  } else if (potential_mode == '15min') {
+    wait = 15 * 60 * 1000;
+  } else if (potential_mode == 'hourly') {
+    wait = 60 * 60 * 1000;
+  } else if (potential_mode == 'daily') {
+    wait = 24 * 60 * 60 * 1000;
+  } else if (potential_mode == 'weekly') {
+    wait = 7 * 24 * 60 * 60 * 1000;
+  } else if (potential_mode == 'monthly') {
+    wait = 30 * 24 * 60 * 60 * 1000;
+  } else if (potential_mode == 'yearly') {
+    wait = 365 * 24 * 60 * 60 * 1000;
   }
+  // log('mode was: ' + mode);
+  // log('wait is: ' + wait);
   return wait;
 }
 
 
-function choose_now(action,choice) {
-  var whichever = Math.floor(action.monikers.length * Math.random());
+function choose_now(moniker_list,choice) {
+  var whichever = Math.floor(moniker_list.length * Math.random());
   choice.last_chosen_item = whichever;
   choice.last_chosen_time = (new Date()).getTime();
 }
 
-function choose(action,choice) {
-  var wait = get_randomize_time(action);
+function choose(rand_mode,moniker_list,choice) {
+  var wait = get_randomize_time(rand_mode);
   var now = (new Date()).getTime();
-  if ((now - choice.last_chosen_time) >= wait) {
-    choose_now(action,choice);
+  if (!('last_chosen_time' in choice) || 
+      ((now - choice.last_chosen_time) >= wait)) {
+    choose_now(moniker_list,choice);
   }
   return choice;
 }
@@ -81,29 +82,24 @@ function find_match_nonmatch_chunks(text,re) {
 }
 
 
-function make_replacement_elems_array(action,broken_texts,orig_node,choice) {
+function make_replacement_elems_array(action,rand_mode,moniker_list,brackets,broken_texts,orig_node,choice) {
   var repl_array = [];
   for (var k=0;k<broken_texts.length;k++) {
     chunk = broken_texts[k];
     if (chunk.match) {
-      choose(action, choice);
-      var replacement = action.monikers[choice.last_chosen_item];
-      if (('scarequote' in action) && action.scarequote) {
-        replacement = '\u201c' + replacement + '\u201d';
-      }
-      if (('bracket' in action) && (action.bracket.length >= 2)) {
-        replacement = action.bracket[0] + replacement + action.bracket[1];
-      }
+      choose(rand_mode, moniker_list, choice);
+      var replacement = moniker_list[choice.last_chosen_item % moniker_list.length];
+      replacement = brackets[0] + replacement + brackets[1];
+
       var unode = document.createElement('span');
+      // This style setting that can be part of a config
+      // is in addition to any styles's associated with the
+      // detrumpified class.
       unode.style = "";
       if ('match_style' in action) {
         unode.style = action.match_style;
       }
-      log('HI!');
-      if ('match_class' in action) {
-        log('setting match class');
-        unode.className = action.match_class;
-      }
+      unode.className = defaults.insult_classname;
       unode.appendChild(document.createTextNode(replacement));
       repl_array.push(unode);
     } else {
@@ -112,7 +108,6 @@ function make_replacement_elems_array(action,broken_texts,orig_node,choice) {
       repl_array.push(newnode);
     }
   }
-  // console.log(repl_array);
   return repl_array;
 }
 
@@ -137,11 +132,13 @@ function switchem() {
     var action_name;
     var n;
 
-    chrome.storage.local.get(['stored_choices','enabled_actions'],function(items) {
+    chrome.storage.local.get(['stored_choices','enabled_actions','brevity','brackets','rand_mode'],function(items) {
       var action_count = 0;
-      var stored_choices_holder = items.stored_choices;
+      var stored_choices = {};
+      if ('stored_choices' in items) stored_choices = items.stored_choices;
+      log(stored_choices);
 
-      // generate a shortened list of actions that the use has enabled
+      // generate a shortened list of actions that the user has enabled
       var actions_to_run = Object.keys(current_config.actions);
       if ('enabled_actions' in items) {
         temp_actions_to_run = Object.keys(items.enabled_actions);
@@ -159,23 +156,56 @@ function switchem() {
         action_name = actions_to_run[n];
         log('action_name: ' + action_name);
         var action = current_config.actions[action_name];
-        console.log(action);
+        // console.log(action);
         if (!('monikers' in action)) {
           log("action is invalid");
           return;
         }
 
+        // create a sublist of monikers that meet the brevity criteria
+        var monikers_to_use = action.monikers;
+        if ('brevity' in items) {
+            monikers_to_use = [];
+            var max_l = parseInt(items.brevity);
+            for (var p=0; p<action.monikers.length; p++) {
+                var moniker = action.monikers[p];
+                var word_count = moniker.split(/[\s\-]/).length;
+                if ((max_l === 0) || (word_count <= max_l)) {
+                    monikers_to_use.push(moniker);
+                }
+            }
+        }
+
+        var rand_mode = 'always';
+        if ('rand_mode' in items) {
+            rand_mode = items.rand_mode;
+        }
+
+        // Determine quoting. I am gradually moving away from 
+        // the config file for this, and letting the UI take
+        // precendence. Eventually, I will not include the 
+        // config file settings at all.
+        var brackets = ['',''];
+        if (('scarequote' in action) && action.scarequote) {
+          brackets = [ '\u201c', '\u201d' ];
+        }
+        if (('bracket' in action) && (action.bracket.length >= 2)) {
+          brackets = [ action.bracket[0], action.bracket[1] ];
+        }
+        if ('brackets' in items) {
+            var mode = items.brackets;
+            if (mode === 'curly') brackets = [ '\u201c', '\u201d' ];
+            if (mode === 'square') brackets = [ '[', ']' ];
+        }
+
+
         var search_regex = new RegExp(action.find_regex[0],
                                       action.find_regex[1]);
         var elements = document.getElementsByTagName('*');
 
-        if (!('stored_choices' in stored_choices_holder)) {
-          stored_choices_holder.stored_choices = {};
-        }
-
-        if (!(action_name in stored_choices_holder.stored_choices)) {
-          stored_choices_holder.stored_choices[action_name] = {};
-          choose_now(action,stored_choices_holder.stored_choices[action_name]);
+        if (!(action_name in stored_choices)) {
+          stored_choices[action_name] = {};
+          choose_now(monikers_to_use,stored_choices[action_name]);
         }
 
         for (var i = 0; i < elements.length; i++) {
@@ -189,9 +219,12 @@ function switchem() {
               if (broken_texts.length) {
                 repl_array = make_replacement_elems_array(
                         action,
+                        rand_mode,
+                        monikers_to_use,
+                        brackets,
                         broken_texts,
                         node,
-                        stored_choices_holder.stored_choices[action_name]);
+                        stored_choices[action_name]);
                 replace_elem_with_array_of_elems(node,repl_array);
               }
             }
@@ -200,8 +233,7 @@ function switchem() {
 
         if (action_count == (Object.keys(current_config.actions).length-1)) {
           // console.log("iteration done; storing choices");
-          // console.log(stored_choices_holder);
-          chrome.storage.local.set(stored_choices_holder, function() { });
+          chrome.storage.local.set({'stored_choices': stored_choices}, function() { });
 
           count -= 1;
           if (count) {

@@ -120,15 +120,45 @@ function restorePluginOptions() {
   getCannedList(dumb_cb);
   log('restorePluginOptions buttons created ');
 
-  chrome.storage.local.get(['insult_style'], function(items) {
-    styleelem = document.getElementById('styleinput');
-      if ('insult_style' in items) {
-          styleelem.value = items.insult_style;
-      } else {
-          chrome.storage.local.set({'insult_style': defaults.insult_style},
+  chrome.storage.local.get(['config_source'], function(items) {
+    srcelem = document.getElementById('configsrc');
+    if ('config_source' in items) {
+      srcelem.value = items.config_source;
+    } else {
+      log('resetting config_source in restorePluginOptions');
+      chrome.storage.local.set({'config_source': defaults.config_source},
               function() {});
-          styleelem.value = defaults.insult_style;
-      }
+      srcelem.value = defaults.config_source;
+    }
+    if (srcelem.value == '__local__') {
+      document.getElementById('editmode_lock').checked = true;
+      editModeClick('lock');
+    } else {
+      editModeClick('url');
+    }
+  });
+
+  loadConfig(showConfig);
+
+  chrome.storage.local.get(['insult_style','brevity','brackets', 'rand_mode'], function(items) {
+
+      var restoreThing = function(name,inpname) {
+          var thingelem = document.getElementById(inpname);
+          log(inpname);
+          log(thingelem);
+          if (name in items) {
+              thingelem.value = items[name];
+          } else {
+              chrome.storage.local.set({name:defaults[name]}, function() {
+                  thingelem.value = defaults[name];
+              });
+          }
+      };
+
+      restoreThing('insult_style','styleinput');
+      restoreThing('brevity','brevityinput');
+      restoreThing('brackets','quoteinput');
+      restoreThing('rand_mode','randmodeinput');
 
       // if this fails, then the browser didn't support data lists 
       // anyway
@@ -139,28 +169,10 @@ function restorePluginOptions() {
           log(e);
       }
 
-
   });
 
-  chrome.storage.local.get(['config_source'], function(items) {
-    srcelem = document.getElementById('configsrc');
-    if ('config_source' in items) {
-      srcelem.value = items.config_source;
-    } else {
-      log('resetting config_source in restorePluginOptions');
-      chrome.storage.local.set({'config_source': defaults.config_source},
-              function() {});
-      secelem.value = defaults.config_source;
-    }
-    if (srcelem.value == '__local__') {
-      document.getElementById('editmode_lock').checked = true;
-      editModeClick('lock');
-    } else {
-      editModeClick('url');
-    }
-  });
-  loadConfig(showConfig);
   log('restorePluginOptions DONE');
+
 }
 
 function saveEnabledActions() {
@@ -281,16 +293,32 @@ function showConfig(err,res) {
   });
 }
 
+function saveGeneric(name,inpname) {
+ log('saving ' + name);
+ var elem = document.getElementById(inpname);
+ var v = elem.value;
+ var sv = {};
+ sv[name] = v;
+
+ chrome.storage.local.set(sv,function() {
+  log(name + ' saved');
+ });
+}
+
+function saveRandMode() {
+  saveGeneric('rand_mode','randmodeinput');
+}
+
+function saveBrackets() {
+  saveGeneric('brackets','quoteinput');
+}
+
+function saveBrevity() {
+  saveGeneric('brevity','brevityinput');
+}
+
 function saveStyle() {
-  log('saving style');
-  var styleelem = document.getElementById('styleinput');
-  var style = styleelem.value;
-  chrome.storage.local.set(
-    {'insult_style': style,
-    },
-    function() {
-      log('style saved');
-    });
+  saveGeneric('insult_style','styleinput');
 }
 
 function saveConfigURL() {
@@ -312,6 +340,7 @@ function saveConfigURL() {
   }
 
   loadConfig(showConfig);
+  restorePluginOptions();
   log('saveConfigURL DONE');
 }
 
@@ -375,23 +404,12 @@ function setup_handlers() {
   document.getElementById('config_save_button').addEventListener('click',saveConfigURL);
   document.getElementById('configsrc').addEventListener('change',saveConfigURL);
 
-  /*
-  // onchange is probably better than this keypress/enter nonsense
-  document.getElementById('configsrc').addEventListener('keypress',function(ev) {
-    if (ev.keyCode === 13) {
-      saveConfigURL();
-    }
-  });
-
-  document.getElementById('styleinput').addEventListener('keypress',function(ev) {
-    if (ev.keyCode === 13) {
-      saveStyle();
-    }
-  });
-  */
-
   document.getElementById('style_save_button').addEventListener('click',saveStyle);
   document.getElementById('styleinput').addEventListener('change',saveStyle);
+
+  document.getElementById('brevityinput').addEventListener('change',saveBrevity);
+  document.getElementById('quoteinput').addEventListener('change',saveBrackets);
+  document.getElementById('randmodeinput').addEventListener('change',saveRandMode);
 
   log('adding radiobutton handler');
   var edit_radios = document.forms.editmodeform.elements.editmode;

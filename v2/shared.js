@@ -43,7 +43,15 @@ function loadConfigRemote(cb) {
         null,
         function(resp) {
           if ((resp === null) || (resp.err === null)) {
-            cb('err','error in eventpage code');
+            if (false) {
+              log('resetting config_source at set_initial_url');
+              source = defaults.config_source;
+              chrome.storage.local.set({'config_source': source},function() {
+                cb('err','error in eventpage code');
+              });
+            } else {
+              cb('err','error in eventpage code');
+            }
           } else if (resp.err == 'OK') {
             storeConfig(null,resp.text,cb);
           } else {
@@ -112,7 +120,7 @@ function storeConfig(err,txt,cb) {
     return;
   }
 
-  if (data.schema == 'InsultMarkupLanguage/0.1') {
+  if (data.schema.match(/InsultMarkupLanguage\/0.\d/)) {
     chrome.storage.local.set({'cfgdata': data}, function() {
       if (chrome.lastError) {
         cb(chrome.lastError);
