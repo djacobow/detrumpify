@@ -244,7 +244,7 @@ monikers = {
       "Self-Avowed Perpetrator of Sexual Assault",
       "President Worse than W, Despite How Improbable Used to Sound",
       "Sociopathic Operating System Installed on a Frightened Child",
-      "Everything Wrong with America, Made into Living Flesh,"
+      "Everything Wrong with America, Made into Living Flesh",
       "Manchurian Combover",
       "Cheeto Benito",
       "Scammer-in-Chief",
@@ -271,12 +271,13 @@ monikers = {
   },
   'alt-right': {
     'clean': [
-      "rebranded white nationalist",
-      "hate filled",
-      "white supremacist",
-      "racist",
-      "anti-semitic",
-      "sexist",
+      "Rebranded White Nationalist Cult",
+      "Hate Filled Movement",
+      "White Supremacist Movement",
+      "Racist Movement",
+      "Anti-Semitic Movement",
+      "Sexist Cult",
+      "Misogynistic Army",
     ],
     'dirty': [
     ],

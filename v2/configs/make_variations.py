@@ -47,12 +47,12 @@ base = {
             ],
             'randomize_mode': 'always',
         },
-        'alt-right': {
-            'find_regex': [
-                "\\b(?!([Aa]|[Aa]n|[Tt]he)\\s)[Aa]lt[- ][Rr]ight(?!\\w)", "g",
-            ],
-            'randomize_mode': 'always',
-        }
+#        'alt-right': {
+#            'find_regex': [
+#                "\\b(?!([Aa]|[Aa]n|[Tt]he)\\s)[Aa]lt[- ][Rr]ight(?!\\w)", "g",
+#            ],
+#            'randomize_mode': 'always',
+#        }
     }
 }
 
@@ -244,7 +244,7 @@ monikers = {
       "Self-Avowed Perpetrator of Sexual Assault",
       "President Worse than W, Despite How Improbable Used to Sound",
       "Sociopathic Operating System Installed on a Frightened Child",
-      "Everything Wrong with America, Made into Living Flesh,"
+      "Everything Wrong with America, Made into Living Flesh",
       "Manchurian Combover",
       "Cheeto Benito",
       "Scammer-in-Chief",
@@ -269,18 +269,18 @@ monikers = {
       "Anus Lips",
     ],
   },
-  'alt-right': {
-    'clean': [
-      "rebranded white nationalist",
-      "hate filled",
-      "white supremacist",
-      "racist",
-      "anti-semitic",
-      "sexist",
-    ],
-    'dirty': [
-    ],
-  },
+#  'alt-right': {
+#    'clean': [
+#      "rebranded white nationalist",
+#      "hate filled",
+#      "white supremacist",
+#      "racist",
+#      "anti-semitic",
+#      "sexist",
+#    ],
+#    'dirty': [
+#    ],
+#  },
   'pence': {
     'clean': [
       "Dead-Ended Politician with Apparently Very Little to Lose",
