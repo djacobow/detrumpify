@@ -41,7 +41,7 @@ function choose_now(moniker_list,choice) {
 function choose(rand_mode,moniker_list,choice) {
   var wait = get_randomize_time(rand_mode);
   var now = (new Date()).getTime();
-  if (!('last_chosen_time' in choice) || 
+  if (!choice.hasOwnProperty('last_chosen_time') || 
       ((now - choice.last_chosen_time) >= wait)) {
     choose_now(moniker_list,choice);
   }
@@ -96,7 +96,7 @@ function make_replacement_elems_array(action,rand_mode,moniker_list,brackets,bro
       // is in addition to any styles's associated with the
       // detrumpified class.
       unode.style = "";
-      if ('match_style' in action) {
+      if (action.hasOwnProperty('match_style')) {
         unode.style = action.match_style;
       }
       unode.className = defaults.insult_classname;
@@ -135,17 +135,17 @@ function switchem() {
     chrome.storage.local.get(['stored_choices','enabled_actions','brevity','brackets','rand_mode'],function(items) {
       var action_count = 0;
       var stored_choices = {};
-      if ('stored_choices' in items) stored_choices = items.stored_choices;
+      if (items.hasOwnProperty('stored_choices')) stored_choices = items.stored_choices;
       log(stored_choices);
 
       // generate a shortened list of actions that the user has enabled
       var actions_to_run = Object.keys(current_config.actions);
-      if ('enabled_actions' in items) {
+      if (items.hasOwnProperty('enabled_actions')) {
         temp_actions_to_run = Object.keys(items.enabled_actions);
         actions_to_run = [];
         for (n=0;n<temp_actions_to_run.length; n++) {
           action_name = temp_actions_to_run[n];
-          if ((action_name in current_config.actions) &&
+          if (current_config.actions.hasOwnProperty(action_name) &&
               (items.enabled_actions[action_name])) {
             actions_to_run.push(action_name);
           }
@@ -157,14 +157,14 @@ function switchem() {
         log('action_name: ' + action_name);
         var action = current_config.actions[action_name];
         // console.log(action);
-        if (!('monikers' in action)) {
+        if (!action.hasOwnProperty('monikers')) {
           log("action is invalid");
           return;
         }
 
         // create a sublist of monikers that meet the brevity criteria
         var monikers_to_use = action.monikers;
-        if ('brevity' in items) {
+        if (items.hasOwnProperty('brevity')) {
             monikers_to_use = [];
             var max_l = parseInt(items.brevity);
             for (var p=0; p<action.monikers.length; p++) {
@@ -177,7 +177,7 @@ function switchem() {
         }
 
         var rand_mode = 'always';
-        if ('rand_mode' in items) {
+        if (items.hasOwnProperty('rand_mode')) {
             rand_mode = items.rand_mode;
         }
 
@@ -186,13 +186,13 @@ function switchem() {
         // precendence. Eventually, I will not include the 
         // config file settings at all.
         var brackets = ['',''];
-        if (('scarequote' in action) && action.scarequote) {
+        if (action.hasOwnProperty('scarequote') && action.scarequote) {
           brackets = [ '\u201c', '\u201d' ];
         }
-        if (('bracket' in action) && (action.bracket.length >= 2)) {
+        if (action.hasOwnProperty('bracket') && (action.bracket.length >= 2)) {
           brackets = [ action.bracket[0], action.bracket[1] ];
         }
-        if ('brackets' in items) {
+        if (items.hasOwnProperty('brackets')) {
             var mode = items.brackets;
             if (mode === 'curly') brackets = [ '\u201c', '\u201d' ];
             if (mode === 'square') brackets = [ '[', ']' ];
@@ -203,7 +203,7 @@ function switchem() {
                                       action.find_regex[1]);
         var elements = document.getElementsByTagName('*');
 
-        if (!(action_name in stored_choices)) {
+        if (!stored_choices.hasOwnProperty(action_name)) {
           stored_choices[action_name] = {};
           choose_now(monikers_to_use,stored_choices[action_name]);
         }
@@ -290,7 +290,7 @@ function startReplTries(err,res) {
 function init() {
   set_initial_url(function() {
     chrome.storage.local.get(['insult_style'],function(items) {
-      if ('insult_style' in items) {
+      if (items.hasOwnProperty('insult_style')) {
         createAndSetStyle(defaults.insult_cssname,items.insult_style);
       }
     });

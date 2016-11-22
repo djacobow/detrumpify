@@ -122,7 +122,7 @@ function restorePluginOptions() {
 
   chrome.storage.local.get(['config_source'], function(items) {
     srcelem = document.getElementById('configsrc');
-    if ('config_source' in items) {
+    if (items.hasOwnProperty('config_source')) {
       srcelem.value = items.config_source;
     } else {
       log('resetting config_source in restorePluginOptions');
@@ -146,7 +146,7 @@ function restorePluginOptions() {
           var thingelem = document.getElementById(inpname);
           log(inpname);
           log(thingelem);
-          if (name in items) {
+          if (items.hasOwnProperty(name)) {
               thingelem.value = items[name];
           } else {
               chrome.storage.local.set({name:defaults[name]}, function() {
@@ -219,7 +219,7 @@ function showEnabledActionsList(items,cfg_actions) {
       // but if it doesn't, reset the stored list to what is in the config
       // (with everything enabled)
       var enabled_exist_list = [];
-      if ('enabled_actions' in items) {
+      if (items.hasOwnProperty('enabled_actions')) {
         enabled_exist_list = Object.keys(items.enabled_actions);
       }
       var config_and_stored_actions_match = arraysEqual(cfg_actions, enabled_exist_list);
@@ -237,7 +237,8 @@ function showEnabledActionsList(items,cfg_actions) {
         for (i=0; i<cfg_actions.length; i++) {
           action = cfg_actions[i];
           var enable_this = true;
-          if (('enabled_actions' in items) && (action in items.enabled_actions)) {
+          if (items.hasOwnProperty('enabled_actions') && 
+              items.enabled_actions.hasOwnProperty(action)) {
             enable_this = items.enabled_actions[action];
           }
           enabled[action] = enable_this;
@@ -273,7 +274,7 @@ function showConfig(err,res) {
   var urlem =  document.getElementById('configsrc');
   chrome.storage.local.get(['config_source','stored_config_source','enabled_actions'],function(items) {
 
-    if ('config_source' in items) {
+    if (items.hasOwnProperty('config_source')) {
       urlem.value = items.config_source;
     }
 

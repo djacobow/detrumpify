@@ -18,7 +18,7 @@ function log(t) {
 function set_initial_url(cb) {
   var source = null;
   chrome.storage.local.get(['config_source'],function(items) {
-    if ('config_source' in items) {
+    if (items.hasOwnProperty('config_source')) {
       source = items.config_source;
       cb(source);
     } else {
@@ -35,7 +35,7 @@ function set_initial_url(cb) {
 // send a message to an event page to have it do an xhr for us
 function loadConfigRemote(cb) {
   chrome.storage.local.get(['config_source'],function(items) {
-    if ('config_source' in items) {
+    if (items.hasOwnProperty('config_source')) {
       chrome.runtime.sendMessage(
         null,
         {'cmd':'get',
@@ -72,15 +72,15 @@ function loadConfig(cb,try_remote = true) {
     function(items) {
       log('loadConfig readLocal');
       var now = (new Date()).getTime();
-      var have_config = ('config_valid' in items) && items.config_valid;
+      var have_config = items.hasOwnProperty('config_valid') && items.config_valid;
       var max_age = defaults.max_age;
       if (have_config) {
-        if ('refresh_age' in items.cfgdata) {
+        if (items.cfgdata.hasOwnProperty('refresh_age')) {
           max_age = items.cfgdata.refresh_age;
         }
       }
       var force_local = (have_config &&
-                        ('config_source' in items) &&
+                        items.hasOwnProperty('config_source') &&
                         (items.config_source == '__local__')) ;
       // if max_age is set to negative then we never refresh
       var use_local = force_local ? true :
