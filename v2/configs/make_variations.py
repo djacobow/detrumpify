@@ -242,7 +242,7 @@ monikers = {
       "Biff Tannen",
       "Swirling Black Hole that Eats Good Sense",
       "Self-Avowed Perpetrator of Sexual Assault",
-      "President Worse than W, Despite How Improbable Used to Sound",
+      "President Worse than W, Despite How Improbable That Used to Sound",
       "Sociopathic Operating System Installed on a Frightened Child",
       "Everything Wrong with America, Made into Living Flesh",
       "Manchurian Combover",
