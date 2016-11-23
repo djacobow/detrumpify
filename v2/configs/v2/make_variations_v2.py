@@ -271,15 +271,17 @@ monikers = {
   },
   'alt-right': {
     'clean': [
-      "Rebranded White Nationalist Cult",
-      "Hate Filled Movement",
-      "White Supremacist Movement",
-      "Racist Movement",
-      "Anti-Semitic Movement",
-      "Sexist Cult",
-      "Misogynistic Army",
+      "Alt-Very-Wrong",
+      "Serioualy-These-Are-Bad-People-Right",
+      "Rebranded-White-Nationalist-Cult",
+      "Hate-Filled-Right",
+      "White-Supremacist-Movement",
+      "Racist-Lunatic-Right",
+      "Anti-Semitic-Monster",
+      "Misogynist-Cult",
     ],
     'dirty': [
+      "Fucking-Scary-Right",
     ],
   },
   'pence': {

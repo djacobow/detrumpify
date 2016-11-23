@@ -47,12 +47,12 @@ base = {
             ],
             'randomize_mode': 'always',
         },
-#        'alt-right': {
-#            'find_regex': [
-#                "\\b(?!([Aa]|[Aa]n|[Tt]he)\\s)[Aa]lt[- ][Rr]ight(?!\\w)", "g",
-#            ],
-#            'randomize_mode': 'always',
-#        }
+        'alt-right': {
+            'find_regex': [
+                "\\b(?!([Aa]|[Aa]n|[Tt]he)\\s)[Aa]lt[- ][Rr]ight(?!\\w)", "g",
+            ],
+            'randomize_mode': 'always',
+        }
     }
 }
 
@@ -269,18 +269,21 @@ monikers = {
       "Anus Lips",
     ],
   },
-#  'alt-right': {
-#    'clean': [
-#      "rebranded white nationalist",
-#      "hate filled",
-#      "white supremacist",
-#      "racist",
-#      "anti-semitic",
-#      "sexist",
-#    ],
-#    'dirty': [
-#    ],
-#  },
+  'alt-right': {
+    'clean': [
+      "Alt-Very-Wrong",
+      "Serioualy-These-Are-Bad-People-Right",
+      "Rebranded-White-Nationalist-Cult",
+      "Hate-Filled-Right",
+      "White-Supremacist-Movement",
+      "Racist-Lunatic-Right",
+      "Anti-Semitic-Monster",
+      "Misogynist-Cult",
+    ],
+    'dirty': [
+      "Fucking-Scary-Right",
+    ],
+  },
   'pence': {
     'clean': [
       "Dead-Ended Politician with Apparently Very Little to Lose",
