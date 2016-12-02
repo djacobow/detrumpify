@@ -121,6 +121,67 @@ function replace_elem_with_array_of_elems(orig, arry) {
 
 
 function switchem() {
+  switch_text();
+  switch_imgs();
+  count -= 1;
+  if (count) {
+    log('currTimeout:' + currTimeout);
+    setTimeout(switchem,currTimeout);
+    if (currTimeout < maxTimeout) currTimeout *= current_config.run_info.timeMultiplier;
+  }
+}
+
+function getRunnableActions(config_actions,items) {
+    // generate a shortened list of actions that the user has enabled
+    var actions_to_run = Object.keys(current_config.actions);
+    if (items.hasOwnProperty('enabled_actions')) {
+      temp_actions_to_run = Object.keys(items.enabled_actions);
+      actions_to_run = [];
+      for (n=0;n<temp_actions_to_run.length; n++) {
+        action_name = temp_actions_to_run[n];
+        if (current_config.actions.hasOwnProperty(action_name) &&
+            (items.enabled_actions[action_name])) {
+          actions_to_run.push(action_name);
+        }
+      }
+    }
+    return actions_to_run;
+}
+
+function switch_imgs() {
+  log('switch_imgs()');
+  chrome.storage.local.get(['kittenize','enabled_actions'],function(items) {
+    var action_count = 0;
+
+    var kittenize = items.hasOwnProperty('kittenize') && items.kittenize;
+    if (kittenize) { 
+      var actions_to_run = getRunnableActions(current_config.actions,items);
+
+      for (var n=0; n<actions_to_run.length; n++) {
+        action_name = actions_to_run[n];
+        log('action_name: ' + action_name);
+        var action = current_config.actions[action_name];
+        var alt_re = new RegExp(action.find_regex[0],
+                                action.find_regex[1]);
+        var src_re = new RegExp(action.find_regex[0],'i');
+        var imgs = document.getElementsByTagName('img');
+        for (var i=0; i<imgs.length; i++) {
+          var img = imgs[i];
+          var src_match = src_re.exec(img.src);
+          var alt_match = alt_re.exec(img.alt);
+          if (alt_match || src_match) {
+            var replsrc = 'https://placekitten.com/' + 
+                          img.clientWidth.toString() + '/' + 
+                          img.clientHeight.toString();
+            img.src = replsrc;
+          }
+        }
+      }
+    }
+  });
+}
+
+function switch_text() {
     log('switchem START, count:' + count);
 
     if (current_config === null) {
@@ -138,19 +199,7 @@ function switchem() {
       if (items.hasOwnProperty('stored_choices')) stored_choices = items.stored_choices;
       log(stored_choices);
 
-      // generate a shortened list of actions that the user has enabled
-      var actions_to_run = Object.keys(current_config.actions);
-      if (items.hasOwnProperty('enabled_actions')) {
-        temp_actions_to_run = Object.keys(items.enabled_actions);
-        actions_to_run = [];
-        for (n=0;n<temp_actions_to_run.length; n++) {
-          action_name = temp_actions_to_run[n];
-          if (current_config.actions.hasOwnProperty(action_name) &&
-              (items.enabled_actions[action_name])) {
-            actions_to_run.push(action_name);
-          }
-        }
-      }
+      var actions_to_run = getRunnableActions(current_config.actions,items);
 
       for (var n=0; n<actions_to_run.length; n++) {
         action_name = actions_to_run[n];
@@ -235,12 +284,6 @@ function switchem() {
           // console.log("iteration done; storing choices");
           chrome.storage.local.set({'stored_choices': stored_choices}, function() { });
 
-          count -= 1;
-          if (count) {
-            log('currTimeout:' + currTimeout);
-            setTimeout(switchem,currTimeout);
-            if (currTimeout < maxTimeout) currTimeout *= current_config.run_info.timeMultiplier;
-          }
         }
         action_count += 1;
       }

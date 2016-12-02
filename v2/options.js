@@ -1,4 +1,4 @@
-
+/*jshint esversion:6 */
 set_initial_url(function(src) { log('set_initial_url cb: ' + src); });
 
 function selectConfig(e) {
@@ -140,17 +140,25 @@ function restorePluginOptions() {
 
   loadConfig(showConfig);
 
-  chrome.storage.local.get(['insult_style','brevity','brackets', 'rand_mode'], function(items) {
+  chrome.storage.local.get(['insult_style','brevity','brackets', 'rand_mode','kittenize'], function(items) {
 
-      var restoreThing = function(name,inpname) {
+      var restoreThing = function(name,inpname,checkbox = false) {
           var thingelem = document.getElementById(inpname);
           log(inpname);
           log(thingelem);
           if (items.hasOwnProperty(name)) {
-              thingelem.value = items[name];
+              if (checkbox) {
+                  thingelem.checked = items[name];
+              } else {
+                  thingelem.value = items[name];
+              }
           } else {
               chrome.storage.local.set({name:defaults[name]}, function() {
-                  thingelem.value = defaults[name];
+                  if (checkbox) {
+                      thingelem.checked = defaults[name];
+                  } else {
+                      thingelem.value = defaults[name];
+                  }
               });
           }
       };
@@ -159,6 +167,7 @@ function restorePluginOptions() {
       restoreThing('brevity','brevityinput');
       restoreThing('brackets','quoteinput');
       restoreThing('rand_mode','randmodeinput');
+      restoreThing('kittenize','kittencheck',true);
 
       // if this fails, then the browser didn't support data lists 
       // anyway
@@ -176,7 +185,7 @@ function restorePluginOptions() {
 }
 
 function saveEnabledActions() {
-  console.log('saveEnabledActions');
+  log('saveEnabledActions');
   var enelem = document.getElementById('actionstd');
   var children = enelem.childNodes;
   enabled = {};
@@ -184,14 +193,14 @@ function saveEnabledActions() {
     var child = children[i];
     var m = child.id.match(/^([\w-]+)_check/);
     if (m) {
-      console.log(action);
+      log(action);
       var action = m[1];
       enabled[action] = child.checked;
       log(action);
     }
   }
   chrome.storage.local.set({'enabled_actions': enabled}, function() {
-   console.log('saved action changes');
+   log('saved action changes');
   });
 }
 
@@ -225,7 +234,7 @@ function showEnabledActionsList(items,cfg_actions) {
       var config_and_stored_actions_match = arraysEqual(cfg_actions, enabled_exist_list);
 
       if (!config_and_stored_actions_match) {
-        console.log('resetting actions list from config');
+        log('resetting actions list from config');
         for (i=0; i<cfg_actions.length; i++) {
           action = cfg_actions[i];
           enabled[action] = true;
@@ -294,10 +303,15 @@ function showConfig(err,res) {
   });
 }
 
-function saveGeneric(name,inpname) {
+function saveGeneric(name,inpname,checkbox = false) {
  log('saving ' + name);
  var elem = document.getElementById(inpname);
- var v = elem.value;
+ var v;
+ if (checkbox) {
+   v = elem.checked;
+ } else {
+   v = elem.value;
+ }
  var sv = {};
  sv[name] = v;
 
@@ -306,6 +320,9 @@ function saveGeneric(name,inpname) {
  });
 }
 
+function saveKittenize() {
+  saveGeneric('kittenize','kittencheck',true);
+}
 function saveRandMode() {
   saveGeneric('rand_mode','randmodeinput');
 }
@@ -411,6 +428,7 @@ function setup_handlers() {
   document.getElementById('brevityinput').addEventListener('change',saveBrevity);
   document.getElementById('quoteinput').addEventListener('change',saveBrackets);
   document.getElementById('randmodeinput').addEventListener('change',saveRandMode);
+  document.getElementById('kittencheck').addEventListener('change',saveKittenize);
 
   log('adding radiobutton handler');
   var edit_radios = document.forms.editmodeform.elements.editmode;

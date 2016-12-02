@@ -26,6 +26,9 @@ var defaults = {
 
   // how often to change insults on page
   'rand_mode': 'always', 
+
+  // should I replace images with kittens
+  'kittenize': false,
 };
 
 
