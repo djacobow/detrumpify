@@ -167,7 +167,7 @@ function restorePluginOptions() {
       restoreThing('brevity','brevityinput');
       restoreThing('brackets','quoteinput');
       restoreThing('rand_mode','randmodeinput');
-      restoreThing('kittenize','kittencheck',true);
+      restoreThing('kittenize','kittensel');
 
       // if this fails, then the browser didn't support data lists 
       // anyway
@@ -321,7 +321,7 @@ function saveGeneric(name,inpname,checkbox = false) {
 }
 
 function saveKittenize() {
-  saveGeneric('kittenize','kittencheck',true);
+  saveGeneric('kittenize','kittensel');
 }
 function saveRandMode() {
   saveGeneric('rand_mode','randmodeinput');
@@ -428,7 +428,7 @@ function setup_handlers() {
   document.getElementById('brevityinput').addEventListener('change',saveBrevity);
   document.getElementById('quoteinput').addEventListener('change',saveBrackets);
   document.getElementById('randmodeinput').addEventListener('change',saveRandMode);
-  document.getElementById('kittencheck').addEventListener('change',saveKittenize);
+  document.getElementById('kittensel').addEventListener('change',saveKittenize);
 
   log('adding radiobutton handler');
   var edit_radios = document.forms.editmodeform.elements.editmode;

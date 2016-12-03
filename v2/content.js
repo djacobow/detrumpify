@@ -153,8 +153,16 @@ function switch_imgs() {
   chrome.storage.local.get(['kittenize','enabled_actions'],function(items) {
     var action_count = 0;
 
-    var kittenize = items.hasOwnProperty('kittenize') && items.kittenize;
-    if (kittenize) { 
+    var mode = items.hasOwnProperty('kittenize') ? items.kittenize : 'off';
+
+    // this is for backward compatibility with boolean version that
+    // may be stored in local store.
+    var modtype = typeof mode;
+    if (modtype == 'boolean') {
+        mode = mode ? 'kittens' : 'off';
+    }
+
+    if (mode !== 'off') {
       var actions_to_run = getRunnableActions(current_config.actions,items);
 
       for (var n=0; n<actions_to_run.length; n++) {
@@ -170,9 +178,16 @@ function switch_imgs() {
           var src_match = src_re.exec(img.src);
           var alt_match = alt_re.exec(img.alt);
           if (alt_match || src_match) {
-            var replsrc = 'https://placekitten.com/' + 
+            var replsrc;
+            if (mode == 'kittens') {
+                replsrc = 'https://placekitten.com/' +
                           img.clientWidth.toString() + '/' + 
                           img.clientHeight.toString();
+            } else {
+                replsrc = 'https://placehold.it/' +
+                          img.clientWidth.toString() + 'x' +
+                          img.clientHeight.toString();
+            }
             img.src = replsrc;
           }
         }

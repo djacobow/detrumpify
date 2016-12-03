@@ -28,7 +28,7 @@ var defaults = {
   'rand_mode': 'always', 
 
   // should I replace images with kittens
-  'kittenize': false,
+  'kittenize': 'off',
 };
 
 
