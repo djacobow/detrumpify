@@ -39,6 +39,10 @@ base = {
             'find_regex': [
                 "((Donald|DONALD)\\s*(J\\.?\\s*)?)?(Trump|TRUMP)(?!\\w)", "g"
             ],
+            "img_find_regex": [
+                "(\\b|_|[0-9])[Tt][Rr][Uu][Mm][Pp](\\b|_|[A-Z]|[0-9])",
+                "g"
+            ],
             'randomize_mode': 'always',
         },
         'pence': {
