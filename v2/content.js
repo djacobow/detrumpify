@@ -187,16 +187,46 @@ function switch_imgs() {
           var sty_match = src_re.exec(decodeURIComponent(img.style));
           if (alt_match || src_match || sty_match) {
             var replsrc;
-            if (mode == 'kittens') {
+            if (mode == 'div') {
+                var border = 2;
+                var nd = document.createElement('div');
+                var replhtml = '<b>National disgrace removed</b>';
+                var backsrc = null;
+                if (action.hasOwnProperty('image_replacement')) {
+                    replhtml = action.image_replacement.html[
+                        Math.floor(Math.random()*action.image_replacement.html.length)
+                    ];
+                    border = action.image_replacement.border;
+                    if (action.image_replacement.hasOwnProperty('background')) {
+                        backsrc = action.image_replacement.background;
+                    }
+                }
+                if (backsrc) {
+                    nd.style['background-image'] = 'url(' + backsrc + ')';
+                }
+                nd.innerHTML = replhtml;
+                var dw = img.clientWidth - 2 * border;
+                var dh = img.clientHeight - 2 * border;
+                nd.style['text-align'] = 'center';
+                nd.style['vertical-align'] = 'middle';
+                nd.style.display = 'table-cell';
+                nd.style.border = border.toString() + 'px solid';
+                nd.style.width = dw.toString() + 'px';
+                nd.style['max-width'] = dw.toString() + 'px';
+                nd.style.height= dh.toString() + 'px';
+                nd.style['max-height'] = dh.toString() + 'px';
+                img.parentNode.replaceChild(nd,img);
+            } else if (mode == 'kittens') {
                 replsrc = 'https://placekitten.com/' +
                           img.clientWidth.toString() + '/' + 
                           img.clientHeight.toString();
+                img.src = replsrc;
             } else {
                 replsrc = 'https://placehold.it/' +
                           img.clientWidth.toString() + 'x' +
                           img.clientHeight.toString();
+                img.src = replsrc;
             }
-            img.src = replsrc;
           }
         }
       }
