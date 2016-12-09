@@ -157,8 +157,7 @@ function switch_imgs() {
 
     // this is for backward compatibility with boolean version that
     // may be stored in local store.
-    var modtype = typeof mode;
-    if (modtype == 'boolean') {
+    if (typeof mode == 'boolean') {
         mode = mode ? 'kittens' : 'off';
     }
 
@@ -171,13 +170,22 @@ function switch_imgs() {
         var action = current_config.actions[action_name];
         var alt_re = new RegExp(action.find_regex[0],
                                 action.find_regex[1]);
-        var src_re = new RegExp(action.find_regex[0],'i');
+        var src_re;
+        if (action.hasOwnProperty('img_find_regex')) {
+            src_re = new RegExp(action.img_find_regex[0],
+                                action.img_find_regex[1]);
+        } else {
+            src_re = new RegExp(action.find_regex[0],'i');
+        }
+
         var imgs = document.getElementsByTagName('img');
         for (var i=0; i<imgs.length; i++) {
           var img = imgs[i];
-          var src_match = src_re.exec(img.src);
           var alt_match = alt_re.exec(img.alt);
-          if (alt_match || src_match) {
+          var src_match = src_re.exec(decodeURIComponent(img.src));
+          // background images are sometimes hidden in style tags
+          var sty_match = src_re.exec(decodeURIComponent(img.style));
+          if (alt_match || src_match || sty_match) {
             var replsrc;
             if (mode == 'kittens') {
                 replsrc = 'https://placekitten.com/' +
