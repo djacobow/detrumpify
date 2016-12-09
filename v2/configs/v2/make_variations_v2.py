@@ -43,6 +43,15 @@ base = {
                 "(\\b|_|[0-9])[Tt][Rr][Uu][Mm][Pp](\\b|_|[A-Z]|[0-9])",
                 "g"
             ],
+            'image_replacement': {
+                'html': [
+                    '<b>National Disgrace Removed</b>',
+                    '<b>Disturbing Imagery Blocked</b>',
+                    '<b>You don\'t want to see what was here.</b>',
+                ],
+                'border': 5,
+                'background': 'http://www.toolsofourtools.org/detrumpify2/v2/houndstooth.png',
+            },
             'randomize_mode': 'always',
         },
         'pence': {
