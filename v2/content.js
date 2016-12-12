@@ -13,6 +13,8 @@ function get_randomize_time(mode) {
   var potential_mode = mode;
   if (potential_mode == 'always') {
     wait = 0;
+  } else if (potential_mode == '1min') {
+    wait = 60 * 1000;
   } else if (potential_mode == '15min') {
     wait = 15 * 60 * 1000;
   } else if (potential_mode == 'hourly') {
@@ -198,7 +200,9 @@ function switch_imgs() {
                     ];
                     border = action.image_replacement.border;
                     if (action.image_replacement.hasOwnProperty('background')) {
-                        backsrc = action.image_replacement.background;
+                        backsrc = action.image_replacement.background[
+                            Math.floor(Math.random()*action.image_replacement.background.length)
+                        ];
                     }
                 }
                 if (backsrc) {
