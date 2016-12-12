@@ -49,8 +49,12 @@ base = {
                     '<b>Disturbing Imagery Blocked</b>',
                     '<b>You don\'t want to see what was here.</b>',
                 ],
-                'border': 5,
-                'background': 'http://www.toolsofourtools.org/detrumpify2/v2/houndstooth.png',
+                'border': 1,
+                'background': [
+                    'http://www.toolsofourtools.org/detrumpify2/v2/houndstooth.png',
+                    'http://www.toolsofourtools.org/detrumpify2/v2/floral.png',
+                    'http://www.toolsofourtools.org/detrumpify2/v2/rope.png',
+                ]
             },
             'randomize_mode': 'always',
         },
@@ -232,7 +236,7 @@ monikers = {
       "Ugly Racist",
       "Wealthy Inheritor Disguised as Successful Businessman",
       "National Embarrassment",
-      "Wart We Can't Freeze Off Until November",
+      "Wart We Can't Freeze Off Until November 2020",
       "Microwaved Circus Peanut",
       "Talking Dingleberry",
       "Republican Babadook",
