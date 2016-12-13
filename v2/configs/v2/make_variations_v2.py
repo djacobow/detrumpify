@@ -9,7 +9,7 @@ base = {
     'schema': 'InsultMarkupLanguage/0.2',
     'refresh_age': 604800000,
     'run_info': {
-        'count': 15,
+        'count': 30,
         'startTimeout': 1000,
         'maxTimeout': 30000,
         'timeMultiplier': 1.8,
@@ -181,7 +181,7 @@ monikers = {
       "Horsehair Mattress Stuffed with Molding Copies of Hustler",
       "Malignant Corn Chip",
       "Human Kinder Egg Whose Inner Surprise is a Tiny Pebble of Rat Shit",
-      "The Sculpture your Three-Year-Old Made but of Soggy Ground-Up Goldfish Snacks",
+      "The Sculpture your Three-Year-Old Made out of Soggy Ground-Up Goldfish Snacks",
       "Man with the Hair of a Radioactive Skunk",
       "Roiling Cheez Whiz Mass",
       "Cryogenically Frozen Bog Man",
