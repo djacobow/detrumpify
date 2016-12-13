@@ -3,13 +3,49 @@
   <head>
     <meta charset="utf-8">
     <title>Detrumpify Config</title>
+    <style>
+
+.tooltip {
+    /*
+    position: relative;
+    display: inline-block;
+    */
+}
+
+.tooltiptext {
+    opacity: 0;
+    width: 200px;
+    background-color: #ffffcc;
+    color: black;
+    padding: 5px 0;
+    border-radius: 3px;
+    position: absolute;
+    z-index: 1;
+    border: 1px solid black;
+    line-height: 100%;
+}
+
+.tooltip:not(:hover) + .tooltiptext {
+    transition: opacity 0.3s linear;
+    transition: visibility 0.3s step-end;
+    opacity: 0.00;
+    visibility: hidden;
+}
+
+.tooltip:hover + .tooltiptext {
+    transition: opacity 0.3s linear;
+    visibility: visible;
+    opacity: 1.00;
+}
+    </style>
   </head>
-  <body style="font-family: Arial, sans-serif;">
-  <div id="wrapperdir" style="overflow-y: scroll;">
+  <body style="font-family: Arial, sans-serif; font-size: 11px; background-color: #e0e0e0; width: 430px;">
+  <!-- <div id="wrapperdir" style="overflow-y: scroll;"> -->
+  <div id="wrapperdir" style="width: 420px;">
       <table width="100%">
-          <tr>
+          <tr style="padding: 0px;">
               <td valign="top">
-                  <div style="font-size:120%; font-weight:bold">Detrumpify Configuration Page</div>
+                  <div style="font-size:120%; font-weight:bold;">Detrumpify Configuration</div>
               </td>
               <td valign="top" align="right">
                   <a target="_blank" href="http://toolsofourtools.org/detrumpify-about">About</a>,
@@ -17,43 +53,71 @@
                   <a href="mailto:dave@toolsofourtools.org">Feedback</a>
               </td>
           </tr>
+          <tr>
+              <td colspan="2">
+                <div>Choose a configuration from the drop-down below, you can provide your own configuration one of two ways: 1) Host a config file somewhere and enter the URL below. 2) Click "show configuration details" and edit a local copy of the selected config.</div>
+              </td>
+          </tr>
       </table>
-      <div>Choose a configuration from the drop-down, or optionally, you can provide your own configuration one of two ways. 1) Host a config file somewhere and enter the URL below. 2) "Show configuration details" and edit a local copy of the selected config.</div>
     <hr>
-    <div>Choose configurations from <a href="http://toolsofourtools.org/detrumpify2">toolsofourtools.org</a>, or enter own URL:</div>
-    <div id="confselectdiv">
-        <select id="confselect" name="confselect"></select><br>
+    <!-- <div>Choose configurations from <a href="http://toolsofourtools.org/detrumpify2">toolsofourtools.org</a>, or enter own URL:</div> -->
+    <div id="confselectdiv" style="background-color: #f0e0e0;">
         <div id="buttonsdiv"></div>
-    </div>
-    <div id="urldiv">
-        <table width="100%">
+        <table style="width:100%;">
             <tr>
-                <td width="15%"><b>URL</b></td>
-                <td width="62%"><input type="text" id="configsrc" size="60"></td>
-                <td width="23%"><input type="button" value="Save URL" id="config_save_button"></td>
+                <td style="width: 10%;"><b>Config</b></td>
+                <td colspan="2">
+                    <select id="confselect" name="confselect" class="tooltip"></select>
+                    <p style="" class="tooltiptext">ToolsOfOurTools has carefully curated numerous
+                    insults, sorted them by tastefulness, and assembled them into the "canned"
+                    configurations you can choose above.</p>
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 10%;"><b>URL</b></td>
+                <td style="width: 90%;">
+                    <div class="tooltip">
+                        <input type="text" id="configsrc" size="45">
+                        <input type="button" value="Save" id="config_save_button">
+                    </div>
+                    <p class="tooltiptext">
+                    This URL is the location from which the
+                    insults and other configuration data will be loaded. It is set
+                    automatically if you use the dropdown selector above, but you
+                    can also type in your own url here if you want to host a
+                    completely custom configuration file.</p>
+                </td>
             </tr>
         </table>
     </div>
-    <hr>
-    <span>You may also specify custom <a href="http://toolsofourtools.org/detrumpify-about#styles" target="_blank">styles</a> to be applied to the insults:</span>
-    <div id="inputstylediv">
-        <table width="100%">
+    <!-- <hr> -->
+    <!-- <span>You may also specify custom <a href="http://toolsofourtools.org/detrumpify-about#styles" target="_blank">styles</a> to be applied to the insults:</span> -->
+    <div id="inputstylediv" style="background-color: #f0f0f0;">
+        <table style="width: 100%;">
             <tr>
-                <td width="15%"><b>Style</b></td>
-                <td width="62%"><input type="text" id="styleinput" size="60"></td>
-                <td width="23%"><input type="button" value="Save style" id="style_save_button"></td>
+                <td style="width: 10%;"><b>Style</b></td>
+                <td style="width: 90%;">
+                    <div class="tooltip">
+                        <input type="text" class="tooltip" id="styleinput" size="45">
+                        <input type="button" value="Save" id="style_save_button">
+                    </div>
+                    <p class="tooltiptext">You can enter a CSS style here
+                        to make the insult stand out fromt the surrounding
+                        text, or leave it blank to leave the formatting just
+                        like the source page.</p>
+                </td>
             </tr>
         </table>
     </div>
-    <hr>
+    <!-- <hr> -->
 
-    <span>Set the maximum word length of your insults and quoting preference</span>
-    <div id="brevitydiv">
-        <table width="100%">
+    <!-- <span>Set the maximum word length of your insults and quoting preference</span> -->
+    <div id="brevitydiv" style="background-color: #f0e0e0;">
+        <table style="width: 100%;">
             <tr>
-                <td width="10%"><b>Brevity</b></td>
-                <td width="20%">
-                    <select id="brevityinput">
+                <td style="width: 15%;"><b>Brevity</b></td>
+                <td style="width: 35%;">
+                    <select id="brevityinput" class="tooltip">
                         <option value="0">Any length</option>
                         <option value="6">Six or fewer words</option>
                         <option value="5">Five or fewer words</option>
@@ -62,61 +126,86 @@
                         <option value="2">One or Two words</option>
                         <option value="1">Just one word</option>
                     </select>
+                    <p class="tooltiptext">Only insults of the number
+                        of words shown or shorter will be used. This may
+                        improve readability for you, at the expense of
+                        you not seeing some of the funnier insults.</p>
                 </td>
-                <td width="10%"><b>Quote</b></td>
-                <td width="20%">
-                    <select id="quoteinput">
+                <td style="width: 15%;"><b>Quote</b></td>
+                <td style="width: 35%;">
+                    <select id="quoteinput" class="tooltip">
                         <option value="none">No quoting</option>
                         <option value="curly">&#8220;Curly scares&#8221;</option>
                         <option value="square">[Brackets]</option>
                     </select>
+                    <p class="tooltiptext" style="width: 150px;">Controls
+                        whether the insults have some visual cue, such as
+                        quotation marks or brackets around them.</p>
                 </td>
-                <td width="10%"><b>Change Freq</b></td>
-                <td width="20%">
-                    <select id="randmodeinput">
+            </tr>
+        </table>
+    </div>
+
+    <!-- <hr> -->
+    <!-- <span>Do you want most Trump images replaced with kittens?</span> -->
+    <div id="kittensenablediv" style="background-color: #f0f0f0;">
+        <table style="width: 100%;">
+            <tr>
+                <td style="width: 15%;"><b>Frequency</b></td>
+                <td style="width: 35%;">
+                    <select id="randmodeinput" class="tooltip">
                         <option value="always">Always</option>
-                        <option value="15min">Every 15 minutes</option>
+                        <option value="1min">one minute</option>
+                        <option value="15min">15 minutes</option>
                         <option value="hourly">Hourly</option>
                         <option value="daily">Daily</option>
                         <option value="weekly">Weekly</option>
                         <option value="monthly">Monthly</option>
                         <option value="yearly">Annually</option>
                     </select>
+                    <p class="tooltiptext">This controls how often the
+                        insults change. Some people prefer to see the same
+                        insult used all day, or every time on a given page.
+                        Set to "always", you will get a new insult Every.
+                        Single.  Mention.
+                    </p>
                 </td>
-            </tr>
-        </table>
-    </div>
-    <hr>
-
-    <span>You may also choose which actions from this config to enable:</span>
-    <div id="actionsenablediv">
-        <table width="100%">
-            <tr>
-                <td width="15%"><b>Action</b></td>
-                <td width="75%" id="actionstd"></td>
-            </tr>
-        </table>
-    </div>
-    <hr>
-
-    <span>Do you want most Trump images replaced with kittens?</span>
-    <div id="kittensenablediv">
-        <table width="100%">
-            <tr>
-                <td width="15%"><b>Kittenize</b></td>
-                <td width="75%">
-                    <select id="kittensel">
+                <td style="width: 15%;"><b>Kittenize</b></td>
+                <td style="width: 35%;">
+                    <select id="kittensel" class="tooltip">
                         <option value="off">Off</option>
                         <option value="kittens">Kittens</option>
                         <option value="blanks">Blanks</option>
                         <option value="div">Text Div</option>
                     </select>
+                    <p class="tooltiptext" style="width: 150px;">We now have
+                        support for removing not only words, but
+                        pictures, too! This works not by image
+                        recognition, but by scanning the URL and "alt" text
+                        for potential references to our villain. There will
+                        be some false positives and negatives.</p>
                 </td>
             </tr>
         </table>
     </div>
-    <hr>
 
+    <!-- <hr> -->
+    <!-- <span>You may also choose which actions from this config to enable:</span> -->
+    <div id="actionsenablediv" style="background-color: #f0e0e0;">
+        <table width="100%">
+            <tr>
+                <td width="25%"><b>Enabled Actions</b></td>
+                <td width="75%">
+                    <div id="actionstd" class="tooltip"></div>
+                    <p class="tooltiptext" style="left: 0px; width: 350px;">
+		    Some configurations contain more than one set of search strings and
+            replacements. Choose which available replacements you want to run.</p>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <hr>
     <div id="configdetaildiv">
         <input type="checkbox" id="showconfigcheck" name="showconfigcheck" value="bloop">Show configuration details. Check if you want to edit the config directly.<br>
         <div id="configdiv" style="background-color: lightblue; display: none;">
@@ -132,8 +221,6 @@
             </div>
         </div>
     </div>
-
-    <hr>
 
     <div id="statusdiv_container" style="display: none;">
       <b>Debug Messages</b>
