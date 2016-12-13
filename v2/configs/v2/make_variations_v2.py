@@ -276,6 +276,7 @@ monikers = {
       "Stubby-Fingered Coatfart",
       "World's Most Easily Insulted Fascist Buffoon",
       "Triple-Chinned Bull in a Nuclear China Shop",
+      "Trumplethinskin",
     ],
     'dirty': [
       "Fuckface von Clownstick",
