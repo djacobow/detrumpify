@@ -5,6 +5,9 @@ var maxTimeout  = 120000;
 var count       = 5;
 
 
+// override whitelist
+var run_anywhere = false;
+
 // the config itself.
 var current_config = null;
 
@@ -349,6 +352,7 @@ function switch_text() {
 
 
 function isThisPageRunnable() {
+  if (run_anywhere) return true;
   log('isThisPageRunnable');
   var url = document.location.href;
   var match = false;
@@ -389,7 +393,10 @@ function startReplTries(err,res) {
 
 function init() {
   set_initial_url(function() {
-    chrome.storage.local.get(['insult_style'],function(items) {
+    chrome.storage.local.get(['insult_style','run_anywhere'],function(items) {
+      if (items.hasOwnProperty('run_anywhere')) {
+          run_anywhere = items.run_anywhere;
+      }
       if (items.hasOwnProperty('insult_style')) {
         createAndSetStyle(defaults.insult_cssname,items.insult_style);
       }

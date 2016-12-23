@@ -61,7 +61,7 @@
       </table>
     <hr>
     <!-- <div>Choose configurations from <a href="http://toolsofourtools.org/detrumpify2">toolsofourtools.org</a>, or enter own URL:</div> -->
-    <div id="confselectdiv" style="background-color: #f0e0e0;">
+    <div id="confselectdiv" style="background-color: #e0e0e0;">
         <div id="buttonsdiv"></div>
         <table style="width:100%;">
             <tr>
@@ -112,7 +112,7 @@
     <!-- <hr> -->
 
     <!-- <span>Set the maximum word length of your insults and quoting preference</span> -->
-    <div id="brevitydiv" style="background-color: #f0e0e0;">
+    <div id="brevitydiv" style="background-color: #e0e0e0;">
         <table style="width: 100%;">
             <tr>
                 <td style="width: 15%;"><b>Brevity</b></td>
@@ -191,7 +191,7 @@
 
     <!-- <hr> -->
     <!-- <span>You may also choose which actions from this config to enable:</span> -->
-    <div id="actionsenablediv" style="background-color: #f0e0e0;">
+    <div id="actionsenablediv" style="background-color: #e0e0e0;">
         <table width="100%">
             <tr>
                 <td width="25%"><b>Enabled Actions</b></td>
@@ -200,6 +200,24 @@
                     <p class="tooltiptext" style="left: 0px; width: 350px;">
 		    Some configurations contain more than one set of search strings and
             replacements. Choose which available replacements you want to run.</p>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div id="usewhitelistdiv" style="background-color: #f0f0f0;">
+        <table width="100%">
+            <tr>
+                <td width="25%"><b>Run Anywhere</b></td>
+                <td width="75%">
+                    <div class="tooltip">
+                        <input class="tooltip" type="checkbox" id="run_anywhere" name="run_anywhere" value="bloop"> (If not checked, only run on whitelisted sites.)
+
+                    </div>
+                    <p class="tooltiptext" style="left: 0px; width: 350px;">
+                    If checked, Detrumpify will run on any website you visit.
+                    If not checked, Detrumpify will only run on the sites
+                    specified in the configuration file.</p>
                 </td>
             </tr>
         </table>

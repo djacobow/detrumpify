@@ -100,9 +100,21 @@ function createStyleSuggestions() {
         document.getElementById('inputstylediv').appendChild(list);
         var some_styles = [
             'color: red;',
+            'color: blue;',
+            'color: purple;',
+            'color: green;',
             'background-color: yellow;',
-            'font-size: 80%',
+            'background-color: #e6dd93;',
+            'background-color: black; color: white;',
+            'background-color: #050556; color: white;',
             'color: #f8ded2; background-color: #6f402a;',
+            'font-size: 80%;',
+            'font-size: 120%;',
+            'font-style: italic;',
+            'font-style: bold;',
+            'text-decoration: overline;',
+            'text-decoration: underline;',
+            'text-decoration: strikethrough;',
         ];
         for (var i=0; i<some_styles.length; i++) {
             var opt = document.createElement('option');
@@ -140,7 +152,7 @@ function restorePluginOptions() {
 
   loadConfig(showConfig);
 
-  chrome.storage.local.get(['insult_style','brevity','brackets', 'rand_mode','kittenize'], function(items) {
+  chrome.storage.local.get(['insult_style','brevity','brackets', 'rand_mode','kittenize','run_anywhere'], function(items) {
 
       var restoreThing = function(name,inpname,checkbox = false) {
           var thingelem = document.getElementById(inpname);
@@ -168,6 +180,7 @@ function restorePluginOptions() {
       restoreThing('brackets','quoteinput');
       restoreThing('rand_mode','randmodeinput');
       restoreThing('kittenize','kittensel');
+      restoreThing('run_anywhere','run_anywhere',true);
 
       // if this fails, then the browser didn't support data lists 
       // anyway
@@ -320,6 +333,10 @@ function saveGeneric(name,inpname,checkbox = false) {
  });
 }
 
+function saveRunAnywhere() {
+  saveGeneric('run_anywhere','run_anywhere', true);
+}
+
 function saveKittenize() {
   saveGeneric('kittenize','kittensel');
 }
@@ -429,6 +446,7 @@ function setup_handlers() {
   document.getElementById('quoteinput').addEventListener('change',saveBrackets);
   document.getElementById('randmodeinput').addEventListener('change',saveRandMode);
   document.getElementById('kittensel').addEventListener('change',saveKittenize);
+  document.getElementById('run_anywhere').addEventListener('change',saveRunAnywhere);
 
   log('adding radiobutton handler');
   var edit_radios = document.forms.editmodeform.elements.editmode;
