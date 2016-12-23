@@ -32,7 +32,7 @@ base = {
         "nationalreview.com", "townhall.com", "freerepublic.com",
         "pjmedia.com", "hotair.com", "cnsnews.com", "westernjournalism.com",
         "washingtonexaminer.com", "tpnn.com", "newsbusters.org",
-        "twitchy.com",
+        "twitchy.com", "news.google.com", "npr.org",
     ],
     'actions': {
         'trump': {
