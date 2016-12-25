@@ -159,6 +159,7 @@ monikers = {
       "Bursting Landfill of Municipal Solid Waste",
       "Mountain of Rotting Whale Blubber",
       "Sputum-Filled Orange Julius",
+      "Orange Julius Caesar",
       "Gangrenous Gaping Wound",
       "Racist, Sexist Block of Aged Cheddar",
       "Oversized Wasp Exoskeleton Stuffed with Old Mustard",
