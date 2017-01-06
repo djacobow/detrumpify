@@ -278,6 +278,17 @@ monikers = {
       "World's Most Easily Insulted Fascist Buffoon",
       "Triple-Chinned Bull in a Nuclear China Shop",
       "Trumplethinskin",
+      "Twitter Twit",
+      "Human Traffic Cone",
+      "Dog that Caught the Car",
+      "Thin-Skinned Idiot with Nuclear Codes",
+      "Grifter-in-Chief",
+      "Sentient Caps-Lock Button",
+      "Xenophobic Sweet Potato",
+      "Batman Villain",
+      "Rome Burning, in Man Form",
+      "Buffalo Wing that Fell in a Urinal",
+      "America's Back Mole",
     ],
     'dirty': [
       "Fuckface von Clownstick",
@@ -297,6 +308,11 @@ monikers = {
       "Human Turd",
       "High Oracle of Dipshittery",
       "Anus Lips",
+      "Foul-Mouthed Tit Judge",
+      "Baboon Anus",
+      "Orange Condom Filled with Rancid Stew",
+      "Used Diaphragm from the Jersey Shore",
+      "Human Queef",
     ],
   },
   'alt-right': {
@@ -317,7 +333,7 @@ monikers = {
   'pence': {
     'clean': [
       "Dead-Ended Politician with Apparently Very Little to Lose",
-      "Guy Who Probably Has Tried To Outlaw Dancing",
+      "Man Who Has Probably Tried To Outlaw Dancing",
       "Champion of Homophobic Pizza Makers",
       "Numbnuts Sidekick",
       "Total Failure as a Congressman",
@@ -332,6 +348,7 @@ monikers = {
       "Person Correct About Global Warming, Probably, in Some Distant Parallel Universe",
       "Man to Be Remembered Primarily for His Willingness to Be Associated with Donald Trump",
       "Conservative-Looking Guy Sent from Central Casting",
+      "Presidential Apprentice",
     ],
     'dirty' : [
     ],
