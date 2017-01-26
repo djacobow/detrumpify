@@ -293,7 +293,7 @@ monikers = {
       "World's Largest Troll Doll",
       "Melting Orange Popsicle",
       "Dessicated, Hollowed-Out Pumpkin Stuff With Wasps",
-      "Rusted Refrigerator Left Out in the Sun Until Its Contents Rot and Well Into One Noxious, Congealed Mass",
+      "Rusted Refrigerator Left in The Sun Until Its Contents Rot And Swell Into A Noxious, Congealed Mass",
       "Regurgitated Wombat",
       "Moldy Pumpkin Spite Latte",
       "Tax-Avoidant Opossum Testicle",
@@ -360,6 +360,8 @@ monikers = {
       "Giant Mound of Hardened Cheez Whiz",
       "Smushed up Caterpillar Your 6-Year-Old Brother Set On Fire With a Magnifying Glass",
       "Rotten Kabocha Squash",
+      "Orange Roughy",
+      "Saglutupiaġataq",
     ],
     'dirty': [
       "Fuckface von Clownstick",
@@ -386,6 +388,7 @@ monikers = {
       "Human Queef",
       "Noted Chode",
       "Man Whose Head Firmly Resembles a Lone Radioactive Testicle Sealed in a Jar of Formaldehyde",
+      "Super Callous Fragile Racist Sexist Nazi POTUS",
     ],
   },
   'alt-right': {
@@ -398,6 +401,7 @@ monikers = {
       "Racist-Lunatic-Right",
       "Anti-Semitic-Monsters",
       "Misogynist-Cult",
+      "Oft-Wrong",
     ],
     'dirty': [
       "Fucking-Scary-Right",
