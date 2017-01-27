@@ -153,6 +153,34 @@ function getRunnableActions(config_actions,items) {
     return actions_to_run;
 }
 
+// this routine starts with an element and tries to work up
+// the hierarchy to see if it is enclosed anywhere by an 'a',
+// and then if that a's link matches the regex supplies, we
+// return true.
+function findParentLinkMatch(elem, re) {
+    var done = false;
+    var celem = elem;
+    var count = 0;
+    while (count < 15) {
+        if (celem && (celem.nodeName === 'A')) {
+            var ss = decodeURIComponent(celem.href);
+            if (celem.href) {
+                if (re.exec(decodeURIComponent(celem.href))) {
+                    return true;
+                }
+                return false;
+            }
+        }
+        count += 1;
+        celem = celem.parentElement;
+        if (celem === null) {
+            return false;
+        }
+    }
+    return false;
+}
+
+
 function switch_imgs() {
   log('switch_imgs()');
   chrome.storage.local.get(['kittenize','enabled_actions'],function(items) {
@@ -186,16 +214,31 @@ function switch_imgs() {
         var imgs = document.getElementsByTagName('img');
         for (var i=0; i<imgs.length; i++) {
           var img = imgs[i];
+
+          // Super-sophisticated image detection algorithm here:
+          // -- does the alt text look trumpian?
           var alt_match = alt_re.exec(img.alt);
+          // does the image source itself look trumpian?
           var src_match = src_re.exec(decodeURIComponent(img.src));
-          // background images are sometimes hidden in style tags
+          // is there anything trumpian in the style tag?
           var sty_match = src_re.exec(decodeURIComponent(img.style));
-          if (alt_match || src_match || sty_match) {
+          // is there an enclosing "A" parent whose href looks trumpian?
+          var parent_link_match = false;
+          try {
+              parent_link_match = findParentLinkMatch(img, src_re);
+          } catch (w) { }
+          parent_link_match &= (mode === 'more_kittens');
+
+          if (alt_match ||
+              src_match ||
+              sty_match ||
+              parent_link_match ||
+              false) {
             var replsrc;
             if (mode == 'div') {
                 var border = 2;
                 var nd = document.createElement('div');
-                var replhtml = '<b>National disgrace removed</b>';
+                var replhtml = '<b>National disgrace removed.</b>';
                 var backsrc = null;
                 if (action.hasOwnProperty('image_replacement')) {
                     replhtml = action.image_replacement.html[
@@ -223,16 +266,17 @@ function switch_imgs() {
                 nd.style.height= dh.toString() + 'px';
                 nd.style['max-height'] = dh.toString() + 'px';
                 img.parentNode.replaceChild(nd,img);
-            } else if (mode == 'kittens') {
+            } else if ((mode == 'kittens') ||
+                       (mode == 'more_kittens')) {
                 replsrc = 'https://placekitten.com/' +
                           img.clientWidth.toString() + '/' + 
                           img.clientHeight.toString();
-                img.src = replsrc;
+                if (img.src !== replsrc) img.src = replsrc;
             } else {
                 replsrc = 'https://placehold.it/' +
                           img.clientWidth.toString() + 'x' +
                           img.clientHeight.toString();
-                img.src = replsrc;
+                if (img.src !== replsrc) img.src = replsrc;
             }
           }
         }
