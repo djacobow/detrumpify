@@ -362,6 +362,7 @@ monikers = {
       "Rotten Kabocha Squash",
       "Orange Roughy",
       "Saglutupiaġataq",
+      "National Grand Mal Seizure",
     ],
     'dirty': [
       "Fuckface von Clownstick",
