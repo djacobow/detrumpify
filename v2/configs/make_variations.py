@@ -346,6 +346,9 @@ monikers = {
       "Orange Roughy",
       "Saglutupiaġataq",
       "National Grand Mal Seizure",
+      "Champion of Oppressors",
+      "Angry Postule",
+      "Dolt 45",
     ],
     'dirty': [
       "Fuckface von Clownstick",
@@ -373,6 +376,7 @@ monikers = {
       "Noted Chode",
       "Man Whose Head Firmly Resembles a Lone Radioactive Testicle Sealed in a Jar of Formaldehyde",
       "Super Callous Fragile Racist Sexist Nazi POTUS",
+      "Weeping Herpe Sore",
     ],
   },
   'alt-right': {

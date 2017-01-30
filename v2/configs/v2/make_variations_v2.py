@@ -45,9 +45,10 @@ base = {
             ],
             'image_replacement': {
                 'html': [
-                    '<b>National Disgrace Removed</b>',
-                    '<b>Disturbing Imagery Blocked</b>',
-                    '<b>You don\'t want to see what was here.</b>',
+                    'National Disgrace Removed',
+                    'Disturbing Imagery Blocked',
+                    'You don\'t want to see what was here.',
+                    'Detrumpified',
                 ],
                 'border': 1,
                 'background': [
@@ -363,6 +364,9 @@ monikers = {
       "Orange Roughy",
       "Saglutupiaġataq",
       "National Grand Mal Seizure",
+      "Champion of Oppressors",
+      "Angry Postule",
+      "Dolt 45",
     ],
     'dirty': [
       "Fuckface von Clownstick",
@@ -390,6 +394,7 @@ monikers = {
       "Noted Chode",
       "Man Whose Head Firmly Resembles a Lone Radioactive Testicle Sealed in a Jar of Formaldehyde",
       "Super Callous Fragile Racist Sexist Nazi POTUS",
+      "Weeping Herpe Sore",
     ],
   },
   'alt-right': {
