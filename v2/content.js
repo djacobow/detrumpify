@@ -238,23 +238,23 @@ function switch_imgs() {
             if (mode == 'div') {
                 var border = 2;
                 var nd = document.createElement('div');
-                var replhtml = '<b>National disgrace removed.</b>';
+                var repl = document.createElement('span');
+                repl.textContent = 'National disgrace removed.';
                 var backsrc = null;
                 if (action.hasOwnProperty('image_replacement')) {
-                    replhtml = action.image_replacement.html[
-                        Math.floor(Math.random()*action.image_replacement.html.length)
-                    ];
+                    var idx = Math.floor(Math.random()*action.image_replacement.html.length);
+                    repl.textContent = action.image_replacement.html[idx];
                     border = action.image_replacement.border;
                     if (action.image_replacement.hasOwnProperty('background')) {
-                        backsrc = action.image_replacement.background[
-                            Math.floor(Math.random()*action.image_replacement.background.length)
-                        ];
+                        idx = Math.floor(Math.random()*action.image_replacement.background.length);
+                        backsrc = action.image_replacement.background[idx];
                     }
                 }
                 if (backsrc) {
-                    nd.style['background-image'] = 'url(' + backsrc + ')';
+                    nd.style.backgroundImage = "url('" + backsrc + "')";
+                    nd.style['background-repeat'] = 'repeat';
                 }
-                nd.innerHTML = replhtml;
+                removeChildrenReplaceWith(nd,[repl]);
                 var dw = img.clientWidth - 2 * border;
                 var dh = img.clientHeight - 2 * border;
                 nd.style['text-align'] = 'center';
