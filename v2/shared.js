@@ -145,6 +145,15 @@ function createAndSetStyle(name,style_text) {
       se.type = 'text/css';
       document.getElementsByTagName('head')[0].appendChild(se);
     }
-    se.innerHTML = name + ' { ' + style_text + ' } ';
+    se.textContent = name + ' { ' + style_text + ' } ';
+}
+
+function removeChildrenReplaceWith(elem,newchildren) {
+    while (elem.firstChild) {
+        elem.removeChild(elem.firstChild);
+    }
+    for (var i=0;i<newchildren.length;i++) {
+        elem.appendChild(newchildren[i]);
+    }
 }
 
