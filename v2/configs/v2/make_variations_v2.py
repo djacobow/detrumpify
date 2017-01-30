@@ -392,6 +392,9 @@ monikers = {
       "Tribble Threat",
       "Saffron Suharto",
       "Manchurian Manchild",
+      "Pyschopathic Elmer Fudd",
+      "Orange Woundwort",
+      "Dorito Mussolini",
     ],
     'dirty': [
       "Fuckface von Clownstick",
@@ -429,6 +432,7 @@ monikers = {
       "Cockjerk Orange",
       "Blithering Butthole",
       "Scrooge McFuck",
+      "America's #2",
     ],
   },
   'alt-right': {
@@ -442,6 +446,7 @@ monikers = {
       "Anti-Semitic-Monsters",
       "Misogynist-Cult",
       "Oft-Wrong",
+      "Confederacy-of-Psychopathic-Dunces",
     ],
     'dirty': [
       "Fucking-Scary-Right",
