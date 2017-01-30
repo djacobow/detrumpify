@@ -28,6 +28,8 @@ function getCannedList(cb) {
     'url': defaults.buttons_fetch_url, },
     null,
     function(resp) {
+      var errmsg = document.createElement('p');
+      errmsg.textContent = 'Could not load button metadata. How is our Internet connection?';
       var bd = document.getElementById('buttonsdiv');
       if ((resp === null) || (resp.err === null)) {
         cb('err','error in eventpage code');
@@ -36,10 +38,10 @@ function getCannedList(cb) {
         try {
           resp.text += "\n";
           data = JSON.parse(resp.text);
-          bd.innerHTML = '';
+          removeChildrenReplaceWith(bd, []);
           log(resp.text);
         } catch(e) {
-          bd.innerHTML = '<p>Could not load button metadata. How is our Internet connection?</p>';
+          removeChildrenReplaceWith(bd, [errmsg]);
           log("Button JSON parse error");
           log(e);
           cb(e,resp.txt);
@@ -47,7 +49,7 @@ function getCannedList(cb) {
         }
         elaborateConfigSelector(data,cb);
       } else {
-        bd.innerHTML = '<p>Could not load button metadata. How is our Internet connection?</p>';
+        removeChildrenReplaceWith(bd, [errmsg]);
         cb('err',resp.status);
       }
     }
@@ -267,11 +269,11 @@ function showEnabledActionsList(items,cfg_actions) {
         }    
       }
 
-      enelem.innerHTML = '';
+      removeChildrenReplaceWith(enelem,[]);
       for (i=0; i<cfg_actions.length; i++) {
         action = cfg_actions[i];
         var label_elem = document.createElement('span');
-        label_elem.innerHTML = action + ' ';
+        label_elem.textContent = action + ' ';
         var check_elem = document.createElement('input');
         check_elem.type = 'checkbox';
         check_elem.name = action + '_check';
@@ -283,7 +285,7 @@ function showEnabledActionsList(items,cfg_actions) {
         enelem.appendChild(check_elem);
         if (i !== cfg_actions.length-1) {
           var pipe_elem = document.createElement('span');
-          pipe_elem.innerHTML = ' | ';
+          pipe_elem.textContent = ' | ';
           enelem.appendChild(pipe_elem);
         }
 
