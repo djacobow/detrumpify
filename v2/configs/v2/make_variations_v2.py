@@ -367,6 +367,12 @@ monikers = {
       "Champion of Oppressors",
       "Angry Postule",
       "Dolt 45",
+      "Combover Caligula",
+      "Mango Manchurian",
+      "Idiot Amin",
+      "Twitler",
+      "Der Gropenführer",
+      "Cheez Whiz Ceaușescu",
     ],
     'dirty': [
       "Fuckface von Clownstick",
