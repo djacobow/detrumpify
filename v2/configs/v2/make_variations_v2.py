@@ -395,6 +395,8 @@ monikers = {
       "Pyschopathic Elmer Fudd",
       "Orange Woundwort",
       "Dorito Mussolini",
+      "Neon Nero",
+      "Reliable Emetic",
     ],
     'dirty': [
       "Fuckface von Clownstick",
