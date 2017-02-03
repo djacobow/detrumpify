@@ -74,9 +74,9 @@ base = {
         'bannon': {
             'find_regex': [
                 # first name and/or middle initial may be present
-                # "((Steve|Steven|Stephen|STEVE|STEVEN|STEPHEN)\\s*((K\\.?|Kevin|KEVIN)\\s*)?)?(Bannon|BANNON)(?!\\w)", "g"
+                "((Steve|Steven|Stephen|STEVE|STEVEN|STEPHEN)\\s*((K\\.?|Kevin|KEVIN)\\s*)?)?(Bannon|BANNON)(?!\\w)", "g"
                 # first name and/or middle initial must be present
-                "((Steve|Steven|Stephen|STEVE|STEVEN|STEPHEN)\\s*((K\\.?|Kevin|KEVIN)\\s*)?)(Bannon|BANNON)(?!\\w)", "g"
+                # "((Steve|Steven|Stephen|STEVE|STEVEN|STEPHEN)\\s*((K\\.?|Kevin|KEVIN)\\s*)?)(Bannon|BANNON)(?!\\w)", "g"
             ],
             'randomize_mode': 'always',
         },
@@ -589,8 +589,7 @@ for comboname in combos:
 
     outdata = copy.deepcopy(base)
     empty_actions = []
-    for person in ['trump','pence','alt-right','bannon']:
-    #for person in monikers:
+    for person in monikers:
       outdata['actions'][person]['monikers'] = []
       for moniker_group in combos[comboname]['monikers']:
         for moniker in monikers[person][moniker_group]:
@@ -609,8 +608,13 @@ for comboname in combos:
       if len(outdata['actions'][person]['monikers']) < 1:
         empty_actions.append(person)
 
-    for action in empty_actions:
-      outdata['actions'].pop(action,None)
+    # remove actions with no insults
+    for person in empty_actions:
+      outdata['actions'].pop(person,None)
+
+    # remove actions that are not quite ready for prime time
+    for person in ['conway','spicer']:
+      outdata['actions'].pop(person,None)
 
     jsd = json.dumps(outdata)
     ofile = open(comboname, 'w')
