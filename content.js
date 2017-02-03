@@ -87,7 +87,7 @@ function find_match_nonmatch_chunks(text,re) {
 }
 
 
-function make_replacement_elems_array(action,rand_mode,moniker_list,brackets,broken_texts,orig_node,choice) {
+function make_replacement_elems_array(action_name,action,rand_mode,moniker_list,brackets,broken_texts,orig_node,choice) {
   var repl_array = [];
   for (var k=0;k<broken_texts.length;k++) {
     chunk = broken_texts[k];
@@ -101,6 +101,8 @@ function make_replacement_elems_array(action,rand_mode,moniker_list,brackets,bro
       // is in addition to any styles's associated with the
       // detrumpified class.
       unode.style = "";
+      unode.title = "was " + action_name;
+
       if (action.hasOwnProperty('match_style')) {
         unode.style = action.match_style;
       }
@@ -371,6 +373,7 @@ function switch_text() {
 
               if (broken_texts.length) {
                 repl_array = make_replacement_elems_array(
+                        action_name,
                         action,
                         rand_mode,
                         monikers_to_use,
