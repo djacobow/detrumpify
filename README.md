@@ -1,10 +1,6 @@
-
 # Detrumpify
 
-A Rewrite of Detrumpify Classic (v1), which hard-coded everything. This
-version, v2, allows users to configure the insults.
-
-## Very simple Chrome Extension to replace instances of the words "Donald Trump" with more apt descriptors
+## Chrome Extensions to replace instances of the words "Donald Trump" with more apt descriptors
 
 Ths initial batch (and still most of the replacement text) comes from here:
 
@@ -12,6 +8,18 @@ http://theslot.jezebel.com/in-honor-of-donald-trumps-70th-birthday-here-are-70-w
 
 However, I will continue to add new insults as I come by them throughout the
 2016 presidential election cycle.
+
+### Enhancements and Options
+
+Over time the extension has grown in complexity. A few improvements include
+
+* insults loaded from external config file
+* insults for Pence, Bannon, etc added
+* insults can be turned on and off by person
+* lots of options for insults control
+* option for user to edit own config
+* code to replace trump images with images of kittens
+
 
 ## Installation
 
