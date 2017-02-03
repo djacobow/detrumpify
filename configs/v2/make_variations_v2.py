@@ -200,7 +200,7 @@ monikers = {
       "Human/Komodo Dragon Hybrid",
       "Blackening Scab Artfully Hiding in Your Raisin Bran",
       "“Taco truck”",
-      "Man Who Could One Day Become the First Hobgoblin to Enter The White House",
+      "Man Who Became the First Hobgoblin to Enter The White House",
       "Pair of Chapped Lips Superglued to a Hairball",
       "Horsehair Mattress Stuffed with Molding Copies of Hustler",
       "Malignant Corn Chip",
@@ -422,6 +422,7 @@ monikers = {
       "Narcissist-in-Chief",
       "Bannon's Burnt Orange Marionette",
       "Know-Nothing",
+      "Commander-in-Cheat",
     ],
     'dirty': [
       "Fuckface von Clownstick",
@@ -537,6 +538,7 @@ monikers = {
       'Rash Wearing a Jabba Costume',
       'Zombie Mark Hamill',
       'Alcoholic Ewok',
+      'Chief White Supremacy Strategist',
     ],
     'dirty': [
       'Neo Nazi Dickhead',
