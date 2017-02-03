@@ -386,7 +386,7 @@ monikers = {
       "Boss Tweet",
       "Marmalade Mussolini",
       "Furious Orange",
-      "Cheetle Golem",
+      "Cheeto Golem",
       "Jack the Twitter",
       "Lyssavirus Agglutination",
       "Tribble Mobility Scooter",
