@@ -1,5 +1,6 @@
 /*jshint esversion:6 */
-var debug_mode = true;
+var debug_mode = false;
+
 var log_count = 0;
 function log(t) {
   try {
