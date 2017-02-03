@@ -421,6 +421,7 @@ monikers = {
       "Emperor Tangerine McTinyhands",
       "Narcissist-in-Chief",
       "Bannon's Burnt Orange Marionette",
+      "Know-Nothing",
     ],
     'dirty': [
       "Fuckface von Clownstick",
@@ -514,14 +515,33 @@ monikers = {
       'Constitutional Demolitions Director',
       'White Nationalist Potato Sack',
       'Shiva, Destroyer of Rights',
-      'Man Who, in a Just Universse, Would Warm a Barstool Alone Every Night Before Returning to His Empty Trailer',
+      'Man Who, in a Sane Universe, Would Warm a Barstool Alone Every Night Before Returning to His Empty Trailer',
       'Rumpled Suit With The President\'s Ear',
       'Leader of the Leader of the Free World',
       'Bigot Whisperer',
+      'White Supremacist Beanbag',
+      'Orangutan Keeper',
+      'Pre-Ghost Version of Slimer',
+      'Person Who Looks like He Pukes More Than He Showers',
+      'Art Student\'s Aattempt at Sculpting Robert Redford Out of Room Temperature Tapioca',
+      'Baron Harkonnen\'s Origin Story',
+      'Actual Grinch',
+      'Guy Infected with Zombie Virus that Tried to Hide It',
+      'MacGyver without Epi-Pen, Stung in the Face by a Bee',
+      'Man One Pizza Away from his Next Papa John\'s Order Free',
+      'Garbage Pail Kid',
+      'Bread Dough Requiring a Punch-Down',
+      'Best-Looking Man in The Liquor Store at 1 AM',
+      'The Disease AIDS Would Catch If It Were Promiscuous and Careless for Decades',
+      'Furry Turned Inside-Out',
+      'Rash Wearing a Jabba Costume',
+      'Zombie Mark Hamill',
+      'Alcoholic Ewok',
     ],
     'dirty': [
       'Neo Nazi Dickhead',
       'Repulsive, Plotting Shit',
+      'Twenty Pounds of Shit in a Ten Pound Sack',
     ]
   },
   'conway': {
@@ -544,8 +564,9 @@ monikers = {
     'clean': [
       'Mouth of Sauron',
       'Crack Hamster',
-      'Inexpert Liar',
-      'Man Who Permanently Destroyed All Credibility pn First Day of Job',
+      'Dissembly Secretary'
+      'Man Who Permanently Destroyed All Credibility on First Day of Job',
+      'Official Tweet Elaborator',
     ],
     'dirty': [
     ],
@@ -612,9 +633,10 @@ for comboname in combos:
     for person in empty_actions:
       outdata['actions'].pop(person,None)
 
-    # remove actions that are not quite ready for prime time
-    for person in ['conway','spicer']:
-      outdata['actions'].pop(person,None)
+    if True:
+        # remove actions that are not quite ready for prime time
+        for person in ['conway','spicer']:
+            outdata['actions'].pop(person,None)
 
     jsd = json.dumps(outdata)
     ofile = open(comboname, 'w')
