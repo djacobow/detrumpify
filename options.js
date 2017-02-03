@@ -1,5 +1,5 @@
 /*jshint esversion:6 */
-set_initial_url(function(src) { log('set_initial_url cb: ' + src); });
+// set_initial_url(function(src) { log('set_initial_url cb: ' + src); });
 
 function selectConfig(e) {
   var tgt = e.target || e.srcElement;
@@ -15,6 +15,16 @@ function selectConfig(e) {
       srcelem.value = new_url;
       saveConfigURL();
   }
+}
+
+function resetStorage() {
+    zapStorage(function() {
+        log('storage zapped');
+        loadConfig(function(err,res) {
+            showConfig(err,res);
+            restorePluginOptions();
+        });
+    });
 }
 
 function dumb_cb(err,msg) {
@@ -208,13 +218,12 @@ function saveEnabledActions() {
     var child = children[i];
     var m = child.id.match(/^([\w-]+)_check/);
     if (m) {
-      log(action);
       var action = m[1];
       enabled[action] = child.checked;
-      log(action);
     }
   }
   chrome.storage.local.set({'enabled_actions': enabled}, function() {
+   log(enabled);
    log('saved action changes');
   });
 }
@@ -236,37 +245,57 @@ function showEnabledActionsList(items,cfg_actions) {
 
       var enabled = {};
       var action;
+      var enable_this = true;
       var i;
 
-      // first, check to see if the list of actions in the config even matches
-      // the list of enabled actions stored. If it does, keep the stored list,
-      // but if it doesn't, reset the stored list to what is in the config
-      // (with everything enabled)
-      var enabled_exist_list = [];
-      if (items.hasOwnProperty('enabled_actions')) {
-        enabled_exist_list = Object.keys(items.enabled_actions);
-      }
-      var config_and_stored_actions_match = arraysEqual(cfg_actions, enabled_exist_list);
-
-      if (!config_and_stored_actions_match) {
-        log('resetting actions list from config');
-        for (i=0; i<cfg_actions.length; i++) {
-          action = cfg_actions[i];
-          enabled[action] = true;
-        }   
-        chrome.storage.local.set({'enabled_actions': enabled},function() {
-          log('stored reset enabled actions');
-        });
-      } else {
-        for (i=0; i<cfg_actions.length; i++) {
-          action = cfg_actions[i];
-          var enable_this = true;
-          if (items.hasOwnProperty('enabled_actions') && 
-              items.enabled_actions.hasOwnProperty(action)) {
-            enable_this = items.enabled_actions[action];
+   
+      if (true) {
+          // NEW way to handle enabled actions:
+          // get a list of actions that the user can enable or disable.
+          // if the user has a preference already stored for an action of 
+          // that name, use it, otherwise set it to enabled.
+          for (i=0; i<cfg_actions.length; i++) {
+              action = cfg_actions[i];
+              enable_this = true;
+              if (items.hasOwnProperty('enabled_actions') &&
+                  items.enabled_actions.hasOwnProperty(action)) {
+                  enable_this = items.enabled_actions[action];
+              }
+              enabled[action] = enable_this;
           }
-          enabled[action] = enable_this;
-        }    
+      } else { 
+          // OLD way to handle enabled actions. Keeping around in case I 
+          // want to go back.
+          // first, check to see if the list of actions in the config even matches
+          // the list of enabled actions stored. If it does, keep the stored list,
+          // but if it doesn't, reset the stored list to what is in the config
+          // (with everything enabled)
+          var enabled_exist_list = [];
+          if (items.hasOwnProperty('enabled_actions')) {
+              enabled_exist_list = Object.keys(items.enabled_actions);
+          }
+          var config_and_stored_actions_match = arraysEqual(cfg_actions, enabled_exist_list);
+
+          if (!config_and_stored_actions_match) {
+              log('resetting actions list from config');
+              for (i=0; i<cfg_actions.length; i++) {
+                  action = cfg_actions[i];
+                  enabled[action] = true;
+              }   
+              chrome.storage.local.set({'enabled_actions': enabled},function() {
+                  log('stored reset enabled actions');
+              });
+          } else {
+              for (i=0; i<cfg_actions.length; i++) {
+                  action = cfg_actions[i];
+                  enable_this = true;
+                  if (items.hasOwnProperty('enabled_actions') && 
+                      items.enabled_actions.hasOwnProperty(action)) {
+                      enable_this = items.enabled_actions[action];
+                  }
+                  enabled[action] = enable_this;
+              }    
+          }
       }
 
       removeChildrenReplaceWith(enelem,[]);
@@ -449,6 +478,7 @@ function setup_handlers() {
   document.getElementById('randmodeinput').addEventListener('change',saveRandMode);
   document.getElementById('kittensel').addEventListener('change',saveKittenize);
   document.getElementById('run_anywhere').addEventListener('change',saveRunAnywhere);
+  document.getElementById('reset_storage').addEventListener('click',resetStorage);
 
   log('adding radiobutton handler');
   var edit_radios = document.forms.editmodeform.elements.editmode;

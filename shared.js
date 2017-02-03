@@ -1,5 +1,5 @@
 /*jshint esversion:6 */
-var debug_mode = false;
+var debug_mode = true;
 var log_count = 0;
 function log(t) {
   try {
@@ -29,6 +29,12 @@ function set_initial_url(cb) {
       });
     }
   });
+}
+
+function zapStorage(cb) {
+    chrome.storage.local.clear(function() {
+        set_initial_url(cb);
+    });
 }
 
 
