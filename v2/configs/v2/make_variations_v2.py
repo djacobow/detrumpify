@@ -70,7 +70,29 @@ base = {
                 "\\b(?!([Aa]|[Aa]n|[Tt]he)\\s)[Aa]lt[- ][Rr]ight(?!\\w)", "g",
             ],
             'randomize_mode': 'always',
-        }
+        },
+        'bannon': {
+            'find_regex': [
+                # first name and/or middle initial may be present
+                # "((Steve|Steven|Stephen|STEVE|STEVEN|STEPHEN)\\s*((K\\.?|Kevin|KEVIN)\\s*)?)?(Bannon|BANNON)(?!\\w)", "g"
+                # first name and/or middle initial must be present
+                "((Steve|Steven|Stephen|STEVE|STEVEN|STEPHEN)\\s*((K\\.?|Kevin|KEVIN)\\s*)?)(Bannon|BANNON)(?!\\w)", "g"
+            ],
+            'randomize_mode': 'always',
+        },
+        'conway': {
+            'find_regex': [
+                "((KELLYANNE|Kellyanne)\\s*)?(Conway|CONWAY)(?!\\w)", "g"
+            ],
+            'randomize_mode': 'always',
+        },
+        'spicer': {
+            'find_regex': [
+                "((SEAN|Sean)\\s*)?(SPICER|Spicer)(?!\\w)", "g"
+            ],
+            'randomize_mode': 'always',
+        },
+
     }
 }
 
@@ -154,7 +176,7 @@ monikers = {
       "Human-Sized Infectious Microbe",
       "Poorly-Trained Circus Organgutan",
       "Chester Cheetah Impersonator",
-      "Lumbering Human-Life Tardigrade",
+      "Lumbering Human-Size Tardigrade",
       "Tiny Piece of Dried Cat Poop that You Found in Your Rug",
       "Seagull Dipped in Tikka Masala",
       "Bursting Landfill of Municipal Solid Waste",
@@ -315,7 +337,6 @@ monikers = {
       "Long and Thunderous Fart in a Stalled Elevator",
       "Rancid Halloween Oreo Filling",
       "Rage-Addled Oompa Loompa",
-      "Your Shitty Racist Uncle",
       "Bewigged Swollen Gall Bladder",
       "Wheezing Blurg from Endor's Forest Moon",
       "Inflamed Carbuncle",
@@ -397,6 +418,9 @@ monikers = {
       "Dorito Mussolini",
       "Neon Nero",
       "Reliable Emetic",
+      "Emperor Tangerine McTinyhands",
+      "Narcissist-in-Chief",
+      "Bannon's Burnt Orange Marionette",
     ],
     'dirty': [
       "Fuckface von Clownstick",
@@ -435,6 +459,8 @@ monikers = {
       "Blithering Butthole",
       "Scrooge McFuck",
       "America's #2",
+      "Lord Dampnut",
+      "Your Shitty Racist Uncle",
     ],
   },
   'alt-right': {
@@ -466,7 +492,7 @@ monikers = {
       "Focus of Chris Christie's Unrelenting Jealous Rage",
       "Mini-Bigot",
       "Supposedly Solid, Solid Person",
-      "Rush Limgaugh on Decaf, Except Never Funny",
+      "Rush Limbaugh on Decaf, Except Never Funny",
       "Six Term Congressman with Perfect Record of Writing Zero Bills that Became Law",
       "Angry Second-Assistant High School Football Coach",
       "Person Correct About Global Warming, Probably, in Some Distant Parallel Universe",
@@ -475,6 +501,53 @@ monikers = {
       "Presidential Apprentice",
     ],
     'dirty' : [
+    ],
+  },
+  'bannon': {
+    'clean' : [
+      'Whiskey-Soaked Machiavelli',
+      'Unshaven Emperor Palpatine',
+      'Goebbels Acolyte'
+      'Coke-Addled Dorito-Huffing Rasputin',
+      'Fascist Puppeteer',
+      'Plotter Against America',
+      'Constitutional Demolitions Director',
+      'White Nationalist Potato Sack',
+      'Shiva, Destroyer of Rights',
+      'Man Who, in a Just Universse, Would Warm a Barstool Alone Every Night Before Returning to His Empty Trailer',
+      'Rumpled Suit With The President\'s Ear',
+      'Leader of the Leader of the Free World',
+      'Bigot Whisperer',
+    ],
+    'dirty': [
+      'Neo Nazi Dickhead',
+      'Repulsive, Plotting Shit',
+    ]
+  },
+  'conway': {
+    'clean' : [
+      'Empty Shell That Might Once Have Been Occupied by a Human',
+      'Alternative Fact Peddler',
+      'Kellyanne Con-Artist',
+      'Deputy Assistant Trump Boot Licker',
+      'Suspected Trump Hostage',
+      'Expert Liar',
+      'Truth Mutilator',
+      'Word Salad Dressing',
+      'Robot Sent From The Future to Obliterate The Very Idea of Shared Reality',
+      'Rhetorical IED',
+    ],
+    'dirty' : [
+    ],
+  },
+  'spicer': {
+    'clean': [
+      'Mouth of Sauron',
+      'Crack Hamster',
+      'Inexpert Liar',
+      'Man Who Permanently Destroyed All Credibility pn First Day of Job',
+    ],
+    'dirty': [
     ],
   },
 }
@@ -516,7 +589,8 @@ for comboname in combos:
 
     outdata = copy.deepcopy(base)
     empty_actions = []
-    for person in monikers:
+    for person in ['trump','pence','alt-right','bannon']:
+    #for person in monikers:
       outdata['actions'][person]['monikers'] = []
       for moniker_group in combos[comboname]['monikers']:
         for moniker in monikers[person][moniker_group]:
