@@ -1,5 +1,4 @@
 /*jshint esversion:6 */
-// set_initial_url(function(src) { log('set_initial_url cb: ' + src); });
 
 function selectConfig(e) {
   var tgt = e.target || e.srcElement;
