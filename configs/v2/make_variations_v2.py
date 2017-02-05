@@ -322,7 +322,7 @@ monikers = {
       "Tax-Avoidant Opossum Testicle",
       "Shrieking Carbuncle in a Red Power Tie",
       "Chipotle Burrito Taken to Its Natural, Digested Conclusion",
-      "Evil Toddle",
+      "Evil Toddler",
       "Clump of Moldering Drain Hair",
       "Inlfated Pig Stomach Full of Rotten Pierogi",
       "Flatulent Butternut Squash",
@@ -423,6 +423,7 @@ monikers = {
       "Bannon's Burnt Orange Marionette",
       "Know-Nothing",
       "Commander-in-Cheat",
+      "Putin Pony",
     ],
     'dirty': [
       "Fuckface von Clownstick",
@@ -463,6 +464,7 @@ monikers = {
       "America's #2",
       "Lord Dampnut",
       "Your Shitty Racist Uncle",
+      "Twitshitter",
     ],
   },
   'alt-right': {
@@ -539,6 +541,7 @@ monikers = {
       'Zombie Mark Hamill',
       'Alcoholic Ewok',
       'Chief White Supremacy Strategist',
+      'Phantom Menace',
     ],
     'dirty': [
       'Neo Nazi Dickhead',
@@ -661,6 +664,11 @@ bconfig.append({
   'name': 'Drumpf',
   'url': url_base + 'drumpf.json',
   'description': 'Always Drumpf (John Oliver mode)'
+});
+bconfig.append({
+  'name': 'Lord Dampnut',
+  'url': url_base + 'dampnut.json',
+  'description': 'Always "Lord Dampnut"'
 });
 
 ofile = open('buttons_config.json',"w")
