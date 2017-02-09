@@ -240,6 +240,7 @@ function arraysEqual(arr1, arr2) {
 }
 
 function showEnabledActionsList(items,cfg_actions) {
+      log('showEnabledActionsList()');
       var enelem = document.getElementById('actionstd');
 
       var enabled = {};
@@ -247,15 +248,20 @@ function showEnabledActionsList(items,cfg_actions) {
       var enable_this = true;
       var i;
 
-   
+      var action_names = Object.keys(cfg_actions);
+
       if (true) {
           // NEW way to handle enabled actions:
           // get a list of actions that the user can enable or disable.
           // if the user has a preference already stored for an action of 
           // that name, use it, otherwise set it to enabled.
-          for (i=0; i<cfg_actions.length; i++) {
-              action = cfg_actions[i];
+          for (i=0; i<action_names.length; i++) {
+              action =action_names[i];
               enable_this = true;
+              log(action);
+              if (cfg_actions[action].hasOwnProperty('default_enabled')) {
+                  enable_this = Boolean(cfg_actions[action].default_enabled);
+              }
               if (items.hasOwnProperty('enabled_actions') &&
                   items.enabled_actions.hasOwnProperty(action)) {
                   enable_this = items.enabled_actions[action];
@@ -273,20 +279,20 @@ function showEnabledActionsList(items,cfg_actions) {
           if (items.hasOwnProperty('enabled_actions')) {
               enabled_exist_list = Object.keys(items.enabled_actions);
           }
-          var config_and_stored_actions_match = arraysEqual(cfg_actions, enabled_exist_list);
+          var config_and_stored_actions_match = arraysEqual(action_names, enabled_exist_list);
 
           if (!config_and_stored_actions_match) {
               log('resetting actions list from config');
-              for (i=0; i<cfg_actions.length; i++) {
-                  action = cfg_actions[i];
+              for (i=0; i<action_names.length; i++) {
+                  action = action_names[i];
                   enabled[action] = true;
               }   
               chrome.storage.local.set({'enabled_actions': enabled},function() {
                   log('stored reset enabled actions');
               });
           } else {
-              for (i=0; i<cfg_actions.length; i++) {
-                  action = cfg_actions[i];
+              for (i=0; i<action_names.length; i++) {
+                  action = action_names[i];
                   enable_this = true;
                   if (items.hasOwnProperty('enabled_actions') && 
                       items.enabled_actions.hasOwnProperty(action)) {
@@ -298,8 +304,8 @@ function showEnabledActionsList(items,cfg_actions) {
       }
 
       removeChildrenReplaceWith(enelem,[]);
-      for (i=0; i<cfg_actions.length; i++) {
-        action = cfg_actions[i];
+      for (i=0; i<action_names.length; i++) {
+        action = action_names[i];
         var label_elem = document.createElement('span');
         label_elem.textContent = action + ' ';
         var check_elem = document.createElement('input');
@@ -311,7 +317,7 @@ function showEnabledActionsList(items,cfg_actions) {
         check_elem.onchange = saveEnabledActions;
         enelem.appendChild(label_elem);
         enelem.appendChild(check_elem);
-        if (i !== cfg_actions.length-1) {
+        if (i !== action_names.length-1) {
           var pipe_elem = document.createElement('span');
           pipe_elem.textContent = ' | ';
           enelem.appendChild(pipe_elem);
@@ -332,11 +338,10 @@ function showConfig(err,res) {
 
     if (err === null) {
       log('no error');
-      var actions = Object.keys(res.actions);
       // this is here rather than in earlier in restorePluginOptions
       // becauase generating this list requires the config as well as
       // the plugin options
-      showEnabledActionsList(items,actions);
+      showEnabledActionsList(items,res.actions);
       jselem.value = JSON.stringify(res,null,2);
     } else {
       log('error');
