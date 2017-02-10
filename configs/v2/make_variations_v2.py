@@ -36,6 +36,7 @@ base = {
     ],
     'actions': {
         'trump': {
+            'default_enabled': True,
             'find_regex': [
                 "((Donald|DONALD)\\s*(J\\.?\\s*)?)?(Trump|TRUMP)(?!\\w)", "g"
             ],
@@ -60,18 +61,21 @@ base = {
             'randomize_mode': 'always',
         },
         'pence': {
+            'default_enabled': True,
             'find_regex': [
                 "\\b((Mike|Michael)\\s*)?Pence(?!\\w)", "g"
             ],
             'randomize_mode': 'always',
         },
         'alt-right': {
+            'default_enabled': True,
             'find_regex': [
                 "\\b(?!([Aa]|[Aa]n|[Tt]he)\\s)[Aa]lt[- ][Rr]ight(?!\\w)", "g",
             ],
             'randomize_mode': 'always',
         },
         'bannon': {
+            'default_enabled': True,
             'find_regex': [
                 # first name and/or middle initial may be present
                 "((Steve|Steven|Stephen|STEVE|STEVEN|STEPHEN)\\s*((K\\.?|Kevin|KEVIN)\\s*)?)?(Bannon|BANNON)(?!\\w)", "g"
@@ -81,12 +85,14 @@ base = {
             'randomize_mode': 'always',
         },
         'conway': {
+            'default_enabled': False,
             'find_regex': [
                 "((KELLYANNE|Kellyanne)\\s*)?(Conway|CONWAY)(?!\\w)", "g"
             ],
             'randomize_mode': 'always',
         },
         'spicer': {
+            'default_enabled': False,
             'find_regex': [
                 "((SEAN|Sean)\\s*)?(SPICER|Spicer)(?!\\w)", "g"
             ],
@@ -95,6 +101,270 @@ base = {
 
     }
 }
+
+matic = {
+    'trump': {
+        'recipe': ['a','a','b'],
+        'clean' : {
+            'slots': {
+                'a': [
+                    'Gaffe-Prone'
+                    'Angry',
+                    'Unrepentant',
+                    'Short-Fingered',
+                    'Idiotic',
+                    'Cheeto-Hued',
+                    'Gender-Threatened',
+                    'Authoritarian',
+                    'Seething',
+                    'Sun-Dried',
+                    'Marmalade',
+                    'Tangerine',
+                    'Fart-Infused',
+                    'Melting',
+                    'Deflated',
+                    'Soggy',
+                    'Pee-Splattered',
+                    'Racist',
+                    'Man-Shaped',
+                    'Swollen',
+                    'Dusty',
+                    'Yellowing',
+                    'Enraged',
+                    'Decomposing',
+                    'Lumbering',
+                    'Orange',
+                    'Sexist',
+                    'Bewildered',
+                    'Flatulent',
+                    'Narcissistic',
+                    'Molding',
+                    'Malignant',
+                    'Screaming',
+                    'Neon-Tinted',
+                    'Sticky',
+                    'Gold-Painted',
+                    'Nacho-Flavored',
+                    'Unkempt',
+                    'Fossilized',
+                    'Noted',
+                    'Mutant',
+                    'Spittle-Flecked',
+                    'Rotting',
+                    'Manchurian',
+                    'Gilded',
+                    'Stubby-Fingered',
+                    'Self-Absorbed',
+                    'Toupee-Wearing',
+                    'Triple-Chinned',
+                    'Xenophobic',
+                    'Dessicated',
+                    'Regurgitated',
+                    'Evil',
+                    'Moldering',
+                    'Putrescent',
+                    'Demonic',
+                    'Rage-Addled',
+                    'Bewigged',
+                    'Industrial-Sized',
+                    'Spray-Tanned',
+                    'Gelatinous',
+                    'Fetid',
+                    'Toxic',
+                    'Decaying',
+                    'Furious',
+                    'Mango',
+                    'Sociopathic',
+                    'Saffron',
+                    'Neon',
+                    'Vacuous',
+                    'Witless',
+                ],
+                'b': [
+                    'Fart',
+                    'Goldfish',
+                    'Git',
+                    'Teratoma',
+                    'Dishrag',
+                    'Lunatic',
+                    'Jack-O-Lantern',
+                    'Creamsicle',
+                    'Faux Luxury Brand',
+                    'Tycoon',
+                    'Incest Ponderer',
+                    'Birther',
+                    'Steak Purveyor',
+                    'Christmas Ham',
+                    'Vulgarian',
+                    'Gingerbread Man',
+                    'Tribble',
+                    'Adulterer',
+                    'Tantrum Thrower',
+                    'Paint Factory Explosion',
+                    'Shag Carpet',
+                    'Hernia Mass',
+                    'Tomato',
+                    'Blobfish',
+                    'Pic Carcass',
+                    'Racist',
+                    'Comb-Over',
+                    'Bloviator',
+                    'Meat Wad',
+                    'Bag of Flour',
+                    'Ear of Corn',
+                    'Parody',
+                    'Pond Scum',
+                    'Troll',
+                    'Clown',
+                    'Burlap Sack',
+                    'Bag of Toxic Sludge',
+                    'Trash Fire',
+                    'Sno Cone',
+                    'Rancid Egg White',
+                    'Fermented Pee',
+                    'Sack of Rancid Peeps',
+                    'Hairpiece',
+                    'Pumpkin Pie',
+                    'Dishrag',
+                    'Yam',
+                    'Gak Spill',
+                    'Microbe',
+                    'Orangutan',
+                    'Chester Cheeta Impersonator',
+                    'Tardigrade',
+                    'Poop',
+                    'Landfill',
+                    'Orange Julius',
+                    'Julius Caesar',
+                    'Wound',
+                    'Block of Cheddar',
+                    'Golem',
+                    'Wasp Exoskeleton',
+                    'Ham Hock',
+                    'Spam',
+                    'Carcass',
+                    'Leather Couch',
+                    'Hot Dog Casing',
+                    'Earthworm Gizzard',
+                    'Masticated Gristle',
+                    'Scab',
+                    'Hobgoblin',
+                    'Radioactice Skunk',
+                    'Horsehair Mattress',
+                    'Corn Chip',
+                    'Cheez Whiz Mass',
+                    'Bog Man',
+                    'Cheese Wedge',
+                    'Rancid Beef',
+                    'Roadside Billboard',
+                    'Hate-Balloon',
+                    'Rumpelstilstkin',
+                    'Self-Tanning Enthusiast',
+                    'Fetus',
+                    'Wad of Gak',
+                    'Tumor',
+                    'Chicken Breast',
+                    'Disappointment',
+                    'Toddler',
+                    'Fascist',
+                    'Lamprey Eeel',
+                    'Tangerine',
+                    'Craigslist Sofa',
+                    'Troll Doll',
+                    'Muppet',
+                    'Ferret',
+                    'Numpty',
+                    'Plum',
+                    'Fuehrer',
+                    'Baby',
+                    'Racist',
+                    'Embarrassment',
+                    'Circus Peanut',
+                    'Dingleberry',
+                    'Babadook',
+                    'Tycoon',
+                    'Carrot',
+                    'Fart',
+                    'Volcano',
+                    'Pile of Orange Peels',
+                    'Pumpkin',
+                    'Manchild',
+                    'Monorail Salesman',
+                    'Viagra Advertisement',
+                    'Ball of Spite',
+                    'Twit',
+                    'Traffic Cone',
+                    'Popsicle',
+                    'Wombat',
+                    'Opposum Testicle',
+                    'Digested Burrito',
+                    'Drain Hair',
+                    'Marshmallow',
+                    'Litter Box',
+                    'Blurg',
+                    'Carbuncle',
+                    'Dog Turd',
+                    'Rooster',
+                    'Blobfish',
+                    'Heap',
+                    'Scabies Outbreak',
+                    'Sack of Chicken Fat',
+                    'Staph Infection',
+                    'Algae Bloom',
+                    'Dorito',
+                    'Mucous Plug',
+                    'Fumigation Tent',
+                    'Cheez-It',
+                    'Kabocha Squash',
+                    'Smushed Caterpillar',
+                    'Grand Mal Seizure',
+                    'Postule',
+                    'Caligula',
+                    'Der Gropenführer',
+                    "Ceaușescu",
+                    "Pinochet",
+                    "Torquemada",
+                    'Mussolini',
+                    'Elmer Fudd',
+                    'Emperor McTinyhands',
+                    'Narcissist',
+                    'Emetic',
+                    'Marionette',
+                ]
+            },
+        },
+        'dirty': {
+            'slots': {
+                'a': [
+                ],
+                'b': [
+                    'Ass Clown',
+                    'Shitgibbon',
+                    'Dipshit',
+                    'Asshat',
+                    'Cockwomble',
+                    'Ballbag',
+                    'Jizztrumpet',
+                    'Cocksplat',
+                    'Fucktrumpet',
+                    'Anus',
+                    'Turd',
+                    'Condom',
+                    'Herpe Sore',
+                    'Nutsack',
+                    'Ballbag',
+                    'Butthole',
+                    'Queef',
+                    'Penis',
+                    'Buttplug',
+                    'Chode',
+                    'Oracle of Dipshittery',
+                ],
+            },
+        }
+    }
+}
+
 
 monikers = {
   'trump': {
@@ -110,7 +380,7 @@ monikers = {
       "Wall Construction Expert",
       "Frequent Provider of Unsolicited Judgements Regarding Female Attractiveness",
       "Unrepentant Birther",
-      "Serial Propogator of Demonstrable Falsehoods",
+      "Serial Propagator of Demonstrable Falsehoods",
       "Harkener to Unspecified Moment of American Greatness",
       "Master of Zero-Sum Business Deals",
       "Purveyor of Lousy Steak",
@@ -360,7 +630,7 @@ monikers = {
       "Scabies Outbreak in Your Freshman Dorm",
       "Fetid Pooh-Face",
       "Floopy Sack of Rancid Chicken Fat",
-      "Cicade Husk Dipped in Fermenting Carrot Soup",
+      "Cicada Husk Dipped in Fermenting Carrot Soup",
       "Cirrhotic Cheetah Liver Dusted in Gold Leaf",
       "Walking Staph Infection",
       "Large Orange Baby",
@@ -424,6 +694,8 @@ monikers = {
       "Know-Nothing",
       "Commander-in-Cheat",
       "Putin Pony",
+      "Walking, Talking SNL Cold Open",
+      "Super Callous Fragile Racist Sexist Nazi POTUS",
     ],
     'dirty': [
       "Fuckface von Clownstick",
@@ -450,14 +722,13 @@ monikers = {
       "Human Queef",
       "Noted Chode",
       "Man Whose Head Firmly Resembles a Lone Radioactive Testicle Sealed in a Jar of Formaldehyde",
-      "Super Callous Fragile Racist Sexist Nazi POTUS",
       "Weeping Herpe Sore",
       "Donald Putinobitch",
       "Il Douche",
       "Goldman's Sack",
       "Dick l'Orange",
       "Badhair al-Asshead",
-      "Garfrield's Scrotal Cancer",
+      "Garfield's Scrotal Cancer",
       "Cockjerk Orange",
       "Blithering Butthole",
       "Scrooge McFuck",
@@ -542,6 +813,8 @@ monikers = {
       'Alcoholic Ewok',
       'Chief White Supremacy Strategist',
       'Phantom Menace',
+      'Eczema Made Human',
+      'Satellite Image of Storm on Jupiter',
     ],
     'dirty': [
       'Neo Nazi Dickhead',
@@ -583,6 +856,7 @@ url_base = 'http://toolsofourtools.org/detrumpify2/v2/'
 combos = {
     'disable.json': {
         'monikers': [],
+        'matic': [],
         'button': {
             'name': 'Disable Detrumpify',
             'description': 'Temporarily disable Detrumpify',
@@ -590,6 +864,7 @@ combos = {
     },
     'combined.json': {
         'monikers': ['clean', 'dirty'],
+        'matic': { 'a' : ['clean', 'dirty'], 'b': ['clean', 'dirty' ] },
         'button': {
           'name': 'clean + NSFW insults',
           'description': 'Combined list of clean and dirty names.',
@@ -597,6 +872,7 @@ combos = {
     },
     'clean.json': {
         'monikers': ['clean', ],
+        'matic': { 'a' : ['clean', ], 'b': ['clean', ] },
         'button': {
           'name': 'clean insults',
           'description': 'Clean names only.',
@@ -604,6 +880,7 @@ combos = {
     },
     'dirty.json': {
         'monikers': ['dirty', ],
+        'matic': { 'a' : ['clean', 'dirty'], 'b': ['dirty' ] },
         'button': {
           'name': 'NSFW insults',
           'description': 'Only curseword names.'
@@ -617,6 +894,20 @@ for comboname in combos:
     empty_actions = []
     for person in monikers:
       outdata['actions'][person]['monikers'] = []
+
+      if person in matic:
+          outdata['actions'][person]['matic'] = {
+              'slots': {},
+              'recipe': matic[person]['recipe'],
+          }
+          for matic_slot in combos[comboname]['matic']:
+              outdata['actions'][person]['matic']['slots'][matic_slot] = []
+
+              for slot_group in combos[comboname]['matic'][matic_slot]:
+                  for entry in matic[person][slot_group]['slots'][matic_slot]:
+                      outdata['actions'][person]['matic']['slots'][matic_slot].append(entry)
+
+
       for moniker_group in combos[comboname]['monikers']:
         for moniker in monikers[person][moniker_group]:
           max_len = combos[comboname].get('max_len',0)
@@ -638,7 +929,7 @@ for comboname in combos:
     for person in empty_actions:
       outdata['actions'].pop(person,None)
 
-    if True:
+    if False:
         # remove actions that are not quite ready for prime time
         for person in ['conway','spicer']:
             outdata['actions'].pop(person,None)
