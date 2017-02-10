@@ -210,16 +210,30 @@
     <div id="usewhitelistdiv" style="background-color: #f0f0f0;">
         <table width="100%">
             <tr>
-                <td width="25%"><b>Run Anywhere</b></td>
-                <td width="75%">
+                <td width="25%">
                     <div class="tooltip">
-                        <input class="tooltip" type="checkbox" id="run_anywhere" name="run_anywhere" value="bloop"> (If not checked, only run on whitelisted sites.)
+                        <b>Run Anywhere</b>
+                        <input class="tooltip" type="checkbox" id="run_anywhere" name="run_anywhere" value="bloop">
 
                     </div>
                     <p class="tooltiptext" style="left: 0px; width: 350px;">
                     If checked, Detrumpify will run on any website you visit.
                     If not checked, Detrumpify will only run on the sites
                     specified in the configuration file.</p>
+                </td>
+                <td width="25%">
+                    <div class="tooltip">
+                        <b>Trump-O-Matic</b>
+                        <select id="use_matic" class="tooltip">
+                            <option value="off">Disabled</option>
+                            <option value="a_b">AB Pattern</option>
+                            <option value="a_a_b">AAB Pattern</option>
+                        </select>
+                    </div>
+                    <p class="tooltiptext" style="left: 0px; width: 350px;">
+                    Trump-O-Matic mode breaks down insults into their atomic
+                    pieces and reassembles them to generate thousands of new
+                    insults. (Overrides Brevity)</p>
                 </td>
             </tr>
         </table>

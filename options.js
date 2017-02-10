@@ -163,7 +163,7 @@ function restorePluginOptions() {
 
   loadConfig(showConfig);
 
-  chrome.storage.local.get(['insult_style','brevity','brackets', 'rand_mode','kittenize','run_anywhere'], function(items) {
+  chrome.storage.local.get(['insult_style','brevity','use_matic', 'brackets', 'rand_mode','kittenize','run_anywhere'], function(items) {
 
       var restoreThing = function(name,inpname,checkbox = false) {
           var thingelem = document.getElementById(inpname);
@@ -188,6 +188,7 @@ function restorePluginOptions() {
 
       restoreThing('insult_style','styleinput');
       restoreThing('brevity','brevityinput');
+      restoreThing('use_matic','use_matic');
       restoreThing('brackets','quoteinput');
       restoreThing('rand_mode','randmodeinput');
       restoreThing('kittenize','kittensel');
@@ -258,13 +259,11 @@ function showEnabledActionsList(items,cfg_actions) {
           for (i=0; i<action_names.length; i++) {
               action =action_names[i];
               enable_this = true;
-              log(action);
-              if (cfg_actions[action].hasOwnProperty('default_enabled')) {
-                  enable_this = Boolean(cfg_actions[action].default_enabled);
-              }
               if (items.hasOwnProperty('enabled_actions') &&
                   items.enabled_actions.hasOwnProperty(action)) {
                   enable_this = items.enabled_actions[action];
+              } else if (cfg_actions[action].hasOwnProperty('default_enabled')) {
+                  enable_this = Boolean(cfg_actions[action].default_enabled);
               }
               enabled[action] = enable_this;
           }
@@ -387,6 +386,10 @@ function saveBrevity() {
   saveGeneric('brevity','brevityinput');
 }
 
+function saveUseMatic() {
+  saveGeneric('use_matic','use_matic');
+}
+
 function saveStyle() {
   saveGeneric('insult_style','styleinput');
 }
@@ -478,6 +481,7 @@ function setup_handlers() {
   document.getElementById('styleinput').addEventListener('change',saveStyle);
 
   document.getElementById('brevityinput').addEventListener('change',saveBrevity);
+  document.getElementById('use_matic').addEventListener('change',saveUseMatic);
   document.getElementById('quoteinput').addEventListener('change',saveBrackets);
   document.getElementById('randmodeinput').addEventListener('change',saveRandMode);
   document.getElementById('kittensel').addEventListener('change',saveKittenize);
