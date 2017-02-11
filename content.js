@@ -49,14 +49,14 @@ function make_matic(action,recipe) {
         var slot_name = recipe[i];
         var elemidx = Math.floor(slots[slot_name].length * Math.random());
         while ((slot_name == last_slot_name) &&
-               (elemidx === last_elem_idx) &&
+               (elemidx === last_elemidx) &&
                (tries < max_tries)
               ) {
             elemidx = Math.floor(slots[slot_name].length * Math.random());
             tries += 1;
         }
         var chunkelem = slots[slot_name][elemidx];
-        if ((recipe.length > 2) && (i < (recipe.length-1))) {
+        if ((recipe.length > 2) && (i < (recipe.length-2))) {
             // put commas between successive adjectives
             chunkelem += ',';
         }
@@ -394,10 +394,9 @@ function switch_text() {
     var action_name;
     var n;
 
-    chrome.storage.local.get(
-        ['stored_choices','enabled_actions','brevity','brackets',
-         'rand_mode','use_matic',],
-        function(items) {
+    var keys_we_need = ['stored_choices','enabled_actions',
+        'brevity','brackets', 'rand_mode', 'use_matic'];
+    chrome.storage.local.get(keys_we_need, function(items) {
       var action_count = 0;
       var stored_choices = useIfElse(items, 'stored_choices', {});
 
