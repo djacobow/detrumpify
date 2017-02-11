@@ -314,8 +314,11 @@ function showEnabledActionsList(items,cfg_actions) {
         check_elem.id = action + '_check';
         check_elem.checked = enabled[action];
         check_elem.onchange = saveEnabledActions;
-        enelem.appendChild(label_elem);
-        enelem.appendChild(check_elem);
+        var groupingdiv = document.createElement('div');
+        groupingdiv.appendChild(label_elem);
+        groupingdiv.appendChild(check_elem);
+        groupingdiv.style.display = 'inline-block';
+        enelem.appendChild(groupingdiv);
         if (i !== action_names.length-1) {
           var pipe_elem = document.createElement('span');
           pipe_elem.textContent = ' | ';
