@@ -108,6 +108,7 @@ matic = {
         'clean' : {
             'slots': {
                 'a': [
+                    'Apricot',
                     'Gaffe-Prone'
                     'Angry',
                     'Unrepentant',
@@ -338,6 +339,7 @@ matic = {
                 'a': [
                 ],
                 'b': [
+                    'Bunglecunt',
                     'Ass Clown',
                     'Shitgibbon',
                     'Dipshit',
