@@ -215,11 +215,17 @@ function saveEnabledActions() {
   var children = enelem.childNodes;
   enabled = {};
   for (var i=0;i<children.length;i++) {
-    var child = children[i];
-    var m = child.id.match(/^([\w-]+)_check/);
-    if (m) {
-      var action = m[1];
-      enabled[action] = child.checked;
+    var groupdiv = children[i];
+    var divchildren = groupdiv.childNodes;
+    for (var j=0;j<divchildren.length; j++) {
+      var cbox = divchildren[j];
+      if (cbox.nodeName === 'INPUT') {
+        var m = cbox.id.match(/^([\w-]+)_check/);
+        if (m) {
+          var action = m[1];
+          enabled[action] = cbox.checked;
+        }
+      }
     }
   }
   chrome.storage.local.set({'enabled_actions': enabled}, function() {
