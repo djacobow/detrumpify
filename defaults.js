@@ -29,6 +29,10 @@ var defaults = {
 
   // should I replace images with kittens
   'kittenize': 'off',
+
+  // fire up the mock-o-matic?
+  'use_matic': 'off',
+
+  // run on any page or just whitelist
+  'run_anywhere': false,
 };
-
-
