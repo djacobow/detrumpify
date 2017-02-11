@@ -236,7 +236,7 @@ monikers = {
       "Little Gloves",
       "Numpty",
       "Weapons-Grade Plum",
-      "Hair Fuehrer",
+      "Hair Führer",
       "Man-Baby",
       "Ambitious Corn Dog that Escaped from the Concession Stand at a Rural Alabama Fairground, Stole an Unattended Wig, Hopped a Freight Train to Atlantic City and Never Looked Back",
       "Ugly Racist",
