@@ -98,7 +98,13 @@ base = {
             ],
             'randomize_mode': 'always',
         },
-
+#        'farage': {
+#            'default_enabled': False,
+#            'find_regex': [
+#                "((NIGEL|Nigel)\\s*)?(FARAGE|Farage)(?!\\w)", "g"
+#            ],
+#            'randomize_mode': 'always',
+#        },
     }
 }
 
@@ -182,6 +188,7 @@ matic = {
                     'Neon',
                     'Vacuous',
                     'Witless',
+                    'Yellow',
                 ],
                 'b': [
                     'Fart',
@@ -333,6 +340,8 @@ matic = {
                     'Narcissist',
                     'Emetic',
                     'Marionette',
+                    'Oompa-Loompa',
+                    'Circus Peanut',
                 ]
             },
         },
@@ -373,7 +382,6 @@ matic = {
         }
     }
 }
-
 
 monikers = {
   'trump': {
@@ -705,6 +713,8 @@ monikers = {
       "Putin Pony",
       "Walking, Talking SNL Cold Open",
       "Super Callous Fragile Racist Sexist Nazi POTUS",
+      "STD That Won't Respond to Antibiotics",
+      'Wussolini',
     ],
     'dirty': [
       "Fuckface von Clownstick",
@@ -783,6 +793,7 @@ monikers = {
       "Man to Be Remembered Primarily for His Willingness to Be Associated with Donald Trump",
       "Conservative-Looking Guy Sent from Central Casting",
       "Presidential Apprentice",
+      "Closeted Bottom",
     ],
     'dirty' : [
     ],
@@ -858,6 +869,19 @@ monikers = {
     'dirty': [
     ],
   },
+#  'farage': {
+#    'clean': [
+#      'Fishface',
+#      'UKIP Nazi',
+#      'Damp Rag',
+#      'Taco Groupie',
+#      'Chief Kipper',
+#      'Punchbag',
+#    ],
+#    'dirty': [
+#      'Drunken Twatface',
+#    ],
+#  },
 }
 
 url_base = 'http://toolsofourtools.org/detrumpify2/v2/'

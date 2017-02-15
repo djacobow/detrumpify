@@ -408,6 +408,8 @@ monikers = {
       "Putin Pony",
       "Walking, Talking SNL Cold Open",
       "Super Callous Fragile Racist Sexist Nazi POTUS",
+      "STD That Won't Respond to Antibiotics",
+      'Wussolini',
     ],
     'dirty': [
       "Fuckface von Clownstick",
@@ -486,6 +488,7 @@ monikers = {
       "Man to Be Remembered Primarily for His Willingness to Be Associated with Donald Trump",
       "Conservative-Looking Guy Sent from Central Casting",
       "Presidential Apprentice",
+      "Closeted Bottom",
     ],
     'dirty' : [
     ],
