@@ -215,7 +215,7 @@ matic = {
                     'Hernia Mass',
                     'Tomato',
                     'Blobfish',
-                    'Pic Carcass',
+                    'Pig Carcass',
                     'Racist',
                     'Comb-Over',
                     'Bloviator',
@@ -715,6 +715,7 @@ monikers = {
       "Super Callous Fragile Racist Sexist Nazi POTUS",
       "STD That Won't Respond to Antibiotics",
       'Wussolini',
+      'Tropicana Jong Il',
     ],
     'dirty': [
       "Fuckface von Clownstick",
@@ -865,6 +866,7 @@ monikers = {
       'Dissembly Secretary'
       'Man Who Permanently Destroyed All Credibility on First Day of Job',
       'Official Tweet Elaborator',
+      'Trumpsplainer',
     ],
     'dirty': [
     ],
