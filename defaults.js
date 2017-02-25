@@ -33,6 +33,9 @@ var defaults = {
   // fire up the mock-o-matic?
   'use_matic': 'off',
 
+  // fraction of found instances to actually change
+  'replace_fraction': '100',
+
   // run on any page or just whitelist
   'run_anywhere': false,
 };
