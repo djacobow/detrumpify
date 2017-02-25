@@ -163,7 +163,9 @@ function restorePluginOptions() {
 
   loadConfig(showConfig);
 
-  chrome.storage.local.get(['insult_style','brevity','use_matic', 'brackets', 'rand_mode','kittenize','run_anywhere'], function(items) {
+  chrome.storage.local.get(['insult_style','brevity','use_matic',
+                            'replace_fraction', 'brackets', 'rand_mode',
+                            'kittenize','run_anywhere'], function(items) {
 
       var restoreThing = function(name,inpname,checkbox = false) {
           var thingelem = document.getElementById(inpname);
@@ -186,13 +188,19 @@ function restorePluginOptions() {
           }
       };
 
-      restoreThing('insult_style','styleinput');
-      restoreThing('brevity','brevityinput');
-      restoreThing('use_matic','use_matic');
-      restoreThing('brackets','quoteinput');
-      restoreThing('rand_mode','randmodeinput');
-      restoreThing('kittenize','kittensel');
-      restoreThing('run_anywhere','run_anywhere',true);
+      var restorethings = [
+        [ 'insult_style',    'styleinput',       false ],
+        [ 'brevity',         'brevityinput',     false ],
+        [ 'use_matic',       'use_matic',        false ],
+        [ 'replace_fraction','replace_fraction', false ],
+        [ 'brackets',        'quoteinput',       false ],
+        [ 'rand_mode',       'randmodeinput',    false ],
+        [ 'kittenize',       'kittensel',        false ],
+        [ 'run_anywhere',    'run_anywhere',     true  ],
+      ];
+
+      for (var i=0;i <restorethings.length; i++)
+          restoreThing.apply(this,restorethings[i]);
 
       // if this fails, then the browser didn't support data lists 
       // anyway
@@ -359,7 +367,7 @@ function showConfig(err,res) {
   });
 }
 
-function saveGeneric(name,inpname,checkbox = false) {
+function saveGen(name,inpname,checkbox = false) {
  log('saving ' + name);
  var elem = document.getElementById(inpname);
  var v;
@@ -376,32 +384,30 @@ function saveGeneric(name,inpname,checkbox = false) {
  });
 }
 
-function saveRunAnywhere() {
-  saveGeneric('run_anywhere','run_anywhere', true);
-}
-
-function saveKittenize() {
-  saveGeneric('kittenize','kittensel');
-}
-function saveRandMode() {
-  saveGeneric('rand_mode','randmodeinput');
-}
-
-function saveBrackets() {
-  saveGeneric('brackets','quoteinput');
-}
-
-function saveBrevity() {
-  saveGeneric('brevity','brevityinput');
-}
-
-function saveUseMatic() {
-  saveGeneric('use_matic','use_matic');
-}
-
-function saveStyle() {
-  saveGeneric('insult_style','styleinput');
-}
+var savethings = [
+  // [ elemid, event, fn ],
+  [ 'config_save_button', 'click',  saveConfigURL ],
+  [ 'configsrc',          'change', saveConfigURL ],
+  [ 'style_save_button',  'click',  function() { saveGen('insult_style',
+                                                         'stlyeinput'); } ],
+  [ 'styleinput',         'change', function() { saveGen('insult_style',
+                                                         'styleinput'); } ],
+  [ 'brevityinput',       'change', function() { saveGen('brevity',
+                                                         'brevityinput'); } ],
+  [ 'use_matic',          'change', function() { saveGen('use_matic',
+                                                         'use_matic'); } ],
+  [ 'replace_fraction',   'change', function() { saveGen('replace_fraction',
+                                                         'replace_fraction'); } ],
+  [ 'quoteinput',         'change', function() { saveGen('brackets',
+                                                         'quoteinput'); } ],
+  [ 'randmodeinput',      'change', function() { saveGen('rand_mode',
+                                                         'randominput'); } ],
+  [ 'kittensel',          'change', function() { saveGen('kittenize',
+                                                         'kittensel'); } ],
+  [ 'run_anywhere',       'change', function() { saveGen('run_anywhere',
+                                                         'run_anywhere'); } ],
+  [ 'reset_storage',      'click',  resetStorage ],
+];
 
 function saveConfigURL() {
   log('saveConfigURL START');
@@ -483,24 +489,15 @@ function setup_handlers() {
   document.addEventListener('DOMContentLoaded', restorePluginOptions);
   log('adding save handler');
 
-  document.getElementById('config_save_button').addEventListener('click',saveConfigURL);
-  document.getElementById('configsrc').addEventListener('change',saveConfigURL);
-
-  document.getElementById('style_save_button').addEventListener('click',saveStyle);
-  document.getElementById('styleinput').addEventListener('change',saveStyle);
-
-  document.getElementById('brevityinput').addEventListener('change',saveBrevity);
-  document.getElementById('use_matic').addEventListener('change',saveUseMatic);
-  document.getElementById('quoteinput').addEventListener('change',saveBrackets);
-  document.getElementById('randmodeinput').addEventListener('change',saveRandMode);
-  document.getElementById('kittensel').addEventListener('change',saveKittenize);
-  document.getElementById('run_anywhere').addEventListener('change',saveRunAnywhere);
-  document.getElementById('reset_storage').addEventListener('click',resetStorage);
+  for (var i=0; i<savethings.length; i++) {
+    var st = savethings[i];
+    document.getElementById(st[0]).addEventListener(st[1], st[2]);
+  }
 
   log('adding radiobutton handler');
   var edit_radios = document.forms.editmodeform.elements.editmode;
-  for (var i=0;i<edit_radios.length;i++) {
-    radio = edit_radios[i];
+  for (var j=0;j<edit_radios.length;j++) {
+    radio = edit_radios[j];
     /*jshint loopfunc:true */
     radio.onchange = function(ev) {
       editModeClick(ev.target.value);

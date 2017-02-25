@@ -210,7 +210,7 @@
     <div id="usewhitelistdiv" style="background-color: #f0f0f0;">
         <table width="100%">
             <tr>
-                <td width="25%">
+                <td width="50%">
                     <div class="tooltip">
                         <b>Run Anywhere</b>
                         <input class="tooltip" type="checkbox" id="run_anywhere" name="run_anywhere" value="bloop">
@@ -221,7 +221,36 @@
                     If not checked, Detrumpify will only run on the sites
                     specified in the configuration file.</p>
                 </td>
-                <td width="25%">
+                <td width="50%">
+                    <div class="tooltip">
+                        <b>Replace Fraction</b>
+                        <select id="replace_fraction" class="tooltip">
+                            <option value="100">100%</option>
+                            <option value="50">50%</option>
+                            <option value="25">25%</option>
+                            <option value="10">10%</option>
+                            <option value="5">5%</option>
+                            <option value="3">3%</option>
+                            <option value="2">2%</option>
+                            <option value="1">1%</option>
+                            <option value="0.5">0.5%</option>
+                            <option value="0.1">0.1%</option>
+                        </select>
+                    </div>
+                    <p class="tooltiptext" style="left: 0px; width: 350px;">
+                    Will every mention be replaced? 100% means yes, lower
+                    numbers mean the target will only be replaced some of
+                    the time.</p>
+                </td>
+                <td width="50%">
+            </tr>
+        </table>
+    </div>
+
+    <div id="replfractdiv" style="background-color: #e0e0e0;">
+        <table width="100%">
+            <tr>
+                <td width="50%">
                     <div class="tooltip">
                         <b>Mock-O-Matic</b>
                         <select id="use_matic" class="tooltip">
