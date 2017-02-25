@@ -130,6 +130,11 @@ function find_match_nonmatch_chunks(text,re) {
   return broken_texts;
 }
 
+function randomPercentTrue(perc) {
+    var res = (Math.floor(Math.random() * 100) < perc);
+    // log('repl_perc: ' + perc + ' res: ' + res);
+    return res;
+}
 
 function make_replacement_elems_array(args) {
 
@@ -139,14 +144,16 @@ function make_replacement_elems_array(args) {
   var use_matic    = useIfElse(args, 'use_matic',   'off');
   var moniker_list = useIfElse(args, 'monikers',    []);
   var brackets     = useIfElse(args, 'brackets',    [ '', '' ]);
+  var repl_percent = useIfElse(args, 'replace_percent', 100);
   var broken_texts = args.broken_texts;
   var orig_node    = args.node;
   var choice       = args.choice;
 
   var repl_array = [];
+  var repl_count = 0;
   for (var k=0;k<broken_texts.length;k++) {
     chunk = broken_texts[k];
-    if (chunk.match) {
+    if (chunk.match && randomPercentTrue(repl_percent)) {
       choose(rand_mode, use_matic, moniker_list, action, choice);
       var replacement = choice.last_chosen_item;
       replacement = brackets[0] + replacement + brackets[1];
@@ -164,19 +171,21 @@ function make_replacement_elems_array(args) {
       unode.className = defaults.insult_classname;
       unode.appendChild(document.createTextNode(replacement));
       repl_array.push(unode);
+      repl_count += 1;
     } else {
       var newnode = orig_node.cloneNode(false);
       newnode.nodeValue = chunk.text;
       repl_array.push(newnode);
     }
   }
-  return repl_array;
+  return { repl_array: repl_array, repl_count: repl_count };
 }
 
 function replace_elem_with_array_of_elems(orig, arry) {
+  // log('replace_elem_with_array_of_elems');
   var newnode = document.createElement('span');
-  for (var k=0;k<repl_array.length;k++) {
-    newnode.appendChild(repl_array[k]);
+  for (var k=0;k<arry.length;k++) {
+    newnode.appendChild(arry[k]);
   }
   orig.parentNode.replaceChild(newnode,orig);
 }
@@ -293,7 +302,6 @@ function switch_imgs() {
 
       for (var n=0; n<actions_to_run.length; n++) {
         action_name = actions_to_run[n];
-        log('action_name: ' + action_name);
         var action = current_config.actions[action_name];
         var alt_re = new RegExp(action.find_regex[0],
                                 action.find_regex[1]);
@@ -395,7 +403,8 @@ function switch_text() {
     var n;
 
     var keys_we_need = ['stored_choices','enabled_actions',
-        'brevity','brackets', 'rand_mode', 'use_matic'];
+        'brevity','brackets', 'rand_mode', 'use_matic',
+        'replace_fraction'];
     chrome.storage.local.get(keys_we_need, function(items) {
       var action_count = 0;
       var stored_choices = useIfElse(items, 'stored_choices', {});
@@ -406,6 +415,7 @@ function switch_text() {
       for (var n=0; n<actions_to_run.length; n++) {
         action_name = actions_to_run[n];
         log('action_name: ' + action_name);
+        var visit_attrib_name = '_dtseen_' + action_name;
         var action = current_config.actions[action_name];
         // console.log(action);
         if (!action.hasOwnProperty('monikers')) {
@@ -416,6 +426,9 @@ function switch_text() {
         var brevity   = useIfElse(items, 'brevity', '0');
         var use_matic = useIfElse(items, 'use_matic', 'off');
         var rand_mode = useIfElse(items, 'rand_mode', 'always');
+        var replace_percent = parseFloat(
+            useIfElse(items, 'replace_fraction', '100')
+        );
 
         // create a sublist of monikers that meet the brevity criteria
         var max_wordcount = parseInt(brevity);
@@ -438,23 +451,29 @@ function switch_text() {
           for (var j =0; j < element.childNodes.length; j++) {
             var node = element.childNodes[j];
             if (node.nodeType === 3) {
-              var text = node.nodeValue;
-              broken_texts = find_match_nonmatch_chunks(text,search_regex);
+              if (!element.hasAttribute(visit_attrib_name)) {
+                element.setAttribute(visit_attrib_name,true);
+                var text = node.nodeValue;
+                broken_texts = find_match_nonmatch_chunks(text,search_regex);
 
-              if (broken_texts.length) {
-                repl_array = make_replacement_elems_array({
+                if (broken_texts.length) {
+                  var rr = make_replacement_elems_array({
                     action_name: action_name,
                     action: action,
                     rand_mode: rand_mode,
                     broken_texts: broken_texts,
                     use_matic: use_matic,
+                    replace_percent: replace_percent,
                     monikers: monikers_to_use,
                     brackets: brackets,
                     node: node,
                     choice: stored_choices[action_name]
-                });
+                  });
 
-                replace_elem_with_array_of_elems(node,repl_array);
+                  if (rr.repl_count) {
+                      replace_elem_with_array_of_elems(node,rr.repl_array);
+                  }
+                }
               }
             }
           }
