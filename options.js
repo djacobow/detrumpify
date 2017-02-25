@@ -401,7 +401,7 @@ var savethings = [
   [ 'quoteinput',         'change', function() { saveGen('brackets',
                                                          'quoteinput'); } ],
   [ 'randmodeinput',      'change', function() { saveGen('rand_mode',
-                                                         'randominput'); } ],
+                                                         'randmodeinput'); } ],
   [ 'kittensel',          'change', function() { saveGen('kittenize',
                                                          'kittensel'); } ],
   [ 'run_anywhere',       'change', function() { saveGen('run_anywhere',
