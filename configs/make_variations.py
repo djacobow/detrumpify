@@ -497,7 +497,7 @@ monikers = {
     'clean' : [
       'Whiskey-Soaked Machiavelli',
       'Unshaven Emperor Palpatine',
-      'Goebbels Acolyte'
+      'Goebbels Acolyte',
       'Coke-Addled Dorito-Huffing Rasputin',
       'Fascist Puppeteer',
       'Plotter Against America',
@@ -557,7 +557,7 @@ monikers = {
     'clean': [
       'Mouth of Sauron',
       'Crack Hamster',
-      'Dissembly Secretary'
+      'Dissembly Secretary',
       'Man Who Permanently Destroyed All Credibility on First Day of Job',
       'Official Tweet Elaborator',
     ],
