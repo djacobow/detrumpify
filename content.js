@@ -449,7 +449,6 @@ function switch_text() {
         for (var i = 0; i < elements.length; i++) {
           var element = elements[i];
           if (!element.hasAttribute(visit_attrib_name)) {
-            element.setAttribute(visit_attrib_name,'1');
             for (var j =0; j < element.childNodes.length; j++) {
               var node = element.childNodes[j];
               if (node.nodeType === 3) {
@@ -472,6 +471,12 @@ function switch_text() {
 
                   if (rr.repl_count) {
                       replace_elem_with_array_of_elems(node,rr.repl_array);
+                  } else {
+                      // if we found a match but didn't make any changes,
+                      // that's because replace_percent randomizer decided
+                      // not to. Let's mark the parent element so that we
+                      // can skip this element on subsequent run-throughs
+                      element.setAttribute(visit_attrib_name,'1');
                   }
                 }
               }
