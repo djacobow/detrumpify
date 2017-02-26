@@ -415,7 +415,7 @@ function switch_text() {
       for (var n=0; n<actions_to_run.length; n++) {
         action_name = actions_to_run[n];
         log('action_name: ' + action_name);
-        var visit_attrib_name = '_dtseen_' + action_name;
+        var visit_attrib_name = '_dtv_' + action_name;
         var action = current_config.actions[action_name];
         // console.log(action);
         if (!action.hasOwnProperty('monikers')) {
@@ -448,11 +448,11 @@ function switch_text() {
 
         for (var i = 0; i < elements.length; i++) {
           var element = elements[i];
-          for (var j =0; j < element.childNodes.length; j++) {
-            var node = element.childNodes[j];
-            if (node.nodeType === 3) {
-              if (!element.hasAttribute(visit_attrib_name)) {
-                element.setAttribute(visit_attrib_name,true);
+          if (!element.hasAttribute(visit_attrib_name)) {
+            element.setAttribute(visit_attrib_name,'1');
+            for (var j =0; j < element.childNodes.length; j++) {
+              var node = element.childNodes[j];
+              if (node.nodeType === 3) {
                 var text = node.nodeValue;
                 broken_texts = find_match_nonmatch_chunks(text,search_regex);
 
