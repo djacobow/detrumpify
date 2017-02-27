@@ -80,21 +80,22 @@ function elaborateConfigSelector(data,cb) {
   opt.text= "Use currently set config.";
   selector.options.add(opt);
 
-  var set_value = false;
+  var set_value = null;
   for (i=0;i<data.length;i++) {
     opt = document.createElement('option');
     opt.id = 'selIdx_' + (i+1).toString();
     opt.value = data[i].url;
     opt.text= data[i].description;
     opt.setAttribute('short-name',data[i].name);
+    console.log('thingy: ' + data[i].url + ' current: ' + current_url);
     if (data[i].url === current_url) {
-        set_value = opt.value;
+        set_value = i +1;
     }
     selector.addEventListener('change',selectConfig);
     selector.options.add(opt);
   }
-  if (set_value) {
-      selector.value = set_value;
+  if (set_value !== null) {
+      selector.selectedIndex = set_value;
   }
   cb('null','yay!');
 }
