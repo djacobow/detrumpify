@@ -410,6 +410,14 @@ monikers = {
       "Super Callous Fragile Racist Sexist Nazi POTUS",
       "STD That Won't Respond to Antibiotics",
       'Wussolini',
+      'Tropicana Jong Il',
+      'Off-Brand Nixon',
+      'Sartorially Challenged Canteloup',
+      'Melania\'s Future Ex-Husband',
+      'Saruman the Orange',
+      'Yamchurian Candidate',
+      'Abscessed Tooth',
+      'Mousseolini',
     ],
     'dirty': [
       "Fuckface von Clownstick",
@@ -464,6 +472,7 @@ monikers = {
       "Misogynist-Cult",
       "Oft-Wrong",
       "Confederacy-of-Psychopathic-Dunces",
+      "White-Nationalist-Fanboys",
     ],
     'dirty': [
       "Fucking-Scary-Right",
@@ -489,6 +498,9 @@ monikers = {
       "Conservative-Looking Guy Sent from Central Casting",
       "Presidential Apprentice",
       "Closeted Bottom",
+      "Walking Precious Moments Figurine",
+      'Homophobic Scout Leader',
+      'Moldy Nilla Wafer',
     ],
     'dirty' : [
     ],
@@ -530,6 +542,8 @@ monikers = {
       'Phantom Menace',
       'Eczema Made Human',
       'Satellite Image of Storm on Jupiter',
+      'Vader Wannabe',
+      'Resurrected Roadkill',
     ],
     'dirty': [
       'Neo Nazi Dickhead',
@@ -549,6 +563,7 @@ monikers = {
       'Word Salad Dressing',
       'Robot Sent From The Future to Obliterate The Very Idea of Shared Reality',
       'Rhetorical IED',
+      'Tennis Machine of Lies',
     ],
     'dirty' : [
     ],
@@ -560,8 +575,11 @@ monikers = {
       'Dissembly Secretary',
       'Man Who Permanently Destroyed All Credibility on First Day of Job',
       'Official Tweet Elaborator',
+      'Trumpsplainer',
+      'Whiny Spice',
     ],
     'dirty': [
+      'Sean Sphincter',
     ],
   },
 }

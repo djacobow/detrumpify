@@ -883,8 +883,10 @@ monikers = {
       'Man Who Permanently Destroyed All Credibility on First Day of Job',
       'Official Tweet Elaborator',
       'Trumpsplainer',
+      'Whiny Spice',
     ],
     'dirty': [
+      'Sean Sphincter',
     ],
   },
 #  'farage': {
