@@ -471,13 +471,14 @@ function switch_text() {
 
                   if (rr.repl_count) {
                       replace_elem_with_array_of_elems(node,rr.repl_array);
-                  } else {
-                      // if we found a match but didn't make any changes,
-                      // that's because replace_percent randomizer decided
-                      // not to. Let's mark the parent element so that we
-                      // can skip this element on subsequent run-throughs
-                      element.setAttribute(visit_attrib_name,'1');
                   }
+                  // regardless of weather we made a change or not,
+                  // we mark this element searched so that it does
+                  // not get replaced on a subsequent run.
+                  // This lets us 1) use insults that have the search
+                  // string in them and 2) not have insults skipped
+                  // purposely not be skipped on subsequent runs
+                  element.setAttribute(visit_attrib_name,'1');
                 }
               }
             }
