@@ -84,6 +84,13 @@ base = {
             ],
             'randomize_mode': 'always',
         },
+        'sessions': {
+            'default_enabled': False,
+            'find_regex': [
+                "((Jeff|Jefferson|JEFF|JEFFERSON)\\s*((B\\.?|Beauregard|BEAUREGARD)\\s*)?)?(Sessions|SESSIONS)(?!\\w)", "g"
+            ],
+            'randomize_mode': 'always',
+        },
         'conway': {
             'default_enabled': False,
             'find_regex': [
@@ -344,6 +351,8 @@ matic = {
                     'Oompa-Loompa',
                     'Circus Peanut',
                     'Abscess',
+                    'Trash Can',
+                    'Genital Wart',
                 ]
             },
         },
@@ -379,6 +388,7 @@ matic = {
                     'Buttplug',
                     'Chode',
                     'Oracle of Dipshittery',
+                    'Attention Whore',
                 ],
             },
         }
@@ -725,6 +735,15 @@ monikers = {
       'Yamchurian Candidate',
       'Abscessed Tooth',
       'Mousseolini',
+      'Dump Truck',
+      'Yellow Snowflake',
+      'Festering Sore on Democracy',
+      'Bag of Farts',
+      'Whiny Twitter Addict',
+      'Permanent Toothache',
+      'Miserable Bastard',
+      'Catsup Covered Well-Done Strip Steak',
+      'Fake Billionaire',
     ],
     'dirty': [
       "Fuckface von Clownstick",
@@ -765,6 +784,7 @@ monikers = {
       "Lord Dampnut",
       "Your Shitty Racist Uncle",
       "Twitshitter",
+      "Gaseous Pompous Ass",
     ],
   },
   'alt-right': {
@@ -780,6 +800,11 @@ monikers = {
       "Oft-Wrong",
       "Confederacy-of-Psychopathic-Dunces",
       "White-Nationalist-Fanboys",
+      "Bowel Movement",
+      "Always-Wrong",
+      "Bass-Ackward-Bigotry",
+      "Real-Special-Snowflakes",
+      'Postules-of-Hate',
     ],
     'dirty': [
       "Fucking-Scary-Right",
@@ -808,6 +833,9 @@ monikers = {
       "Walking Precious Moments Figurine",
       'Homophobic Scout Leader',
       'Moldy Nilla Wafer',
+      'Misogynistic Bowl of Oatmeal',
+      'Rejected Square',
+      'Permanently Constipated Man',
     ],
     'dirty' : [
     ],
@@ -851,12 +879,27 @@ monikers = {
       'Satellite Image of Storm on Jupiter',
       'Vader Wannabe',
       'Resurrected Roadkill',
+      'Actual Racist',
+      'Hate-Filled Troll With a Plan',
+      "Besuited Racist Pig",
+      'Ghostbusters Containment System Escapee',
+      'Racist Hemorrhoid',
     ],
     'dirty': [
       'Neo Nazi Dickhead',
       'Repulsive, Plotting Shit',
       'Twenty Pounds of Shit in a Ten Pound Sack',
     ]
+  },
+  'sessions': {
+    'clean': [
+      'Man Too Racist For Strom Thurmond',
+      'Evil Yoda',
+      'Perjurer General',
+      'Staunch Defender of Jeff Sessions\'s Civil Rights',
+    ],
+    'dirty': [
+    ],
   },
   'conway': {
     'clean' : [
@@ -871,6 +914,8 @@ monikers = {
       'Robot Sent From The Future to Obliterate The Very Idea of Shared Reality',
       'Rhetorical IED',
       'Tennis Machine of Lies',
+      'Nonstop Liar',
+      'Lying Ear of Dessicated Corn',
     ],
     'dirty' : [
     ],
