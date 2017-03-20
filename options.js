@@ -406,7 +406,8 @@ var savethings = [
   [ 'kittensel',          'change', function() { saveGen('kittenize',
                                                          'kittensel'); } ],
   [ 'run_anywhere',       'change', function() { saveGen('run_anywhere',
-                                                         'run_anywhere'); } ],
+                                                         'run_anywhere',
+                                                         true); } ],
   [ 'reset_storage',      'click',  resetStorage ],
 ];
 
