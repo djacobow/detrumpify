@@ -105,6 +105,13 @@ base = {
             ],
             'randomize_mode': 'always',
         },
+        'ryan': {
+            'default_enabled': False,
+            'find_regex': [
+                "((SPEAKER|Speaker)\\s)?((Paul|PAUL)\\s*)?(RYAN|Ryan)(?!\\w)", "g"
+            ],
+            'randomize_mode': 'always',
+        },
 #        'farage': {
 #            'default_enabled': False,
 #            'find_regex': [
@@ -286,7 +293,7 @@ matic = {
                     'Toddler',
                     'Fascist',
                     'Lamprey Eeel',
-                    'Tangerine',
+                    'Tangerine-Tinted',
                     'Craigslist Sofa',
                     'Troll Doll',
                     'Muppet',
@@ -353,6 +360,7 @@ matic = {
                     'Abscess',
                     'Trash Can',
                     'Genital Wart',
+                    'Menace',
                 ]
             },
         },
@@ -744,6 +752,11 @@ monikers = {
       'Miserable Bastard',
       'Catsup Covered Well-Done Strip Steak',
       'Fake Billionaire',
+      'Tangerine-Tinted Trash Fire',
+      'Spongebob Dictator-Pants',
+      'Deadly Blob of Melted Nuclear Fuel',
+      'Ball of Hair and Dust Mites Clogging your Vacuum',
+      'Vanity Hair',
     ],
     'dirty': [
       "Fuckface von Clownstick",
@@ -780,11 +793,11 @@ monikers = {
       "Cockjerk Orange",
       "Blithering Butthole",
       "Scrooge McFuck",
-      "America's #2",
       "Lord Dampnut",
       "Your Shitty Racist Uncle",
       "Twitshitter",
       "Gaseous Pompous Ass",
+      "Sunburned Puckered Asshole",
     ],
   },
   'alt-right': {
@@ -836,6 +849,7 @@ monikers = {
       'Misogynistic Bowl of Oatmeal',
       'Rejected Square',
       'Permanently Constipated Man',
+      "America's #2",
     ],
     'dirty' : [
     ],
@@ -884,6 +898,8 @@ monikers = {
       "Besuited Racist Pig",
       'Ghostbusters Containment System Escapee',
       'Racist Hemorrhoid',
+      'Bag of Wet Cigarette Butts',
+      'Gin Blossom Gone to Seed',
     ],
     'dirty': [
       'Neo Nazi Dickhead',
@@ -896,7 +912,12 @@ monikers = {
       'Man Too Racist For Strom Thurmond',
       'Evil Yoda',
       'Perjurer General',
-      'Staunch Defender of Jeff Sessions\'s Civil Rights',
+      # disabled for now because of plugin bug
+      # 'Staunch Defender of Jeff Sessions\'s Civil Rights',
+      'Child Who Was Turned Into an Old Man for Stealing a Pie from A Witch\'s Windowsill',
+      'Keebler Elf',
+      'Tiny Racist',
+      'Compact Klansman',
     ],
     'dirty': [
     ],
@@ -916,6 +937,7 @@ monikers = {
       'Tennis Machine of Lies',
       'Nonstop Liar',
       'Lying Ear of Dessicated Corn',
+      'Con-Job',
     ],
     'dirty' : [
     ],
@@ -929,9 +951,22 @@ monikers = {
       'Official Tweet Elaborator',
       'Trumpsplainer',
       'Whiny Spice',
+      'America\'s Baghdad Bob',
     ],
     'dirty': [
       'Sean Sphincter',
+      'Bullshit Spice',
+    ],
+  },
+  'ryan': {
+    'clean': [
+      'Granny Starver',
+      'What Passes for a Serious Policy Wonk in Republican-Land',
+      'Professional Sad Puppy Face',
+      'International Man of Principle and Integritude',
+      'Mercifully Incompetent Evil House Speaker',
+    ],
+    'dirty': [
     ],
   },
 #  'farage': {
