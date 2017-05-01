@@ -254,23 +254,19 @@ function findParentLinkMatch(elem, re) {
 function makeImageReplacementDiv(img, action) {
     var border = 2;
     var nd = document.createElement('div');
-    var repl = document.createElement('span');
-    repl.textContent = 'National disgrace removed.';
-    var backsrc = null;
+    var newimg = document.createElement('img');
+    newimg.setAttribute('detrumpified',true);
+    newimg.alt = 'National disgrace removed.';
+    var newimgsrc = chrome.runtime.getURL('empty_image.png');
     if (action.hasOwnProperty('image_replacement')) {
         var idx = Math.floor(Math.random()*action.image_replacement.html.length);
-        repl.textContent = action.image_replacement.html[idx];
+        newimg.alt = action.image_replacement.html[idx];
         border = action.image_replacement.border;
         if (action.image_replacement.hasOwnProperty('background')) {
             idx = Math.floor(Math.random()*action.image_replacement.background.length);
-            backsrc = action.image_replacement.background[idx];
+            newimgsrc = action.image_replacement.background[idx];
         }
     }
-    if (backsrc) {
-        nd.style.backgroundImage = "url('" + backsrc + "')";
-        nd.style['background-repeat'] = 'repeat';
-    }
-    removeChildrenReplaceWith(nd,[repl]);
     var dw = img.clientWidth - 2 * border;
     var dh = img.clientHeight - 2 * border;
     nd.style['text-align'] = 'center';
@@ -281,6 +277,17 @@ function makeImageReplacementDiv(img, action) {
     nd.style['max-width'] = dw.toString() + 'px';
     nd.style.height= dh.toString() + 'px';
     nd.style['max-height'] = dh.toString() + 'px';
+    removeChildrenReplaceWith(nd,[newimg]);
+
+    newimg.src = newimgsrc;
+    // very primitive way to deal with the aspect ratio. Assume that
+    // the longer edge is more important to match, don't do anything
+    // else. Will have to revisit this, but not today.
+    if (dw > dh) {
+        newimg.width = '100%';
+    } else {
+        newimg.height = '100%';
+    }
     return nd;
 }
 
@@ -296,6 +303,10 @@ function switch_imgs() {
     if (typeof mode == 'boolean') {
         mode = mode ? 'kittens' : 'off';
     }
+    // Also for backward compatibility with "more kittens" (switch
+    // image if parent element matches), which we are making the 
+    // default and only behavior now
+    if (mode == 'more_kittens') mode = 'kittens';
 
     if (mode !== 'off') {
       var actions_to_run = getRunnableActions(current_config.actions,items);
@@ -316,6 +327,8 @@ function switch_imgs() {
         var imgs = document.getElementsByTagName('img');
         for (var i=0; i<imgs.length; i++) {
           var img = imgs[i];
+          var one_of_ours = img.getAttribute('detrumpified');
+          if (one_of_ours) break;
 
           // Super-sophisticated image detection algorithm here:
           // -- does the alt text look trumpian?
@@ -329,7 +342,6 @@ function switch_imgs() {
           try {
               parent_link_match = findParentLinkMatch(img, src_re);
           } catch (w) { }
-          parent_link_match &= (mode === 'more_kittens');
 
           if (alt_match ||
               src_match ||
@@ -340,8 +352,7 @@ function switch_imgs() {
             if (mode == 'div') {
                 var nd = makeImageReplacementDiv(img, action);
                 img.parentNode.replaceChild(nd,img);
-            } else if ((mode == 'kittens') ||
-                       (mode == 'more_kittens')) {
+            } else if (mode == 'kittens') {
                 replsrc = 'https://placekitten.com/' +
                           img.clientWidth.toString() + '/' +
                           img.clientHeight.toString();
