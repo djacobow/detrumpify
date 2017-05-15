@@ -1,9 +1,11 @@
-
+/* jshint esversion:6 */
 // These weill be overridden by the config itself.
-var currTimeout = 1000;
-var maxTimeout  = 120000;
-var count       = 5;
-
+var runInfo = {
+    trackMutations: false,
+    currTimeout: 1000,
+    maxTimeout: 120000,
+    runCount : 5
+};
 
 // override whitelist
 var run_anywhere = false;
@@ -191,15 +193,20 @@ function replace_elem_with_array_of_elems(orig, arry) {
 }
 
 
-function switchem() {
-  switch_text();
-  switch_imgs();
-  count -= 1;
-  if (count) {
-    log('currTimeout:' + currTimeout);
-    setTimeout(switchem,currTimeout);
-    if (currTimeout < maxTimeout) {
-          currTimeout *= current_config.run_info.timeMultiplier;
+function runReplacementOnce(elems = null, img_elems = null) {
+  switch_text(elems);
+  switch_imgs(img_elems);
+}
+
+
+function runPeriodicReplacement() {
+  runReplacementOnce();
+  runInfo.runCount -= 1;
+  if (runInfo.runCount) {
+    log('runInfo.currTimeout:' + runInfo.currTimeout);
+    setTimeout(runPeriodicReplacement,runInfo.currTimeout);
+    if (runInfo.currTimeout < runInfo.maxTimeout) {
+          runInfo.currTimeout *= current_config.run_info.timeMultiplier;
     }
   }
 }
@@ -291,7 +298,7 @@ function makeImageReplacementDiv(img, action) {
     return nd;
 }
 
-function switch_imgs() {
+function switch_imgs(imgs = null) {
   log('switch_imgs()');
   chrome.storage.local.get(['kittenize','enabled_actions'],function(items) {
     var action_count = 0;
@@ -324,7 +331,7 @@ function switch_imgs() {
             src_re = new RegExp(action.find_regex[0],'i');
         }
 
-        var imgs = document.getElementsByTagName('img');
+        if (!imgs) imgs = document.getElementsByTagName('img');
         for (var i=0; i<imgs.length; i++) {
           var img = imgs[i];
           var one_of_ours = img.getAttribute('detrumpified');
@@ -401,8 +408,8 @@ function determineBrackets(mode, action) {
     return brackets;
 }
 
-function switch_text() {
-    log('switchem START, count:' + count);
+function switch_text(elements = null) {
+    log('switch_text START, count:' + runInfo.runCount);
 
     if (current_config === null) {
       log("current_config is invalid");
@@ -416,6 +423,7 @@ function switch_text() {
     var keys_we_need = ['stored_choices','enabled_actions',
         'brevity','brackets', 'rand_mode', 'use_matic',
         'replace_fraction'];
+    // log(keys_we_need);
     chrome.storage.local.get(keys_we_need, function(items) {
       var action_count = 0;
       var stored_choices = useIfElse(items, 'stored_choices', {});
@@ -450,7 +458,7 @@ function switch_text() {
 
         var search_regex = new RegExp(action.find_regex[0],
                                       action.find_regex[1]);
-        var elements = document.getElementsByTagName('*');
+        if (!elements) elements = document.getElementsByTagName('*');
 
         if (!stored_choices.hasOwnProperty(action_name)) {
           stored_choices[action_name] = {};
@@ -459,40 +467,46 @@ function switch_text() {
 
         for (var i = 0; i < elements.length; i++) {
           var element = elements[i];
-          if (!element.hasAttribute(visit_attrib_name)) {
-            for (var j =0; j < element.childNodes.length; j++) {
-              var node = element.childNodes[j];
-              if (node.nodeType === 3) {
-                var text = node.nodeValue;
-                broken_texts = find_match_nonmatch_chunks(text,search_regex);
+          try {
+            if (!element.hasAttribute(visit_attrib_name)) {
+              for (var j =0; j < element.childNodes.length; j++) {
+                var node = element.childNodes[j];
+                if (node.nodeType === 3) {
+                  var text = node.nodeValue;
+                  broken_texts = find_match_nonmatch_chunks(text,search_regex);
 
-                if (broken_texts.length) {
-                  var rr = make_replacement_elems_array({
-                    action_name: action_name,
-                    action: action,
-                    rand_mode: rand_mode,
-                    broken_texts: broken_texts,
-                    use_matic: use_matic,
-                    replace_percent: replace_percent,
-                    monikers: monikers_to_use,
-                    brackets: brackets,
-                    node: node,
-                    choice: stored_choices[action_name]
-                  });
+                  if (broken_texts.length) {
+                    var rr = make_replacement_elems_array({
+                      action_name: action_name,
+                      action: action,
+                      rand_mode: rand_mode,
+                      broken_texts: broken_texts,
+                      use_matic: use_matic,
+                      replace_percent: replace_percent,
+                      monikers: monikers_to_use,
+                      brackets: brackets,
+                      node: node,
+                      choice: stored_choices[action_name]
+                    });
 
-                  if (rr.repl_count) {
+                    if (rr.repl_count) {
                       replace_elem_with_array_of_elems(node,rr.repl_array);
+                    }
+                    // regardless of weather we made a change or not,
+                    // we mark this element searched so that it does
+                    // not get replaced on a subsequent run.
+                    // This lets us 1) use insults that have the search
+                    // string in them and 2) not have insults skipped
+                    // purposely not be skipped on subsequent runs
+                    element.setAttribute(visit_attrib_name,'1');
                   }
-                  // regardless of weather we made a change or not,
-                  // we mark this element searched so that it does
-                  // not get replaced on a subsequent run.
-                  // This lets us 1) use insults that have the search
-                  // string in them and 2) not have insults skipped
-                  // purposely not be skipped on subsequent runs
-                  element.setAttribute(visit_attrib_name,'1');
                 }
               }
             }
+          } catch(e) {
+              log('exception');
+              log(e);
+              log(element);
           }
         }
 
@@ -524,24 +538,59 @@ function isThisPageRunnable() {
   return match;
 }
 
-function startReplTries(err,res) {
-  log("startReplTries()");
+
+var observer = null;
+function startMutationReplacements() {
+    var target = document.getElementsByTagName('BODY')[0];
+    observer = new MutationObserver(function(mutations) {
+        var elems = [];
+        var img_elems = [];
+        mutations.forEach(function(mutation) {
+            var more_elems = mutation.target.getElementsByTagName('*');
+            var more_img_elems = mutation.target.getElementsByTagName('IMG'); 
+            Array.prototype.push.apply(elems, more_elems);
+            Array.prototype.push.apply(img_elems, more_img_elems);
+            if (mutation.target.nodeName !== '#text') {
+                elems.push(mutation.target);
+            }
+            if (mutation.target.nodeName === 'IMG') {
+                img_elems.push(mutation.target);
+            }
+        });
+        log('MUTATION BASED SWITCHING');
+        runReplacementOnce(elems, img_elems);
+    });
+    observer.observe(target, {
+        childList: true,
+        characterData: true,
+        subtree: true,
+    });
+}
+
+function initReplacementStrategy(err,res) {
+  log("initReplacementStrategy()");
   if (err === null) {
     current_config = res;
+
     if (isThisPageRunnable()) {
-      setTimeout(switchem, currTimeout);
-      try {
-        currTimeout = current_config.run_info.startTimeout;
-        currTimeout *= current_config.run_info.timeMultiplier;
-        count = current_config.run_info.count;
-      } catch(e) {
-        log("config probably doesn't have run_info");
+      if (runInfo.trackMutations) {
+          runReplacementOnce();
+          startMutationReplacements();
+      } else {
+          setTimeout(runPeriodicReplacement, runInfo.currTimeout);
+          try {
+              runInfo.currTimeout = current_config.run_info.startTimeout;
+              runInfo.currTimeout *= current_config.run_info.timeMultiplier;
+              runInfo.runCount = current_config.run_info.count;
+          } catch(e) {
+              log("config probably doesn't have run_info");
+          }
       }
     } else {
       log("this page is not whitelisted");
     }
   } else {
-    log("Skipping startReplTries due to ERROR");
+    log("Skipping initReplacementStrategy due to ERROR");
     log(err);
     log(res);
   }
@@ -549,17 +598,21 @@ function startReplTries(err,res) {
 
 function init() {
   set_initial_url(function() {
-    chrome.storage.local.get(['insult_style','run_anywhere'],function(items) {
-      if (items.hasOwnProperty('run_anywhere')) {
-          run_anywhere = items.run_anywhere;
-      }
-      if (items.hasOwnProperty('insult_style')) {
-        createAndSetStyle(defaults.insult_cssname,items.insult_style);
-      }
+    chrome.storage.local.get(['insult_style','run_anywhere','track_mutations'],
+        function(items) {
+        if (items.hasOwnProperty('run_anywhere')) {
+            run_anywhere = items.run_anywhere;
+        }
+        if (items.hasOwnProperty('track_mutations')) {
+            runInfo.trackMutations = items.track_mutations;
+        }
+        if (items.hasOwnProperty('insult_style')) {
+            createAndSetStyle(defaults.insult_cssname,items.insult_style);
+        }
     });
-    loadConfig(startReplTries);
+    loadConfig(initReplacementStrategy);
   });
 }
 
 log("starting");
-setTimeout(init, currTimeout);
+setTimeout(init, runInfo.currTimeout);

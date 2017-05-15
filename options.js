@@ -164,9 +164,10 @@ function restorePluginOptions() {
 
   loadConfig(showConfig);
 
-  chrome.storage.local.get(['insult_style','brevity','use_matic',
-                            'replace_fraction', 'brackets', 'rand_mode',
-                            'kittenize','run_anywhere'], function(items) {
+  vars_to_get = ['insult_style','brevity','use_matic', 'replace_fraction', 
+                 'brackets', 'rand_mode', 'kittenize','run_anywhere',
+                 'track_mutations'];
+  chrome.storage.local.get(vars_to_get, function(items) {
 
       var restoreThing = function(name,inpname,checkbox = false) {
           var thingelem = document.getElementById(inpname);
@@ -198,6 +199,7 @@ function restorePluginOptions() {
         [ 'rand_mode',       'randmodeinput',    false ],
         [ 'kittenize',       'kittensel',        false ],
         [ 'run_anywhere',    'run_anywhere',     true  ],
+        [ 'track_mutations', 'track_mutations',  true  ],
       ];
 
       for (var i=0;i <restorethings.length; i++)
@@ -408,6 +410,9 @@ var savethings = [
   [ 'run_anywhere',       'change', function() { saveGen('run_anywhere',
                                                          'run_anywhere',
                                                          true); } ],
+  [ 'track_mutations',    'change', function() { saveGen('track_mutations',
+                                                         'track_mutations',
+                                                         true);} ],
   [ 'reset_storage',      'click',  resetStorage ],
 ];
 
