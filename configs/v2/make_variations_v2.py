@@ -53,9 +53,8 @@ base = {
                 ],
                 'border': 1,
                 'background': [
-                    'http://www.toolsofourtools.org/detrumpify2/v2/houndstooth.png',
-                    'http://www.toolsofourtools.org/detrumpify2/v2/floral.png',
-                    'http://www.toolsofourtools.org/detrumpify2/v2/rope.png',
+                    'https://img.buzzfeed.com/buzzfeed-static/static/2015-06/3/15/enhanced/webdr03/enhanced-873-1433359232-20.jpg?downsize=715:*&output-format=auto&output-quality=auto',
+                    'https://img.buzzfeed.com/buzzfeed-static/static/2015-06/3/15/enhanced/webdr03/enhanced-859-1433359572-14.jpg?downsize=715:*&output-format=auto&output-quality=auto',
                 ]
             },
             'randomize_mode': 'always',
@@ -361,6 +360,7 @@ matic = {
                     'Trash Can',
                     'Genital Wart',
                     'Menace',
+                    'Voldemort',
                 ]
             },
         },
@@ -757,6 +757,8 @@ monikers = {
       'Deadly Blob of Melted Nuclear Fuel',
       'Ball of Hair and Dust Mites Clogging your Vacuum',
       'Vanity Hair',
+      'Haunted Toenail Clipping',
+      'Milk-Faced Popinjay',
     ],
     'dirty': [
       "Fuckface von Clownstick",
@@ -793,11 +795,14 @@ monikers = {
       "Cockjerk Orange",
       "Blithering Butthole",
       "Scrooge McFuck",
+      "America's #2",
       "Lord Dampnut",
       "Your Shitty Racist Uncle",
       "Twitshitter",
       "Gaseous Pompous Ass",
       "Sunburned Puckered Asshole",
+      "Fart That Turned out to Be a Shit",
+      "Dicktator",
     ],
   },
   'alt-right': {
@@ -900,6 +905,7 @@ monikers = {
       'Racist Hemorrhoid',
       'Bag of Wet Cigarette Butts',
       'Gin Blossom Gone to Seed',
+      'Flea Market Made Flesh',
     ],
     'dirty': [
       'Neo Nazi Dickhead',
@@ -918,6 +924,8 @@ monikers = {
       'Keebler Elf',
       'Tiny Racist',
       'Compact Klansman',
+      'Full-Size Evil in a Travel-Size Container',
+      'Klansman / Leprechaun Love Child',
     ],
     'dirty': [
     ],
