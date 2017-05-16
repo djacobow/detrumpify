@@ -440,7 +440,12 @@ function switch_text(elements = null) {
         'brevity', 'brackets', 'rand_mode', 'use_matic',
         'replace_fraction'
     ];
-    // log(keys_we_need);
+
+    // This line doesn't do anything. It is there because there is some
+    // weird race bug with chrome.storage.local.get where the array
+    // argument sometimes gets hosed if it comes too fast. Or something.
+    keys_we_need.forEach(function(k) { k += 'bloop'; });
+
     chrome.storage.local.get(keys_we_need, function(items) {
         var action_count = 0;
         var stored_choices = useIfElse(items, 'stored_choices', {});
@@ -566,11 +571,11 @@ function startMutationReplacements() {
         var elems = [];
         var img_elems = [];
         mutations.forEach(function(mutation) {
-            var more_elems = mutation.target.getElementsByTagName('*');
-            var more_img_elems = mutation.target.getElementsByTagName('IMG');
-            Array.prototype.push.apply(elems, more_elems);
-            Array.prototype.push.apply(img_elems, more_img_elems);
             if (mutation.target.nodeName !== '#text') {
+                var more_elems = mutation.target.getElementsByTagName('*');
+                var more_img_elems = mutation.target.getElementsByTagName('IMG');
+                Array.prototype.push.apply(elems, more_elems);
+                Array.prototype.push.apply(img_elems, more_img_elems);
                 elems.push(mutation.target);
             }
             if (mutation.target.nodeName === 'IMG') {
