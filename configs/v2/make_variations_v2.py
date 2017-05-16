@@ -759,6 +759,7 @@ monikers = {
       'Vanity Hair',
       'Haunted Toenail Clipping',
       'Milk-Faced Popinjay',
+      'Dunning-Kruger Singularity',
     ],
     'dirty': [
       "Fuckface von Clownstick",
