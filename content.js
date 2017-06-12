@@ -312,6 +312,10 @@ function makeImageReplacementDiv(img, action) {
 
 function switch_imgs(imgs = null) {
     log('switch_imgs()');
+    //
+    // we do not need to do anything if we get a zero length list
+    if (imgs && !imgs.length) return;
+
     chrome.storage.local.get(['kittenize', 'enabled_actions'], function(items) {
         var action_count = 0;
 
@@ -432,6 +436,8 @@ function switch_text(elements = null) {
         return;
     }
 
+    // if we got a list, but it is an empty list, then we're done
+    if (elements && !elements.length) return;
 
     var action_name;
     var n;
@@ -571,7 +577,9 @@ function startMutationReplacements() {
         var elems = [];
         var img_elems = [];
         mutations.forEach(function(mutation) {
-            if (mutation.target.nodeName !== '#text') {
+            if (mutation.target.nodeName === '#text') {
+            } else if (mutation.target.nodeName === 'input') {
+            } else {
                 var more_elems = mutation.target.getElementsByTagName('*');
                 var more_img_elems = mutation.target.getElementsByTagName('IMG');
                 Array.prototype.push.apply(elems, more_elems);
@@ -582,7 +590,6 @@ function startMutationReplacements() {
                 img_elems.push(mutation.target);
             }
         });
-        log('MUTATION BASED SWITCHING');
         runReplacementOnce(elems, img_elems);
     });
     observer.observe(target, {
