@@ -203,6 +203,7 @@ matic = {
                     'Witless',
                     'Yellow',
                     'Day-Glo',
+                    'Chicken-Necked',
                 ],
                 'b': [
                     'Fart',
@@ -760,6 +761,13 @@ monikers = {
       'Haunted Toenail Clipping',
       'Milk-Faced Popinjay',
       'Dunning-Kruger Singularity',
+      'King Leer',
+      'Sheriff of Rottingham',
+      'King Joffrey the Treasonous',
+      'Chicken-Necked Scumbag',
+      'Orange Foolius',
+      'Worst Person Ever',
+      'Don Corleorange',
     ],
     'dirty': [
       "Fuckface von Clownstick",
@@ -804,6 +812,8 @@ monikers = {
       "Sunburned Puckered Asshole",
       "Fart That Turned out to Be a Shit",
       "Dicktator",
+      'Urine Bather',
+      'Generalassimo',
     ],
   },
   'alt-right': {
@@ -827,6 +837,7 @@ monikers = {
     ],
     'dirty': [
       "Fucking-Scary-Right",
+      'Anal-Rot',
     ],
   },
   'pence': {
@@ -856,6 +867,7 @@ monikers = {
       'Rejected Square',
       'Permanently Constipated Man',
       "America's #2",
+      'Warren Harding Impersonator',
     ],
     'dirty' : [
     ],
@@ -907,11 +919,15 @@ monikers = {
       'Bag of Wet Cigarette Butts',
       'Gin Blossom Gone to Seed',
       'Flea Market Made Flesh',
+      'Sack of Halitosis',
+      'Cirrhotic Rasputin',
     ],
     'dirty': [
       'Neo Nazi Dickhead',
       'Repulsive, Plotting Shit',
       'Twenty Pounds of Shit in a Ten Pound Sack',
+      'Reeking Smegma',
+      'Tanker Truck of Ass Sweat',
     ]
   },
   'sessions': {
@@ -927,6 +943,9 @@ monikers = {
       'Compact Klansman',
       'Full-Size Evil in a Travel-Size Container',
       'Klansman / Leprechaun Love Child',
+      'Lucky Charms Mascot',
+      'Ku Klux Keebler',
+      'Apple-Cheeked Hate Goblin',
     ],
     'dirty': [
     ],
@@ -961,6 +980,7 @@ monikers = {
       'Trumpsplainer',
       'Whiny Spice',
       'America\'s Baghdad Bob',
+      'Human Toilet Brush',
     ],
     'dirty': [
       'Sean Sphincter',
@@ -974,8 +994,11 @@ monikers = {
       'Professional Sad Puppy Face',
       'International Man of Principle and Integritude',
       'Mercifully Incompetent Evil House Speaker',
+      'Eddie Munster Understudy',
+      'Ol\' Zombie-Eyes',
     ],
     'dirty': [
+      'The Honorable Mr. Fuck You I Got Mine',
     ],
   },
 #  'farage': {
