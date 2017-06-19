@@ -500,6 +500,10 @@ function switch_text(elements = null) {
                         for (var j = 0; j < element.childNodes.length; j++) {
                             var node = element.childNodes[j];
                             if (node.nodeType === 3) {
+                                if ((node.parentElement !== undefined) &&
+                                    (node.parentElement.nodeName == 'TITLE')) {
+                                    continue;
+                                }
                                 var text = node.nodeValue;
                                 broken_texts = find_match_nonmatch_chunks(text, search_regex);
 
