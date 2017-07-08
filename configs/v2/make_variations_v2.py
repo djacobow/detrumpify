@@ -111,6 +111,20 @@ base = {
             ],
             'randomize_mode': 'always',
         },
+        'gorsuch': {
+            'default_enabled': False,
+            'find_regex': [
+                "((JUSTICE|Justice)\\s)?((Neil|NEIL)\\s*)?(GORSUCH|Gorsuch)(?!\\w)", "g"
+            ],
+            'randomize_mode': 'always',
+        },
+        'mcconnell': {
+            'default_enabled': False,
+            'find_regex': [
+                "((SENATOR|Senator)\\s)?((ADDISON|Addison)\\s)?((Mitch|MITCH|Mitchell|MITCHELL)\\s*)?(McConnell|MCONNELL)(?!\\w)", "g"
+            ],
+            'randomize_mode': 'always',
+        },
 #        'farage': {
 #            'default_enabled': False,
 #            'find_regex': [
@@ -814,6 +828,7 @@ monikers = {
       "Dicktator",
       'Urine Bather',
       'Generalassimo',
+      'Asshole-in-One',
     ],
   },
   'alt-right': {
@@ -921,6 +936,7 @@ monikers = {
       'Flea Market Made Flesh',
       'Sack of Halitosis',
       'Cirrhotic Rasputin',
+      'Seething 4chan Post',
     ],
     'dirty': [
       'Neo Nazi Dickhead',
@@ -999,6 +1015,22 @@ monikers = {
     ],
     'dirty': [
       'The Honorable Mr. Fuck You I Got Mine',
+    ],
+  },
+  'gorsuch': {
+    'clean': [
+      'Asterisk',
+    ],
+    'dirty': [
+    ],
+  },
+  'gorsuch': {
+    'clean': [
+      'Human/Turtle Hybrid',
+      'Yertle the Turtle',
+      'Lipless Turtle',
+    ],
+    'dirty': [
     ],
   },
 #  'farage': {

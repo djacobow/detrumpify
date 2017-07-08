@@ -62,6 +62,13 @@ base = {
             ],
             'randomize_mode': 'always',
         },
+        'sessions': {
+            'default_enabled': False,
+            'find_regex': [
+                "((Jeff|Jefferson|JEFF|JEFFERSON)\\s*((B\\.?|Beauregard|BEAUREGARD)\\s*)?)?(Sessions|SESSIONS)(?!\\w)", "g"
+            ],
+            'randomize_mode': 'always',
+        },
         'conway': {
             'find_regex': [
                 "((KELLYANNE|Kellyanne)\\s*)?(Conway|CONWAY)(?!\\w)", "g"
@@ -71,6 +78,27 @@ base = {
         'spicer': {
             'find_regex': [
                 "((SEAN|Sean)\\s*)?(SPICER|Spicer)(?!\\w)", "g"
+            ],
+            'randomize_mode': 'always',
+        },
+        'ryan': {
+            'default_enabled': False,
+            'find_regex': [
+                "((SPEAKER|Speaker)\\s)?((Paul|PAUL)\\s*)?(RYAN|Ryan)(?!\\w)", "g"
+            ],
+            'randomize_mode': 'always',
+        },
+        'gorsuch': {
+            'default_enabled': False,
+            'find_regex': [
+                "((JUSTICE|Justice)\\s)?((Neil|NEIL)\\s*)?(GORSUCH|Gorsuch)(?!\\w)", "g"
+            ],
+            'randomize_mode': 'always',
+        },
+        'mcconnell': {
+            'default_enabled': False,
+            'find_regex': [
+                "((SENATOR|Senator)\\s)?((ADDISON|Addison)\\s)?((Mitch|MITCH|Mitchell|MITCHELL)\\s*)?(McConnell|MCONNELL)(?!\\w)", "g"
             ],
             'randomize_mode': 'always',
         },
@@ -488,6 +516,7 @@ monikers = {
       "Dicktator",
       'Urine Bather',
       'Generalassimo',
+      'Asshole-in-One',
     ],
   },
   'alt-right': {
@@ -595,6 +624,7 @@ monikers = {
       'Flea Market Made Flesh',
       'Sack of Halitosis',
       'Cirrhotic Rasputin',
+      'Seething 4chan Post',
     ],
     'dirty': [
       'Neo Nazi Dickhead',
@@ -603,6 +633,26 @@ monikers = {
       'Reeking Smegma',
       'Tanker Truck of Ass Sweat',
     ]
+  },
+  'sessions': {
+    'clean': [
+      'Man Too Racist For Strom Thurmond',
+      'Evil Yoda',
+      'Perjurer General',
+      # disabled for now because of plugin bug
+      # 'Staunch Defender of Jeff Sessions\'s Civil Rights',
+      'Child Who Was Turned Into an Old Man for Stealing a Pie from A Witch\'s Windowsill',
+      'Keebler Elf',
+      'Tiny Racist',
+      'Compact Klansman',
+      'Full-Size Evil in a Travel-Size Container',
+      'Klansman / Leprechaun Love Child',
+      'Lucky Charms Mascot',
+      'Ku Klux Keebler',
+      'Apple-Cheeked Hate Goblin',
+    ],
+    'dirty': [
+    ],
   },
   'conway': {
     'clean' : [
@@ -638,6 +688,37 @@ monikers = {
     ],
     'dirty': [
       'Sean Sphincter',
+      'Bullshit Spice',
+    ],
+  },
+  'ryan': {
+    'clean': [
+      'Granny Starver',
+      'What Passes for a Serious Policy Wonk in Republican-Land',
+      'Professional Sad Puppy Face',
+      'International Man of Principle and Integritude',
+      'Mercifully Incompetent Evil House Speaker',
+      'Eddie Munster Understudy',
+      'Ol\' Zombie-Eyes',
+    ],
+    'dirty': [
+      'The Honorable Mr. Fuck You I Got Mine',
+    ],
+  },
+  'gorsuch': {
+    'clean': [
+      'Asterisk',
+    ],
+    'dirty': [
+    ],
+  },
+  'gorsuch': {
+    'clean': [
+      'Human/Turtle Hybrid',
+      'Yertle the Turtle',
+      'Lipless Turtle',
+    ],
+    'dirty': [
     ],
   },
 }
