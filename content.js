@@ -92,6 +92,7 @@ function choose_now(use_matic, moniker_list, action, choice) {
 function choose(rand_mode, use_matic, moniker_list, action, choice) {
     var wait = get_randomize_time(rand_mode);
     var now = (new Date()).getTime();
+    // console.log('choose wait: ' + wait + ' now: ' + now + ' last_chosen: ' + choice.last_chosen_time);
     if (!choice.hasOwnProperty('last_chosen_time') ||
         ((now - choice.last_chosen_time) >= wait)) {
         choose_now(use_matic, moniker_list, action, choice);
@@ -455,9 +456,9 @@ function switch_text(elements = null) {
     chrome.storage.local.get(keys_we_need, function(items) {
         var action_count = 0;
         var stored_choices = useIfElse(items, 'stored_choices', {});
-
+        // console.log('STORED CHOICES AT START');
+        // console.log(JSON.stringify(stored_choices));
         var actions_to_run = getRunnableActions(current_config.actions, items);
-        log(actions_to_run);
 
         for (var n = 0; n < actions_to_run.length; n++) {
             action_name = actions_to_run[n];
@@ -467,7 +468,7 @@ function switch_text(elements = null) {
             // console.log(action);
             if (!action.hasOwnProperty('monikers')) {
                 log("action is invalid");
-                return;
+                continue;
             }
 
             var brevity = useIfElse(items, 'brevity', '0');
@@ -542,15 +543,16 @@ function switch_text(elements = null) {
                 }
             }
 
-            if (action_count == (Object.keys(current_config.actions).length - 1)) {
-                // console.log("iteration done; storing choices");
-                chrome.storage.local.set({
-                    'stored_choices': stored_choices
-                }, function() {});
-
-            }
             action_count += 1;
         }
+
+        if (true) {
+            // console.log("iteration done; storing choices");
+            chrome.storage.local.set({
+                'stored_choices': stored_choices
+            }, function() {});
+        }
+
     });
 }
 
