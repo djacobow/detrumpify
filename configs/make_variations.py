@@ -712,7 +712,7 @@ monikers = {
     'dirty': [
     ],
   },
-  'gorsuch': {
+  'mcconnell': {
     'clean': [
       'Human/Turtle Hybrid',
       'Yertle the Turtle',
