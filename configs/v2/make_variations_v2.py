@@ -125,6 +125,13 @@ base = {
             ],
             'randomize_mode': 'always',
         },
+        'breitbart': {
+            'default_enabled': False,
+            'find_regex': [
+                "Breitbart(?!\\w)", "g"
+            ],
+            'randomize_mode': 'always',
+        },
 #        'farage': {
 #            'default_enabled': False,
 #            'find_regex': [
@@ -1033,6 +1040,15 @@ monikers = {
     'dirty': [
     ],
   },
+  'breitbart': {
+    'clean': [
+      'Blightshart',
+      'Notsmart',
+      'Spitefart',
+    ],
+    'dirty': [
+    ],
+  }
 #  'farage': {
 #    'clean': [
 #      'Fishface',

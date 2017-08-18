@@ -102,6 +102,13 @@ base = {
             ],
             'randomize_mode': 'always',
         },
+        'breitbart': {
+            'default_enabled': False,
+            'find_regex': [
+                "Breitbart(?!\\w)", "g"
+            ],
+            'randomize_mode': 'always',
+        },
 
     }
 }
@@ -721,6 +728,15 @@ monikers = {
     'dirty': [
     ],
   },
+  'breitbart': {
+    'clean': [
+      'Blightshart',
+      'Notsmart',
+      'Spitefart',
+    ],
+    'dirty': [
+    ],
+  }
 }
 
 url_base = 'http://toolsofourtools.org/detrumpify2/'
