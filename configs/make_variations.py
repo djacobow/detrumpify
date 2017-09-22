@@ -478,6 +478,7 @@ monikers = {
       'Worst Person Ever',
       'Don Corleorange',
       'Great Crested Traffic Barrel',
+      'Deranged Dotard',
     ],
     'dirty': [
       "Fuckface von Clownstick",
