@@ -226,6 +226,7 @@ matic = {
                     'Day-Glo',
                     'Chicken-Necked',
                     'Deranged',
+                    'Desperate',
                 ],
                 'b': [
                     'Fart',
@@ -385,6 +386,7 @@ matic = {
                     'Menace',
                     'Voldemort',
                     'Dotard',
+                    'Cheeto',
                 ]
             },
         },
@@ -793,6 +795,9 @@ monikers = {
       'Don Corleorange',
       'Great Crested Traffic Barrel',
       'Deranged Dotard',
+      'Moron-in-Chief',
+      'Worst Possible Person to be President',
+      'Desperate Wet Cheeto',
     ],
     'dirty': [
       "Fuckface von Clownstick",

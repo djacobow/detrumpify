@@ -479,6 +479,9 @@ monikers = {
       'Don Corleorange',
       'Great Crested Traffic Barrel',
       'Deranged Dotard',
+      'Moron-in-Chief',
+      'Worst Possible Person to be President',
+      'Desperate Wet Cheeto',
     ],
     'dirty': [
       "Fuckface von Clownstick",
