@@ -132,14 +132,28 @@ base = {
             ],
             'randomize_mode': 'always',
         },
-#        'farage': {
-#            'default_enabled': False,
-#            'find_regex': [
-#                "((NIGEL|Nigel)\\s*)?(FARAGE|Farage)(?!\\w)", "g"
-#            ],
-#            'randomize_mode': 'always',
-#        },
-    }
+        'shuckabee': {
+            'default_enabled': False,
+            'find_regex': [
+                "((SARAH|Sarah)\\s)?(HUCKABEE|Huckabee)\\s(SANDERS|Sanders)(?!\\w)", "g"
+            ],
+            'randomize_mode': 'always',
+        },
+        'kelly': {
+            'default_enabled': False,
+            'find_regex': [
+                "((GENERAL|General)\\s)?((JOHN|John)\\s)((Francis|F\.)\\s)?(KELLY|Kelly)(?!\\w)", "g"
+            ],
+            'randomize_mode': 'always',
+        },
+        'devos': {
+            'default_enabled': False,
+            'find_regex': [
+                "((Elisabeth Dee|Betsy)\\s)?DeVos(?!\\w)", "g"
+            ],
+            'randomize_mode': 'always',
+        },
+    },
 }
 
 matic = {
@@ -387,6 +401,7 @@ matic = {
                     'Voldemort',
                     'Dotard',
                     'Cheeto',
+                    'Vacuous',
                 ]
             },
         },
@@ -423,6 +438,7 @@ matic = {
                     'Chode',
                     'Oracle of Dipshittery',
                     'Attention Whore',
+                    'Huckster',
                 ],
             },
         }
@@ -798,6 +814,9 @@ monikers = {
       'Moron-in-Chief',
       'Worst Possible Person to be President',
       'Desperate Wet Cheeto',
+      'Donny Two-Scoops',
+      'World\'s Oldest Toddler',
+      'Tangerine Idi Amin',
     ],
     'dirty': [
       "Fuckface von Clownstick",
@@ -845,6 +864,8 @@ monikers = {
       'Urine Bather',
       'Generalassimo',
       'Asshole-in-One',
+      'Bergamot Ballsack',
+      'Fucking Moron',
     ],
   },
   'alt-right': {
@@ -865,6 +886,8 @@ monikers = {
       "Bass-Ackward-Bigotry",
       "Real-Special-Snowflakes",
       'Postules-of-Hate',
+      'Melting-Snowflake',
+      'Alt-Blight',
     ],
     'dirty': [
       "Fucking-Scary-Right",
@@ -899,6 +922,7 @@ monikers = {
       'Permanently Constipated Man',
       "America's #2",
       'Warren Harding Impersonator',
+      'Mother\'s Favorite Little Soldier',
     ],
     'dirty' : [
     ],
@@ -1031,6 +1055,7 @@ monikers = {
     ],
     'dirty': [
       'The Honorable Mr. Fuck You I Got Mine',
+      'Spineless Shitweasel',
     ],
   },
   'gorsuch': {
@@ -1045,6 +1070,9 @@ monikers = {
       'Human/Turtle Hybrid',
       'Yertle the Turtle',
       'Lipless Turtle',
+      'Donatello\'s Racist Uncle',
+      'Actual Grinch',
+      'Dixie Koopa',
     ],
     'dirty': [
     ],
@@ -1057,20 +1085,33 @@ monikers = {
     ],
     'dirty': [
     ],
-  }
-#  'farage': {
-#    'clean': [
-#      'Fishface',
-#      'UKIP Nazi',
-#      'Damp Rag',
-#      'Taco Groupie',
-#      'Chief Kipper',
-#      'Punchbag',
-#    ],
-#    'dirty': [
-#      'Drunken Twatface',
-#    ],
-#  },
+  },
+  'shuckabee': {
+    'clean': [
+      'Sarah Huckster Sanders',
+      'Spawn of Mike Huckabee',
+    ],
+    'dirty': [
+      'Lying White House Spokesperson Number n+1',
+      'Another Mendacious Sack of Shit',
+    ],
+  },
+  'kelly': {
+    'clean': [
+        'Formerly Respected General Who Traded That All In To Carry Water for This Jackass',
+        'Man Who Lectures Gold Star Families With Heartfelt Bullshit',
+    ],
+    'dirty': [
+    ],
+  },
+  'devos': {
+    'clean': [
+      'Cruella DeVos',
+      'DevOs Umbridge',
+    ],
+    'dirty': [
+    ],
+  },
 }
 
 url_base = 'http://toolsofourtools.org/detrumpify2/v2/'
