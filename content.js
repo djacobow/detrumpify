@@ -467,7 +467,7 @@ function switch_text(elements = null) {
             var action = current_config.actions[action_name];
             // console.log(action);
             if (!action.hasOwnProperty('monikers')) {
-                log("action is invalid");
+                log("skipping action; no monikers");
                 continue;
             }
 
@@ -542,6 +542,7 @@ function switch_text(elements = null) {
                     log(element);
                 }
             }
+            log('action_done: ' + action_name);
 
             action_count += 1;
         }
