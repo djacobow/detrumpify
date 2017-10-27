@@ -128,7 +128,7 @@ base = {
         'breitbart': {
             'default_enabled': False,
             'find_regex': [
-                "Breitbart(?!\\w)", "g"
+                "Breitbart(?!\\w)", "gi"
             ],
             'randomize_mode': 'always',
         },
@@ -1223,6 +1223,11 @@ bconfig.append({
   'name': 'Lord Dampnut',
   'url': url_base + 'dampnut.json',
   'description': 'Always "Lord Dampnut"'
+});
+bconfig.append({
+  'name': 'Just Kittens',
+  'url': url_base + 'justkittens.json',
+  'description': 'No Insults -- Just Kittens',
 });
 
 ofile = open('buttons_config.json',"w")
