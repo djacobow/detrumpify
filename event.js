@@ -1,4 +1,10 @@
 
+var statusOK = function(xhr) {
+    var s = xhr.status;
+    var ok = (s === 0) || ((s >=200) && (s<300));
+    return ok;
+};
+
 // just a simple script to do an xhr, but on a background page,
 // getting away from content page restrictions
 chrome.runtime.onMessage.addListener(function(msg,sender,cb) {
@@ -10,7 +16,7 @@ chrome.runtime.onMessage.addListener(function(msg,sender,cb) {
    rv = {};
    rv.text = xhr.responseText;
    rv.status = xhr.status;
-   rv.err = ((xhr.status < 200) || (xhr.status >= 300)) ? 'not_2xx' : 'OK';
+   rv.err = statusOK(xhr) ? 'OK' :'not_2xx';
    cb(rv);
   }
  };
