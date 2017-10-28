@@ -1,0 +1,9 @@
+[
+    {"url": "__off__", "name": "Off", "description": "Leave Images Alone" },
+    {"url": "__kittens__", "name": "Kittens", "description": "Kittens" },
+    {"url": "__blanks__", "name": "Blanks", "description": "Empty Placeholders" },
+    {"url": "https://toolsofourtools.org/detrumpify2/v2/images/puppies", 
+     "name": "Puppies", "description": "Cute Puppies!"},
+    {"url": "https://toolsofourtools.org/detrumpify2/v2/images/bunnies", 
+     "name": "Bunnies", "description": "Bunnies!"}
+]
