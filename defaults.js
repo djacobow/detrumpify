@@ -1,6 +1,6 @@
 
 //var url_base = 'http://localhost:8000/';
-var url_base = 'http://toolsofourtools.org/detrumpify2/v2/';
+var url_base = 'https://toolsofourtools.org/detrumpify2/v2/';
 // var url_base = 'https://www.dropbox.com/s/';
 
 var defaults = {
@@ -28,7 +28,8 @@ var defaults = {
   'rand_mode': 'always', 
 
   // should I replace images with kittens
-  'kittenize': 'off',
+  'imgrepls_fetch_url': url_base + 'imgrepls_config.json',
+  'imgreplsrc': '__off__',
 
   // fire up the mock-o-matic?
   'use_matic': 'off',
