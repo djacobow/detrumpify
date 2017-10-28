@@ -92,7 +92,7 @@ function choose_now(use_matic, moniker_list, action, choice) {
 function choose(rand_mode, use_matic, moniker_list, action, choice) {
     var wait = get_randomize_time(rand_mode);
     var now = (new Date()).getTime();
-    // console.log('choose wait: ' + wait + ' now: ' + now + ' last_chosen: ' + choice.last_chosen_time);
+    // log('choose wait: ' + wait + ' now: ' + now + ' last_chosen: ' + choice.last_chosen_time);
     if (!choice.hasOwnProperty('last_chosen_time') ||
         ((now - choice.last_chosen_time) >= wait)) {
         choose_now(use_matic, moniker_list, action, choice);
@@ -137,7 +137,7 @@ function find_match_nonmatch_chunks(text, re) {
         });
     }
     // if (broken_texts.length) {
-    //   console.log(broken_texts);
+    //   log(broken_texts);
     // }
     return broken_texts;
 }
@@ -317,20 +317,33 @@ function switch_imgs(imgs = null) {
     // we do not need to do anything if we get a zero length list
     if (imgs && !imgs.length) return;
 
-    chrome.storage.local.get(['kittenize', 'enabled_actions'], function(items) {
+    chrome.storage.local.get(['enabled_actions', 'imgreplsrc', 'imgrepldata'], function(items) {
         var action_count = 0;
 
-        var mode = useIfElse(items, 'kittenize', 'off');
-
-        // this is for backward compatibility with boolean version that
-        // may be stored in local store.
-        if (typeof mode == 'boolean') {
-            mode = mode ? 'kittens' : 'off';
+        var imgreplsrc = useIfElse(items, 'imgreplsrc', '__off__');
+        var src_not_url = imgreplsrc.match(/^__(\w+)__$/);
+        var mode = 'off';
+        if (src_not_url) {
+            mode = src_not_url[1];
         }
-        // Also for backward compatibility with "more kittens" (switch
-        // image if parent element matches), which we are making the 
-        // default and only behavior now
-        if (mode == 'more_kittens') mode = 'kittens';
+        if (imgreplsrc.match(/^https?:/)) {
+            mode = 'replcfg';
+        }
+         
+        var picdb = null;
+        if (mode == 'replcfg') {
+            log('mode is replcfg');
+            if (items.hasOwnProperty('imgrepldata')) {
+                log('we have what we need');
+                picdb = new PicDB();
+                log(items.imgrepldata);
+                picdb.loadDirect(items.imgrepldata || []);
+                picdb.processData(items.imgreplsrc + '/');
+            } else {
+                log('this won\'t work');
+                mode = 'off';
+            }
+        }
 
         if (mode !== 'off') {
             var actions_to_run = getRunnableActions(current_config.actions, items);
@@ -381,11 +394,31 @@ function switch_imgs(imgs = null) {
                                 img.clientWidth.toString() + '/' +
                                 img.clientHeight.toString();
                             if (img.src !== replsrc) img.src = replsrc;
-                        } else {
+                        } else if (mode == 'blanks') {
                             replsrc = 'https://placehold.it/' +
                                 img.clientWidth.toString() + 'x' +
                                 img.clientHeight.toString();
                             if (img.src !== replsrc) img.src = replsrc;
+                        } else if (mode == 'replcfg') {
+                            replsrc = picdb.selectImage(img.clientWidth,img.clientHeight);
+                            log('new src');
+                            log(replsrc);
+                            if (replsrc && (img.src !== replsrc)) {
+                                if (false) {
+                                    // spoil cache
+                                    replsrc += '?t=' + (new Date()).getTime();
+                                }
+                                var iw = img.clientWidth;
+                                var ih = img.clientHeight;
+                                log('old src');
+                                log(img.src);
+                                img.style.width = Math.floor(iw+0.5).toString() + 'px';
+                                img.style.height = Math.floor(ih+0.5).toString() + 'px';
+                                img.setAttribute('detrumpified',true);
+                                img.src = replsrc;
+                            } else {
+                                log('no replsrc?');
+                            }
                         }
                     }
                 }
@@ -456,8 +489,8 @@ function switch_text(elements = null) {
     chrome.storage.local.get(keys_we_need, function(items) {
         var action_count = 0;
         var stored_choices = useIfElse(items, 'stored_choices', {});
-        // console.log('STORED CHOICES AT START');
-        // console.log(JSON.stringify(stored_choices));
+        // log('STORED CHOICES AT START');
+        // log(JSON.stringify(stored_choices));
         var actions_to_run = getRunnableActions(current_config.actions, items);
 
         for (var n = 0; n < actions_to_run.length; n++) {
@@ -465,7 +498,7 @@ function switch_text(elements = null) {
             log('action_name: ' + action_name);
             var visit_attrib_name = '_dtv_' + action_name;
             var action = current_config.actions[action_name];
-            // console.log(action);
+            // log(action);
             if (!action.hasOwnProperty('monikers')) {
                 log("skipping action; no monikers");
                 continue;
@@ -548,7 +581,7 @@ function switch_text(elements = null) {
         }
 
         if (true) {
-            // console.log("iteration done; storing choices");
+            // log("iteration done; storing choices");
             chrome.storage.local.set({
                 'stored_choices': stored_choices
             }, function() {});

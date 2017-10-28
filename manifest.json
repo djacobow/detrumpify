@@ -8,14 +8,14 @@
       "page": "options.html",
       "chrome_style": true
     },
-    "version": "1.1.42",
+    "version": "1.2.0",
     "permissions": [
-        "https://dropbox.com/",
-        "https://dl.dropboxusercontent.com/",
         "http://toolsofourtools.org/",
         "https://toolsofourtools.org/",
         "http://localhost/",
         "http://localhost:8000/",
+        "https://localhost/",
+        "https://localhost:8000/",
         "storage"
     ],
     "background": {
@@ -36,7 +36,7 @@
                 "https://*/*"
             ],
             "js": [
-                "defaults.js", "shared.js", "content.js"
+                "defaults.js", "shared.js", "picdb.js", "content.js"
             ],
             "run_at": "document_end"
         }

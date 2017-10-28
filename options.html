@@ -63,11 +63,11 @@
       </table>
     <hr>
     <!-- <div>Choose configurations from <a href="http://toolsofourtools.org/detrumpify2">toolsofourtools.org</a>, or enter own URL:</div> -->
-    <div id="confselectdiv" style="background-color: #e0e0e0;">
+    <div id="confselectdiv" style="background-color: #f0f0f0;">
         <div id="buttonsdiv"></div>
         <table style="width:100%;">
             <tr>
-                <td style="width: 10%;"><b>Config</b></td>
+                <td style="width: 10%;"><b>Insult Config</b></td>
                 <td colspan="2">
                     <select id="confselect" name="confselect" class="tooltip"></select>
                     <p style="" class="tooltiptext">ToolsOfOurTools has carefully curated numerous
@@ -93,6 +93,38 @@
         </table>
     </div>
     <!-- <hr> -->
+
+    <div id="imgreplseldiv" style="background-color: #e0e0e0;">
+        <div id="buttonsdiv2"></div>
+        <table style="width:100%;">
+            <tr>
+                <td style="width: 10%;"><b>Image Config</b></td>
+                <td colspan="2">
+                    <select id="imgreplselect" name="imgreplselect" class="tooltip"></select>
+                    <p style="" class="tooltiptext">ToolsOfOurTools has some groups of 
+                    pictures you can use to replace more offensive pictures you might
+                    find in your newsfeed. The Kittens pictures from placekittens.com.
+                    The rest come from Google Image Search for noncommercial resuse licensed
+                    images.</p>
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 10%;"><b>URL</b></td>
+                <td style="width: 90%;">
+                    <div class="tooltip">
+                        <input type="text" id="imgreplsrcinput" size="45">
+                        <input type="button" value="Save" id="imgrepl_save_button">
+                    </div>
+                    <p class="tooltiptext">
+                    This URL is the location from which the replacement
+                    image metadata will be loaded. It is set automatically,
+                    from the drop down above, but you can also type here to 
+                    use a completely custom config file.</p>
+                </td>
+            </tr>
+        </table>
+    </div>
+
     <!-- <span>You may also specify custom <a href="http://toolsofourtools.org/detrumpify-about#styles" target="_blank">styles</a> to be applied to the insults:</span> -->
     <div id="inputstylediv" style="background-color: #f0f0f0;">
         <table style="width: 100%;">
@@ -113,7 +145,6 @@
     </div>
     <!-- <hr> -->
 
-    <!-- <span>Set the maximum word length of your insults and quoting preference</span> -->
     <div id="brevitydiv" style="background-color: #e0e0e0;">
         <table style="width: 100%;">
             <tr>
@@ -171,21 +202,6 @@
                         Set to "always", you will get a new insult Every.
                         Single.  Mention.
                     </p>
-                </td>
-                <td style="width: 15%;"><b>Replace Images</b></td>
-                <td style="width: 35%;">
-                    <select id="kittensel" class="tooltip">
-                        <option value="off">Off</option>
-                        <!-- <option value="more_kittens">More Kittens</option> -->
-                        <option value="kittens">Kittens</option>
-                        <option value="blanks">Blanks</option>
-                        <option value="div">Config File</option>
-                    </select>
-                    <p class="tooltiptext" style="width: 150px;">
-                        Change T images to kittens. Works
-                        by scanning the URL and "alt" text
-                        for potential references to our villain. There will
-                        be false positives and negatives.</p>
                 </td>
             </tr>
         </table>
@@ -278,6 +294,8 @@
             </tr>
         </table>
     </div>
+
+    <!-- <span>Set the maximum word length of your insults and quoting preference</span> -->
 
     <hr>
     <div id="configdetaildiv">
