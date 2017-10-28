@@ -1114,7 +1114,7 @@ monikers = {
   },
 }
 
-url_base = 'http://toolsofourtools.org/detrumpify2/v2/'
+url_base = 'https://toolsofourtools.org/detrumpify2/v2/'
 
 combos = {
     'disable.json': {
