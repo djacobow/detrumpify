@@ -110,7 +110,7 @@ PicDB.prototype.selectImage = function(w,h) {
         // log('ar_cat ' + ar_cat + ' sz_cat ' + sz_cat);
         pic_options = this.db[ar_cat][sz_cat];
         // log('pic_options', pic_options);
-        if (pic_options.length) {
+        if (pic_options && pic_options.length) {
             return pic_options[Math.floor(Math.random()*pic_options.length)];
         }
         sz_idx += 1;
