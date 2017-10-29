@@ -1,5 +1,5 @@
 /*jshint esversion:6 */
-var debug_mode = false;
+var debug_mode = true;
 
 var log_count = 0;
 function log(t) {
@@ -164,3 +164,15 @@ function removeChildrenReplaceWith(elem,newchildren) {
     }
 }
 
+function useIfElse(dict, name, deflt) {
+    return dict.hasOwnProperty(name) ? dict[name] : deflt;
+}
+
+function replace_elem_with_array_of_elems(orig, arry) {
+    // log('replace_elem_with_array_of_elems');
+    var newnode = document.createElement('span');
+    for (var k = 0; k < arry.length; k++) {
+        newnode.appendChild(arry[k]);
+    }
+    orig.parentNode.replaceChild(newnode, orig);
+}

@@ -40,7 +40,9 @@
                 "shared.js",
                 "picdb.js",
                 "timers.js",
-                "content.js"
+                "image_changer.js",
+                "text_changer.js",
+                "top.js"
             ],
             "run_at": "document_end"
         }
