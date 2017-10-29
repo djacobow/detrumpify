@@ -360,48 +360,39 @@ function switch_imgs(imgs = null) {
                         parent_link_match = findParentLinkMatch(img, src_re);
                     } catch (w) {}
 
-                    if (alt_match ||
-                        src_match ||
-                        sty_match ||
-                        parent_link_match ||
-                        false) {
+                    if (alt_match || src_match || sty_match || parent_link_match) {
+                        console.log('alt: ' + alt_match + ' src: ' + src_match + ' sty: ' + sty_match +
+                                ' prnt: ' + parent_link_match);
                         var replsrc;
+                        var ni = null;
                         log('looking to replace: ' + img.src);
+                        var iw = img.clientWidth;
+                        var ih = img.clientHeight;
                         if (mode == 'div') {
                             var nd = makeImageReplacementDiv(img, action);
-                            nd.setAttribute('detrumpified', true);
                             img.parentNode.replaceChild(nd, img);
-                        } else if (mode == 'kittens') {
-                            replsrc = 'https://placekitten.com/' +
-                                img.clientWidth.toString() + '/' +
-                                img.clientHeight.toString();
+                        } else if ((mode == 'kittens') || (mode == 'blanks')) {
+                            replsrc = (mode == 'kittens') ?
+                                'https://placekitten.com/' :
+                                'https://placehold.it/';
+                            replsrc += iw.toString() + '/' + ih.toString();
                             if (img.src !== replsrc) {
-                                img.src = replsrc;
-                                img.setAttribute('detrumpified',true);
-                            }
-                        } else if (mode == 'blanks') {
-                            replsrc = 'https://placehold.it/' +
-                                img.clientWidth.toString() + 'x' +
-                                img.clientHeight.toString();
-                            if (img.src !== replsrc) {
-                                img.src = replsrc;
-                                img.setAttribute('detrumpified',true);
+                                log('[kitten/blank]: replacing ' + img.src + ' with ' + replsrc);
+                                ni = document.createElement('img');
+                                ni.src = replsrc;
+                                img.parentNode.replaceChild(ni, img);
                             }
                         } else if (mode == 'replcfg') {
-                            var iw = img.clientWidth;
-                            var ih = img.clientHeight;
                             replsrc = picdb.selectImage(iw,ih);
                             if (replsrc) {
-                                if (img.src !== replsrc) {
-                                    log('imgrepl: replacing ' + img.src + ' with ' + replsrc);
-                                    if (false) {
-                                        // spoil cache
-                                        replsrc += '?t=' + (new Date()).getTime();
-                                    }
-                                    img.style.width = Math.floor(iw+0.5).toString() + 'px';
-                                    img.style.height = Math.floor(ih+0.5).toString() + 'px';
-                                    img.setAttribute('detrumpified',true);
-                                    img.src = replsrc;
+                                if (!img.getAttribute('replcfg_detrumpified')) {
+                                    log('[replcfg]: replacing ' + img.src + ' with ' + replsrc);
+                                    ni = document.createElement('img');
+                                    ni.style.width = Math.floor(iw+0.5).toString() + 'px';
+                                    ni.style.height = Math.floor(ih+0.5).toString() + 'px';
+                                    ni.setAttribute('replcfg_detrumpified',true);
+                                    ni.src = replsrc;
+                                    img.parentNode.replaceChild(ni, img);
                                 }
                             } else {
                                 log('No appropriate replacement image for ' + img.src + ' (' + iw + ',' + ih + ')');
