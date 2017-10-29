@@ -1,14 +1,4 @@
 /* jshint esversion:6 */
-// These weill be overridden by the config itself.
-var runInfo = {
-    trackMutations: false,
-    currTimeout: 1000,
-    maxTimeout: 120000,
-    runCount: 5
-};
-
-// override whitelist
-var run_anywhere = false;
 
 // the config itself.
 var current_config = null;
@@ -212,18 +202,6 @@ function runReplacementOnce(elems = null, img_elems = null) {
 }
 
 
-function runPeriodicReplacement() {
-    runReplacementOnce();
-    runInfo.runCount -= 1;
-    if (runInfo.runCount) {
-        log('runInfo.currTimeout:' + runInfo.currTimeout);
-        setTimeout(runPeriodicReplacement, runInfo.currTimeout);
-        if (runInfo.currTimeout < runInfo.maxTimeout) {
-            runInfo.currTimeout *= current_config.run_info.timeMultiplier;
-        }
-    }
-}
-
 function getRunnableActions(config_actions, items) {
     // generate a shortened list of actions that the user has enabled
 
@@ -334,13 +312,12 @@ function switch_imgs(imgs = null) {
         if (mode == 'replcfg') {
             log('mode is replcfg');
             if (items.hasOwnProperty('imgrepldata')) {
-                log('we have what we need');
                 picdb = new PicDB();
-                log(items.imgrepldata);
+                // log(items.imgrepldata);
                 picdb.loadDirect(items.imgrepldata || []);
                 picdb.processData(items.imgreplsrc + '/');
             } else {
-                log('this won\'t work');
+                log('imgrepl won\'t work');
                 mode = 'off';
             }
         }
@@ -365,7 +342,10 @@ function switch_imgs(imgs = null) {
                 for (var i = 0; i < imgs.length; i++) {
                     var img = imgs[i];
                     var one_of_ours = img.getAttribute('detrumpified');
-                    if (one_of_ours) break;
+                    if (one_of_ours) {
+                        log('already detrumpified: ' + img.src);
+                        break;
+                    }
 
                     // Super-sophisticated image detection algorithm here:
                     // -- does the alt text look trumpian?
@@ -386,38 +366,45 @@ function switch_imgs(imgs = null) {
                         parent_link_match ||
                         false) {
                         var replsrc;
+                        log('looking to replace: ' + img.src);
                         if (mode == 'div') {
                             var nd = makeImageReplacementDiv(img, action);
+                            nd.setAttribute('detrumpified', true);
                             img.parentNode.replaceChild(nd, img);
                         } else if (mode == 'kittens') {
                             replsrc = 'https://placekitten.com/' +
                                 img.clientWidth.toString() + '/' +
                                 img.clientHeight.toString();
-                            if (img.src !== replsrc) img.src = replsrc;
+                            if (img.src !== replsrc) {
+                                img.src = replsrc;
+                                img.setAttribute('detrumpified',true);
+                            }
                         } else if (mode == 'blanks') {
                             replsrc = 'https://placehold.it/' +
                                 img.clientWidth.toString() + 'x' +
                                 img.clientHeight.toString();
-                            if (img.src !== replsrc) img.src = replsrc;
-                        } else if (mode == 'replcfg') {
-                            replsrc = picdb.selectImage(img.clientWidth,img.clientHeight);
-                            log('new src');
-                            log(replsrc);
-                            if (replsrc && (img.src !== replsrc)) {
-                                if (false) {
-                                    // spoil cache
-                                    replsrc += '?t=' + (new Date()).getTime();
-                                }
-                                var iw = img.clientWidth;
-                                var ih = img.clientHeight;
-                                log('old src');
-                                log(img.src);
-                                img.style.width = Math.floor(iw+0.5).toString() + 'px';
-                                img.style.height = Math.floor(ih+0.5).toString() + 'px';
-                                img.setAttribute('detrumpified',true);
+                            if (img.src !== replsrc) {
                                 img.src = replsrc;
+                                img.setAttribute('detrumpified',true);
+                            }
+                        } else if (mode == 'replcfg') {
+                            var iw = img.clientWidth;
+                            var ih = img.clientHeight;
+                            replsrc = picdb.selectImage(iw,ih);
+                            if (replsrc) {
+                                if (img.src !== replsrc) {
+                                    log('imgrepl: replacing ' + img.src + ' with ' + replsrc);
+                                    if (false) {
+                                        // spoil cache
+                                        replsrc += '?t=' + (new Date()).getTime();
+                                    }
+                                    img.style.width = Math.floor(iw+0.5).toString() + 'px';
+                                    img.style.height = Math.floor(ih+0.5).toString() + 'px';
+                                    img.setAttribute('detrumpified',true);
+                                    img.src = replsrc;
+                                }
                             } else {
-                                log('no replsrc?');
+                                log('No appropriate replacement image for ' + img.src + ' (' + iw + ',' + ih + ')');
                             }
                         }
                     }
@@ -463,7 +450,7 @@ function determineBrackets(mode, action) {
 }
 
 function switch_text(elements = null) {
-    log('switch_text START, count:' + runInfo.runCount);
+    log('switch_text START');
 
     if (current_config === null) {
         log("current_config is invalid");
@@ -591,100 +578,26 @@ function switch_text(elements = null) {
 }
 
 
-function isThisPageRunnable() {
-    if (run_anywhere) return true;
-    log('isThisPageRunnable');
-    var url = document.location.href;
-    var match = false;
-    for (var i = 0; i < current_config.whitelist.length; i++) {
-        var item = current_config.whitelist[i];
-        var re = new RegExp('https?://(\\w+\\.)?' + item);
-        if (url.match(re)) {
-            match = true;
-            log("IS RUNNABLE: " + url);
-            break;
-        }
-    }
-    return match;
-}
-
-
-var observer = null;
-
-function startMutationReplacements() {
-    var target = document.getElementsByTagName('BODY')[0];
-    observer = new MutationObserver(function(mutations) {
-        var elems = [];
-        var img_elems = [];
-        mutations.forEach(function(mutation) {
-            if (mutation.target.nodeName === '#text') {
-            } else if (mutation.target.nodeName === 'input') {
-            } else {
-                var more_elems = mutation.target.getElementsByTagName('*');
-                var more_img_elems = mutation.target.getElementsByTagName('IMG');
-                Array.prototype.push.apply(elems, more_elems);
-                Array.prototype.push.apply(img_elems, more_img_elems);
-                elems.push(mutation.target);
-            }
-            if (mutation.target.nodeName === 'IMG') {
-                img_elems.push(mutation.target);
-            }
-        });
-        runReplacementOnce(elems, img_elems);
-    });
-    observer.observe(target, {
-        childList: true,
-        characterData: true,
-        subtree: true,
-    });
-}
-
-function initReplacementStrategy(err, res) {
-    log("initReplacementStrategy()");
-    if (err === null) {
-        current_config = res;
-
-        if (isThisPageRunnable()) {
-            if (runInfo.trackMutations) {
-                runReplacementOnce();
-                startMutationReplacements();
-            } else {
-                setTimeout(runPeriodicReplacement, runInfo.currTimeout);
-                try {
-                    runInfo.currTimeout = current_config.run_info.startTimeout;
-                    runInfo.currTimeout *= current_config.run_info.timeMultiplier;
-                    runInfo.runCount = current_config.run_info.count;
-                } catch (e) {
-                    log("config probably doesn't have run_info");
-                }
-            }
-        } else {
-            log("this page is not whitelisted");
-        }
-    } else {
-        log("Skipping initReplacementStrategy due to ERROR");
-        log(err);
-        log(res);
-    }
-}
+var ct = new ControlTimers(runReplacementOnce);
 
 function init() {
     set_initial_url(function() {
         chrome.storage.local.get(['insult_style', 'run_anywhere', 'track_mutations'],
             function(items) {
-                if (items.hasOwnProperty('run_anywhere')) {
-                    run_anywhere = items.run_anywhere;
-                }
-                if (items.hasOwnProperty('track_mutations')) {
-                    runInfo.trackMutations = items.track_mutations;
-                }
+                ct.preconfig_init(items);
                 if (items.hasOwnProperty('insult_style')) {
                     createAndSetStyle(defaults.insult_cssname, items.insult_style);
                 }
             });
-        loadConfig(initReplacementStrategy);
+        loadConfig(function(err, res) {
+            if (!err) {
+                current_config = res;
+                ct.postconfig_init(res);
+            }
+        });
     });
 }
 
+
 log("starting");
-setTimeout(init, runInfo.currTimeout);
+setTimeout(init, 500);

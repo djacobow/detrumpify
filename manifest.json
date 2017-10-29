@@ -36,7 +36,11 @@
                 "https://*/*"
             ],
             "js": [
-                "defaults.js", "shared.js", "picdb.js", "content.js"
+                "defaults.js",
+                "shared.js",
+                "picdb.js",
+                "timers.js",
+                "content.js"
             ],
             "run_at": "document_end"
         }
