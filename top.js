@@ -1,5 +1,4 @@
 /* jshint esversion:6 */
-
 // the config itself.
 var current_config = null;
 var current_settings = null;
@@ -46,9 +45,9 @@ function init() {
                     if (!err) {
                         current_config = res;
                         ct.postconfig_init(res);
-                }
+                    }
+                });
             });
-        });
     });
 }
 

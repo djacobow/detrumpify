@@ -1,5 +1,4 @@
 /* jshint esversion:6 */
-
 var ImageChanger = function(settings, config) {
     this.current_settings = settings;
     this.current_config = config;
@@ -92,7 +91,7 @@ ImageChanger.prototype.run = function(imgs = null) {
         if (imgreplsrc.match(/^https?:/)) {
             mode = 'replcfg';
         }
-         
+
         var picdb = null;
         if (mode == 'replcfg') {
             log('mode is replcfg');
@@ -147,7 +146,7 @@ ImageChanger.prototype.run = function(imgs = null) {
 
                     if (alt_match || src_match || sty_match || parent_link_match) {
                         log('alt: ' + alt_match + ' src: ' + src_match + ' sty: ' + sty_match +
-                                ' prnt: ' + parent_link_match);
+                            ' prnt: ' + parent_link_match);
                         var replsrc;
                         var ni = null;
                         log('looking to replace: ' + img.src);
@@ -168,14 +167,14 @@ ImageChanger.prototype.run = function(imgs = null) {
                                 img.parentNode.replaceChild(ni, img);
                             }
                         } else if (mode == 'replcfg') {
-                            replsrc = picdb.selectImage(iw,ih);
+                            replsrc = picdb.selectImage(iw, ih);
                             if (replsrc) {
                                 if (!img.getAttribute('replcfg_detrumpified')) {
                                     log('[replcfg]: replacing ' + img.src + ' with ' + replsrc);
                                     ni = document.createElement('img');
-                                    ni.style.width = Math.floor(iw+0.5).toString() + 'px';
-                                    ni.style.height = Math.floor(ih+0.5).toString() + 'px';
-                                    ni.setAttribute('replcfg_detrumpified',true);
+                                    ni.style.width = Math.floor(iw + 0.5).toString() + 'px';
+                                    ni.style.height = Math.floor(ih + 0.5).toString() + 'px';
+                                    ni.setAttribute('replcfg_detrumpified', true);
                                     ni.src = replsrc;
                                     img.parentNode.replaceChild(ni, img);
                                 }
@@ -189,4 +188,3 @@ ImageChanger.prototype.run = function(imgs = null) {
         }
     }
 };
-

@@ -1,4 +1,3 @@
-
 var ControlTimers = function(callback) {
     this.runInfo = {
         trackMutations: false,
@@ -47,7 +46,7 @@ ControlTimers.prototype.postconfig_init = function(current_config) {
             this.run_again = true; // force one run through no matter what
         } else {
             this.runInfo.currTimeout = this.config.run_info.startTimeout;
-            this.runInfo.maxTimeout  = this.config.run_info.maxTimeout;
+            this.runInfo.maxTimeout = this.config.run_info.maxTimeout;
             this.runInfo.runCount = this.config.run_info.count;
             this.backoffTimer();
         }
@@ -102,4 +101,3 @@ ControlTimers.prototype.backoffTimer = function() {
     }
     log(this.runInfo);
 };
-

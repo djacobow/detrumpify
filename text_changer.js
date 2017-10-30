@@ -1,5 +1,4 @@
 /* jshint esversion:6 */
-
 var TextChanger = function(settings, config) {
     this.current_settings = settings;
     this.current_config = config;
@@ -29,7 +28,6 @@ TextChanger.prototype.get_randomize_time = function(mode) {
     // log('wait is: ' + wait);
     return wait;
 };
-
 
 
 
@@ -342,4 +340,3 @@ TextChanger.prototype.run = function(elements = null) {
 
     }
 };
-
