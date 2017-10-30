@@ -1,6 +1,7 @@
 /* jshint esversion:6 */
 
-var TextChanger = function(config) {
+var TextChanger = function(settings, config) {
+    this.current_settings = settings;
     this.current_config = config;
 };
 
@@ -237,25 +238,15 @@ TextChanger.prototype.run = function(elements = null) {
     var action_name;
     var n;
 
-    var keys_we_need = ['stored_choices', 'enabled_actions',
-        'brevity', 'brackets', 'rand_mode', 'use_matic',
-        'replace_fraction'
-    ];
-
-    // This line doesn't do anything. It is there because there is some
-    // weird race bug with chrome.storage.local.get where the array
-    // argument sometimes gets hosed if it comes too fast. Or something.
-    keys_we_need.forEach(function(k) { k += 'bloop'; });
-
     var tthis = this;
-    chrome.storage.local.get(keys_we_need, function(items) {
+    if (true) {
         var action_count = 0;
-        var stored_choices = useIfElse(items, 'stored_choices', {});
+        var stored_choices = useIfElse(this.current_settings, 'stored_choices', {});
         // log('STORED CHOICES AT START');
         // log(JSON.stringify(stored_choices));
-        var actions_to_run = getRunnableActions(tthis.current_config.actions, items);
+        var actions_to_run = getRunnableActions(tthis.current_config.actions, this.current_settings);
 
-        for (var n = 0; n < actions_to_run.length; n++) {
+        for (n = 0; n < actions_to_run.length; n++) {
             action_name = actions_to_run[n];
             log('action_name: ' + action_name);
             var visit_attrib_name = '_dtv_' + action_name;
@@ -266,18 +257,18 @@ TextChanger.prototype.run = function(elements = null) {
                 continue;
             }
 
-            var brevity = useIfElse(items, 'brevity', '0');
-            var use_matic = useIfElse(items, 'use_matic', 'off');
-            var rand_mode = useIfElse(items, 'rand_mode', 'always');
+            var brevity = useIfElse(this.current_settings, 'brevity', '0');
+            var use_matic = useIfElse(this.current_settings, 'use_matic', 'off');
+            var rand_mode = useIfElse(this.current_settings, 'rand_mode', 'always');
             var replace_percent = parseFloat(
-                useIfElse(items, 'replace_fraction', '100')
+                useIfElse(this.current_settings, 'replace_fraction', '100')
             );
 
             // create a sublist of monikers that meet the brevity criteria
             var max_wordcount = parseInt(brevity);
             var monikers_to_use = tthis.filterListByWordCount(action.monikers, max_wordcount);
 
-            var bracket_mode = useIfElse(items, 'brackets', 'off');
+            var bracket_mode = useIfElse(this.current_settings, 'brackets', 'off');
             var brackets = tthis.determineBrackets(bracket_mode, action);
 
             var search_regex = new RegExp(action.find_regex[0],
@@ -349,6 +340,6 @@ TextChanger.prototype.run = function(elements = null) {
             }, function() {});
         }
 
-    });
+    }
 };
 

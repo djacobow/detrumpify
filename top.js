@@ -2,11 +2,12 @@
 
 // the config itself.
 var current_config = null;
+var current_settings = null;
 
 var runReplacementOnce = function(elems = null, img_elems = null) {
-    var tc = new TextChanger(current_config);
+    var tc = new TextChanger(current_settings, current_config);
     tc.run(elems);
-    var ic = new ImageChanger(current_config);
+    var ic = new ImageChanger(current_settings, current_config);
     ic.run(img_elems);
 };
 
@@ -33,18 +34,20 @@ var ct = new ControlTimers(runReplacementOnce);
 
 function init() {
     set_initial_url(function() {
-        chrome.storage.local.get(['insult_style', 'run_anywhere', 'track_mutations'],
-            function(items) {
-                ct.preconfig_init(items);
-                if (items.hasOwnProperty('insult_style')) {
-                    createAndSetStyle(defaults.insult_cssname, items.insult_style);
+        //chrome.storage.local.get(['insult_style', 'run_anywhere', 'track_mutations'],
+        chrome.storage.local.get(null,
+            function(settings) {
+                current_settings = settings;
+                ct.preconfig_init(settings);
+                if (settings.hasOwnProperty('insult_style')) {
+                    createAndSetStyle(defaults.insult_cssname, settings.insult_style);
+                }
+                loadConfig(settings, function(err, res) {
+                    if (!err) {
+                        current_config = res;
+                        ct.postconfig_init(res);
                 }
             });
-        loadConfig(function(err, res) {
-            if (!err) {
-                current_config = res;
-                ct.postconfig_init(res);
-            }
         });
     });
 }

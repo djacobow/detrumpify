@@ -299,18 +299,11 @@
 
     <hr>
     <div id="configdetaildiv">
-        <input type="checkbox" id="showconfigcheck" name="showconfigcheck" value="bloop">Show configuration details. Check if you want to edit the config directly.<br>
+        <input type="checkbox" id="showconfigcheck" name="showconfigcheck" value="bloop">Show configuration details.<br>
         <div id="configdiv" style="background-color: lightblue; display: none;">
             <b>Currently loaded configuration:</b>
-            <textarea id="configjson" rows="10" style="width: 100%" readonly="true">
-            </textarea>
-            <div>
-              <form id="editmodeform" name="editmodeform" action="">
-                  <input type="radio" checked id="editmode_url" name="editmode" value="url">Use Config URL
-                  <input type="radio" id="editmode_edit" name="editmode" value="edit">Edit Config
-                  <input type="radio" id="editmode_lock" name="editmode" value="lock">Lock Changes
-              </form>
-            </div>
+            <textarea id="configjson" rows="10" style="width: 100%" readonly="true"></textarea>
+            <div></div>
             <div id="zapdiv" style="text-align: right">
                 <input style="font-size: 75%; background-color: pink;" type="button" name="reset_storage" id="reset_storage" value="Reset All Stored Preferences">
             </div>

@@ -1,14 +1,94 @@
 /*jshint esversion:6 */
 
-function selectConfig(e) {
-    genericSelect(e,'configsrc',true,saveConfigURL);
+function arraysEqual(arr1, arr2) {
+    if(arr1.length !== arr2.length)
+        return false;
+    for(var i = arr1.length; i--;) {
+        if(arr1[i] !== arr2[i])
+            return false;
+    }
+    return true;
 }
 
-function selectImgReplConfig(e) {
-    genericSelect(e,'imgreplsrcinput',false,saveImgReplURL);
-}
+var OptionsThingy = function() {
+    this.current_settings = {};
+    this.some_styles = [
+        'color: red;',
+        'color: blue;',
+        'color: purple;',
+        'color: green;',
+        'background-color: yellow;',
+        'background-color: #e6dd93;',
+        'background-color: black; color: white;',
+        'background-color: #050556; color: white;',
+        'color: #f8ded2; background-color: #6f402a;',
+        'font-size: 80%;',
+        'font-size: 120%;',
+        'font-style: italic;',
+        'font-style: bold;',
+        'text-decoration: overline;',
+        'text-decoration: underline;',
+        'text-decoration: strikethrough;',
+    ];
+    this.restorethings = [
+        [ 'imgreplsrc',      'imgreplsrcinput',  false ],
+        [ 'insult_style',    'styleinput',       false ],
+        [ 'brevity',         'brevityinput',     false ],
+        [ 'use_matic',       'use_matic',        false ],
+        [ 'replace_fraction','replace_fraction', false ],
+        [ 'brackets',        'quoteinput',       false ],
+        [ 'rand_mode',       'randmodeinput',    false ],
+        [ 'run_anywhere',    'run_anywhere',     true  ],
+        [ 'track_mutations', 'track_mutations',  true  ],
+    ];
+    var tthis = this;
+    this.savethings = [
+        // [ elemid, event, fn ],
+        [ 'imgreplsrcinput',    'change', function() { tthis.saveImgReplURL(); } ],
+        [ 'imgrepl_save_button','click',  function() { tthis.saveImgReplURL(); } ],
+        [ 'config_save_button', 'click',  function() { tthis.saveConfigURL(); } ],
+        [ 'configsrc',          'change', function() { tthis.saveConfigURL(); } ],
+        [ 'style_save_button',  'click',  function() { tthis.saveGen('insult_style',
+                                                               'styleinput'); } ],
+        [ 'styleinput',         'change', function() { tthis.saveGen('insult_style',
+                                                               'styleinput'); } ],
+        [ 'brevityinput',       'change', function() { tthis.saveGen('brevity',
+                                                               'brevityinput'); } ],
+        [ 'use_matic',          'change', function() { tthis.saveGen('use_matic',
+                                                               'use_matic'); } ],
+        [ 'replace_fraction',   'change', function() { tthis.saveGen('replace_fraction',
+                                                               'replace_fraction'); } ],
+        [ 'quoteinput',         'change', function() { tthis.saveGen('brackets',
+                                                               'quoteinput'); } ],
+        [ 'randmodeinput',      'change', function() { tthis.saveGen('rand_mode',
+                                                               'randmodeinput'); } ],
+        [ 'run_anywhere',       'change', function() { tthis.saveGen('run_anywhere',
+                                                               'run_anywhere',
+                                                               true); } ],
+        [ 'track_mutations',    'change', function() { tthis.saveGen('track_mutations',
+                                                               'track_mutations',
+                                                               true);} ],
+        [ 'reset_storage',      'click',  function() { tthis.resetStorage(); } ],
+    ];
+};
 
-function genericSelect(e,srcename,click_radio_buttons,save_fn) {
+OptionsThingy.prototype.storeThings = function(dict,cb) {
+    var tthis = this;
+    chrome.storage.local.set(dict,function() {
+        copyDictByKeys(tthis.current_settings, dict);
+        return cb(tthis.current_settings);
+    });
+};
+
+OptionsThingy.prototype.selectConfig = function(e) {
+    this.genericSelect(e,'configsrc',this.saveConfigURL.bind(this));
+};
+
+OptionsThingy.prototype.selectImgReplConfig = function(e) {
+    this.genericSelect(e,'imgreplsrcinput',this.saveImgReplURL.bind(this));
+};
+
+OptionsThingy.prototype.genericSelect = function(e, srcename, save_fn) {
   var tgt = e.target || e.srcElement;
   var id  = tgt.id;
   var new_url = tgt.value;
@@ -17,41 +97,42 @@ function genericSelect(e,srcename,click_radio_buttons,save_fn) {
   var curr_url = srcelem.value;
 
   if (new_url !== curr_url) {
-      if (click_radio_buttons) {
-          editModeClick('url');
-          document.getElementById('editmode_url').checked = true;
-      }
       srcelem.value = new_url;
       save_fn();
   }
-}
+};
 
-function resetStorage() {
-    zapStorage(function() {
+OptionsThingy.prototype.resetStorage = function() {
+    this.current_settings = {};
+    var tthis = this;
+    zapStorage(function(config_source) {
+        tthis.current_settings.config_source = config_source;
         log('storage zapped');
-        loadConfig(function(err,res) {
-            showConfig(err,res);
-            restorePluginOptions();
+        loadConfig(tthis.current_settings, function(err,res) {
+            tthis.updateConfigDisplay(err,res);
+            tthis.restorePluginOptions();
         });
     });
-}
+};
 
-function dumb_cb(err,msg) {
+OptionsThingy.prototype.dumb_cb = function() {
  // log('dumb_cb');
-}
+};
 
-function getCannedConfigList(cb) {
-    var args = ['buttonsdiv', 'confselect', 'configsrc', selectConfig, defaults.buttons_fetch_url];
-    getCannedList(args,cb);
-}
+OptionsThingy.prototype.getCannedConfigList = function(cb) {
+    var args = ['buttonsdiv', 'confselect', 'configsrc', this.selectConfig.bind(this), defaults.buttons_fetch_url];
+    this.getCannedList(args, cb);
+};
 
-function getCannedImgReplList(cb) {
-    var args = ['buttonsdiv2', 'imgreplselect', 'imgreplsrcinput', selectImgReplConfig, defaults.imgrepls_fetch_url];
-    getCannedList(args,cb);
-}
-function getCannedList(targs, cb) {
+OptionsThingy.prototype.getCannedImgReplList = function(cb) {
+    var args = ['buttonsdiv2', 'imgreplselect', 'imgreplsrcinput', this.selectImgReplConfig.bind(this), defaults.imgrepls_fetch_url];
+    this.getCannedList(args,cb);
+};
+
+OptionsThingy.prototype.getCannedList = function(targs, cb)  {
   var target = document.getElementById(targs[0]);
 
+  var tthis = this;
   chrome.runtime.sendMessage(
     null,
     {'cmd':'get',
@@ -76,16 +157,16 @@ function getCannedList(targs, cb) {
           cb(e,resp.txt);
           return;
         }
-        elaborateConfigSelector(targs, data, cb);
+        tthis.elaborateConfigSelector(targs, data, cb);
       } else {
         removeChildrenReplaceWith(target, [errmsg]);
         cb('err',resp.status);
       }
     }
   );
-}
+};
 
-function elaborateConfigSelector(targs, data, cb) {
+OptionsThingy.prototype.elaborateConfigSelector = function(targs, data, cb) {
   var selector = document.getElementById(targs[1]);
 
   for(var i=selector.options.length-1; i>=0 ;i--) {
@@ -118,11 +199,11 @@ function elaborateConfigSelector(targs, data, cb) {
       selector.selectedIndex = set_value;
   }
   cb('null','yay!');
-}
+};
 
 // since this is static, it should probably be done in straight
 // html
-function createStyleSuggestions() {    
+OptionsThingy.prototype.createStyleSuggestions = function() {
     // attempt to populate a datalist
     styleelem = document.getElementById('styleinput');
     list = document.getElementById('style_suggestions');
@@ -130,77 +211,58 @@ function createStyleSuggestions() {
         list = document.createElement('datalist');
         list.id = 'style_suggestions';
         document.getElementById('inputstylediv').appendChild(list);
-        var some_styles = [
-            'color: red;',
-            'color: blue;',
-            'color: purple;',
-            'color: green;',
-            'background-color: yellow;',
-            'background-color: #e6dd93;',
-            'background-color: black; color: white;',
-            'background-color: #050556; color: white;',
-            'color: #f8ded2; background-color: #6f402a;',
-            'font-size: 80%;',
-            'font-size: 120%;',
-            'font-style: italic;',
-            'font-style: bold;',
-            'text-decoration: overline;',
-            'text-decoration: underline;',
-            'text-decoration: strikethrough;',
-        ];
-        for (var i=0; i<some_styles.length; i++) {
+        for (var i=0; i<this.some_styles.length; i++) {
             var opt = document.createElement('option');
-            opt.value = some_styles[i];
+            opt.value = this.some_styles[i];
             list.appendChild(opt);
         }
     }
     styleelem.setAttribute('list','style_suggestions');
     styleelem.setAttribute('autocomplete','off');
-} 
+};
 
-function restorePluginOptions() {
+
+OptionsThingy.prototype.restorePluginOptions = function() {
   log('restorePluginOptions START');
 
-  getCannedConfigList(dumb_cb);
+  this.getCannedConfigList(this.dumb_cb.bind(this));
   log('cannedConfigList options created');
 
-  getCannedImgReplList(dumb_cb);
+  this.getCannedImgReplList(this.dumb_cb.bind(this));
   log('cannedImgReplList options created');
 
-  chrome.storage.local.get(['config_source'], function(items) {
+  var tthis = this;
+  chrome.storage.local.get(null, function(settings) {
+    
+    copyDictByKeys(tthis.current_settings, settings);
+
     srcelem = document.getElementById('configsrc');
-    if (items.hasOwnProperty('config_source')) {
-      srcelem.value = items.config_source;
+    if (settings.hasOwnProperty('config_source')) {
+      srcelem.value = settings.config_source;
     } else {
       log('resetting config_source in restorePluginOptions');
-      chrome.storage.local.set({'config_source': defaults.config_source},
+      this.storeThings({'config_source': defaults.config_source},
               function() {});
       srcelem.value = defaults.config_source;
     }
-    if (srcelem.value == '__local__') {
-      document.getElementById('editmode_lock').checked = true;
-      editModeClick('lock');
-    } else {
-      editModeClick('url');
-    }
+
+    tthis.finishRestoringOptions();
+    loadConfig(tthis.current_settings, tthis.updateConfigDisplay.bind(tthis));
   });
+};
 
-  loadConfig(showConfig);
-
-  vars_to_get = ['insult_style','brevity','use_matic', 'replace_fraction', 
-                 'brackets', 'rand_mode','run_anywhere',
-                 'track_mutations','imgreplsrc'];
-  chrome.storage.local.get(vars_to_get, function(items) {
-
+OptionsThingy.prototype.finishRestoringOptions = function() {
+      log('finishRestoringOptions START');
+      var tthis = this;
       var restoreThing = function(name,inpname,checkbox = false) {
           var thingelem = document.getElementById(inpname);
           log(inpname);
           log(thingelem);
-          if (items.hasOwnProperty(name)) {
+          if (tthis.current_settings.hasOwnProperty(name)) {
               if (checkbox) {
-                  thingelem.checked = items[name];
+                  thingelem.checked = tthis.current_settings[name];
               } else {
-                  thingelem.value = items[name];
+                  thingelem.value = tthis.current_settings[name];
               }
           } else {
               chrome.storage.local.set({name:defaults[name]}, function() {
@@ -213,37 +275,20 @@ function restorePluginOptions() {
           }
       };
 
-      var restorethings = [
-        [ 'imgreplsrc',      'imgreplsrcinput',  false ],
-        [ 'insult_style',    'styleinput',       false ],
-        [ 'brevity',         'brevityinput',     false ],
-        [ 'use_matic',       'use_matic',        false ],
-        [ 'replace_fraction','replace_fraction', false ],
-        [ 'brackets',        'quoteinput',       false ],
-        [ 'rand_mode',       'randmodeinput',    false ],
-        [ 'run_anywhere',    'run_anywhere',     true  ],
-        [ 'track_mutations', 'track_mutations',  true  ],
-      ];
+      for (var i=0;i <this.restorethings.length; i++)
+          restoreThing.apply(this,this.restorethings[i]);
 
-      for (var i=0;i <restorethings.length; i++)
-          restoreThing.apply(this,restorethings[i]);
-
-      // if this fails, then the browser didn't support data lists 
-      // anyway
+      // if this fails, then the browser didn't support data lists anyway
       try {
-          createStyleSuggestions();
+          this.createStyleSuggestions();
       } catch (e) {
           log('oh well');
           log(e);
       }
+      log('finishRestoringOptions DONE');
+};
 
-  });
-
-  log('restorePluginOptions DONE');
-
-}
-
-function saveEnabledActions() {
+OptionsThingy.prototype.saveEnabledActions = function() {
   log('saveEnabledActions');
   var enelem = document.getElementById('actionstd');
   var children = enelem.childNodes;
@@ -262,25 +307,14 @@ function saveEnabledActions() {
       }
     }
   }
-  chrome.storage.local.set({'enabled_actions': enabled}, function() {
+  this.storeThings({'enabled_actions': enabled}, function() {
    log(enabled);
    log('saved action changes');
   });
-}
+};
 
 
-function arraysEqual(arr1, arr2) {
-    if(arr1.length !== arr2.length)
-        return false;
-    for(var i = arr1.length; i--;) {
-        if(arr1[i] !== arr2[i])
-            return false;
-    }
-
-    return true;
-}
-
-function showEnabledActionsList(items,cfg_actions) {
+OptionsThingy.prototype.showEnabledActionsList = function(settings,cfg_actions) {
       log('showEnabledActionsList()');
       var enelem = document.getElementById('actionstd');
 
@@ -291,55 +325,20 @@ function showEnabledActionsList(items,cfg_actions) {
 
       var action_names = Object.keys(cfg_actions);
 
-      if (true) {
-          // NEW way to handle enabled actions:
-          // get a list of actions that the user can enable or disable.
-          // if the user has a preference already stored for an action of 
-          // that name, use it, otherwise set it to enabled.
-          for (i=0; i<action_names.length; i++) {
-              action =action_names[i];
-              enable_this = true;
-              if (items.hasOwnProperty('enabled_actions') &&
-                  items.enabled_actions.hasOwnProperty(action)) {
-                  enable_this = items.enabled_actions[action];
-              } else if (cfg_actions[action].hasOwnProperty('default_enabled')) {
-                  enable_this = Boolean(cfg_actions[action].default_enabled);
-              }
-              enabled[action] = enable_this;
+      // NEW way to handle enabled actions:
+      // get a list of actions that the user can enable or disable.
+      // if the user has a preference already stored for an action of 
+      // that name, use it, otherwise set it to enabled.
+      for (i=0; i<action_names.length; i++) {
+          action =action_names[i];
+          enable_this = true;
+          if (settings.hasOwnProperty('enabled_actions') &&
+              settings.enabled_actions.hasOwnProperty(action)) {
+              enable_this = settings.enabled_actions[action];
+          } else if (cfg_actions[action].hasOwnProperty('default_enabled')) {
+              enable_this = Boolean(cfg_actions[action].default_enabled);
           }
-      } else { 
-          // OLD way to handle enabled actions. Keeping around in case I 
-          // want to go back.
-          // first, check to see if the list of actions in the config even matches
-          // the list of enabled actions stored. If it does, keep the stored list,
-          // but if it doesn't, reset the stored list to what is in the config
-          // (with everything enabled)
-          var enabled_exist_list = [];
-          if (items.hasOwnProperty('enabled_actions')) {
-              enabled_exist_list = Object.keys(items.enabled_actions);
-          }
-          var config_and_stored_actions_match = arraysEqual(action_names, enabled_exist_list);
-
-          if (!config_and_stored_actions_match) {
-              log('resetting actions list from config');
-              for (i=0; i<action_names.length; i++) {
-                  action = action_names[i];
-                  enabled[action] = true;
-              }   
-              chrome.storage.local.set({'enabled_actions': enabled},function() {
-                  log('stored reset enabled actions');
-              });
-          } else {
-              for (i=0; i<action_names.length; i++) {
-                  action = action_names[i];
-                  enable_this = true;
-                  if (items.hasOwnProperty('enabled_actions') && 
-                      items.enabled_actions.hasOwnProperty(action)) {
-                      enable_this = items.enabled_actions[action];
-                  }
-                  enabled[action] = enable_this;
-              }    
-          }
+          enabled[action] = enable_this;
       }
 
       removeChildrenReplaceWith(enelem,[]);
@@ -353,7 +352,7 @@ function showEnabledActionsList(items,cfg_actions) {
         check_elem.value = action;
         check_elem.id = action + '_check';
         check_elem.checked = enabled[action];
-        check_elem.onchange = saveEnabledActions;
+        check_elem.onchange = this.saveEnabledActions.bind(this);
         var groupingdiv = document.createElement('div');
         groupingdiv.appendChild(label_elem);
         groupingdiv.appendChild(check_elem);
@@ -366,34 +365,32 @@ function showEnabledActionsList(items,cfg_actions) {
         }
 
       }
-}
+};
 
-function showConfig(err,res) {
-  log('showConfig START');
+OptionsThingy.prototype.updateConfigDisplay = function(err,cfg) {
+  log('updateConfigDisplay START');
+
   var jselem = document.getElementById('configjson');
   var urlem =  document.getElementById('configsrc');
-  chrome.storage.local.get(['config_source','stored_config_source','enabled_actions'],function(items) {
 
-    if (items.hasOwnProperty('config_source')) {
-      urlem.value = items.config_source;
-    }
+  if (this.current_settings.hasOwnProperty('config_source')) {
+    urlem.value = this.current_settings.config_source;
+  }
 
-    if (err === null) {
-      log('no error');
-      // this is here rather than in earlier in restorePluginOptions
-      // becauase generating this list requires the config as well as
-      // the plugin options
-      showEnabledActionsList(items,res.actions);
-      jselem.value = JSON.stringify(res,null,2);
-    } else {
-      log('error');
-      jselem.value = "ERROR:" + err;
-    }
-    log('showConfig DONE');
-  });
-}
+  if (err === null) {
+    // this is here rather than in earlier in restorePluginOptions
+    // becauase generating this list requires the config as well as
+    // the plugin options
+    this.showEnabledActionsList(this.current_settings,cfg.actions);
+    jselem.value = JSON.stringify(cfg,null,2);
+  } else {
+    log('error');
+    jselem.value = "ERROR:" + err;
+  }
+  log('updateConfigDisplay DONE');
+};
 
-function saveGen(name,inpname,checkbox = false) {
+OptionsThingy.prototype.saveGen = function(name,inpname,checkbox = false) {
  log('saving ' + name);
  var elem = document.getElementById(inpname);
  var v;
@@ -405,53 +402,26 @@ function saveGen(name,inpname,checkbox = false) {
  var sv = {};
  sv[name] = v;
 
- chrome.storage.local.set(sv,function() {
+ this.storeThings(sv,function() {
   log(name + ' saved');
  });
-}
+};
 
-var savethings = [
-  // [ elemid, event, fn ],
-  [ 'imgreplsrcinput',    'change', saveImgReplURL ],
-  [ 'imgrepl_save_button','click',  saveImgReplURL ],
-  [ 'config_save_button', 'click',  saveConfigURL ],
-  [ 'configsrc',          'change', saveConfigURL ],
-  [ 'style_save_button',  'click',  function() { saveGen('insult_style',
-                                                         'stlyeinput'); } ],
-  [ 'styleinput',         'change', function() { saveGen('insult_style',
-                                                         'styleinput'); } ],
-  [ 'brevityinput',       'change', function() { saveGen('brevity',
-                                                         'brevityinput'); } ],
-  [ 'use_matic',          'change', function() { saveGen('use_matic',
-                                                         'use_matic'); } ],
-  [ 'replace_fraction',   'change', function() { saveGen('replace_fraction',
-                                                         'replace_fraction'); } ],
-  [ 'quoteinput',         'change', function() { saveGen('brackets',
-                                                         'quoteinput'); } ],
-  [ 'randmodeinput',      'change', function() { saveGen('rand_mode',
-                                                         'randmodeinput'); } ],
-  [ 'run_anywhere',       'change', function() { saveGen('run_anywhere',
-                                                         'run_anywhere',
-                                                         true); } ],
-  [ 'track_mutations',    'change', function() { saveGen('track_mutations',
-                                                         'track_mutations',
-                                                         true);} ],
-  [ 'reset_storage',      'click',  resetStorage ],
-];
 
-function saveImgReplURL() {
+OptionsThingy.prototype.saveImgReplURL = function() {
     log('saveImgReplURL START');
     var srcelem = document.getElementById('imgreplsrcinput');
     var url = srcelem.value;
 
     var not_an_url = url.match(/^__(\w+)__$/);
     if (not_an_url) {
-        chrome.storage.local.set({
+        this.storeThings({
             imgreplsrc: url,
         },function() {});
         return;
     }
 
+    var tthis = this;
     chrome.runtime.sendMessage(
       null, {cmd:'get',url: url + '/img_list.json'}, null, function(resp) {
           var imgrepldata = null;
@@ -460,7 +430,7 @@ function saveImgReplURL() {
                   resp.text += "\n";
                   imgrepldata = JSON.parse(resp.text);
                   log(imgrepldata);
-                  chrome.storage.local.set({
+                  tthis.storeThings({
                       imgreplsrc: url,
                       imgrepldata: imgrepldata,
                   }, function() {
@@ -475,115 +445,49 @@ function saveImgReplURL() {
               log('imgrepldata not saved');
           }
     });
-}
+};
 
 
-function saveConfigURL() {
+OptionsThingy.prototype.saveConfigURL = function() {
   log('saveConfigURL START');
   var srcelem = document.getElementById('configsrc');
   var url = srcelem.value;
-  // if it's set to local, then it was set by the 'lock' button
-  // after validating and we should not do so here just because
-  // someone types __local__ into the url bar.
-  if (srcelem.value != '__local__') {
-    chrome.storage.local.set(
-      {'config_source': url,
-       'config_valid': false,
-       'config_date': 0
-      },
-      function() {
-        log('config_source saved');
-      });
+
+  var tthis = this;
+  this.storeThings(
+    {'config_source': url, 'config_valid': false, 'config_date': 0 },
+    function() {
+      log('config_source saved');
+      loadConfig(tthis.current_settings, tthis.updateConfigDisplay);
+      tthis.restorePluginOptions();
+      log('saveConfigURL DONE');
+    }
+  );
+};
+
+OptionsThingy.prototype.setupSaveHandlers = function() {
+  for (var i=0; i<this.savethings.length; i++) {
+    var st = this.savethings[i];
+    document.getElementById(st[0]).addEventListener(st[1], st[2]);
   }
-
-  loadConfig(showConfig);
-  restorePluginOptions();
-  log('saveConfigURL DONE');
-}
-
-function editModeClick(which) {
- log('editModeClick: ' + which);
- cfjson = document.getElementById('configjson');
- urlinp = document.getElementById('configsrc');
- if (which == 'url') {
-
-   cfjson.readOnly = true;
-   cfjson.style.backgroundColor = "#e0f0e0";
-   urlinp.readOnly = false;
-   urlinp.style.backgroundColor = '#ffffff';
-
-   // reset to default
-   var src = urlinp.value;
-   if (src == '__local__') {
-     src = defaults.config_source;
-     urlinp.value = src;
-   }
-   chrome.storage.local.set({'config_source': src, 'config_valid': false}, function() {
-     loadConfig(showConfig,true);
-   });
-
- } else if (which == 'edit') {
-
-   cfjson.readOnly = false;
-   cfjson.style.backgroundColor = "#f0f0e0";
-   urlinp.readOnly = true;
-   urlinp.style.backgroundColor = '#d0d0d0';
-
- } else if (which == 'lock') {
-
-   cfjson.readOnly = true;
-   cfjson.style.backgroundColor = "#f0e0e0";
-   urlinp.readOnly = true;
-   urlinp.style.backgroundColor = '#d0d0d0';
-
-   storeConfig(null,cfjson.value,function(err) {
-     if (err === null) {
-       log('setting to __local__');
-       urlinp.value = '__local__';
-       chrome.storage.local.set({'config_source': '__local__'}, function() {
-         loadConfig(showConfig,false);
-       });
-     } else {
-       log('custom json did not validate');
-       log('NOT setting to __local__');
-     }
-   });
- }
-}
-
+};
 
 function setup_handlers() {
 
-  log('adding handlers');
-  document.addEventListener('DOMContentLoaded', restorePluginOptions);
+  var ot = new OptionsThingy();
+
+  log('adding onloaded handler');
+  document.addEventListener('DOMContentLoaded', ot.restorePluginOptions.bind(ot));
+
   log('adding save handler');
-
-  for (var i=0; i<savethings.length; i++) {
-    var st = savethings[i];
-    document.getElementById(st[0]).addEventListener(st[1], st[2]);
-  }
-
-  log('adding radiobutton handler');
-  var edit_radios = document.forms.editmodeform.elements.editmode;
-  for (var j=0;j<edit_radios.length;j++) {
-    radio = edit_radios[j];
-    /*jshint loopfunc:true */
-    radio.onchange = function(ev) {
-      editModeClick(ev.target.value);
-    };
-  }
+  ot.setupSaveHandlers();
 
   document.getElementById('showconfigcheck').addEventListener('change', function(ev) {
     var configdiv = document.getElementById('configdiv');
     var tgt = ev.target || ev.srcElement;
-    if (tgt.checked) {
-        configdiv.style.display = 'block';
-    } else {
-        configdiv.style.display = 'none';
-    }
+    configdiv.style.display = tgt.checked ? 'block' : 'none';
   });
 }
-
 
 setup_handlers();
 

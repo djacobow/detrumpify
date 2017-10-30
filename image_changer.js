@@ -1,6 +1,7 @@
 /* jshint esversion:6 */
 
-var ImageChanger = function(config) {
+var ImageChanger = function(settings, config) {
+    this.current_settings = settings;
     this.current_config = config;
 };
 
@@ -79,10 +80,10 @@ ImageChanger.prototype.run = function(imgs = null) {
 
     var tthis = this;
 
-    chrome.storage.local.get(['enabled_actions', 'imgreplsrc', 'imgrepldata'], function(items) {
+    if (true) {
         var action_count = 0;
 
-        var imgreplsrc = useIfElse(items, 'imgreplsrc', '__off__');
+        var imgreplsrc = useIfElse(this.current_settings, 'imgreplsrc', '__off__');
         var src_not_url = imgreplsrc.match(/^__(\w+)__$/);
         var mode = 'off';
         if (src_not_url) {
@@ -95,11 +96,11 @@ ImageChanger.prototype.run = function(imgs = null) {
         var picdb = null;
         if (mode == 'replcfg') {
             log('mode is replcfg');
-            if (items.hasOwnProperty('imgrepldata')) {
+            if (this.current_settings.hasOwnProperty('imgrepldata')) {
                 picdb = new PicDB();
-                // log(items.imgrepldata);
-                picdb.loadDirect(items.imgrepldata || []);
-                picdb.processData(items.imgreplsrc + '/');
+                // log(this.current_settings.imgrepldata);
+                picdb.loadDirect(this.current_settings.imgrepldata || []);
+                picdb.processData(this.current_settings.imgreplsrc + '/');
             } else {
                 log('imgrepl won\'t work');
                 mode = 'off';
@@ -107,7 +108,7 @@ ImageChanger.prototype.run = function(imgs = null) {
         }
 
         if (mode !== 'off') {
-            var actions_to_run = getRunnableActions(tthis.current_config.actions, items);
+            var actions_to_run = getRunnableActions(tthis.current_config.actions, this.current_settings);
 
             for (var n = 0; n < actions_to_run.length; n++) {
                 action_name = actions_to_run[n];
@@ -186,6 +187,6 @@ ImageChanger.prototype.run = function(imgs = null) {
                 }
             }
         }
-    });
+    }
 };
 

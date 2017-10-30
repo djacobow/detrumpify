@@ -40,13 +40,13 @@ function zapStorage(cb) {
 
 
 // send a message to an event page to have it do an xhr for us
-function loadConfigRemote(cb) {
-  chrome.storage.local.get(['config_source'],function(items) {
-    if (items.hasOwnProperty('config_source')) {
+var loadConfigRemote = function(settings, cb) {
+  if (true) {
+    if (settings.hasOwnProperty('config_source')) {
       chrome.runtime.sendMessage(
         null,
         {'cmd':'get',
-        'url': items.config_source},
+        'url': settings.config_source},
         null,
         function(resp) {
           if ((resp === null) || (resp.err === null)) {
@@ -68,43 +68,37 @@ function loadConfigRemote(cb) {
     } else {
       cb('err','no config source');
     }
-  });
-}
+  }
+};
 
 
-function loadConfig(cb,try_remote = true) {
+function loadConfig(settings, cb,try_remote = true) {
   log('loadConfig START');
-  chrome.storage.local.get(
-    ['cfgdata', 'config_date', 'config_valid', 'config_source'],
-    function(items) {
+  if (true) {
       log('loadConfig readLocal');
       var now = (new Date()).getTime();
-      var have_config = items.hasOwnProperty('config_valid') && items.config_valid;
+      var have_config = settings.hasOwnProperty('config_valid') && settings.config_valid;
       var max_age = defaults.max_age;
       if (have_config) {
-        if (items.cfgdata.hasOwnProperty('refresh_age')) {
-          max_age = items.cfgdata.refresh_age;
+        if (settings.cfgdata.hasOwnProperty('refresh_age')) {
+          max_age = settings.cfgdata.refresh_age;
         }
       }
-      var force_local = (have_config &&
-                        items.hasOwnProperty('config_source') &&
-                        (items.config_source == '__local__')) ;
       // if max_age is set to negative then we never refresh
-      var use_local = force_local ? true :
-                     max_age < 0 ? true :
-        ((now - items.config_date) < max_age);
+      var use_stored = max_age < 0 ? true :
+        ((now - settings.config_date) < max_age);
 
-      if (have_config && use_local) {
+      if (have_config && use_stored) {
         log('loading from local storage');
-        cb(null,items.cfgdata);
+        cb(null,settings.cfgdata);
       } else if (try_remote) {
         log('calling loadConfigRemote');
-        loadConfigRemote(cb);
+        loadConfigRemote(settings, cb);
       } else {
         log('loadConfig FAILED');
         cb('load_config_failed');
       }
-    });
+    }
     log('loadConfig DONE');
 }
 
@@ -130,17 +124,31 @@ function storeConfig(err,txt,cb) {
   if (data.schema.match(/InsultMarkupLanguage\/0.\d/)) {
     chrome.storage.local.set({'cfgdata': data}, function() {
       if (chrome.lastError) {
+        log('error storing configdata');
         cb(chrome.lastError);
       } else {
         date = (new Date()).getTime();
-        chrome.storage.local.set({'config_date': date}, function() {});
-        chrome.storage.local.set({'config_valid': true}, function() {});
-        chrome.storage.local.set({'last_chosen_time': 0}, function() {});
-        log("STORE SUCCESS");
-        loadConfig(cb,false);
+        chrome.storage.local.set(
+            {'config_date': date,
+             'config_valid': true,
+             'last_chosen_time': 0}, 
+            function() {
+                log("STORE SUCCESS");
+                chrome.storage.local.get(null, function(settings) {
+                  loadConfig(settings,cb,false);
+                });
+            }
+        );
       }
     });
   }
+}
+
+function copyDictByKeys(dst,src) {
+    var ks = Object.keys(src);
+    for (var i=0;i<ks.length; i++) {
+        dst[ks[i]] = src[ks[i]];
+    }
 }
 
 function createAndSetStyle(name,style_text) {
