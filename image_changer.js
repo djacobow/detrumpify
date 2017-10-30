@@ -146,7 +146,7 @@ ImageChanger.prototype.run = function(imgs = null) {
                     } catch (w) {}
 
                     if (alt_match || src_match || sty_match || parent_link_match) {
-                        console.log('alt: ' + alt_match + ' src: ' + src_match + ' sty: ' + sty_match +
+                        log('alt: ' + alt_match + ' src: ' + src_match + ' sty: ' + sty_match +
                                 ' prnt: ' + parent_link_match);
                         var replsrc;
                         var ni = null;
