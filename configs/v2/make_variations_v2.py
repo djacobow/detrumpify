@@ -241,6 +241,7 @@ matic = {
                     'Chicken-Necked',
                     'Deranged',
                     'Desperate',
+                    'Vacuous',
                 ],
                 'b': [
                     'Fart',
@@ -401,7 +402,7 @@ matic = {
                     'Voldemort',
                     'Dotard',
                     'Cheeto',
-                    'Vacuous',
+                    '💩', # poo emoji
                 ]
             },
         },
@@ -817,6 +818,7 @@ monikers = {
       'Donny Two-Scoops',
       'World\'s Oldest Toddler',
       'Tangerine Idi Amin',
+      'Just a Big 💩',
     ],
     'dirty': [
       "Fuckface von Clownstick",
