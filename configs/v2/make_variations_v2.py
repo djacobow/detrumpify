@@ -1090,6 +1090,7 @@ monikers = {
     'clean': [
       'Sarah Huckster Sanders',
       'Spawn of Mike Huckabee',
+      'Un-❤-able Huckabee',
     ],
     'dirty': [
       'Lying White House Spokesperson Number n+1',
@@ -1225,9 +1226,9 @@ bconfig.append({
   'description': 'Always "Lord Dampnut"'
 });
 bconfig.append({
-  'name': 'Just Kittens',
-  'url': url_base + 'justkittens.json',
-  'description': 'No Insults -- Just Kittens',
+  'name': 'Just Pictures',
+  'url': url_base + 'justpictures.json',
+  'description': 'No Insults -- Just Pictures',
 });
 
 ofile = open('buttons_config.json',"w")
