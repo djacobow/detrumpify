@@ -7,5 +7,7 @@
     {"url": "https://toolsofourtools.org/detrumpify2/v2/images/bunnies", 
      "name": "Bunnies", "description": "Bunnies!"},
     {"url": "https://toolsofourtools.org/detrumpify2/v2/images/jackolanterns",
-     "name": "Jack-O-Lanterns", "description": "Scary Pumpkins"}
+     "name": "Jack-O-Lanterns", "description": "Scary Pumpkins"},
+    {"url": "https://toolsofourtools.org/detrumpify2/v2/images/kittens",
+     "name": "alt-kittens", "description": "Different Kittens"}
 ]
