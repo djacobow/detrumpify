@@ -269,7 +269,7 @@ OptionsThingy.prototype.restorePluginOptions = function() {
             srcelem.value = settings.config_source;
         } else {
             log('resetting config_source in restorePluginOptions');
-            this.storeThings({
+            tthis.storeThings({
                     'config_source': defaults.config_source
                 },
                 function() {});
