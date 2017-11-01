@@ -36,7 +36,8 @@ ImageChanger.prototype.makeImageReplacementDiv = function(img, action) {
     var nd = document.createElement('div');
     var newimg = document.createElement('img');
     newimg.setAttribute('detrumpified', true);
-    newimg.alt = 'National disgrace removed.';
+    newimg.alt = 'National disgrace replaced.';
+    newimg.title = 'National disgrace replaced.';
     var newimgsrc = chrome.runtime.getURL('empty_image.png');
     if (action.hasOwnProperty('image_replacement')) {
         var idx = Math.floor(Math.random() * action.image_replacement.html.length);
@@ -164,6 +165,7 @@ ImageChanger.prototype.run = function(imgs = null) {
                                 log('[kitten/blank]: replacing ' + img.src + ' with ' + replsrc);
                                 ni = document.createElement('img');
                                 ni.src = replsrc;
+                                ni.title = 'National Disgrace Replaced';
                                 img.parentNode.replaceChild(ni, img);
                             }
                         } else if (mode == 'replcfg') {
@@ -172,6 +174,7 @@ ImageChanger.prototype.run = function(imgs = null) {
                                 if (!img.getAttribute('replcfg_detrumpified')) {
                                     log('[replcfg]: replacing ' + img.src + ' with ' + replsrc);
                                     ni = document.createElement('img');
+                                    ni.title = 'National Disgrace Replaced';
                                     ni.style.width = Math.floor(iw + 0.5).toString() + 'px';
                                     ni.style.height = Math.floor(ih + 0.5).toString() + 'px';
                                     ni.setAttribute('replcfg_detrumpified', true);
