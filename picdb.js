@@ -39,11 +39,6 @@ PicDB.prototype.ChromeloadFromURL = function(src, cb) {
     );
 };
 
-PicDB.prototype.loadFromFile = function(src, cb) {
-    this.raw_data = require(src);
-    cb(null);
-};
-
 PicDB.prototype.parse = function(resp, cb) {
     try {
         resp.text += "\n";
@@ -135,24 +130,22 @@ if ((typeof require !== 'undefined') && (require.main === module)) {
         console.log(arguments);
     };
 
+    var raw_data = require('./configs/v2/images/puppies/output/img_list.json');
     var pdb = new PicDB();
-    pdb.loadFromFile('./configs/v2/images/puppies/output/img_list.json', function(lderr) {
-        if (!lderr) {
-            pdb.processData('file://');
+    pdb.loadDirect(raw_data);
+    pdb.processData('file://');
 
-            var tests = [
-                [45, 45],
-                [200, 200],
-                [800, 600],
-                [1204, 768],
-                [1000, 1000]
-            ];
-            log(pdb.db);
-            for (var i = 0; i < tests.length; i++) {
-                var test = tests[i];
-                var pic = pdb.selectImage(test[0], test[1]);
-                log(test, pic);
-            }
-        }
-    });
+    var tests = [
+        [45, 45],
+        [200, 200],
+        [800, 600],
+        [1204, 768],
+        [1000, 1000]
+    ];
+    log(pdb.db);
+    for (var i = 0; i < tests.length; i++) {
+        var test = tests[i];
+        var pic = pdb.selectImage(test[0], test[1]);
+        log(test, pic);
+    }
 }
