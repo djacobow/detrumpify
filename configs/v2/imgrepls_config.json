@@ -9,5 +9,7 @@
     {"url": "https://toolsofourtools.org/detrumpify2/v2/images/jackolanterns",
      "name": "Jack-O-Lanterns", "description": "Scary Pumpkins"},
     {"url": "https://toolsofourtools.org/detrumpify2/v2/images/kittens",
-     "name": "alt-kittens", "description": "Different Kittens"}
+     "name": "alt-kittens", "description": "Different Kittens"},
+    {"url": "https://toolsofourtools.org/detrumpify2/v2/images/obama",
+     "name": "obama", "description": "A Legitimate US President"}
 ]
