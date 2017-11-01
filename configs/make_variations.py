@@ -110,7 +110,7 @@ base = {
         'breitbart': {
             'default_enabled': False,
             'find_regex': [
-                "Breitbart(?!\\w)", "g"
+                "Breitbart(?!\\w)", "gi"
             ],
             'randomize_mode': 'always',
         },
@@ -511,6 +511,7 @@ monikers = {
       'Donny Two-Scoops',
       'World\'s Oldest Toddler',
       'Tangerine Idi Amin',
+      'Just a Big 💩',
     ],
     'dirty': [
       "Fuckface von Clownstick",
@@ -784,6 +785,7 @@ monikers = {
     'clean': [
       'Sarah Huckster Sanders',
       'Spawn of Mike Huckabee',
+      'Un-❤-able Huckabee',
     ],
     'dirty': [
       'Lying White House Spokesperson Number n+1',
