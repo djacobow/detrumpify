@@ -403,6 +403,7 @@ matic = {
                     'Dotard',
                     'Cheeto',
                     '💩', # poo emoji
+                    'Scobberlotcher',
                 ]
             },
         },
@@ -819,6 +820,8 @@ monikers = {
       'World\'s Oldest Toddler',
       'Tangerine Idi Amin',
       'Just a Big 💩',
+      'Son of a Brothel Goat',
+      'Yellow #6',
     ],
     'dirty': [
       "Fuckface von Clownstick",
@@ -868,6 +871,9 @@ monikers = {
       'Asshole-in-One',
       'Bergamot Ballsack',
       'Fucking Moron',
+      'Fucky McFuckface',
+      'Utter Prick',
+      'Smegma Goblin',
     ],
   },
   'alt-right': {
@@ -890,6 +896,7 @@ monikers = {
       'Postules-of-Hate',
       'Melting-Snowflake',
       'Alt-Blight',
+      'Projecting-Snowflakes',
     ],
     'dirty': [
       "Fucking-Scary-Right",
@@ -979,6 +986,7 @@ monikers = {
       'Sack of Halitosis',
       'Cirrhotic Rasputin',
       'Seething 4chan Post',
+      'Spoiled Lard Blob Stuck to the Botom of the Recycle Bin',
     ],
     'dirty': [
       'Neo Nazi Dickhead',
@@ -1004,6 +1012,7 @@ monikers = {
       'Lucky Charms Mascot',
       'Ku Klux Keebler',
       'Apple-Cheeked Hate Goblin',
+      'Blob of Raw Cookie Dough',
     ],
     'dirty': [
     ],
@@ -1093,6 +1102,7 @@ monikers = {
       'Sarah Huckster Sanders',
       'Spawn of Mike Huckabee',
       'Un-❤-able Huckabee',
+      'Baghdad Barbie',
     ],
     'dirty': [
       'Lying White House Spokesperson Number n+1',
