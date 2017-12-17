@@ -987,6 +987,8 @@ monikers = {
       'Cirrhotic Rasputin',
       'Seething 4chan Post',
       'Spoiled Lard Blob Stuck to the Botom of the Recycle Bin',
+      'Soiled Fish Tank Filter Insert',
+      'Bannon Hackonnen'
     ],
     'dirty': [
       'Neo Nazi Dickhead',
