@@ -169,7 +169,7 @@ TextChanger.prototype.make_replacement_elems_array = function(args) {
             // is in addition to any styles's associated with the
             // detrumpified class.
             unode.style = "";
-            unode.title = "was " + action_name;
+            unode.title = 'was: "' + chunk.text + '"';
 
             if (action.hasOwnProperty('match_style')) {
                 unode.style = action.match_style;
