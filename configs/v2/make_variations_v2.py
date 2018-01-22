@@ -242,6 +242,7 @@ matic = {
                     'Deranged',
                     'Desperate',
                     'Vacuous',
+                    'Five-Deferment',
                 ],
                 'b': [
                     'Fart',
@@ -404,6 +405,7 @@ matic = {
                     'Cheeto',
                     '💩', # poo emoji
                     'Scobberlotcher',
+                    'Draft Dodger',
                 ]
             },
         },
@@ -822,6 +824,8 @@ monikers = {
       'Just a Big 💩',
       'Son of a Brothel Goat',
       'Yellow #6',
+      'Five-Deferment Draft Dodger',
+      'Cadet Bone Spurs',
     ],
     'dirty': [
       "Fuckface von Clownstick",

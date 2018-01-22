@@ -514,6 +514,8 @@ monikers = {
       'Just a Big 💩',
       'Son of a Brothel Goat',
       'Yellow #6',
+      'Five-Deferment Draft Dodger',
+      'Cadet Bone Spurs',
     ],
     'dirty': [
       "Fuckface von Clownstick",
