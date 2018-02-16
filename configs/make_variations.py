@@ -568,6 +568,8 @@ monikers = {
       'Fucky McFuckface',
       'Utter Prick',
       'Smegma Goblin',
+      'America\'s Pulsing Sphincter',
+      'Pussygrabber Galore',
     ],
   },
   'alt-right': {
@@ -591,6 +593,7 @@ monikers = {
       'Melting-Snowflake',
       'Alt-Blight',
       'Projecting-Snowflakes',
+      'Nazis-with-Memes',
     ],
     'dirty': [
       "Fucking-Scary-Right",
@@ -682,7 +685,9 @@ monikers = {
       'Seething 4chan Post',
       'Spoiled Lard Blob Stuck to the Botom of the Recycle Bin',
       'Soiled Fish Tank Filter Insert',
-      'Bannon Hackonnen'
+      'Bannon Hackonnen',
+      'Three Day Old Corpse Just Pulled from River',
+      'Diseased Bullfrog',
     ],
     'dirty': [
       'Neo Nazi Dickhead',
@@ -780,6 +785,7 @@ monikers = {
       'Donatello\'s Racist Uncle',
       'Actual Grinch',
       'Dixie Koopa',
+      'Comrade Turtleface',
     ],
     'dirty': [
     ],
