@@ -37,7 +37,7 @@ ControlTimers.prototype.isThisPageRunnable = function(storeddata) {
     return match;
 };
 
-ControlTimers.prototype.postconfig_init = function(current_config) {
+ControlTimers.prototype.postconfig_init = function(current_config, current_settings) {
     log("psotconfig_init()");
     this.config = current_config;
     if (this.isThisPageRunnable()) {
@@ -50,6 +50,9 @@ ControlTimers.prototype.postconfig_init = function(current_config) {
             this.runInfo.runCount = this.config.run_info.count;
             this.backoffTimer();
         }
+        window.setTimeout(function() {
+            makeBreaking(current_config.breaking,current_settings);
+        },2000);
         this.tick();
     }
 };

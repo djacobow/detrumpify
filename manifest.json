@@ -8,7 +8,7 @@
         "page":"options.html",
         "chrome_style":true
     },
-    "version":"1.2.3",
+    "version":"1.2.4",
     "permissions":[
         "http://toolsofourtools.org/",
         "https://toolsofourtools.org/",
@@ -44,6 +44,8 @@
                 "timers.js",
                 "image_changer.js",
                 "text_changer.js",
+                "ttr.js",
+                "breaking.js",
                 "top.js"
             ],
             "run_at":"document_end"

@@ -36,6 +36,9 @@ var defaults = {
     // fraction of found instances to actually change
     'replace_fraction': '100',
 
+    // how often to put up a breaking headline
+    'breaking_fract': 1,
+
     // run on any page or just whitelist
     'run_anywhere': false,
 };

@@ -34,6 +34,7 @@ var OptionsThingy = function() {
         ['insult_style', 'styleinput', false],
         ['brevity', 'brevityinput', false],
         ['use_matic', 'use_matic', false],
+        ['breaking_fract', 'breaking_fract', false],
         ['replace_fraction', 'replace_fraction', false],
         ['brackets', 'quoteinput', false],
         ['rand_mode', 'randmodeinput', false],
@@ -70,6 +71,10 @@ var OptionsThingy = function() {
         ['use_matic', 'change', function() {
             tthis.saveGen('use_matic',
                 'use_matic');
+        }],
+        ['breaking_fract', 'change', function() {
+            tthis.saveGen('breaking_fract',
+                'breaking_fract');
         }],
         ['replace_fraction', 'change', function() {
             tthis.saveGen('replace_fraction',

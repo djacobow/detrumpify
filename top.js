@@ -33,7 +33,6 @@ var ct = new ControlTimers(runReplacementOnce);
 
 function init() {
     set_initial_url(function() {
-        //chrome.storage.local.get(['insult_style', 'run_anywhere', 'track_mutations'],
         chrome.storage.local.get(null,
             function(settings) {
                 current_settings = settings;
@@ -44,7 +43,7 @@ function init() {
                 loadConfig(settings, function(err, res) {
                     if (!err) {
                         current_config = res;
-                        ct.postconfig_init(res);
+                        ct.postconfig_init(res,settings);
                     }
                 });
             });
