@@ -37,7 +37,7 @@ var defaults = {
     'replace_fraction': '100',
 
     // how often to put up a breaking headline
-    'breaking_fract': 1,
+    'breaking_fract': 0,
 
     // run on any page or just whitelist
     'run_anywhere': false,
