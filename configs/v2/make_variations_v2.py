@@ -62,6 +62,9 @@ base = {
         'Experts confirm Donald Trump is bad president, bad person.',
         'Trump administration official dissembles.',
         'President manifestly unfit for presidency.',
+        'Sound, Fury, Signify Nothing',
+        'World Cruel, Cruel',
+        'Uh-oh, we\'re really screwed now.',
     ],
     'actions': {
         'trump': {
@@ -1308,6 +1311,7 @@ monikers = {
       'Spawn of Mike Huckabee',
       'Un-❤-able Huckabee',
       'Baghdad Barbie',
+      'Sneer of Sauron',
     ],
     'dirty': [
       'Lying White House Spokesperson Number n+1',
