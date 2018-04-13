@@ -1022,6 +1022,11 @@ monikers = {
       'Drum of Hot Farts',
       'Reverse Midas',
       'Roadside Urine Jug',
+      'IQ45',
+      'Corncob Head',
+      'Victim of Tanning Bed Malfunction',
+      'Baked Ham',
+      'Liar-in-Chief',
     ],
     'dirty': [
       "Fuckface von Clownstick",
@@ -1100,6 +1105,8 @@ monikers = {
       'Alt-Blight',
       'Projecting-Snowflakes',
       'Nazis-with-Memes',
+      'Hateful Man-Babies',
+      'Dunciad of Confederates',
     ],
     'dirty': [
       "Fucking-Scary-Right",
@@ -1135,6 +1142,7 @@ monikers = {
       "America's #2",
       'Warren Harding Impersonator',
       'Mother\'s Favorite Little Soldier',
+      '"Mother" Lover',
     ],
     'dirty' : [
     ],
@@ -1330,6 +1338,7 @@ monikers = {
     'clean': [
       'Cruella DeVos',
       'DevOs Umbridge',
+      'Dumbridge',
     ],
     'dirty': [
     ],
