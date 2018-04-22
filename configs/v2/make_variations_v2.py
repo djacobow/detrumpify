@@ -631,6 +631,7 @@ matic = {
                     'Oracle of Dipshittery',
                     'Attention Whore',
                     'Huckster',
+                    'Sphincterlips',
                 ],
                 'shka': [ ],
                 'shkb': [ ],
@@ -1081,6 +1082,7 @@ monikers = {
       'Smegma Goblin',
       'America\'s Pulsing Sphincter',
       'Pussygrabber Galore',
+      'Spraytan Sphincterlips',
     ],
   },
   'alt-right': {
