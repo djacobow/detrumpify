@@ -1028,6 +1028,8 @@ monikers = {
       'Victim of Tanning Bed Malfunction',
       'Baked Ham',
       'Liar-in-Chief',
+      'Mango Mugabe',
+      '45✱',
     ],
     'dirty': [
       "Fuckface von Clownstick",
