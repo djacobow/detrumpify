@@ -1085,6 +1085,7 @@ monikers = {
       'America\'s Pulsing Sphincter',
       'Pussygrabber Galore',
       'Spraytan Sphincterlips',
+      'Shit-Midas',
     ],
   },
   'alt-right': {
