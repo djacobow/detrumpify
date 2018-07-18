@@ -65,6 +65,9 @@ base = {
         'Sound, Fury, Signify Nothing',
         'World Cruel, Cruel',
         'Uh-oh, we\'re really screwed now.',
+        'They\'re all corrupt sh!tbags',
+        'President pardons self for any and all crimes he, family, friends commit, or may commit.',
+        'Brutal autocrats invite Trump to address annual convention.',
     ],
     'actions': {
         'trump': {
@@ -275,6 +278,9 @@ matic = {
                     'Desperate',
                     'Vacuous',
                     'Five-Deferment',
+                    'Chicken-Eyed',
+                    'Slobbering',
+                    'Syphilitic',
                 ],
                 'b': [
                     'Fart',
@@ -438,6 +444,10 @@ matic = {
                     '💩', # poo emoji
                     'Scobberlotcher',
                     'Draft Dodger',
+                    'Brat',
+                    'Barnacle',
+                    'Pigfart',
+                    'Traitor',
                 ],
                 "shka": [
                     'Artless',
@@ -1030,6 +1040,22 @@ monikers = {
       'Liar-in-Chief',
       'Mango Mugabe',
       '45✱',
+      'Horse Loose in a Hospital',
+      'Corporal Bone Spurs',
+      'Orange Colostomy Bag',
+      'King Mierdas',
+      '💩',
+      'The Very Last Person on Earth Who You\'d Want to Be President',
+      'Agent Orange',
+      'Mt. St. Felons',
+      'Gassy Burrito',
+      'Lord of the Fries',
+      'Lord Peeington',
+      'Blonde Dingleberry',
+      'Wee-Wee Dinkypaws',
+      'White Noise Machine',
+      'Traitor in Chief',
+      'Most Corrupt President Ever',
     ],
     'dirty': [
       "Fuckface von Clownstick",
@@ -1086,6 +1112,8 @@ monikers = {
       'Pussygrabber Galore',
       'Spraytan Sphincterlips',
       'Shit-Midas',
+      'America\'s Shitstorm',
+      'Unwiped Ass-Crack',
     ],
   },
   'alt-right': {
@@ -1112,6 +1140,7 @@ monikers = {
       'Nazis-with-Memes',
       'Hateful Man-Babies',
       'Dunciad of Confederates',
+      'So-So-Wrong',
     ],
     'dirty': [
       "Fucking-Scary-Right",
@@ -1255,6 +1284,7 @@ monikers = {
       'Con-Job',
     ],
     'dirty' : [
+      'Shitstorm\'s Chamber Maid',
     ],
   },
   'spicer': {
@@ -1314,6 +1344,7 @@ monikers = {
       'Blightshart',
       'Notsmart',
       'Spitefart',
+      'Not-So-Brightbart',
     ],
     'dirty': [
     ],
@@ -1344,6 +1375,7 @@ monikers = {
       'Cruella DeVos',
       'DevOs Umbridge',
       'Dumbridge',
+      'Uneducated Human Erase',
     ],
     'dirty': [
     ],
