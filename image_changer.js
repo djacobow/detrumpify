@@ -72,6 +72,22 @@ ImageChanger.prototype.makeImageReplacementDiv = function(img, action) {
     return nd;
 };
 
+var swapOldNewSrc = function(elem) {
+    var old_src = elem.getAttribute('old_src');
+    if (old_src) {
+        var new_old_src = elem.src;
+        elem.setAttribute('old_src',new_old_src);
+        elem.src = old_src;
+    }
+};
+var unReplaceEventHandler = function(ev) {
+    ev.preventDefault();
+    swapOldNewSrc(ev.target);
+    ev.target.removeEventListener('click',unReplaceEventHandler);
+};
+
+
+
 ImageChanger.prototype.run = function(imgs = null) {
     log('switch_imgs()');
 
@@ -165,6 +181,8 @@ ImageChanger.prototype.run = function(imgs = null) {
                                 log('[kitten/blank]: replacing ' + img.src + ' with ' + replsrc);
                                 ni = document.createElement('img');
                                 ni.src = replsrc;
+                                ni.setAttribute('old_src',img.src);
+                                ni.addEventListener('click', unReplaceEventHandler);
                                 ni.title = 'National Disgrace Replaced';
                                 img.parentNode.replaceChild(ni, img);
                             }
@@ -178,8 +196,10 @@ ImageChanger.prototype.run = function(imgs = null) {
                                     ni.style.width = Math.floor(iw + 0.5).toString() + 'px';
                                     ni.style.height = Math.floor(ih + 0.5).toString() + 'px';
                                     ni.setAttribute('replcfg_detrumpified', true);
+                                    ni.setAttribute('old_src',img.src);
                                     ni.src = replsrc;
                                     img.parentNode.replaceChild(ni, img);
+                                    ni.addEventListener('click', unReplaceEventHandler);
                                 }
                             } else {
                                 log('No appropriate replacement image for ' + img.src + ' (' + iw + ',' + ih + ')');
