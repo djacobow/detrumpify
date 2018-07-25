@@ -183,7 +183,7 @@ ImageChanger.prototype.run = function(imgs = null) {
                                 ni.src = replsrc;
                                 ni.setAttribute('old_src',img.src);
                                 ni.addEventListener('click', unReplaceEventHandler);
-                                ni.title = 'National Disgrace Replaced';
+                                ni.title = 'Click to re-trumpify image';
                                 img.parentNode.replaceChild(ni, img);
                             }
                         } else if (mode == 'replcfg') {
@@ -192,7 +192,7 @@ ImageChanger.prototype.run = function(imgs = null) {
                                 if (!img.getAttribute('replcfg_detrumpified')) {
                                     log('[replcfg]: replacing ' + img.src + ' with ' + replsrc);
                                     ni = document.createElement('img');
-                                    ni.title = 'National Disgrace Replaced';
+                                    ni.title = 'Click to re-trumpify image';
                                     ni.style.width = Math.floor(iw + 0.5).toString() + 'px';
                                     ni.style.height = Math.floor(ih + 0.5).toString() + 'px';
                                     ni.setAttribute('replcfg_detrumpified', true);
