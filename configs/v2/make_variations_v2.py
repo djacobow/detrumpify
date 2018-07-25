@@ -1056,6 +1056,8 @@ monikers = {
       'White Noise Machine',
       'Traitor in Chief',
       'Most Corrupt President Ever',
+      'Пу́тин кукольный',
+      'TЯЦMР',
     ],
     'dirty': [
       "Fuckface von Clownstick",
