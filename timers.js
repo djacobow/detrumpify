@@ -1,3 +1,5 @@
+/* jshint esversion: 6 */
+
 var ControlTimers = function(callback) {
     this.runInfo = {
         trackMutations: false,
@@ -18,11 +20,44 @@ ControlTimers.prototype.preconfig_init = function(storeddata) {
     if (storeddata.hasOwnProperty('track_mutations')) {
         this.runInfo.trackMutations = storeddata.track_mutations;
     }
+    if (storeddata.hasOwnProperty('user_blacklist')) {
+        this.user_blacklist = storeddata.user_blacklist;
+    }
 };
 
-ControlTimers.prototype.isThisPageRunnable = function(storeddata) {
-    if (this.run_anywhere) return true;
-    log('isThisPageRunnable');
+ControlTimers.prototype.isThisPageRunnable = function() {
+    if (this.isThisPageBlackListed()) return false;
+    return this.isThisPageWhiteListed();
+};
+
+ControlTimers.prototype.isThisPageBlackListed = function() {
+    log('isThisPageBlackListed');
+    var url = document.location.href;
+    var black_str = this.user_blacklist;
+    if (black_str && black_str.length) {
+        list = black_str.split(/[^\w\.]+/)
+            .map((x) => { return x.trim(); })
+            .filter((x) => { return x.length;});
+        log(list);
+        for (var i=0; i< list.length; i++) {
+            var l = list[i];
+            var re = new RegExp('https?://(\\w+\\.)?' + l + '\\b');
+            if (url.match(re)) {
+                log('BLACKLISTED because ' + l);
+                return true;
+            }
+        }
+    }
+    log('NOT BLACKLISTED');
+    return false;
+};
+
+ControlTimers.prototype.isThisPageWhiteListed = function() {
+    if (this.run_anywhere) {
+        log('RUN ANYWHERE');
+        return true;
+    }
+    log('isThisPageWhiteListed');
     var url = document.location.href;
     var match = false;
     for (var i = 0; i < this.config.whitelist.length; i++) {

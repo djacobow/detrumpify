@@ -40,6 +40,7 @@ var OptionsThingy = function() {
         ['rand_mode', 'randmodeinput', false],
         ['run_anywhere', 'run_anywhere', true],
         ['track_mutations', 'track_mutations', true],
+        ['user_blacklist', 'user_blacklist', false],
     ];
     var tthis = this;
     this.savethings = [
@@ -97,6 +98,16 @@ var OptionsThingy = function() {
             tthis.saveGen('track_mutations',
                 'track_mutations',
                 true);
+        }],
+        ['user_blacklist', 'change', function() {
+            tthis.saveGen('user_blacklist',
+                'user_blacklist',
+                false);
+        }],
+        ['blacklist_save_button', 'click', function() {
+            tthis.saveGen('user_blacklist',
+                'user_blacklist',
+                false);
         }],
         ['reset_storage', 'click', function() {
             tthis.resetStorage();

@@ -4,41 +4,44 @@ var url_base = 'https://toolsofourtools.org/detrumpify2/v2/';
 
 var defaults = {
     // 'config_source': url_base + 'xywl436wxlgquw1/clean.json',
-    'config_source': url_base + 'clean.json',
+    config_source: url_base + 'clean.json',
     // 'max_age': 7 * 24 * 60 * 60 * 1000
-    'max_age': 180 * 1000,
-    'buttons_fetch_url': url_base + 'buttons_config.json',
+    max_age: 180 * 1000,
+    buttons_fetch_url: url_base + 'buttons_config.json',
 
     // default blanket style for all insults
-    'insult_style': '',
+    insult_style: '',
 
     // default brevity. 0 == any length. Note that it is a string,
     // since html form will also return string
-    'brevity': "0",
+    brevity: "0",
 
     // default brackets: none
-    'brackets': 'none',
+    brackets: 'none',
 
     // classname for all insult styles
-    'insult_cssname': 'span.detrumpified',
-    'insult_classname': 'detrumpified',
+    insult_cssname: 'span.detrumpified',
+    insult_classname: 'detrumpified',
 
     // how often to change insults on page
-    'rand_mode': 'always',
+    rand_mode: 'always',
 
     // should I replace images with kittens
-    'imgrepls_fetch_url': url_base + 'imgrepls_config.json',
-    'imgreplsrc': '__off__',
+    imgrepls_fetch_url: url_base + 'imgrepls_config.json',
+    imgreplsrc: '__off__',
 
     // fire up the mock-o-matic?
-    'use_matic': 'off',
+    use_matic: 'off',
 
     // fraction of found instances to actually change
-    'replace_fraction': '100',
+    replace_fraction: '100',
 
     // how often to put up a breaking headline
-    'breaking_fract': 0,
+    breaking_fract: 0,
 
     // run on any page or just whitelist
-    'run_anywhere': false,
+    run_anywhere: false,
+
+    // some pages never to run on
+    user_blacklist: "mail.google.com mail.yahoo.com",
 };

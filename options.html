@@ -221,14 +221,15 @@
             <tr>
                 <td width="50%">
                     <div class="tooltip">
-                        <b>Run Anywhere</b>
+                        <b>Ignore Whitelist</b>
                         <input class="tooltip" type="checkbox" id="run_anywhere" name="run_anywhere" value="bloop">
 
                     </div>
                     <p class="tooltiptext" style="left: 0px; width: 350px;">
-                    If checked, Detrumpify will run on any website you visit.
-                    If not checked, Detrumpify will only run on the sites
-                    specified in the configuration file.</p>
+                    Detrumpify configuration files come with a "whitelist" of 
+                    news sites and will only run on those. If this is checked, 
+                    Detrumpify will run on <i>any</i> website you visit except 
+                    those you explicitly blacklist below.</p>
                 </td>
                 <td width="50%">
                     <div class="tooltip">
@@ -316,6 +317,28 @@
     </div>
 
     <!-- <span>Set the maximum word length of your insults and quoting preference</span> -->
+
+    <div id="blacklistdivdiv" style="background-color: #e0e0e0;">
+        <div id="blacklistdiv"></div>
+        <table style="width:100%;">
+            <tr>
+                <td style="width: 10%;"><b>Blacklist</b></td>
+                <td style="width: 90%;">
+                    <div class="tooltip" style="display: flex;">
+                        <div>
+                            <textarea type="text" id="user_blacklist" cols="45" rows="4"></textarea>
+                        </div>
+                        <div style="flex-grow: 1;">
+                            <input type="button" value="Save" id="blacklist_save_button">
+                        </div>
+                    </div>
+                    <p style="" class="tooltiptext">Enter a space-separate list of website
+                    hosts that you want "blacklisted". Detrumpify will skip over these
+                    sites at all times.</p>
+                </td>
+            </tr>
+        </table>
+    </div>
 
     <div id="configdetaildiv">
         <input type="checkbox" id="showconfigcheck" name="showconfigcheck" value="bloop">Show configuration details.<br>
