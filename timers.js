@@ -35,7 +35,7 @@ ControlTimers.prototype.isThisPageBlackListed = function() {
     var url = document.location.href;
     var black_str = this.user_blacklist;
     if (black_str && black_str.length) {
-        list = black_str.split(/[^\w\.]+/)
+        list = black_str.split(/[^\w\.-]+/)
             .map((x) => { return x.trim(); })
             .filter((x) => { return x.length;});
         log(list);
