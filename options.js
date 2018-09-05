@@ -136,7 +136,7 @@ var neatenBlackList = function(to_add = null) {
     var id = {};
     il.forEach((i) => { id[i] = 1; });
     il = Object.keys(id).sort();
-    bl.value = il.join('\n');
+    bl.value = il.join(' ');
     return il;
 };
 
