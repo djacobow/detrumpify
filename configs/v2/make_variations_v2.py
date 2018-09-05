@@ -188,6 +188,13 @@ base = {
             ],
             'randomize_mode': 'always',
         },
+        'pai': {
+            'default_enabled': False,
+            'find_regex': [
+                "(Ajit\\s)?Pai(?!\\w)", "g"
+            ],
+            'randomize_mode': 'always',
+        },
     },
 }
 
@@ -1058,6 +1065,8 @@ monikers = {
       'Most Corrupt President Ever',
       'Пу́тин кукольный',
       'TЯЦMР',
+      'Shrieking Toad',
+      'TraitorTot™',
     ],
     'dirty': [
       "Fuckface von Clownstick",
@@ -1300,6 +1309,7 @@ monikers = {
       'Whiny Spice',
       'America\'s Baghdad Bob',
       'Human Toilet Brush',
+      'Man Hiding in Bushes',
     ],
     'dirty': [
       'Sean Sphincter',
@@ -1382,6 +1392,16 @@ monikers = {
     'dirty': [
     ],
   },
+  'pai': {
+    'clean': [
+        'FCC Con Artist',
+        'Comcast, if it Were a Human,',
+        'Walking Bad WiFi Connection',
+    ],
+    'dirty': [
+        'Comcast Fellator',
+    ],
+  }
 }
 
 url_base = 'https://toolsofourtools.org/detrumpify2/v2/'
