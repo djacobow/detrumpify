@@ -105,14 +105,39 @@ var OptionsThingy = function() {
                 false);
         }],
         ['blacklist_save_button', 'click', function() {
+            neatenBlackList();
             tthis.saveGen('user_blacklist',
                 'user_blacklist',
                 false);
+        }],
+        ['blacklist_add_button', 'click', function() {
+            getCurrentWindowHost((host) => {
+                if (host) {
+                    neatenBlackList(host);
+                    tthis.saveGen('user_blacklist',
+                        'user_blacklist',
+                        false);
+                }
+            });
+
         }],
         ['reset_storage', 'click', function() {
             tthis.resetStorage();
         }],
     ];
+};
+
+var neatenBlackList = function(to_add = null) {
+    var bl = document.getElementById('user_blacklist');
+    if (to_add) bl.value += ' ' + to_add;
+    var il = bl.value.split(/[^\w\.]+/)
+        .map((x) => { return x.trim(); })
+        .filter((x) => { return x.length; });
+    var id = {};
+    il.forEach((i) => { id[i] = 1; });
+    il = Object.keys(id).sort();
+    bl.value = il.join('\n');
+    return il;
 };
 
 OptionsThingy.prototype.storeThings = function(dict, cb) {
@@ -529,6 +554,22 @@ OptionsThingy.prototype.setupSaveHandlers = function() {
         var st = this.savethings[i];
         document.getElementById(st[0]).addEventListener(st[1], st[2]);
     }
+};
+
+getCurrentWindowHost = function(cb) {
+    chrome.windows.getCurrent({populate:true}, (w) => {
+        console.log(w.tabs);
+        for (var i=0;i<w.tabs.length;i++) {
+            var tab = w.tabs[i];
+            if (tab && tab.active) {
+                var a = document.createElement('a');
+                a.href = tab.url;
+                var host = a.hostname;
+                return cb(host);
+            }
+        }
+        return cb(null);
+    });
 };
 
 function setup_handlers() {

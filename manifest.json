@@ -16,7 +16,8 @@
         "http://localhost:8000/",
         "https://localhost/",
         "https://localhost:8000/",
-        "storage"
+        "storage",
+        "tabs"
     ],
     "background":{
         "persistent":false,
