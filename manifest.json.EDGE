@@ -1,0 +1,73 @@
+{
+    "manifest_version": 2,
+    "name": "Detrumpify",
+    "short_name": "Detrumpify",
+    "description": "Replaces references to Donald Trump with more accurate descriptions.",
+    "author": "Dave Jacobowitz",
+    "options_page": "options.html",
+    "version": "0.1.2.8",
+    "permissions": [
+        "http://toolsofourtools.org/",
+        "https://toolsofourtools.org/",
+        "http://localhost/",
+        "http://localhost:8000/",
+        "https://localhost/",
+        "https://localhost:8000/",
+        "storage",
+        "tabs"
+    ],
+    "background": {
+        "page": "background_for_edge.html",
+        "persistent": true
+    },
+    "browser_action": {
+        "default_icon": {
+            "19": "icons/dt-19.png",
+            "38": "icons/dt-38.png",
+            "44": "icons/dt-44.png",
+            "50": "icons/dt-50.png",
+            "128": "icons/dt-128.png",
+            "150": "icons/dt-150.png",
+            "200": "icons/dt-200.png"
+        },
+        "default_title": "Configure Detrumpify",
+        "default_popup": "options.html"
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "http://*/*",
+                "https://*/*"
+            ],
+            "js": [
+                "defaults.js",
+                "shared.js",
+                "picdb.js",
+                "timers.js",
+                "image_changer.js",
+                "text_changer.js",
+                "ttr.js",
+                "breaking.js",
+                "top.js"
+            ],
+            "run_at": "document_end"
+        }
+    ],
+    "icons": {
+        "128": "icons/dt-128.png",
+        "200": "icons/dt-200.png",
+        "400": "icons/dt-400.png"
+    },
+    "applications": {
+        "gecko": {
+            "id": "@detrumpify"
+        }
+    },
+    "web_accessible_resources": [
+        "empty_image.png"
+    ],
+    "-ms-preload": {
+        "backgroundScript": "backgroundScriptsAPIBridge.js",
+        "contentScript": "contentScriptsAPIBridge.js"
+    }
+}
