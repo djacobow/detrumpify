@@ -41,6 +41,9 @@ var defaults = {
 
     // run on any page or just whitelist
     run_anywhere: false,
+ 
+    // use the mutation approach or timer approach
+    track_mutations: false,
 
     // some pages never to run on
     user_blacklist: "mail.google.com mail.yahoo.com",
