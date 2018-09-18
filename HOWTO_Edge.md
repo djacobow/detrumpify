@@ -42,6 +42,10 @@ Test in the normal manner.
 ## Packaging The Extension
 
 
+Links:
+  * https://docs.microsoft.com/en-us/microsoft-edge/extensions/guides/packaging
+  * https://docs.microsoft.com/en-us/microsoft-edge/extensions/guides/packaging/using-manifoldjs-to-package-extensions
+
 0. Install nodejs
 1. Install manifoldjs 
 
@@ -49,13 +53,15 @@ Test in the normal manner.
 
 2. Use manifoldjs to pre-package the extension.
 
-   https://docs.microsoft.com/en-us/microsoft-edge/extensions/guides/packaging/using-manifoldjs-to-package-extensions
  
    `manifoldjs -l debug -p edgeextension -f edgeextension -m <...>\Detrumpify\manifest.json -d workarea`
 
 3. Then you have to edit: `<workarea>/Detrumpify/edgeextension/manifest/appxmanifest.xml`
 
    You'll need to adjust some icon locations and fix the publisher identifier:
+
+   Useful link:
+     * https://docs.microsoft.com/en-us/microsoft-edge/extensions/guides/packaging/creating-and-testing-extension-packages#app-identity-template-values
 
 
 ```
@@ -129,32 +135,91 @@ Test in the normal manner.
 
 ## Testing the package
 
-Testing on of these appx packages is not easy. You need to sign it before you can test it.
+Testing on of these appx packages is not easy. You need to sign it before 
+you can load it and test it.
 
-### Create a self-signed certificate
-
-### 
-
-
-https://partner.microsoft.com/en-us/dashboard/products/9P38V28D5LGL/submissions/1152921505688100241/packages
-
-
-how to package 
-https://docs.microsoft.com/en-us/microsoft-edge/extensions/guides/packaging
-
-how to use manifoldjs
-https://docs.microsoft.com/en-us/microsoft-edge/extensions/guides/packaging/using-manifoldjs-to-package-extensions
-
-how to copy the stuff you need for the other manifest (id, etc)
-https://docs.microsoft.com/en-us/microsoft-edge/extensions/guides/packaging/creating-and-testing-extension-packages#app-identity-template-values
-
-creating a certificate and making it trusted
-https://docs.microsoft.com/en-us/microsoft-edge/extensions/guides/packaging/creating-and-testing-extension-packages#testing-an-appx-package
-
-https://docs.microsoft.com/en-us/windows/uwp/packaging/create-certificate-package-signing
-
-https://docs.microsoft.com/en-us/windows/desktop/appxpkg/how-to-sign-a-package-using-signtool
-
-https://docs.microsoft.com/en-us/powershell/module/pkiclient/export-certificate?view=win10-ps
+Links:
+   * https://docs.microsoft.com/en-us/microsoft-edge/extensions/guides/packaging/creating-and-testing-extension-packages#testing-an-appx-package
+   * https://docs.microsoft.com/en-us/windows/uwp/packaging/create-certificate-package-signing
+   * https://docs.microsoft.com/en-us/windows/desktop/appxpkg/how-to-sign-a-package-using-signtool
+   * https://docs.microsoft.com/en-us/powershell/module/pkiclient/export-certificate?view=win10-ps
 
 
+0. Install the Microsoft SDK to you can get a utility called "signtool.exe"
+
+1. Get your publisher identity, name, etc from the Windows Dev Center 
+   dashboard. It's all under App Management => App Identity
+
+
+   Use that Publisher info here:
+
+   `New-SelfSignedCertificate -Type Custom -Subject "CN=secret_stuff" -FriendName toot -CertStoreLocation "Cert:\LocalMachine\My\"`
+
+   You can check that it is there with:
+
+```
+   Set-Location Cert:\LocalMachine\My
+   Get-ChildItem
+```
+
+You should get something like:
+
+```
+Thumbprint                                Subject
+----------                                -------
+0E17760DF83D1415E07B9B5C3DEB0FA4441E8455  CN=CD84993F-08C4-47FB-BA55-7F5262A68E48
+```
+
+That thumbprint is what you use to ID the cert going forward.
+
+2. Generate a .pfx file for signing the package:
+
+First, make a password:
+
+`$pwd = ConvertTo-SecureString -String <Your Password> -Force -AsPlainText`
+
+Then use that password to make the signing file:
+
+Export-PfxCertificate -cert "Cert:\LocalMachine\My\<Certificate Thumbprint>" -FilePath <FilePath>/toot.pfx -Password $pwd
+ 
+
+3. Now export another version of the cert so that computer trusts it
+
+```
+$cert = (Get-ChildItem -Path cert:\CurrentUser\My\<thumbprint>)
+Export-Certificate -Cert $cert -FilePath <somepath>toot.sst -Type SST
+Certutil -addStore TrustedPeople toot.sst
+```
+
+
+4. Now you can sign the package
+
+
+   Find signtool.exe. It should be in `c:\Program Files (x86)\Windows Kits\10\bin\10.0.17134.0\x64` or similar.
+
+   Now run:
+
+   `signtool.exe sign /fd SHA256 /a /f toot.pfx /p <password_we_used_above> <path_to_the_appx_package>\edgeExtension.appx`
+
+
+5. Now you can install the package you made before
+
+   Add-AppxPackage <path_to_appx>
+
+
+6. Now, wasn't that fun?!?!?
+
+
+
+## Uploading the Extension
+
+This is done on the developer dashboard. When you upload there will a 
+validation step and there will likely be errors, so that's life.
+ 
+
+
+
+# Useful Links
+
+Microsoft Dev Dashboard:
+    https://partner.microsoft.com/en-us/dashboard
