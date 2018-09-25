@@ -130,7 +130,7 @@ var OptionsThingy = function() {
 var neatenBlackList = function(to_add = null) {
     var bl = document.getElementById('user_blacklist');
     if (to_add) bl.value += ' ' + to_add;
-    var il = bl.value.split(/[^\w\.]+/)
+    var il = bl.value.split(/[^\w\.-]+/)
         .map((x) => { return x.trim(); })
         .filter((x) => { return x.length; });
     var id = {};
