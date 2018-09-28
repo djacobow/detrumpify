@@ -63,6 +63,7 @@ Links:
    Useful link:
      * https://docs.microsoft.com/en-us/microsoft-edge/extensions/guides/packaging/creating-and-testing-extension-packages#app-identity-template-values
 
+   Don't forget to copy the actual icons into the new `manifest\Assets` folder
 
 ```
 <?xml version="1.0" encoding="utf-8"?>
