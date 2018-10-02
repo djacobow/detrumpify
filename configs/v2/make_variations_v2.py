@@ -195,6 +195,14 @@ base = {
             ],
             'randomize_mode': 'always',
         },
+        'kavanaugh': {
+            'default_enabled': False,
+            'find_regex': [
+                "((Justice|JUSTICE)\\s)?((Brett|BRETT)\\s)?((Michael|MICHAEL)\\s)?(Kavanaugh|KAVANAUGH)(?!\\w)", "g"
+                #"((Brett|BRETT)\\s)?((Michael|M\\.)\\s)?(KAVANAUGH|Kavanaugh)(?!\\w)", "g"
+            ],
+            'randomize_mode': 'always',
+        },
     },
 }
 
@@ -1067,6 +1075,7 @@ monikers = {
       'TЯЦMР',
       'Shrieking Toad',
       'TraitorTot™',
+      'Talking Gallstone',
     ],
     'dirty': [
       "Fuckface von Clownstick",
@@ -1188,6 +1197,7 @@ monikers = {
       'Warren Harding Impersonator',
       'Mother\'s Favorite Little Soldier',
       '"Mother" Lover',
+      'Norman Bates Double',
     ],
     'dirty' : [
     ],
@@ -1388,6 +1398,7 @@ monikers = {
       'DevOs Umbridge',
       'Dumbridge',
       'Uneducated Human Erase',
+      'Educationy Allergy',
     ],
     'dirty': [
     ],
@@ -1397,11 +1408,36 @@ monikers = {
         'FCC Con Artist',
         'Comcast, if it Were a Human,',
         'Walking Bad WiFi Connection',
+        'Rotten Pai',
     ],
     'dirty': [
         'Comcast Fellator',
     ],
-  }
+  },
+  'kavanaugh': {
+    'clean': [
+        'Federalist Society Angry Robot',
+        'Raging Spittle-Sprayer',
+        'Bart O\'Kavanaugh',
+        'Probable Rapist',
+        'Mean Drunk',
+        'Textbook Alcoholic',
+        'Beer Liker',
+        'Serial Perjurer',
+        'Sunofabitch Who Thinks Supreme Court Seat Is His Birthright',
+        'Soon-to-be Passengerless Carpool Dad',
+        'Future Convict',
+        'Prep-School Douchebag',
+        'Boofoon',
+        'Hostile White Man Unaccustomed to Slightest Bit of Accountability',
+        'Walking Alcoholics Anonymous PSA',
+    ],
+    'dirty': [
+        'Drunken Dick Waver',
+        'Sexist Fuckwit',
+        'Just Another Shitbag from Yale',
+    ],
+  },
 }
 
 url_base = 'https://toolsofourtools.org/detrumpify2/v2/'
