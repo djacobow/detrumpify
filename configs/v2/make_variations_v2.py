@@ -1431,6 +1431,7 @@ monikers = {
         'Boofoon',
         'Hostile White Man Unaccustomed to Slightest Bit of Accountability',
         'Walking Alcoholics Anonymous PSA',
+        'Yalie MacYaleface',
     ],
     'dirty': [
         'Drunken Dick Waver',
