@@ -8,20 +8,33 @@ var ControlTimers = function(callback) {
         runCount: 5
     };
     this.cb = callback;
-    this.run_anywhere = false;
+    this.use_blacklist = false;
     this.run_again = false;
     this.stop_completely = false;
 };
 
 ControlTimers.prototype.preconfig_init = function(storeddata) {
-    if (storeddata.hasOwnProperty('run_anywhere')) {
-        this.run_anywhere = storeddata.run_anywhere;
+
+    // Extra complexity to deal with the old "run_anywhere" variable
+    // that the user may have set and we want to make sure it carried
+    // forward to user doesn't have to set it again.
+    if (storeddata.hasOwnProperty('site_filter')) {
+        this.use_blacklist = (storeddata.site_filter == 'use_blacklist');
+    } else if (storeddata.hasOwnProperty('run_anywhere')) {
+        this.use_blacklist = storeddata.run_anywhere;
+        chrome.storage.local.set({
+            'site_filter': storeddata.run_anywhere ? 'use_blacklist' : 'use_whitelist',
+        }, () => {});
     }
+
     if (storeddata.hasOwnProperty('track_mutations')) {
         this.runInfo.trackMutations = storeddata.track_mutations;
     }
     if (storeddata.hasOwnProperty('user_blacklist')) {
         this.user_blacklist = storeddata.user_blacklist;
+    }
+    if (storeddata.hasOwnProperty('user_whitelist')) {
+        this.user_whitelist = storeddata.user_whitelist;
     }
 };
 
@@ -30,51 +43,67 @@ ControlTimers.prototype.isThisPageRunnable = function() {
     return this.isThisPageWhiteListed();
 };
 
-ControlTimers.prototype.isThisPageBlackListed = function() {
-    log('isThisPageBlackListed');
+ControlTimers.prototype.matchesList = function(lstr) {
     var url = document.location.href;
-    var black_str = this.user_blacklist;
-    if (black_str && black_str.length) {
-        list = black_str.split(/[^\w\.-]+/)
+    if (lstr && lstr.length) {
+        var list = lstr.split(/[^\w\.-]+/)
             .map((x) => { return x.trim(); })
             .filter((x) => { return x.length;});
-        log(list);
+        // log(list);
         for (var i=0; i< list.length; i++) {
             var l = list[i];
             var re = new RegExp('https?://(\\w+\\.)?' + l + '\\b');
             if (url.match(re)) {
-                log('BLACKLISTED because ' + l);
+                log('list match because ' + l);
                 return true;
             }
         }
     }
-    log('NOT BLACKLISTED');
     return false;
 };
 
+ControlTimers.prototype.isThisPageBlackListed = function() {
+    log('isThisPageBlackListed');
+    return this.matchesList(this.user_blacklist);
+};
+
 ControlTimers.prototype.isThisPageWhiteListed = function() {
-    if (this.run_anywhere) {
-        log('RUN ANYWHERE');
+    log('isThisPageWhiteListed');
+    if (this.use_blacklist) {
+        log('Blacklist mode');
         return true;
     }
-    log('isThisPageWhiteListed');
-    var url = document.location.href;
-    var match = false;
-    for (var i = 0; i < this.config.whitelist.length; i++) {
-        var item = this.config.whitelist[i];
-        var re = new RegExp('https?://(\\w+\\.)?' + item);
-        if (url.match(re)) {
-            match = true;
-            log("IS RUNNABLE: " + url);
-            break;
-        }
-    }
-    return match;
+    return this.matchesList(this.user_whitelist);
 };
 
 ControlTimers.prototype.postconfig_init = function(current_config, current_settings) {
-    log("psotconfig_init()");
+    log("postconfig_init()");
     this.config = current_config;
+
+
+    // User's can generate their own whitelists now, but until version 1.2.9,
+    // the whitelist was backed into the config. This code allows a smooth
+    // transition for users upgrading from old version without user 
+    // whitelist, whereby the whitelist from the config is stored to the 
+    // user's whitelist.
+    if (!this.hasOwnProperty('user_whitelist')) {
+        var lstr = null;
+        if (this.config.whitelist) {
+            lstr = this.config.whitelist.join(' ');
+        } else if (defaults.user_whitelist) {
+            lstr = defaults.user_whitelist;
+        }
+        if (lstr !== null) {
+            this.user_whitelist = lstr;
+            chrome.storage.local.set({
+                'user_whitelist': this.user_whitelist
+            }, () => {
+                log('Stored whitelist from config to user data.');
+                log(this.user_whitelist);
+            });
+        }
+    }
+
     if (this.isThisPageRunnable()) {
         if (this.runInfo.trackMutations) {
             this.startMutationTracking();
