@@ -5,6 +5,14 @@
     <title>Detrumpify Config</title>
     <style>
 
+td.disabled {
+    color: rgb(175,175,174);
+}
+textarea.disabled {
+    background-color: rgb(236,236,236);
+    color: rgb(175,175,174);
+}
+
 .tooltip {
     /*
     position: relative;
@@ -216,48 +224,7 @@
         </table>
     </div>
 
-    <div id="usewhitelistdiv" style="background-color: #f0f0f0;">
-        <table width="100%">
-            <tr>
-                <td width="50%">
-                    <div class="tooltip">
-                        <b>Ignore Whitelist</b>
-                        <input class="tooltip" type="checkbox" id="run_anywhere" name="run_anywhere" value="bloop">
-
-                    </div>
-                    <p class="tooltiptext" style="left: 0px; width: 350px;">
-                    Detrumpify configuration files come with a "whitelist" of 
-                    news sites and will only run on those. If this is checked, 
-                    Detrumpify will run on <i>any</i> website you visit except 
-                    those you explicitly blacklist below.</p>
-                </td>
-                <td width="50%">
-                    <div class="tooltip">
-                        <b>Replace Fraction</b>
-                        <select id="replace_fraction" class="tooltip">
-                            <option value="100">100%</option>
-                            <option value="50">50%</option>
-                            <option value="25">25%</option>
-                            <option value="10">10%</option>
-                            <option value="5">5%</option>
-                            <option value="3">3%</option>
-                            <option value="2">2%</option>
-                            <option value="1">1%</option>
-                            <option value="0.5">0.5%</option>
-                            <option value="0.1">0.1%</option>
-                        </select>
-                    </div>
-                    <p class="tooltiptext" style="left: 0px; width: 350px;">
-                    Will every mention be replaced? 100% means yes, lower
-                    numbers mean the target will only be replaced some of
-                    the time.</p>
-                </td>
-                <td width="50%">
-            </tr>
-        </table>
-    </div>
-
-    <div id="replfractdiv" style="background-color: #e0e0e0;">
+    <div id="replfractdiv" style="background-color: #f0f0f0;">
         <table width="100%">
             <tr>
                 <td width="50%">
@@ -290,7 +257,7 @@
         </table>
     </div>
 
-    <div id="breakctrldiv" style="background-color: #f0f0f0;">
+    <div id="breakctrldiv" style="background-color: #e0e0e0;">
         <table width="100%">
             <tr>
                 <td width="50%">
@@ -311,18 +278,70 @@
                     "breaking" news. Turn this on to get more!</p>
                 </td>
                 <td width="50%">
+                    <div class="tooltip">
+                        <b>Replace Fraction</b>
+                        <select id="replace_fraction" class="tooltip">
+                            <option value="100">100%</option>
+                            <option value="50">50%</option>
+                            <option value="25">25%</option>
+                            <option value="10">10%</option>
+                            <option value="5">5%</option>
+                            <option value="3">3%</option>
+                            <option value="2">2%</option>
+                            <option value="1">1%</option>
+                            <option value="0.5">0.5%</option>
+                            <option value="0.1">0.1%</option>
+                        </select>
+                    </div>
+                    <p class="tooltiptext" style="left: 0px; width: 350px;">
+                    Will every mention be replaced? 100% means yes, lower
+                    numbers mean the target will only be replaced some of
+                    the time.</p>
                 </td>
             </tr>
         </table>
     </div>
 
-    <!-- <span>Set the maximum word length of your insults and quoting preference</span> -->
-
-    <div id="blacklistdivdiv" style="background-color: #e0e0e0;">
-        <div id="blacklistdiv"></div>
+    <div id="sitescontroldiv" style="background-color: #f0f0f0;">
+        <div id="whitelistdiv"></div>
         <table style="width:100%;">
             <tr>
-                <td style="width: 10%;"><b>Blacklist</b></td>
+                <td width="100%" colspan="2">
+                    <div class="tooltip">
+                        <b>Site permissions</b>
+                        <select id="site_filter" class="tooltip">
+                            <option value="use_whitelist">Run <em>only</em> in "Sites Enabled"</option>
+                            <option value="use_blacklist">Run in all sites <em>unless</em> in "Sites Disabled"</option>
+                        </select>
+                    </div>
+                    <p class="tooltiptext" style="left: 0px; width: 350px;">
+                    You can control which sites this plugin runs on. You 
+                    can allow it to run on a certain list of sites, or you
+                    can let it run on all sites except those you <em>dis</em>allow.
+
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td id="wl_td" style="width: 10%;"><b>Sites Enabled</b></td>
+                <td style="width: 90%;">
+                    <div class="tooltip" style="display: flex;">
+                        <div>
+                            <textarea type="text" id="user_whitelist" cols="35" rows="4"></textarea>
+                        </div>
+                        <div style="flex-grow: 1;">
+                            <input type="button" value="Save" id="whitelist_save_button">
+                            <input type="button" value="Add Current" id="whitelist_add_button">
+                            <input type="button" value="Set From Config" id="whitelist_addconfig_button">
+                        </div>
+                    </div>
+                    <p style="" class="tooltiptext">Enter a space-separate list of website
+                    hosts that you want "whitelisted". Detrumpify will run on these sites
+                    only unless the "run anywhere" option is checked.</p>
+                </td>
+            </tr>
+            <tr>
+                <td id="bl_td" style="width: 10%;"><b>Sites Disabled</b></td>
                 <td style="width: 90%;">
                     <div class="tooltip" style="display: flex;">
                         <div>
@@ -342,7 +361,7 @@
         </table>
     </div>
 
-    <div id="configdetaildiv">
+    <div id="configdetaildiv" style="background-color: #e0e0e0;">
         <input type="checkbox" id="showconfigcheck" name="showconfigcheck" value="bloop">Show configuration details.<br>
         <div id="configdiv" style="background-color: lightblue; display: none;">
             <b>Currently loaded configuration:</b>

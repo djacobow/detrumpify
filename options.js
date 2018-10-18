@@ -38,9 +38,10 @@ var OptionsThingy = function() {
         ['replace_fraction', 'replace_fraction', false],
         ['brackets', 'quoteinput', false],
         ['rand_mode', 'randmodeinput', false],
-        ['run_anywhere', 'run_anywhere', true],
+        ['site_filter', 'site_filter', false],
         ['track_mutations', 'track_mutations', true],
         ['user_blacklist', 'user_blacklist', false],
+        ['user_whitelist', 'user_whitelist', false],
     ];
     var tthis = this;
     this.savethings = [
@@ -89,10 +90,11 @@ var OptionsThingy = function() {
             tthis.saveGen('rand_mode',
                 'randmodeinput');
         }],
-        ['run_anywhere', 'change', function() {
-            tthis.saveGen('run_anywhere',
-                'run_anywhere',
-                true);
+        ['site_filter', 'change', function() {
+            tthis.grayWhitelist();
+            tthis.saveGen('site_filter',
+                'site_filter',
+                false);
         }],
         ['track_mutations', 'change', function() {
             tthis.saveGen('track_mutations',
@@ -104,16 +106,27 @@ var OptionsThingy = function() {
                 'user_blacklist',
                 false);
         }],
+        ['user_whitelist', 'change', function() {
+            tthis.saveGen('user_whitelist',
+                'user_whitelist',
+                false);
+        }],
         ['blacklist_save_button', 'click', function() {
-            neatenBlackList();
+            neatenList('user_blacklist');
             tthis.saveGen('user_blacklist',
                 'user_blacklist',
+                false);
+        }],
+        ['whitelist_save_button', 'click', function() {
+            neatenList('user_whitelist');
+            tthis.saveGen('user_whitelist',
+                'user_whitelist',
                 false);
         }],
         ['blacklist_add_button', 'click', function() {
             getCurrentWindowHost((host) => {
                 if (host) {
-                    neatenBlackList(host);
+                    neatenList('user_blacklist',host);
                     tthis.saveGen('user_blacklist',
                         'user_blacklist',
                         false);
@@ -121,14 +134,66 @@ var OptionsThingy = function() {
             });
 
         }],
+        ['whitelist_add_button', 'click', function() {
+            getCurrentWindowHost((host) => {
+                if (host) {
+                    neatenList('user_whitelist',host);
+                    tthis.saveGen('user_whitelist',
+                        'user_whitelist',
+                        false);
+                }
+            });
+
+        }],
+        ['whitelist_addconfig_button', 'click', function() {
+            var configwhitelist = tthis.getConfigWhitelist();
+            if (configwhitelist) {
+                document.getElementById('user_whitelist').value = 
+                    configwhitelist;
+                neatenList('user_whitelist');
+                tthis.saveGen('user_whitelist', 'user_whitelist', false);
+            }
+        }],
         ['reset_storage', 'click', function() {
             tthis.resetStorage();
         }],
     ];
 };
 
-var neatenBlackList = function(to_add = null) {
-    var bl = document.getElementById('user_blacklist');
+OptionsThingy.prototype.grayWhitelist = function() {
+
+    var use_whitelist = 
+        document.getElementById('site_filter').value == 'use_whitelist';
+
+    [
+        [ 'whitelist_save_button', false, ],
+        [ 'whitelist_add_button', false, ],
+        [ 'whitelist_addconfig_button', false, ],
+        [ 'wl_td', false, ],
+        [ 'user_whitelist', false, ],
+        [ 'blacklist_save_button', true, ],
+        [ 'blacklist_add_button', true, ],
+        [ 'user_blacklist', true, ],
+        [ 'bl_td', true, ],
+    ].forEach((n) => {
+        var disable = (use_whitelist && n[1]) || (!use_whitelist && !n[1]);
+        var el = document.getElementById(n[0]);
+        el.disabled  = disable ? true : false;
+        el.className = disable ? 'disabled' : '';
+        console.log(disable,el.disabled,el.className,el.id);
+    });
+};
+
+OptionsThingy.prototype.getConfigWhitelist = function() {
+    if (this.current_settings && this.current_settings.cfgdata &&
+        this.current_settings.cfgdata.whitelist) {
+        return this.current_settings.cfgdata.whitelist.join(' ');
+    }
+    return null;
+};
+
+var neatenList = function(listname, to_add = null) {
+    var bl = document.getElementById(listname);
     if (to_add) bl.value += ' ' + to_add;
     var il = bl.value.split(/[^\w\.-]+/)
         .map((x) => { return x.trim(); })
@@ -350,6 +415,8 @@ OptionsThingy.prototype.finishRestoringOptions = function() {
 
     for (var i = 0; i < this.restorethings.length; i++)
         restoreThing.apply(this, this.restorethings[i]);
+
+    this.grayWhitelist();
 
     // if this fails, then the browser didn't support data lists anyway
     try {
