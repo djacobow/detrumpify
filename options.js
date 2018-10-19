@@ -180,7 +180,7 @@ OptionsThingy.prototype.grayWhitelist = function() {
         var el = document.getElementById(n[0]);
         el.disabled  = disable ? true : false;
         el.className = disable ? 'disabled' : '';
-        console.log(disable,el.disabled,el.className,el.id);
+        // console.log(disable,el.disabled,el.className,el.id);
     });
 };
 
@@ -625,7 +625,6 @@ OptionsThingy.prototype.setupSaveHandlers = function() {
 
 getCurrentWindowHost = function(cb) {
     chrome.windows.getCurrent({populate:true}, (w) => {
-        console.log(w.tabs);
         for (var i=0;i<w.tabs.length;i++) {
             var tab = w.tabs[i];
             if (tab && tab.active) {
