@@ -39,8 +39,11 @@ ControlTimers.prototype.preconfig_init = function(storeddata) {
 };
 
 ControlTimers.prototype.isThisPageRunnable = function() {
-    if (this.isThisPageBlackListed()) return false;
-    return this.isThisPageWhiteListed();
+    if (this.use_blacklist) {
+        return !this.isThisPageBlackListed();
+    } else {
+        return this.isThisPageWhiteListed();
+    }
 };
 
 ControlTimers.prototype.matchesList = function(lstr) {
@@ -69,10 +72,6 @@ ControlTimers.prototype.isThisPageBlackListed = function() {
 
 ControlTimers.prototype.isThisPageWhiteListed = function() {
     log('isThisPageWhiteListed');
-    if (this.use_blacklist) {
-        log('Blacklist mode');
-        return true;
-    }
     return this.matchesList(this.user_whitelist);
 };
 
