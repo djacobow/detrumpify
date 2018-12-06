@@ -53,7 +53,10 @@ var loadConfigRemote = function(settings, cb) {
                 },
                 null,
                 function(resp) {
-                    if ((resp === null) || (resp.err === null)) {
+		    resp_is_null = resp === null;
+		    resperr_is_null = resp && (resp.err === null)
+
+                    if (resp_is_null || resperr_is_null) {
                         if (false) {
                             log('resetting config_source at set_initial_url');
                             source = defaults.config_source;
