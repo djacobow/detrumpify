@@ -53,26 +53,17 @@ var loadConfigRemote = function(settings, cb) {
                 },
                 null,
                 function(resp) {
-		    resp_is_null = resp === null;
-		    resperr_is_null = resp && (resp.err === null)
+                    var resp_exists = resp && resp.hasOwnProperty('err');
+		    var resp_ok = resp_exists && (resp.err == 'OK');
+		    var resp_nok = resp_exists && (resp.err != 'OK');
 
-                    if (resp_is_null || resperr_is_null) {
-                        if (false) {
-                            log('resetting config_source at set_initial_url');
-                            source = defaults.config_source;
-                            chrome.storage.local.set({
-                                'config_source': source
-                            }, function() {
-                                cb('err', 'error in eventpage code');
-                            });
-                        } else {
-                            cb('err', 'error in eventpage code');
-                        }
-                    } else if (resp.err == 'OK') {
+		    if (resp_ok) {
                         storeConfig(null, resp.text, cb);
-                    } else {
+		    } else if (resp_nok) {
                         cb('err', resp.status);
-                    }
+		    } else {
+                        cb('err', 'error in eventpage code');
+		    }
                 });
         } else {
             cb('err', 'no config source');
