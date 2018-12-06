@@ -515,11 +515,12 @@ OptionsThingy.prototype.updateConfigDisplay = function(err, cfg) {
     var jselem = document.getElementById('configjson');
     var urlem = document.getElementById('configsrc');
 
-    if (this.current_settings.hasOwnProperty('config_source')) {
+    if (this.hasOwnProperty('current_settings') && 
+        this.current_settings.hasOwnProperty('config_source')) {
         urlem.value = this.current_settings.config_source;
     }
 
-    if (err === null) {
+    if (this && this.hasOwnProperty('current_settings') && (err === null)) {
         // this is here rather than in earlier in restorePluginOptions
         // becauase generating this list requires the config as well as
         // the plugin options
