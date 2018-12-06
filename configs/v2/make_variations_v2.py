@@ -1076,6 +1076,7 @@ monikers = {
       'Shrieking Toad',
       'TraitorTot™',
       'Talking Gallstone',
+      'Ungainly Chicken of Late-Stage Capitalism Come Home To Roost',
     ],
     'dirty': [
       "Fuckface von Clownstick",
@@ -1412,6 +1413,7 @@ monikers = {
     ],
     'dirty': [
         'Comcast Fellator',
+        'A Shit Pie',
     ],
   },
   'kavanaugh': {
@@ -1432,6 +1434,8 @@ monikers = {
         'Hostile White Man Unaccustomed to Slightest Bit of Accountability',
         'Walking Alcoholics Anonymous PSA',
         'Yalie MacYaleface',
+        'Kava-Nope',
+        'Loud, Annoying Drunk',
     ],
     'dirty': [
         'Drunken Dick Waver',
