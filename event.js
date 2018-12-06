@@ -11,11 +11,12 @@ chrome.runtime.onMessage.addListener(function(msg, sender, cb) {
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function() {
         if (xhr.readyState == 4) {
-            text = xhr.responseText;
+	    // console.log(xhr);
             rv = {};
             rv.text = xhr.responseText;
             rv.status = xhr.status;
             rv.err = statusOK(xhr) ? 'OK' : 'not_2xx';
+	    // console.log(rv);
             cb(rv);
         }
     };
