@@ -1077,6 +1077,9 @@ monikers = {
       'TraitorTot™',
       'Talking Gallstone',
       'Ungainly Chicken of Late-Stage Capitalism Come Home To Roost',
+      'Individual 1',
+      'Felon-in-Chief',
+      'Fredo Corleone',
     ],
     'dirty': [
       "Fuckface von Clownstick",
