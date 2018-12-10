@@ -1,0 +1,17 @@
+{
+	"run_info": {
+		"count": 5,
+		"startTimeout": 1000,
+		"timeMultiplier": 1.8,
+		"maxTimeout": 12000
+	},
+	"refresh_age": 604800000,
+	"whitelist": ["www.cnn.com", "www.bbc.com/news", "www.bbc.co.uk/news", "www.theguardian.com", "www.theguardian.co.uk", "nytimes.com", "facebook.com", "washingtonpost.com", "salon.com", "slate.com", "buzzfeed.com", "vox.com", "huffingtonpost.com", "wsj.com", "economist.com", "latimes.com", "dallasnews.com", "usatoday.com", "denverpost.com", "insidedenver.com", "philly.com", "chron.com", "detroitnews.com", "freep.com", "boston.com", "newsday.com", "startribune.com", "nypost.com", "ajc.com", "nj.com", "sfgate.com", "sfchronicle.com", "azcentral.com", "chicagotribune.com", "cleveland.com", "oregonlive.com", "tampatribune.com", "signonsandiego.com", "mercurynews.com", "contracostatimes.com", "insidebayarea.com", "feedly.com", "reddit.com", "npr.org", "news.google.com"],
+	"actions": {
+		"trump": {
+			"monikers": ["Individual 1"],
+			"find_regex": ["(?!Donald\\w)?Trump(?!\\w)", "g"]
+		}
+	},
+	"schema": "InsultMarkupLanguage/0.2"
+}

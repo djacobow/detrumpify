@@ -1563,6 +1563,11 @@ bconfig.append({
   'description': 'Always Drumpf (John Oliver mode)'
 });
 bconfig.append({
+  'name': 'Drumpf',
+  'url': url_base + 'individual1.json',
+  'description': 'Individual 1'
+});
+bconfig.append({
   'name': 'Lord Dampnut',
   'url': url_base + 'dampnut.json',
   'description': 'Always "Lord Dampnut"'
