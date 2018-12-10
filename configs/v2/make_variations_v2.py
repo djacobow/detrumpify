@@ -1080,6 +1080,8 @@ monikers = {
       'Individual 1',
       'Felon-in-Chief',
       'Fredo Corleone',
+      'Mottled Rump',
+      'Swamp Creature',
     ],
     'dirty': [
       "Fuckface von Clownstick",
