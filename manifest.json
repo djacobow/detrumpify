@@ -8,7 +8,7 @@
         "page":"options.html",
         "chrome_style":true
     },
-    "version":"1.2.11",
+    "version":"1.2.12",
     "permissions":[
         "http://toolsofourtools.org/",
         "https://toolsofourtools.org/",

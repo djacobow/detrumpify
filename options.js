@@ -157,6 +157,9 @@ var OptionsThingy = function() {
         ['reset_storage', 'click', function() {
             tthis.resetStorage();
         }],
+        ['save_edited_config', 'click', function() {
+            tthis.save_config_edits();
+        }],
     ];
 };
 
@@ -232,6 +235,25 @@ OptionsThingy.prototype.genericSelect = function(e, srcename, save_fn) {
     if (new_url !== curr_url) {
         srcelem.value = new_url;
         save_fn();
+    }
+};
+
+OptionsThingy.prototype.save_config_edits = function() {
+    var jselem = document.getElementById('configjson');
+    var jsontext = jselem.value;
+    var new_config = null;
+    try {
+        new_config = JSON.parse(jsontext);
+    } catch (e) {
+        log(e);
+    }
+
+    if (new_config) {
+        chrome.storage.local.set({
+            'cfgdata': new_config,
+        }, function() {
+            jselem.value = JSON.stringify(new_config,null,2);
+        });
     }
 };
 
