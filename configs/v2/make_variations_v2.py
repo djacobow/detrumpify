@@ -296,6 +296,8 @@ matic = {
                     'Chicken-Eyed',
                     'Slobbering',
                     'Syphilitic',
+                    'Cancerous',
+                    'Vain',
                 ],
                 'b': [
                     'Fart',
@@ -463,6 +465,7 @@ matic = {
                     'Barnacle',
                     'Pigfart',
                     'Traitor',
+                    'Genital Wart',
                 ],
                 "shka": [
                     'Artless',
@@ -1082,6 +1085,13 @@ monikers = {
       'Fredo Corleone',
       'Mottled Rump',
       'Swamp Creature',
+      'Underlying Crime',
+      'Walking Obstruction of Justice',
+      'Despicable Him',
+      'Simpering Worm',
+      'Rubber Duck DIpped in Vinegar',
+      'Vain, Cancerous Tumor',
+      'Tweeto von Cheeto',
     ],
     'dirty': [
       "Fuckface von Clownstick",
@@ -1140,6 +1150,8 @@ monikers = {
       'Shit-Midas',
       'America\'s Shitstorm',
       'Unwiped Ass-Crack',
+      'Shit You Just Stepped In',
+      'Genital Wart',
     ],
   },
   'alt-right': {
@@ -1363,6 +1375,7 @@ monikers = {
       'Actual Grinch',
       'Dixie Koopa',
       'Comrade Turtleface',
+      'Constitutional Demolitions Expert',
     ],
     'dirty': [
     ],
@@ -1403,8 +1416,9 @@ monikers = {
       'Cruella DeVos',
       'DevOs Umbridge',
       'Dumbridge',
-      'Uneducated Human Erase',
-      'Educationy Allergy',
+      'Uneducated Human Eraser',
+      'Educational Allergy',
+      'Calvinist Thief',
     ],
     'dirty': [
     ],
@@ -1415,6 +1429,7 @@ monikers = {
         'Comcast, if it Were a Human,',
         'Walking Bad WiFi Connection',
         'Rotten Pai',
+        'Net Neuterer',
     ],
     'dirty': [
         'Comcast Fellator',
@@ -1446,6 +1461,7 @@ monikers = {
         'Drunken Dick Waver',
         'Sexist Fuckwit',
         'Just Another Shitbag from Yale',
+        'Sexist, Drunk Jackass',
     ],
   },
 }
@@ -1582,6 +1598,12 @@ bconfig.append({
   'url': url_base + 'justpictures.json',
   'description': 'No Insults -- Just Pictures',
 });
+bconfig.append({
+  'name': 'NZ Black it Out - Counter Hate',
+  'url': url_base + 'blackout.json',
+  'description': 'NZ Black it Out - Counter Hate',
+});
+
 
 ofile = open('buttons_config.json',"w")
 ofile.write(json.dumps(bconfig))
