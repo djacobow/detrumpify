@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 import copy
@@ -200,6 +200,13 @@ base = {
             'find_regex': [
                 "((Justice|JUSTICE)\\s)?((Brett|BRETT)\\s)?((Michael|MICHAEL)\\s)?(Kavanaugh|KAVANAUGH)(?!\\w)", "g"
                 #"((Brett|BRETT)\\s)?((Michael|M\\.)\\s)?(KAVANAUGH|Kavanaugh)(?!\\w)", "g"
+            ],
+            'randomize_mode': 'always',
+        },
+        'giuliani': {
+            'default_enabled': False,
+            'find_regex': [
+                "(Rudy|Rudolph\\s)?Giuliani(?!\\w)", "g"
             ],
             'randomize_mode': 'always',
         },
@@ -466,6 +473,7 @@ matic = {
                     'Pigfart',
                     'Traitor',
                     'Genital Wart',
+                    'Chump',
                 ],
                 "shka": [
                     'Artless',
@@ -1092,6 +1100,13 @@ monikers = {
       'Rubber Duck DIpped in Vinegar',
       'Vain, Cancerous Tumor',
       'Tweeto von Cheeto',
+      'Poll Rot',
+      'Cheez-Whiz Musharraf', 
+      'Apricot Al-Assad',
+      'Mango Milosevic',
+      'Satan\'s Worst Minion',
+      'Abomination-in-Chief',
+      'Hell, Manifested on Earth',
     ],
     'dirty': [
       "Fuckface von Clownstick",
@@ -1152,6 +1167,9 @@ monikers = {
       'Unwiped Ass-Crack',
       'Shit You Just Stepped In',
       'Genital Wart',
+      'Dumbass Twatwaffle',
+      'Pendejo Naranja',
+      'Baby Dick',
     ],
   },
   'alt-right': {
@@ -1376,6 +1394,7 @@ monikers = {
       'Dixie Koopa',
       'Comrade Turtleface',
       'Constitutional Demolitions Expert',
+      'Moscow Mitch',
     ],
     'dirty': [
     ],
@@ -1462,6 +1481,19 @@ monikers = {
         'Sexist Fuckwit',
         'Just Another Shitbag from Yale',
         'Sexist, Drunk Jackass',
+    ],
+  },
+  'giuliani': {
+    'clean': [
+      'America\'s (Worst) Mayor',
+      'Butt Only Good For Dialing',
+      'Ol\' Yeller',
+      'Kind of a Lawyer, We Guess',
+      'Dumbassador to Ukraine',
+      'Prosecutor Turned Mobster',
+      'Shakedown Man',
+    ],
+    'dirty': [
     ],
   },
 }
@@ -1568,7 +1600,7 @@ for comboname in combos:
 
 ofile = open("insults.txt", "wb")
 for moniker in sorted(monikers['trump']['clean']):
-    ofile.write('"' + moniker + '",' + "\n")
+    ofile.write(''.join(['"',moniker,'",',"\n"]).encode('utf-8'))
 ofile.close()
 
 
