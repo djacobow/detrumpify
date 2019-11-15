@@ -206,7 +206,14 @@ base = {
         'giuliani': {
             'default_enabled': False,
             'find_regex': [
-                "(Rudy|Rudolph\\s)?Giuliani(?!\\w)", "g"
+                "((Rudy|Rudolph)\\s)?Giuliani(?!\\w)", "g"
+            ],
+            'randomize_mode': 'always',
+        },
+        'ivanka': {
+            'default_enabled': False,
+            'find_regex': [
+                "(Ivana Marie|Ivanka)(\\s?Trump(?!\\w))?", "g"
             ],
             'randomize_mode': 'always',
         },
@@ -1492,6 +1499,20 @@ monikers = {
       'Dumbassador to Ukraine',
       'Prosecutor Turned Mobster',
       'Shakedown Man',
+    ],
+    'dirty': [
+    ],
+  },
+  'ivanka': {
+    'clean': [
+      'Daughter Wife',
+      'Nepotism Barbie',
+      'Real First Lady',
+      'Daddy\'s Little Ghoul',
+      'Proxy Wife',
+      'Ivanka the Terrible',
+      'Trophy Daughter',
+      'Out-of-Touch Barbie',
     ],
     'dirty': [
     ],
