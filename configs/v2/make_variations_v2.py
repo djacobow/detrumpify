@@ -312,6 +312,7 @@ matic = {
                     'Syphilitic',
                     'Cancerous',
                     'Vain',
+                    'Impeached',
                 ],
                 'b': [
                     'Fart',
@@ -1114,6 +1115,9 @@ monikers = {
       'Satan\'s Worst Minion',
       'Abomination-in-Chief',
       'Hell, Manifested on Earth',
+      'Twitter Account Come to Life',
+      'Kumquat Pol Pot',
+      'Impeached Rotten Peach',
     ],
     'dirty': [
       "Fuckface von Clownstick",
@@ -1513,6 +1517,8 @@ monikers = {
       'Ivanka the Terrible',
       'Trophy Daughter',
       'Out-of-Touch Barbie',
+      'Crown Princess Complicity',
+      'Daddy\'s Favorite Griftress',
     ],
     'dirty': [
     ],
