@@ -220,7 +220,7 @@ base = {
         'hannity': {
             'default_enabled': False,
             'find_regex': [
-                "((SEAN|Sean)\\s)?(HANNITY|Hannity)(?!\\w)", "g"
+                "(Sean\\s)?Hannity(?!\\w)", "g"
             ],
             'randomize_mode': 'always',
         },
