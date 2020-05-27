@@ -9,7 +9,7 @@ base = {
     'schema': 'InsultMarkupLanguage/0.2',
     'refresh_age': 604800000,
     'run_info': {
-        'count': 30,
+        'count': 31,
         'startTimeout': 1000,
         'maxTimeout': 30000,
         'timeMultiplier': 1.8,
