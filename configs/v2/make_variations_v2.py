@@ -9,7 +9,7 @@ base = {
     'schema': 'InsultMarkupLanguage/0.2',
     'refresh_age': 604800000,
     'run_info': {
-        'count': 31,
+        'count': 30,
         'startTimeout': 1000,
         'maxTimeout': 30000,
         'timeMultiplier': 1.8,
@@ -1538,8 +1538,8 @@ monikers = {
     ],
     'dirty': [
       "Ted Koppel's Bitch",
-    ]
-  }
+    ],
+  },
 }
 
 url_base = 'https://toolsofourtools.org/detrumpify2/v2/'
