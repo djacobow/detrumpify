@@ -224,6 +224,12 @@ base = {
             ],
             'randomize_mode': 'always',
         },
+        'zuckerberg': {
+            'default_enabled': False,
+            'find_regex': [
+                "(Mark\\s)?Zuckerberg(?!\\w)", "g"
+            ]
+        }
     },
 }
 
@@ -1268,7 +1274,7 @@ monikers = {
       'White Nationalist Potato Sack',
       'Shiva, Destroyer of Rights',
       'Man Who, in a Sane Universe, Would Warm a Barstool Alone Every Night Before Returning to His Empty Trailer',
-      'Rumpled Suit With The President\'s Ear',
+      "Rumpled Suit With The President's Ear",
       'Leader of the Leader of the Free World',
       'Bigot Whisperer',
       'White Supremacist Beanbag',
@@ -1538,6 +1544,17 @@ monikers = {
     ],
     'dirty': [
       "Ted Koppel's Bitch",
+    ],
+  },
+  'zuckerberg': {
+    'clean': [
+      'Face 💩',
+      'MySpace Murderer',
+      'Man Whose Virgin Level, In A Sane Universe, Would Be Over 9000',
+      'Just Another CIA Agent With A Particular Set Of H4CK0R $K1LLZ',
+    ],
+    'dirty': [
+      'Facefuck',
     ],
   },
 }
