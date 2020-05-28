@@ -1533,6 +1533,7 @@ monikers = {
       "Daddy's Favorite Griftress",
     ],
     'dirty': [
+      "The Only Woman To Which 'Grab Them By The Pussy' Does Not Apply"
     ],
   },
   'hannity': {
