@@ -1535,6 +1535,7 @@ monikers = {
     'dirty': [
       "The Only Woman To Which 'Grab Them By The Pussy' Does Not Apply"
       "Woman Who, Oddly Enough, He-Who-Must-Not-Be-Named Won't Grab By The Pussy"
+      'First Whore'
     ],
   },
   'hannity': {
