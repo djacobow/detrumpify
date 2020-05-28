@@ -228,8 +228,16 @@ base = {
             'default_enabled': False,
             'find_regex': [
                 "(Mark\\s)?Zuckerberg(?!\\w)", "g"
-            ]
-        }
+            ],
+            'randomize_mode': 'always',
+        },
+        'dorsey': {
+            'default_enabled': False,
+            'find_regex': [
+                "(Jack\\s)?Dorsey(?!\\w)", "g"
+            ],
+            'randomize_mode': 'always',
+        },
     },
 }
 
@@ -1558,6 +1566,19 @@ monikers = {
     ],
     'dirty': [
       'Facefuck',
+    ],
+  },
+  'dorsey': {
+    'clean': [
+      'Number-One Twit',
+      'Another Man Whose Virgin Level, In A Sane Universe, Would Be Over 9000',
+      'Yet Another CIA Agent/Hacker',
+      'The Number-One Trending Topic In His Own Mind'
+    ],
+    'dirty': [
+      'Shitter',
+      '#asshole',
+      '#motherfucker',
     ],
   },
 }
