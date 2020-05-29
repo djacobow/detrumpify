@@ -224,6 +224,20 @@ base = {
             ],
             'randomize_mode': 'always',
         },
+        'zuckerberg': {
+            'default_enabled': False,
+            'find_regex': [
+                "(Mark\\s)?Zuckerberg(?!\\w)", "g"
+            ],
+            'randomize_mode': 'always',
+        },
+        'dorsey': {
+            'default_enabled': False,
+            'find_regex': [
+                "(Jack\\s)?Dorsey(?!\\w)", "g"
+            ],
+            'randomize_mode': 'always',
+        },
     },
 }
 
@@ -1268,7 +1282,7 @@ monikers = {
       'White Nationalist Potato Sack',
       'Shiva, Destroyer of Rights',
       'Man Who, in a Sane Universe, Would Warm a Barstool Alone Every Night Before Returning to His Empty Trailer',
-      'Rumpled Suit With The President\'s Ear',
+      "Rumpled Suit With The President's Ear",
       'Leader of the Leader of the Free World',
       'Bigot Whisperer',
       'White Supremacist Beanbag',
@@ -1527,6 +1541,9 @@ monikers = {
       "Daddy's Favorite Griftress",
     ],
     'dirty': [
+      "The Only Woman To Which 'Grab Them By The Pussy' Does Not Apply"
+      "Woman Who, Oddly Enough, He-Who-Must-Not-Be-Named Won't Grab By The Pussy"
+      'First Whore'
     ],
   },
   'hannity': {
@@ -1538,6 +1555,30 @@ monikers = {
     ],
     'dirty': [
       "Ted Koppel's Bitch",
+    ],
+  },
+  'zuckerberg': {
+    'clean': [
+      'Face 💩',
+      'MySpace Murderer',
+      'Man Whose Virgin Level, In A Sane Universe, Would Be Over 9000',
+      'Just Another CIA Agent With A Particular Set Of H4CK0R $K1LLZ',
+    ],
+    'dirty': [
+      'Facefuck',
+    ],
+  },
+  'dorsey': {
+    'clean': [
+      'Number-One Twit',
+      'Another Man Whose Virgin Level, In A Sane Universe, Would Be Over 9000',
+      'Yet Another CIA Agent/Hacker',
+      'The Number-One Trending Topic In His Own Mind'
+    ],
+    'dirty': [
+      'Shitter',
+      '#asshole',
+      '#motherfucker',
     ],
   },
 }
