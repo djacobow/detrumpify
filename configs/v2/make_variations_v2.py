@@ -199,7 +199,6 @@ base = {
             'default_enabled': False,
             'find_regex': [
                 "((Justice|JUSTICE)\\s)?((Brett|BRETT)\\s)?((Michael|MICHAEL)\\s)?(Kavanaugh|KAVANAUGH)(?!\\w)", "g"
-                #"((Brett|BRETT)\\s)?((Michael|M\\.)\\s)?(KAVANAUGH|Kavanaugh)(?!\\w)", "g"
             ],
             'randomize_mode': 'always',
         },
@@ -234,7 +233,7 @@ base = {
         'dorsey': {
             'default_enabled': False,
             'find_regex': [
-                "(Jack\\s)?Dorsey(?!\\w)", "g"
+                "Jack\\sDorsey(?!\\w)", "g"
             ],
             'randomize_mode': 'always',
         },
@@ -1541,17 +1540,16 @@ monikers = {
       "Daddy's Favorite Griftress",
     ],
     'dirty': [
-      "The Only Woman To Which 'Grab Them By The Pussy' Does Not Apply"
-      "Woman Who, Oddly Enough, He-Who-Must-Not-Be-Named Won't Grab By The Pussy"
-      'First Whore'
+      "Person Who's Pussy has Special No-Grab Privileges"
     ],
   },
   'hannity': {
     'clean': [
       'Mister Bad-For-America Himself',
       'The REAL Fake News Journalist',
+      'Fake News Fount',
       "Putin's Favorite Spy",
-      "The Reason Fox News Is So 'Fair And Balanced'",
+      "Lead Trump Fluffer",
     ],
     'dirty': [
       "Ted Koppel's Bitch",
@@ -1563,6 +1561,7 @@ monikers = {
       'MySpace Murderer',
       'Man Whose Virgin Level, In A Sane Universe, Would Be Over 9000',
       'Just Another CIA Agent With A Particular Set Of H4CK0R $K1LLZ',
+      'Dead-Eyed Zombie',
     ],
     'dirty': [
       'Facefuck',
@@ -1570,10 +1569,8 @@ monikers = {
   },
   'dorsey': {
     'clean': [
-      'Number-One Twit',
-      'Another Man Whose Virgin Level, In A Sane Universe, Would Be Over 9000',
-      'Yet Another CIA Agent/Hacker',
-      'The Number-One Trending Topic In His Own Mind'
+      'Top Twit',
+      'Number-One Trending Topic In His Own Mind'
     ],
     'dirty': [
       'Shitter',
