@@ -237,6 +237,14 @@ base = {
             ],
             'randomize_mode': 'always',
         },
+        'mclaughlin': {
+            'default_enabled': False,
+            'find_regex': [
+                "John\\sMcLaughlin(?!\\w)", "g"
+                "McLaughlin\\s(([Aa]nd|&)\\sAssociates(?!\\w)", "g"
+            ],
+            'randomize_mode': 'always',
+        },
     },
 }
 
@@ -1576,6 +1584,15 @@ monikers = {
       'Shitter',
       '#asshole',
       '#motherfucker',
+    ],
+  },
+  'mclaughlin': {
+    'clean': [
+      'Not My Pollsters',
+      '2016 Election Fixers',
+      'Man Voted Most Likely To Be Mind-Controlled By Putin',
+    ],
+    'dirty': [
     ],
   },
 }
