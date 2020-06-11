@@ -6,3 +6,4 @@ configs/v2/*.txt
 configs/v2/images/bunnies/output/*.jpg
 configs/v2/images/puppies/output/*.jpg
 
+configs/v2/make_variations_v2-DESKTOP-A44CV6F.py
