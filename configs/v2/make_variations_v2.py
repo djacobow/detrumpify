@@ -69,6 +69,7 @@ base = {
         'President pardons self for any and all crimes he, family, friends commit, or may commit.',
         'Brutal autocrats invite Trump to address annual convention.',
         'Trump doubles down on doubling down. Wait, what? What is this, Vegas?',
+        "Oh, my God! We're all gonna die!"
     ],
     'actions': {
         'trump': {
