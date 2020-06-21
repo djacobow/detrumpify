@@ -247,6 +247,13 @@ base = {
             ],
             'randomize_mode': 'always',
         },
+        'parscale': {
+            'default_enabled': False,
+            'find_regex': [
+                "(Brad\\s)?Parscale(?!\\w)", "g"
+            ],
+            'randomize_mode': 'always',
+        },
     },
 }
 
@@ -1595,6 +1602,14 @@ monikers = {
       'Man Voted Most Likely To Be Mind-Controlled By Putin',
     ],
     'dirty': [
+    ],
+  },
+  'parscale': {
+    'clean': [
+      'Man Who, If Left Unchecked, Could Turn America Into The Death Star',
+    ],
+    'dirty': [
+      'Digital Shitwad',
     ],
   },
 }
