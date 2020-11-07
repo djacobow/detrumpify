@@ -335,6 +335,8 @@ matic = {
                     'Impeached',
                 ],
                 'b': [
+                    'Loser',
+                    'One-Termer',
                     'Fart',
                     'Goldfish',
                     'Git',
@@ -502,6 +504,8 @@ matic = {
                     'Traitor',
                     'Genital Wart',
                     'Chump',
+                    'Tax Cheat',
+                    'Draft Dodger',
                 ],
                 "shka": [
                     'Artless',
@@ -701,6 +705,29 @@ matic = {
                 'shkb': [ ],
                 'shkc': [ ],
             },
+        },
+        'loser': {
+            'slots': {
+                'a': [
+                ],
+                'b': [
+                    'Loser',
+                    'Also-Ran',
+                    'Dud',
+                    'Failure',
+                    'Unemployed Person',
+                    'Reject',
+                    'Castoff',
+                    'Trash Pile',
+                    'Deportee',
+                    'Discard',
+                    'Throwaway',
+                    'Rubbish',
+                    'Trash',
+                    'Outcast',
+                    'Pariah',
+                ],
+            }
         }
     }
 }
@@ -1129,7 +1156,7 @@ monikers = {
       'Vain, Cancerous Tumor',
       'Tweeto von Cheeto',
       'Poll Rot',
-      'Cheez-Whiz Musharraf', 
+      'Cheez-Whiz Musharraf',
       'Apricot Al-Assad',
       'Mango Milosevic',
       "Satan's Worst Minion",
@@ -1138,6 +1165,13 @@ monikers = {
       'Twitter Account Come to Life',
       'Kumquat Pol Pot',
       'Impeached Rotten Peach',
+      'Toilet Clog',
+      'Skidmark on Humanity\'s Underwear',
+      'Bag of Soggy Fritos',
+      'Manure Lagoon',
+      'Oily Humanoid Garfield',
+      'Bunker Boy',
+      'Mashed Potato Head',
     ],
     'dirty': [
       "Fuckface von Clownstick",
@@ -1201,6 +1235,35 @@ monikers = {
       'Dumbass Twatwaffle',
       'Pendejo Naranja',
       'Baby Dick',
+      'Smegma Pudding Pop',
+      'Taint Tumor',
+    ],
+    'loser': [ 
+      'Loser',
+      'Presidential Failure',
+      'Unemployed Man, Fired for Incompetence',
+      'Dissipating Oval Office Fart',
+      "Biggest Loser",
+      "Reject-in-Chief",
+      "Discharged Discharge",
+      "Canceled Caeser",
+      "Expired Block of Cheese",
+      "Deposed Dictator",
+      "Fired Contestant",
+      "Epic Loser",
+      "Unprecedented Failure",
+      "Defeated Dimwit",
+      "One-Term Loser",
+      "Unemployed Criminal",
+      "Fat Flop",
+      "Electoral Reject",
+      "Crybaby",
+      "Democratically Deflated Gas Bag",
+      "Orange-Hued Has-Been",
+      "Man With Door Imprint on His Ass",
+      "Former Uncivil Servant",
+      'Done, Old Lump',
+      'Abusive Ex',
     ],
   },
   'alt-right': {
@@ -1233,6 +1296,7 @@ monikers = {
       "Fucking-Scary-Right",
       'Anal-Rot',
     ],
+    'loser': [],
   },
   'pence': {
     'clean': [
@@ -1266,8 +1330,8 @@ monikers = {
       '"Mother" Lover',
       'Norman Bates Double',
     ],
-    'dirty' : [
-    ],
+    'dirty' : [],
+    'loser': [],
   },
   'bannon': {
     'clean' : [
@@ -1331,7 +1395,8 @@ monikers = {
       'Twenty Pounds of Shit in a Ten Pound Sack',
       'Reeking Smegma',
       'Tanker Truck of Ass Sweat',
-    ]
+    ],
+    'loser': [],
   },
   'sessions': {
     'clean': [
@@ -1350,8 +1415,8 @@ monikers = {
       'Apple-Cheeked Hate Goblin',
       'Blob of Raw Cookie Dough',
     ],
-    'dirty': [
-    ],
+    'dirty': [ ],
+    'loser': [ ],
   },
   'conway': {
     'clean' : [
@@ -1373,6 +1438,7 @@ monikers = {
     'dirty' : [
       "Shitstorm's Chamber Maid",
     ],
+    'loser' : [],
   },
   'spicer': {
     'clean': [
@@ -1391,6 +1457,7 @@ monikers = {
       'Sean Sphincter',
       'Bullshit Spice',
     ],
+    'loser': [],
   },
   'ryan': {
     'clean': [
@@ -1406,13 +1473,14 @@ monikers = {
       'The Honorable Mr. Fuck You I Got Mine',
       'Spineless Shitweasel',
     ],
+    'loser': [],
   },
   'gorsuch': {
     'clean': [
       'Asterisk',
     ],
-    'dirty': [
-    ],
+    'dirty': [],
+    'loser': [],
   },
   'mcconnell': {
     'clean': [
@@ -1425,9 +1493,10 @@ monikers = {
       'Comrade Turtleface',
       'Constitutional Demolitions Expert',
       'Moscow Mitch',
+      'McTraitor',
     ],
-    'dirty': [
-    ],
+    'dirty': [],
+    'loser': [],
   },
   'breitbart': {
     'clean': [
@@ -1436,8 +1505,8 @@ monikers = {
       'Spitefart',
       'Not-So-Brightbart',
     ],
-    'dirty': [
-    ],
+    'dirty': [],
+    'loser': [],
   },
   'shuckabee': {
     'clean': [
@@ -1451,14 +1520,15 @@ monikers = {
       'Lying White House Spokesperson Number n+1',
       'Another Mendacious Sack of Shit',
     ],
+    'loser': [],
   },
   'kelly': {
     'clean': [
         'Formerly Respected General Who Traded That All In To Carry Water for This Jackass',
         'Man Who Lectures Gold Star Families With Heartfelt Bullshit',
     ],
-    'dirty': [
-    ],
+    'dirty': [],
+    'loser': [],
   },
   'devos': {
     'clean': [
@@ -1469,8 +1539,8 @@ monikers = {
       'Educational Allergy',
       'Calvinist Thief',
     ],
-    'dirty': [
-    ],
+    'dirty': [],
+    'loser': [],
   },
   'pai': {
     'clean': [
@@ -1484,6 +1554,7 @@ monikers = {
         'Comcast Fellator',
         'A Shit Pie',
     ],
+    'loser': [],
   },
   'kavanaugh': {
     'clean': [
@@ -1512,6 +1583,7 @@ monikers = {
         'Just Another Shitbag from Yale',
         'Sexist, Drunk Jackass',
     ],
+    'loser': [],
   },
   'giuliani': {
     'clean': [
@@ -1522,9 +1594,10 @@ monikers = {
       'Dumbassador to Ukraine',
       'Prosecutor Turned Mobster',
       'Shakedown Man',
+      'Dollar Store Nosferatu',
     ],
-    'dirty': [
-    ],
+    'dirty': [],
+    'loser': [],
   },
   'ivanka': {
     'clean': [
@@ -1542,6 +1615,7 @@ monikers = {
     'dirty': [
       "Person Who's Pussy has Special No-Grab Privileges"
     ],
+    'loser': [],
   },
   'hannity': {
     'clean': [
@@ -1554,6 +1628,7 @@ monikers = {
     'dirty': [
       "Ted Koppel's Bitch",
     ],
+    'loser': [],
   },
   'zuckerberg': {
     'clean': [
@@ -1566,6 +1641,7 @@ monikers = {
     'dirty': [
       'Facefuck',
     ],
+    'loser': [],
   },
   'dorsey': {
     'clean': [
@@ -1577,6 +1653,7 @@ monikers = {
       '#asshole',
       '#motherfucker',
     ],
+    'loser': [],
   },
 }
 
@@ -1592,10 +1669,10 @@ combos = {
         },
     },
     'combined.json': {
-        'monikers': ['clean', 'dirty'],
+        'monikers': ['clean', 'dirty', 'loser'],
         'matic': { 
             'a': ['clean', 'dirty'], 
-            'b': ['clean', 'dirty' ],
+            'b': ['clean', 'dirty', 'loser' ],
             'shka': ['clean', 'dirty' ],
             'shkb': ['clean', 'dirty' ],
             'shkc': ['clean', 'dirty' ],
@@ -1609,7 +1686,7 @@ combos = {
         'monikers': ['clean', ],
         'matic': { 
             'a' : ['clean', ], 
-            'b': ['clean', ],
+            'b': ['clean', 'loser'],
             'shka': ['clean', ],
             'shkb': ['clean', ],
             'shkc': ['clean', ],
@@ -1621,10 +1698,18 @@ combos = {
     },
     'dirty.json': {
         'monikers': ['dirty', ],
-        'matic': { 'a' : ['clean', 'dirty'], 'b': ['dirty' ] },
+        'matic': { 'a' : ['clean', 'dirty'], 'b': ['dirty','loser' ] },
         'button': {
           'name': 'NSFW insults',
           'description': 'Only curseword names.'
+        },
+    },
+    'loser.json': {
+        'monikers': ['loser', ],
+        'matic': { 'a' : ['clean', 'dirty'], 'b': ['loser' ] },
+        'button': {
+          'name': 'Loser insults',
+          'description': 'Only Loser-Based'
         },
     },
 }
@@ -1657,6 +1742,8 @@ for comboname in combos:
               if act_len <= max_len:
                   outdata['actions'][person]['monikers'].append(moniker)
           else:
+              if person == 'trump':
+                  print(comboname, moniker_group, moniker)
               outdata['actions'][person]['monikers'].append(moniker)
 
       for v in ['randomize_mode', 'match_style', 'match_class', 'bracket']:
@@ -1711,6 +1798,11 @@ bconfig.append({
   'name': 'Just Pictures',
   'url': url_base + 'justpictures.json',
   'description': 'No Insults -- Just Pictures',
+});
+bconfig.append({
+  'name': 'Loser',
+  'url': url_base + 'loser.json',
+  'description': 'Epic Loser',
 });
 bconfig.append({
   'name': 'NZ Black it Out - Counter Hate',
