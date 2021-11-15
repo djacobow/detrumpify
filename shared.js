@@ -1,5 +1,5 @@
 /*jshint esversion:6 */
-var debug_mode = false;
+var debug_mode = true;
 
 var log_count = 0;
 
@@ -13,6 +13,37 @@ function log(t) {
     if (debug_mode) {
         console.log(t);
     }
+}
+
+var statusOK = function(xhr) {
+    var s = xhr.status;
+    var ok = (s === 0) || ((s >= 200) && (s < 300));
+    return ok;
+};
+
+var doGet = function(url, cb) {
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4) {
+        // console.log(xhr);
+            rv = {};
+            rv.text = xhr.responseText;
+            rv.status = xhr.status;
+            rv.err = statusOK(xhr) ? 'OK' : 'not_2xx';
+        // console.log(rv);
+            cb(rv);
+        }
+    };
+    var source = url;
+    // extra weirdness to force dropbox to download rather than page,
+    // and the date to force no cache
+    source += '?dl=1&_=' + (new Date()).getTime();
+    xhr.open('GET', source, true);
+    xhr.send();
+    //
+    // to tell chrome to let us call the cb after
+    // returning we must return true;
+    return true;
 }
 
 // sets the initial stored url for configuration fetching
@@ -46,25 +77,18 @@ function zapStorage(cb) {
 var loadConfigRemote = function(settings, cb) {
     if (true) {
         if (settings.hasOwnProperty('config_source')) {
-            chrome.runtime.sendMessage(
-                null, {
-                    'cmd': 'get',
-                    'url': settings.config_source
-                },
-                null,
-                function(resp) {
-                    var resp_exists = resp && resp.hasOwnProperty('err');
-		    var resp_ok = resp_exists && (resp.err == 'OK');
-		    var resp_nok = resp_exists && (resp.err != 'OK');
-
-		    if (resp_ok) {
-                        storeConfig(null, resp.text, cb);
-		    } else if (resp_nok) {
-                        cb('err', resp.status);
-		    } else {
-                        cb('err', 'error in eventpage code');
-		    }
-                });
+            doGet(settings.config_source, function(resp) {
+                var resp_exists = resp && resp.hasOwnProperty('err');
+                var resp_ok = resp_exists && (resp.err == 'OK');
+                var resp_nok = resp_exists && (resp.err != 'OK');
+                if (resp_ok) {
+                    storeConfig(null, resp.text, cb);
+                } else if (resp_nok) {
+                    cb('err', resp.status);
+                } else {
+                    cb('err', 'error in eventpage code');
+                }
+            });
         } else {
             cb('err', 'no config source');
         }
@@ -101,7 +125,7 @@ function loadConfig(settings, cb, try_remote = true) {
     }
     log('loadConfig DONE');
 }
-
+ 
 
 function storeConfig(err, txt, cb) {
     log("storeConfig START");

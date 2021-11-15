@@ -1,4 +1,7 @@
 
+_NOTE 11/14/2021: Not going to support Edge anymore using this approach. If I release
+a new Edge version, hopefully it will be using the new "chrome style" manifest._
+
 # Creating an uploadable package for Edge
 
 Edge is by far the most difficult platform to build for so far!

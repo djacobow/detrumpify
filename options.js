@@ -288,15 +288,10 @@ OptionsThingy.prototype.getCannedList = function(targs, cb) {
     var target = document.getElementById(targs[0]);
 
     var tthis = this;
-    chrome.runtime.sendMessage(
-        null, {
-            'cmd': 'get',
-            'url': targs[4],
-        },
-        null,
-        function(resp) {
+    doGet(targs[4], function(resp) {
             var errmsg = document.createElement('p');
             errmsg.textContent = 'Could not load button metadata. How is our Internet connection?';
+            log(resp)
             if ((resp === null) || (resp.err === null)) {
                 cb('err', 'error in eventpage code');
             } else if (resp.err == 'OK') {
@@ -587,12 +582,7 @@ OptionsThingy.prototype.saveImgReplURL = function() {
     }
 
     var tthis = this;
-    chrome.runtime.sendMessage(
-        null, {
-            cmd: 'get',
-            url: url + '/img_list.json'
-        }, null,
-        function(resp) {
+    doGet(url + '/img_list.json', function(resp) {
             var imgrepldata = null;
             if (resp.err == 'OK') {
                 try {
@@ -615,7 +605,8 @@ OptionsThingy.prototype.saveImgReplURL = function() {
             } else {
                 log('imgrepldata not saved');
             }
-        });
+        }
+    );
 };
 
 
