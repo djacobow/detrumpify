@@ -39,34 +39,34 @@ base = {
         'Trump White House Wretched Hive of Scum, Villany.',
         'Trump admnistration all crooks and liars.',
         'Scientists conclude nothing Trump says is true.',
-        'White House to launch new grift campaign.',
-        'White house staffed by joyless, broken husks of human beings.',
-        'President presently watching TV.',
-        'President golfing.',
-        'Presidential red button much smaller than previously claimed.',
-        'Presidential hair imported from China.',
-        'Oval office window opened in attempt to dissipate Presidential gas attack.',
+        #'White House to launch new grift campaign.',
+        #'White house staffed by joyless, broken husks of human beings.',
+        'Trump presently watching TV.',
+        #'President golfing.',
+        #'Presidential red button much smaller than previously claimed.',
+        'Trump hair imported from China.',
+        #'Oval office window opened in attempt to dissipate Presidential gas attack.',
         'Honestly, you don\'t even want to know.',
-        'White House backs up stupid tweets with stupid press conference statements.',
-        'White House staffers question life choices.',
+        'Trump backs up stupid tweets with stupid press conference statements.',
+        #'White House staffers question life choices.',
         'Nothing really happened today. Stop reading the news.',
-        'Wishing Earth would open up and swallow White House is not going to make it happen.',
-        'Today is day $days_elapsed of the criminal occupation of the White House.',
-        'Keep your head up. We are $perc_complete% done with this crap!',
+        #'Wishing Earth would open up and swallow White House is not going to make it happen.',
+        #'Today is day $days_elapsed of the criminal occupation of the White House.',
+        #'Keep your head up. We are $perc_complete% done with this crap!',
         'Help! I\'m chained to a computer and forced to write clickbait headlines all day.',
-        'And you thought Kelly would make it better?',
-        'President doesn\'t like you, either.',
-        'Melania captured and returned to White House following daring escape.',
+        #'And you thought Kelly would make it better?',
+        #'President doesn\'t like you, either.',
+        #'Melania captured and returned to White House following daring escape.',
         'America offers Trump as much ice cream as he likes if he\'ll just leave.',
-        'President repeats something dumb he heard on Fox.',
-        'Experts confirm Donald Trump is bad president, bad person.',
-        'Trump administration official dissembles.',
-        'President manifestly unfit for presidency.',
-        'Sound, Fury, Signify Nothing',
+        #'President repeats something dumb he heard on Fox.',
+        'Experts confirm Donald Trump bad president, bad person.',
+        #'Trump administration official dissembles.',
+        #'President manifestly unfit for presidency.',
+        #'Sound, Fury, Signify Nothing',
         'World Cruel, Cruel',
-        'Uh-oh, we\'re really screwed now.',
-        'They\'re all corrupt sh!tbags',
-        'President pardons self for any and all crimes he, family, friends commit, or may commit.',
+        #'Uh-oh, we\'re really screwed now.',
+        #'They\'re all corrupt sh!tbags',
+        #'President pardons self for any and all crimes he, family, friends commit, or may commit.',
         'Brutal autocrats invite Trump to address annual convention.',
     ],
     'actions': {
@@ -241,6 +241,36 @@ base = {
             'default_enabled': True,
             'find_regex': [
                 "((Владимир\\s)?Путин|(Vladimir\\s)?Putin)(?!\\w)", "g"
+            ],
+            'randomize_mode': 'always',
+            "img_find_regex": [
+                "(\\b|_|[0-9])[Pp][Uu][Tt][Ii][Nn](\\b|_|[A-Z]|[0-9])",
+                "g"
+            ],
+            'image_replacement': {
+                'html': [
+                    'Kleptocrat Removed',
+                    'Would-be Czar was here',
+                ],
+                'border': 1,
+                'background': [
+                    'https://img.buzzfeed.com/buzzfeed-static/static/2015-06/3/15/enhanced/webdr03/enhanced-873-1433359232-20.jpg?downsize=715:*&output-format=auto&output-quality=auto',
+                    'https://img.buzzfeed.com/buzzfeed-static/static/2015-06/3/15/enhanced/webdr03/enhanced-859-1433359572-14.jpg?downsize=715:*&output-format=auto&output-quality=auto',
+                ]
+            },
+            'randomize_mode': 'always',
+        },
+        'carlson': {
+            'default_enabled': False,
+            'find_regex': [
+                "Tucker\\sCarlson(?!\\w)", "g"
+            ],
+            'randomize_mode': 'always',
+        },
+        'owens': {
+            'default_enabled': False,
+            'find_regex': [
+                "Candace\\sOwens(?!\\w)", "g"
             ],
             'randomize_mode': 'always',
         },
@@ -1689,12 +1719,40 @@ monikers = {
       'Ботоксный', 'Old Botox',
       'Гном',
       'Сонцелікий',
+      'Evil Caillou',
+      'Emperor Poutine',
     ],
     'dirty': [
       'Xуйло́', 'Dickhead',
       'Tонкошкірний Гандон', 'Thin-skinned Condom',
     ],
     'loser': [],
+  },
+  'owens': {
+    'clean': [
+      'COVID Reaper',
+      'BlacKKKlanswoman',
+    ],
+    'dirty': [
+    ],
+    'loser': [],
+  },
+  'carlson': {
+    'clean': [
+      'Sucker Charlatan',
+      'Trumpsucker Carlson',
+      'Fryer Tuck',
+      'White Supremacist Goblin',
+      '"Bubba The Love Sponge" Brainiac',
+      'Cable Host from Amway',
+      'Perpetually Confused Frat Boy',
+      'Bow-Tied Backpfeifengesicht',
+      'Performatively Outraged Wedge Salad',
+    ],
+   'dirty': [
+        'Guy Who Always Looks Like You Just Fucked His Girlfriend'
+    ],
+   'loser': [],
   },
 }
 
