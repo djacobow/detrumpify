@@ -237,6 +237,20 @@ base = {
             ],
             'randomize_mode': 'always',
         },
+        'carlson': {
+            'default_enabled': False,
+            'find_regex': [
+                "Tucker\\sCarlson(?!\\w)", "g"
+            ],
+            'randomize_mode': 'always',
+        },
+        'owens': {
+            'default_enabled': False,
+            'find_regex': [
+                "Candace\\sOwens(?!\\w)", "g"
+            ],
+            'randomize_mode': 'always',
+        },
     },
 }
 
@@ -1654,6 +1668,32 @@ monikers = {
       '#motherfucker',
     ],
     'loser': [],
+  },
+  'owens': {
+    'clean': [
+      'COVID Reaper',
+      'BlacKKKlanswoman',
+    ],
+    'dirty': [
+    ],
+    'loser': [],
+  },
+  'carlson': {
+    'clean': [
+      'Sucker Charlatan',
+      'Trumpsucker Carlson',
+      'Fryer Tuck',
+      'White Supremacist Goblin',
+      '"Bubba The Love Sponge" Brainiac',
+      'Cable Host from Amway',
+      'Perpetually Confused Frat Boy',
+      'Bow-Tied Backpfeifengesicht',
+      'Performatively Outraged Wedge Salad',
+    ],
+   'dirty': [
+        'Guy Who Always Looks Like You Just Fucked His Girlfriend'
+    ],
+   'loser': [],
   },
 }
 
