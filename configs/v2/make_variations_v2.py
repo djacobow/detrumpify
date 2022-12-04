@@ -274,6 +274,13 @@ base = {
             ],
             'randomize_mode': 'always',
         },
+        'musk': {
+            'default_enabled': False,
+            'find_regex': [
+                "(Elon\\s)Musk(?!\\w)", "g"
+            ],
+            'randomize_mode': 'always',
+        },
     },
 }
 
@@ -1753,6 +1760,15 @@ monikers = {
         'Guy Who Always Looks Like You Just Fucked His Girlfriend'
     ],
    'loser': [],
+  },
+  'musk': {
+    'clean': [
+      'Chief Twit (his words as well as ours)',
+      'Darth Twitter',
+      'Dijon Mustard'
+    ],
+    'dirty': [],
+    'loser': [],
   },
 }
 
