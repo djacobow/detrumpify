@@ -68,6 +68,7 @@ base = {
         #'They\'re all corrupt sh!tbags',
         #'President pardons self for any and all crimes he, family, friends commit, or may commit.',
         'Brutal autocrats invite Trump to address annual convention.',
+        'Trump doubles down on doubling down. Wait, what? What is this, Vegas?'
     ],
     'actions': {
         'trump': {
