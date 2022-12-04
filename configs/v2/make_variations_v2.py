@@ -278,7 +278,7 @@ base = {
         'musk': {
             'default_enabled': False,
             'find_regex': [
-                "(Elon\\s)Musk(?!\\w)", "g"
+                "(Elon\\s)?Musk(?!\\w)", "g"
             ],
             'randomize_mode': 'always',
         },
@@ -1766,7 +1766,13 @@ monikers = {
     'clean': [
       'Chief Twit (his words as well as ours)',
       'Darth Twitter',
-      'Dijon Mustard'
+      'Dijon Mustard',
+      'Melon Husk',
+      'Keno Slum',
+      'Mole Sunk',
+      'Space Karen',
+      'Phony Stark',
+      'Worthless Billionaire',
     ],
     'dirty': [],
     'loser': [],
