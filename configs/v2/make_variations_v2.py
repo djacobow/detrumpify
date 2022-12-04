@@ -68,6 +68,7 @@ base = {
         #'They\'re all corrupt sh!tbags',
         #'President pardons self for any and all crimes he, family, friends commit, or may commit.',
         'Brutal autocrats invite Trump to address annual convention.',
+        'Trump doubles down on doubling down. Wait, what? What is this, Vegas?'
     ],
     'actions': {
         'trump': {
@@ -271,6 +272,13 @@ base = {
             'default_enabled': False,
             'find_regex': [
                 "Candace\\sOwens(?!\\w)", "g"
+            ],
+            'randomize_mode': 'always',
+        },
+        'musk': {
+            'default_enabled': False,
+            'find_regex': [
+                "(Elon\\s)Musk(?!\\w)", "g"
             ],
             'randomize_mode': 'always',
         },
@@ -1753,6 +1761,15 @@ monikers = {
         'Guy Who Always Looks Like You Just Fucked His Girlfriend'
     ],
    'loser': [],
+  },
+  'musk': {
+    'clean': [
+      'Chief Twit (his words as well as ours)',
+      'Darth Twitter',
+      'Dijon Mustard'
+    ],
+    'dirty': [],
+    'loser': [],
   },
 }
 
