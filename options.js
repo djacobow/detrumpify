@@ -375,6 +375,7 @@ OptionsThingy.prototype.createStyleSuggestions = function() {
 
 OptionsThingy.prototype.restorePluginOptions = function() {
     log('restorePluginOptions START');
+    document.getElementById('ver').innerText = chrome.runtime.getManifest()['version'];
 
     this.getCannedConfigList(this.dumb_cb.bind(this));
     log('cannedConfigList options created');
@@ -504,6 +505,7 @@ OptionsThingy.prototype.showEnabledActionsList = function(settings, cfg_actions)
     for (i = 0; i < action_names.length; i++) {
         action = action_names[i];
         var label_elem = document.createElement('span');
+        label_elem.className = 'actionlabel';
         label_elem.textContent = action + ' ';
         var check_elem = document.createElement('input');
         check_elem.type = 'checkbox';
@@ -513,14 +515,14 @@ OptionsThingy.prototype.showEnabledActionsList = function(settings, cfg_actions)
         check_elem.checked = enabled[action];
         check_elem.onchange = this.saveEnabledActions.bind(this);
         var groupingdiv = document.createElement('div');
-        groupingdiv.appendChild(label_elem);
         groupingdiv.appendChild(check_elem);
-        groupingdiv.style.display = 'inline-block';
+        groupingdiv.appendChild(label_elem);
+        groupingdiv.className = i % 2 ? 'action_odd' : 'action_even';
         enelem.appendChild(groupingdiv);
-        if (i !== action_names.length - 1) {
-            var pipe_elem = document.createElement('span');
-            pipe_elem.textContent = ' | ';
-            enelem.appendChild(pipe_elem);
+        if ((i % 3) == 2) {
+        //if (i !== action_names.length - 1) {
+            var br_elem = document.createElement('br');
+            enelem.appendChild(br_elem);
         }
 
     }

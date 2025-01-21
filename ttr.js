@@ -1,7 +1,7 @@
 
 var ttr_options = {
     ref_date: 'inauguration',
-    terms: '1',
+    terms: '2',
 };
 
 var ttr_config = {
@@ -9,17 +9,13 @@ var ttr_config = {
     // Based on EST (for Wash DC in Nov & Jan
     dates: {
         start: {
-            inauguration: new Date('January 20, 2017 16:00:00Z'),
-            election: new Date('November 8, 2016 04:00:00Z'),
+            inauguration: new Date('January 20, 2025 16:00:00Z'),
+            election: new Date('November 5, 2024 04:00:00Z'),
         },
         end: {
-            '1': {
-                inauguration: new Date('January 20, 2021 16:00:00Z'),
-                election: new Date('November 3, 2020 04:00:00Z'),
-            },
             '2': {
-                inauguration: new Date('January 20, 2025 16:00:00Z'),
-                election: new Date('November 5, 2024 04:00:00Z'),
+                inauguration: new Date('January 20, 2029 16:00:00Z'),
+                election: new Date('November 7, 2028 04:00:00Z'),
             },
         }
     },

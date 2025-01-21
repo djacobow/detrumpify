@@ -5,31 +5,73 @@
     <title>Detrumpify Config</title>
     <style>
 
+body {
+    font-family: Verdana, sans-serif;
+    background-color: #f8f8f8;
+    font-size: 11px;
+    width: 600px;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+tr {
+    border-bottom: 1px solid #e0e0e0;
+}
+
+td {
+    vertical-align: top;
+    padding: 5px;
+}
+
+td.left {
+    width: 10%;
+}
+
+div.wrapperdir {
+    width: 590px;
+}
+
 td.disabled {
     color: rgb(175,175,174);
 }
+
 textarea.disabled {
     background-color: rgb(236,236,236);
     color: rgb(175,175,174);
 }
 
-.tooltip {
-    /*
-    position: relative;
+span.actionlabel {
+    width: 90px;
     display: inline-block;
-    */
+}
+
+div.action_odd {
+    background-color: #e0e0e0;
+    display: inline-block;
+}
+
+div.action_even {
+    background-color: #e8e8e8;
+    display: inline-block;
+
+}
+
+.tooltip {
 }
 
 .tooltiptext {
     opacity: 0;
     width: 200px;
-    background-color: #ffffcc;
+    background-color: #f0f0ff;
     color: black;
-    padding: 5px 0;
+    padding: 5px 5px 5px 5px;
     border-radius: 3px;
     position: absolute;
     z-index: 1;
     border: 1px solid black;
+    border-radius: 5px;
     line-height: 100%;
 }
 
@@ -45,350 +87,317 @@ textarea.disabled {
     visibility: visible;
     opacity: 1.00;
 }
+
     </style>
-  </head>
-  <body style="font-family: Arial, sans-serif; font-size: 11px; background-color: #e0e0e0; width: 430px;">
-  <!-- <div id="wrapperdir" style="overflow-y: scroll;"> -->
-  <div id="wrapperdir" style="width: 420px;">
-      <table width="100%">
-          <tr style="padding: 0px;">
-              <td width="10%" valign="top">
-                  <div style="font-size:120%; font-weight:bold;">Detrumpify Configuration</div>
-              </td>
-          </tr>
-          <tr>
-              <td colspan="2">
-                  <div>Choose a configuration from the drop-down below, or you can provide your own configuration by hosting a config file somewhere and entering the URL below.</div>
-              </td>
-          </tr>
-      </table>
-    <hr>
-    <!-- <div>Choose configurations from <a href="http://toolsofourtools.org/detrumpify2">toolsofourtools.org</a>, or enter own URL:</div> -->
-    <div id="confselectdiv" style="background-color: #f0f0f0;">
-        <div id="buttonsdiv"></div>
-        <table style="width:100%;">
-            <tr>
-                <td style="width: 10%;"><b>Insult Config</b></td>
-                <td colspan="2">
-                    <select id="confselect" name="confselect" class="tooltip"></select>
-                    <p style="" class="tooltiptext">ToolsOfOurTools has carefully curated numerous
-                    insults, sorted them by tastefulness, and assembled them into the "canned"
-                    configurations you can choose above.</p>
-                </td>
-            </tr>
-            <tr>
-                <td style="width: 10%;"><b>URL</b></td>
-                <td style="width: 90%;">
-                    <div class="tooltip">
-                        <input type="text" id="configsrc" size="45">
-                        <input type="button" value="Save" id="config_save_button">
-                    </div>
-                    <p class="tooltiptext">
-                    This URL is the location from which the
-                    insults and other configuration data will be loaded. It is set
-                    automatically if you use the dropdown selector above, but you
-                    can also type in your own url here if you want to host a
-                    completely custom configuration file.</p>
-                </td>
-            </tr>
-        </table>
-    </div>
-    <!-- <hr> -->
-
-    <div id="imgreplseldiv" style="background-color: #e0e0e0;">
-        <div id="buttonsdiv2"></div>
-        <table style="width:100%;">
-            <tr>
-                <td style="width: 10%;"><b>Image Config</b></td>
-                <td colspan="2">
-                    <select id="imgreplselect" name="imgreplselect" class="tooltip"></select>
-                    <p style="" class="tooltiptext">ToolsOfOurTools has some groups of 
-                    pictures you can use to replace more offensive pictures you might
-                    find in your newsfeed. The Kittens pictures from placekittens.com.
-                    The rest come from Google Image Search for noncommercial resuse licensed
-                    images.</p>
-                </td>
-            </tr>
-            <tr>
-                <td style="width: 10%;"><b>URL</b></td>
-                <td style="width: 90%;">
-                    <div class="tooltip">
-                        <input type="text" id="imgreplsrcinput" size="45">
-                        <input type="button" value="Save" id="imgrepl_save_button">
-                    </div>
-                    <p class="tooltiptext">
-                    This URL is the location from which the replacement
-                    image metadata will be loaded. It is set automatically,
-                    from the drop down above, but you can also type here to 
-                    use a completely custom config file.</p>
-                </td>
-            </tr>
-        </table>
-    </div>
-
-    <!-- <span>You may also specify custom <a href="http://toolsofourtools.org/detrumpify-about#styles" target="_blank">styles</a> to be applied to the insults:</span> -->
-    <div id="inputstylediv" style="background-color: #f0f0f0;">
-        <table style="width: 100%;">
-            <tr>
-                <td style="width: 10%;"><b>Style</b></td>
-                <td style="width: 90%;">
-                    <div class="tooltip">
-                        <input type="text" class="tooltip" id="styleinput" size="45">
-                        <input type="button" value="Save" id="style_save_button">
-                    </div>
-                    <p class="tooltiptext">You can enter a CSS style here
-                        to make the insult stand out fromt the surrounding
-                        text, or leave it blank to leave the formatting just
-                        like the source page.</p>
-                </td>
-            </tr>
-        </table>
-    </div>
-    <!-- <hr> -->
-
-    <div id="brevitydiv" style="background-color: #e0e0e0;">
-        <table style="width: 100%;">
-            <tr>
-                <td style="width: 15%;"><b>Brevity</b></td>
-                <td style="width: 35%;">
-                    <select id="brevityinput" class="tooltip">
-                        <option value="0">Any length</option>
-                        <option value="6">Six or fewer words</option>
-                        <option value="5">Five or fewer words</option>
-                        <option value="4">Four or fewer words</option>
-                        <option value="3">Three or fewer words</option>
-                        <option value="2">One or Two words</option>
-                        <option value="1">Just one word</option>
+ </head>
+  <body>
+    <div id="wrapperdir">
+      <table>
+        <tr>
+          <td colspan="2">
+            <div style="font-size:120%; font-weight:bold;">Detrumpify Configuration</div>
+            <div>Choose a configuration from the drop-down below, or provide own url that hosts a config .json file.</div>
+          </td>
+        </tr>
+        <tr>
+          <td class="left"><b>Insult Config</b></td>
+          <td>
+            <div id="buttonsdiv"></div>
+            <select id="confselect" name="confselect" class="tooltip"></select>
+            <p style="" class="tooltiptext">ToolsOfOurTools has carefully curated numerous
+              insults, sorted them by tastefulness, and assembled them into the "canned"
+              configurations you can choose above.
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td class="left"><b>URL</b></td>
+          <td style="width: 90%;">
+            <div class="tooltip">
+              <input type="text" id="configsrc" size="45">
+              <input type="button" value="Save" id="config_save_button">
+            </div>
+            <p class="tooltiptext">
+              This URL is the location from which the
+              insults and other configuration data will be loaded. It is set
+              automatically if you use the dropdown selector above, but you
+              can also type in your own url here if you want to host a
+              completely custom configuration file.
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td class="left"><b>Image Config</b></td>
+          <td>
+            <div id="buttonsdiv2"></div>
+            <select id="imgreplselect" name="imgreplselect" class="tooltip"></select>
+            <p style="" class="tooltiptext">ToolsOfOurTools has some groups of 
+              pictures you can use to replace more offensive pictures you might
+              find in your newsfeed. The Kittens pictures from placekittens.com.
+              The rest come from Google Image Search for noncommercial resuse licensed
+              images.
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td class="left"><b>URL</b></td>
+          <td>
+            <div class="tooltip">
+              <input type="text" id="imgreplsrcinput" size="45">
+              <input type="button" value="Save" id="imgrepl_save_button">
+            </div>
+            <p class="tooltiptext">
+              This URL is the location from which the replacement
+              image metadata will be loaded. It is set automatically,
+              from the drop down above, but you can also type here to 
+              use a completely custom config file.
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td class="left"><b>Style</b></td>
+          <td>
+            <div id="inputstylediv" style="background-color: #f0f0f0;"></div>
+            <div class="tooltip">
+              <input type="text" class="tooltip" id="styleinput" size="45">
+              <input type="button" value="Save" id="style_save_button">
+            </div>
+            <p class="tooltiptext">You can enter a CSS style here
+              to make the insult stand out fromt the surrounding
+              text, or leave it blank to leave the formatting just
+              like the source page.
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td class="left"><b>Brevity</b></td>
+          <td>
+            <select id="brevityinput" class="tooltip">
+              <option value="0">Any length</option>
+              <option value="6">Six or fewer words</option>
+              <option value="5">Five or fewer words</option>
+              <option value="4">Four or fewer words</option>
+              <option value="3">Three or fewer words</option>
+              <option value="2">One or Two words</option>
+              <option value="1">Just one word</option>
+            </select>
+            <p class="tooltiptext">Only insults of the number
+              of words shown or shorter will be used. This may
+              improve readability for you, at the expense of
+              you not seeing some of the funnier insults.
+            </p>
+            <b>Quote</b>
+            <select id="quoteinput" class="tooltip">
+              <option value="none">No quoting</option>
+              <option value="curly">&#8220;Curly scares&#8221;</option>
+              <option value="square">[Brackets]</option>
+            </select>
+            <p class="tooltiptext" style="width: 150px;">Controls
+              whether the insults have some visual cue, such as
+              quotation marks or brackets around them.
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td class="left"><b>Frequency</b></td>
+          <td>
+            <select id="randmodeinput" class="tooltip">
+              <option value="always">Always</option>
+              <option value="1min">one minute</option>
+              <option value="15min">15 minutes</option>
+              <option value="hourly">Hourly</option>
+              <option value="daily">Daily</option>
+              <option value="weekly">Weekly</option>
+              <option value="monthly">Monthly</option>
+              <option value="yearly">Annually</option>
+            </select>
+            <p class="tooltiptext">This controls how often the
+              insults change. Some people prefer to see the same
+              insult used all day, or every time on a given page.
+              Set to "always", you will get a new insult Every.
+              Single.  Mention.
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td class="left"><b>Targeted Losers</b></td>
+          <td>
+            <div id="actionstd" class="tooltip"></div>
+            <p class="tooltiptext" style="left: 0px; width: 350px;">
+              Some configurations contain more than one set of search strings and
+              replacements. Choose which available replacements you want to run.
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td class="left">
+            <b>Mock-O-Matic</b>
+          </td>
+          <td>
+            <div class="tooltip">
+              <select id="use_matic" class="tooltip">
+                <option value="off">Disabled</option>
+                <option value="a_b">AB Pattern</option>
+                <option value="a_a_b">AAB Pattern</option>
+                <option value="shka_shkb_shkc">Bard Mode</option>
+              </select>
+            </div>
+            <p class="tooltiptext" style="left: 0px; width: 350px;">
+              Mock-O-Matic mode breaks down insults into their atomic
+              elements and reassembles them to generate thousands of
+              fresh, new insults. (Overrides Brevity)
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td><b>Scan on Change</b></td>
+          <td>
+            <div class="tooltip">
+              <input class="tooltip" type="checkbox" id="track_mutations" name="track_mutations" value="bloop">
+            </div>
+            <p class="tooltiptext" style="left: 0px; width: 350px;">
+              Add insults <i>whenever</i> page changes, not only at
+              first load and periodically afterwards. This is good
+              for pages like Twitter and Facebook that show a
+              constant feed, but it's a bit more CPU intensive.
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td class="left">
+            <b>Breaking!</b>
+          </td>
+          <td>
+            <div class="tooltip">
+              <select id="breaking_fract" class="tooltip">
+                <option value="0">Never</option>
+                <option value="1">1% of the time</option>
+                <option value="5">5% of the time</option>
+                <option value="10">10% of the time</option>
+                <option value="25">25% of the time</option>
+                <option value="50">half the time</option>
+                <option value="100">Always</option>
+              </select>
+            </div>
+            <p class="tooltiptext" style="left: 0px; width: 350px;">
+              Your life isn't exciting enough without constant 
+              "breaking" news. Turn this on to get more!
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td class="left">
+            <b>Replace Fraction</b>
+          </td>
+          <td>
+            <div class="tooltip">
+              <select id="replace_fraction" class="tooltip">
+                <option value="100">100%</option>
+                <option value="50">50%</option>
+                <option value="25">25%</option>
+                <option value="10">10%</option>
+                <option value="5">5%</option>
+                <option value="3">3%</option>
+                <option value="2">2%</option>
+                <option value="1">1%</option>
+                <option value="0.5">0.5%</option>
+                <option value="0.1">0.1%</option>
+              </select>
+            </div>
+            <p class="tooltiptext" style="left: 0px; width: 350px;">
+              Will every mention be replaced? 100% means yes, lower
+              numbers mean the target will only be replaced some of
+              the time.
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td><b>Permissions</b></td>
+          <td>
+            <div id="whitelistdiv"></div>
+            <table style="width:100%;">
+              <tr>
+                <td style="width: 100%;" colspan="2">
+                  <div class="tooltip">
+                    <select id="site_filter" class="tooltip">
+                      <option value="use_whitelist">Run only on "Sites Enabled"</option>
+                      <option value="use_blacklist">Run on all sites except "Sites Disabled"</option>
                     </select>
-                    <p class="tooltiptext">Only insults of the number
-                        of words shown or shorter will be used. This may
-                        improve readability for you, at the expense of
-                        you not seeing some of the funnier insults.</p>
-                </td>
-                <td style="width: 15%;"><b>Quote</b></td>
-                <td style="width: 35%;">
-                    <select id="quoteinput" class="tooltip">
-                        <option value="none">No quoting</option>
-                        <option value="curly">&#8220;Curly scares&#8221;</option>
-                        <option value="square">[Brackets]</option>
-                    </select>
-                    <p class="tooltiptext" style="width: 150px;">Controls
-                        whether the insults have some visual cue, such as
-                        quotation marks or brackets around them.</p>
-                </td>
-            </tr>
-        </table>
-    </div>
-
-    <!-- <hr> -->
-    <!-- <span>Do you want most Trump images replaced with kittens?</span> -->
-    <div id="kittensenablediv" style="background-color: #f0f0f0;">
-        <table style="width: 100%;">
-            <tr>
-                <td style="width: 15%;"><b>Frequency</b></td>
-                <td style="width: 35%;">
-                    <select id="randmodeinput" class="tooltip">
-                        <option value="always">Always</option>
-                        <option value="1min">one minute</option>
-                        <option value="15min">15 minutes</option>
-                        <option value="hourly">Hourly</option>
-                        <option value="daily">Daily</option>
-                        <option value="weekly">Weekly</option>
-                        <option value="monthly">Monthly</option>
-                        <option value="yearly">Annually</option>
-                    </select>
-                    <p class="tooltiptext">This controls how often the
-                        insults change. Some people prefer to see the same
-                        insult used all day, or every time on a given page.
-                        Set to "always", you will get a new insult Every.
-                        Single.  Mention.
-                    </p>
-                </td>
-            </tr>
-        </table>
-    </div>
-
-    <!-- <hr> -->
-    <!-- <span>You may also choose which actions from this config to enable:</span> -->
-    <div id="actionsenablediv" style="background-color: #e0e0e0;">
-        <table width="100%">
-            <tr>
-                <td width="25%"><b>Enabled Actions</b></td>
-                <td width="75%">
-                    <div id="actionstd" class="tooltip"></div>
-                    <p class="tooltiptext" style="left: 0px; width: 350px;">
-		    Some configurations contain more than one set of search strings and
-            replacements. Choose which available replacements you want to run.</p>
-                </td>
-            </tr>
-        </table>
-    </div>
-
-    <div id="replfractdiv" style="background-color: #f0f0f0;">
-        <table width="100%">
-            <tr>
-                <td width="50%">
-                    <div class="tooltip">
-                        <b>Mock-O-Matic</b>
-                        <select id="use_matic" class="tooltip">
-                            <option value="off">Disabled</option>
-                            <option value="a_b">AB Pattern</option>
-                            <option value="a_a_b">AAB Pattern</option>
-                            <option value="shka_shkb_shkc">Bard Mode</option>
-                        </select>
-                    </div>
-                    <p class="tooltiptext" style="left: 0px; width: 350px;">
-                    Mock-O-Matic mode breaks down insults into their atomic
-                    elements and reassembles them to generate thousands of
-                    fresh, new insults. (Overrides Brevity)</p>
-                </td>
-                <td width="50%">
-                    <div class="tooltip">
-                        <b>Scan on Change</b>
-                        <input class="tooltip" type="checkbox" id="track_mutations" name="track_mutations" value="bloop">
-                    </div>
-                    <p class="tooltiptext" style="left: 0px; width: 350px;">
-                    Add insults <i>whenever</i> page changes, not only at
-                    first load and periodically afterwards. This is good
-                    for pages like Twitter and Facebook that show a
-                    constant feed, but it's a bit more CPU intensive.</p>
-                </td>
-            </tr>
-        </table>
-    </div>
-
-    <div id="breakctrldiv" style="background-color: #e0e0e0;">
-        <table width="100%">
-            <tr>
-                <td width="50%">
-                    <div class="tooltip">
-                        <b>Breaking!</b>
-                        <select id="breaking_fract" class="tooltip">
-                            <option value="0">Never</option>
-                            <option value="1">1% of the time</option>
-                            <option value="5">5% of the time</option>
-                            <option value="10">10% of the time</option>
-                            <option value="25">25% of the time</option>
-                            <option value="50">half the time</option>
-                            <option value="100">Always</option>
-                        </select>
-                    </div>
-                    <p class="tooltiptext" style="left: 0px; width: 350px;">
-                    Your life isn't exciting enough without constant 
-                    "breaking" news. Turn this on to get more!</p>
-                </td>
-                <td width="50%">
-                    <div class="tooltip">
-                        <b>Replace Fraction</b>
-                        <select id="replace_fraction" class="tooltip">
-                            <option value="100">100%</option>
-                            <option value="50">50%</option>
-                            <option value="25">25%</option>
-                            <option value="10">10%</option>
-                            <option value="5">5%</option>
-                            <option value="3">3%</option>
-                            <option value="2">2%</option>
-                            <option value="1">1%</option>
-                            <option value="0.5">0.5%</option>
-                            <option value="0.1">0.1%</option>
-                        </select>
-                    </div>
-                    <p class="tooltiptext" style="left: 0px; width: 350px;">
-                    Will every mention be replaced? 100% means yes, lower
-                    numbers mean the target will only be replaced some of
-                    the time.</p>
-                </td>
-            </tr>
-        </table>
-    </div>
-
-    <div id="sitescontroldiv" style="background-color: #f0f0f0;">
-        <div id="whitelistdiv"></div>
-        <table style="width:100%;">
-            <tr>
-                <td width="100%" colspan="2">
-                    <div class="tooltip">
-                        <b>Site permissions</b>
-                        <select id="site_filter" class="tooltip">
-                            <option value="use_whitelist">Run <em>only</em> on "Sites Enabled"</option>
-                            <option value="use_blacklist">Run on all sites <em>except</em> "Sites Disabled"</option>
-                        </select>
-                    </div>
-                    <p class="tooltiptext" style="left: 0px; width: 350px;">
+                  </div>
+                  <p class="tooltiptext" style="left: 0px; width: 350px;">
                     You can control which sites this plugin runs on. 
-		    Choose "Sites Enabled" to explicity specify the sites you
-		    want Detrumpify to run on. Choose "Sites Disabled" to run
-		    on all sites <em>except</em> those listed.
-                    </p>
+                    Choose "Sites Enabled" to explicity specify the sites you
+                    want Detrumpify to run on. Choose "Sites Disabled" to run
+                    on all sites <em>except</em> those listed.
+                  </p>
                 </td>
-            </tr>
-            <tr>
+              </tr>
+              <tr>
                 <td id="wl_td" style="width: 10%;"><b>Sites Enabled</b></td>
                 <td style="width: 90%;">
-                    <div class="tooltip" style="display: flex;">
-                        <div>
-                            <textarea type="text" id="user_whitelist" cols="35" rows="4"></textarea>
-                        </div>
-                        <div style="flex-grow: 1;">
-                            <input type="button" value="Save" id="whitelist_save_button">
-                            <input type="button" value="Add Current" id="whitelist_add_button">
-                            <input type="button" value="Set From Config" id="whitelist_addconfig_button">
-                        </div>
+                  <div class="tooltip" style="display: flex;">
+                    <div>
+                      <textarea id="user_whitelist" cols="35" rows="4"></textarea>
                     </div>
-                    <p style="" class="tooltiptext">Enter a space-separate list of website
+                    <div style="flex-grow: 1;">
+                      <input type="button" value="Save" id="whitelist_save_button">
+                      <input type="button" value="Add Current" id="whitelist_add_button">
+                      <input type="button" value="Set From Config" id="whitelist_addconfig_button">
+                    </div>
+                  </div>
+                  <p style="" class="tooltiptext">Enter a space-separate list of website
                     hosts that you want to be Detrumpified. Detrumpify will run on these sites
-                    <em>only</em>.</p>
+                    <em>only</em>.
+                  </p>
                 </td>
-            </tr>
-            <tr>
+              </tr>
+              <tr>
                 <td id="bl_td" style="width: 10%;"><b>Sites Disabled</b></td>
                 <td style="width: 90%;">
-                    <div class="tooltip" style="display: flex;">
-                        <div>
-                            <textarea type="text" id="user_blacklist" cols="35" rows="4"></textarea>
-                        </div>
-                        <div style="flex-grow: 1;">
-                            <input type="button" value="Save" id="blacklist_save_button">
-                            <input type="button" value="Add Current" id="blacklist_add_button">
-
-                        </div>
+                  <div class="tooltip" style="display: flex;">
+                    <div>
+                      <textarea id="user_blacklist" cols="35" rows="4"></textarea>
                     </div>
-                    <p style="" class="tooltiptext">Enter a space-separate list of website
-		    hosts that you do <em>not</em> want to be Detrumpified. All other sites will
-		    be detrumpified.</p>
+                    <div style="flex-grow: 1;">
+                      <input type="button" value="Save" id="blacklist_save_button">
+                      <input type="button" value="Add Current" id="blacklist_add_button">
+                    </div>
+                  </div>
+                  <p style="" class="tooltiptext">Enter a space-separate list of website
+                    hosts that you do <em>not</em> want to be Detrumpified. All other sites will
+                    be detrumpified.
+                  </p>
                 </td>
-            </tr>
-        </table>
-    </div>
-
-    <div id="configdetaildiv" style="background-color: #e0e0e0;">
-        <input type="checkbox" id="showconfigcheck" name="showconfigcheck" value="bloop">Show configuration details.<br>
-        <div id="configdiv" style="background-color: lightblue; display: none;">
-            <b>Currently loaded configuration:</b>
-            <textarea id="configjson" rows="10" style="width: 100%"></textarea>
-            <input type="button" id="save_edited_config" name="save_edited_config" value="Save Config Edits">
-            <div></div>
-            <div id="zapdiv" style="text-align: right">
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td colspan=2>
+            <input type="checkbox" id="showconfigcheck" name="showconfigcheck" value="bloop">Show configuration details.<br>
+            <div id="configdiv" style="background-color: lightblue; display: none;">
+              <b>Currently loaded configuration:</b>
+              <textarea id="configjson" rows="10" style="width: 100%"></textarea>
+              <input type="button" id="save_edited_config" name="save_edited_config" value="Save Config Edits">
+              <div></div>
+              <div id="zapdiv" style="text-align: right">
                 <input style="font-size: 75%; background-color: pink;" type="button" name="reset_storage" id="reset_storage" value="Reset All Stored Preferences">
+              </div>
             </div>
-        </div>
-    </div>
-    <div id="boilerplatediv">
-      <hr>
-      <table width="100%">
-          <tr>
-              <td valign="top">
-                  <a target="_blank" href="http://toolsofourtools.org/detrumpify-about">About</a> | 
-                  <a target="_blank" href="https://github.com/djacobow/detrumpify">Browse code</a> | 
-                  <a target="_blank" href="https://docs.google.com/forms/d/e/1FAIpQLSdgff7aEdLtu7luZcV7zLbgVLbBkCyvd7P6FFGWRoRa9BhUOw/viewform?entry.1908802217=Trump&entry.2110744980">Suggest Insult</a> | 
-                  <!-- goo.gl/2izY88 -->
-                  <a target="_blank" href="mailto:dave@toolsofourtools.org">Feedback</a> | 
-                  <a target="_blank" href="https://www.facebook.com/detrumpify/">Like us on FB!</a>
-              </td>
-          </tr>
+          </td>
+        </tr>
+        <tr>
+          <td colspan=2>
+            <a target="_blank" href="http://toolsofourtools.org/detrumpify-about">About</a> | 
+            <a target="_blank" href="https://github.com/djacobow/detrumpify">Browse code</a> | 
+            <a target="_blank" href="https://docs.google.com/forms/d/e/1FAIpQLSdgff7aEdLtu7luZcV7zLbgVLbBkCyvd7P6FFGWRoRa9BhUOw/viewform?entry.1908802217=Narcissistic Bowl of Rotten Gazpacho&entry.2110744980">Suggest Insult</a> | 
+            <!-- goo.gl/2izY88 -->
+            <a target="_blank" href="mailto:dave@toolsofourtools.org">Feedback</a> | Version
+            <span id="ver"></span> 
+          </td>
+        </tr>
       </table>
     </div>
-
     <div id="statusdiv_container" style="display: none;">
       <b>Debug Messages</b>
       <div id="statusdiv" style="background-color: lightyellow; width:100%; height:30px; overflow-y:scroll">
@@ -397,6 +406,6 @@ textarea.disabled {
     <script src="defaults.js"></script>
     <script src="shared.js"></script>
     <script src="options.js"></script>
-  </div>
+    <!--  </div> -->
   </body>
 </html>

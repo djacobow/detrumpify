@@ -27,46 +27,43 @@ base = {
         "cleveland.com", "oregonlive.com", "tampatribune.com",
         "signonsandiego.com", "mercurynews.com", "contracostatimes.com",
         "insidebayarea.com", "feedly.com", "reddit.com",
-        "drudgereport.com", "theblaze.com", "breitbart.com","ijreview.com",
+        "drudgereport.com", "theblaze.com", "breitbart.com", "ijreview.com",
         "newsmax.com", "wnd.com", "dailycaller.com", "washingtontimes.com",
         "nationalreview.com", "townhall.com", "freerepublic.com",
         "pjmedia.com", "hotair.com", "cnsnews.com", "westernjournalism.com",
         "washingtonexaminer.com", "tpnn.com", "newsbusters.org",
-        "twitchy.com", "news.google.com", "npr.org", "cnbc.com", "reuters.com"
+        "twitchy.com", "news.google.com", "npr.org", "cnbc.com", "reuters.com",
+        "tiktok.com",
     ],
     'breaking': [
         'Trump just a big, fat tardigrade.',
         'Trump White House Wretched Hive of Scum, Villany.',
         'Trump admnistration all crooks and liars.',
         'Scientists conclude nothing Trump says is true.',
-        #'White House to launch new grift campaign.',
-        #'White house staffed by joyless, broken husks of human beings.',
+        'White House to launch new grift campaign.',
+        'White house staffed by joyless, broken husks of human beings.',
         'Trump presently watching TV.',
-        #'President golfing.',
-        #'Presidential red button much smaller than previously claimed.',
+        'President golfing.',
         'Trump hair imported from China.',
-        #'Oval office window opened in attempt to dissipate Presidential gas attack.',
+        'Oval office window opened in attempt to dissipate Presidential gas attack.',
         'Honestly, you don\'t even want to know.',
         'Trump backs up stupid tweets with stupid press conference statements.',
-        #'White House staffers question life choices.',
+        'White House staffers question life choices.',
         'Nothing really happened today. Stop reading the news.',
-        #'Wishing Earth would open up and swallow White House is not going to make it happen.',
-        #'Today is day $days_elapsed of the criminal occupation of the White House.',
-        #'Keep your head up. We are $perc_complete% done with this crap!',
+        'Wishing Earth would open up and swallow White House is not going to make it happen.',
+        'Today is day $days_elapsed of the criminal occupation of the White House.',
+        'Keep your head up. We are $perc_complete% done with this crap!',
         'Help! I\'m chained to a computer and forced to write clickbait headlines all day.',
-        #'And you thought Kelly would make it better?',
-        #'President doesn\'t like you, either.',
-        #'Melania captured and returned to White House following daring escape.',
+        'President doesn\'t like you, either.',
         'America offers Trump as much ice cream as he likes if he\'ll just leave.',
-        #'President repeats something dumb he heard on Fox.',
+        'President repeats something dumb he heard on Fox.',
         'Experts confirm Donald Trump bad president, bad person.',
-        #'Trump administration official dissembles.',
-        #'President manifestly unfit for presidency.',
-        #'Sound, Fury, Signify Nothing',
+        'Trump administration official dissembles.',
+        'President manifestly unfit for presidency.',
+        'Sound, Fury, Signify Nothing',
         'World Cruel, Cruel',
-        #'Uh-oh, we\'re really screwed now.',
-        #'They\'re all corrupt sh!tbags',
-        #'President pardons self for any and all crimes he, family, friends commit, or may commit.',
+        'Uh-oh, we\'re really screwed now.',
+        'They\'re all corrupt sh!tbags',
         'Brutal autocrats invite Trump to address annual convention.',
         'Trump doubles down on doubling down. Wait, what? What is this, Vegas?'
     ],
@@ -96,7 +93,7 @@ base = {
             'randomize_mode': 'always',
         },
         'pence': {
-            'default_enabled': True,
+            'default_enabled': False,
             'find_regex': [
                 "\\b((Mike|Michael)\\s*)?Pence(?!\\w)", "g"
             ],
@@ -225,7 +222,7 @@ base = {
             'randomize_mode': 'always',
         },
         'zuckerberg': {
-            'default_enabled': False,
+            'default_enabled': True,
             'find_regex': [
                 "(Mark\\s)?Zuckerberg(?!\\w)", "g"
             ],
@@ -276,9 +273,58 @@ base = {
             'randomize_mode': 'always',
         },
         'musk': {
-            'default_enabled': False,
+            'default_enabled': True,
             'find_regex': [
                 "(Elon\\s)?Musk(?!\\w)", "g"
+            ],
+            'randomize_mode': 'always',
+        },
+        'boebert': {
+            'default_enabled': True,
+            'find_regex': [
+                "(Lauren\\s)?Boebert(?!\\w)", "g"
+            ],
+            'randomize_mode': 'always',
+        },
+        'mtg': {
+            'default_enabled': True,
+            'find_regex': [
+                "(Marjorie\\s)?Taylor\s+Green(?!\\w)", "g"
+            ],
+            'randomize_mode': 'always',
+        },
+        'jdv': {
+            'default_enabled': True,
+            'find_regex': [
+                "(J\\.?D\\.?\\s)?Vance(?!\\w)", "g"
+            ],
+            'randomize_mode': 'always',
+        },
+        'rfk': {
+            'default_enabled': True,
+            'find_regex': [
+                "((RFK\s+Jr\\.?)|((R(obert)?\\s+F\\.?\\s)?Kennedy,?\s+Jr\\.?))(?!\\w)", "g"
+            ],
+            'randomize_mode': 'always',
+        },
+        'miller': {
+            'default_enabled': True,
+            'find_regex': [
+                "Stephen\\sMiller(?!\\w)", "g"
+            ],
+            'randomize_mode': 'always',
+        },
+        'hegseth': {
+            'default_enabled': True,
+            'find_regex': [
+                "((Pete)r?)?\\sHegseth(?!\\w)", "g"
+            ],
+            'randomize_mode': 'always',
+        },
+        'bondi': {
+            'default_enabled': True,
+            'find_regex': [
+                "(((Pam)?ela)?\\sBondi)(?!\\w)", "g"
             ],
             'randomize_mode': 'always',
         },
@@ -287,8 +333,8 @@ base = {
 
 matic = {
     'trump': {
-        'recipe': ['a','a','b'],
-        'clean' : {
+        'recipe': ['a', 'a', 'b'],
+        'clean': {
             'slots': {
                 'a': [
                     'Loofa-Faced',
@@ -540,7 +586,7 @@ matic = {
                     'Voldemort',
                     'Dotard',
                     'Cheeto',
-                    '💩', # poo emoji
+                    '💩',  # poo emoji
                     'Scobberlotcher',
                     'Draft Dodger',
                     'Brat',
@@ -746,34 +792,11 @@ matic = {
                     'Huckster',
                     'Sphincterlips',
                 ],
-                'shka': [ ],
-                'shkb': [ ],
-                'shkc': [ ],
+                'shka': [],
+                'shkb': [],
+                'shkc': [],
             },
         },
-        'loser': {
-            'slots': {
-                'a': [
-                ],
-                'b': [
-                    'Loser',
-                    'Also-Ran',
-                    'Dud',
-                    'Failure',
-                    'Unemployed Person',
-                    'Reject',
-                    'Castoff',
-                    'Trash Pile',
-                    'Deportee',
-                    'Discard',
-                    'Throwaway',
-                    'Rubbish',
-                    'Trash',
-                    'Outcast',
-                    'Pariah',
-                ],
-            }
-        }
     }
 }
 
@@ -784,9 +807,8 @@ monikers = {
       "Human-Toupee Hybrid",
       "Decomposing Jack-O-Lantern",
       "Angry Creamsicle",
-      "The Kindest, Bravest, Warmest, Most Wonderful Human Being You'll Ever Know in Your Life",
       "Walking Faux Luxury Brand",
-      "Real-Estate Tycoon with Simple, Stupid Plan to Defeat ISIS",
+      "Real-Estate Tycoon with Simple, Stupid Plan",
       "Self-Proclaimed Ponderer of Incest",
       "Wall Construction Expert",
       "Frequent Provider of Unsolicited Judgements Regarding Female Attractiveness",
@@ -797,7 +819,7 @@ monikers = {
       "Purveyor of Lousy Steak",
       "Angrily Reanimated Christmas Ham",
       "Short-Fingered Vulgarian",
-      "Weirdly Authoritarian Gingerbread Man",
+      "Authoritarian Gingerbread Man",
       "Traditional Values Adulterer with Two Ex-Wives",
       "Rage Tribble",
       "Unconvincing Presidential Simulation",
@@ -821,15 +843,14 @@ monikers = {
       "Human Equivalent of Cargo Pants that Zip Away into Shorts",
       "Cheeto-Dusted Bloviator",
       "Fuzzy Meat-Wad",
-      "Bag of Flour",
-      "Man Who Cherishes Women",
-      "Future Leader of the Free World",
+      "Bag of Rancid Flour",
+      "Leader of the Soon Un-Free World",
       "Decomposing Ear of Corn",
       "Own Best Parody",
       "Rich Idiot Willing to Allow Garbage to Fall Out of His Mouth Without Batting a Single Golden Lash",
       "Pond Scum",
       "Noted Troll",
-      "Class Clown that Everyone Wishes Would Be Quiet and Let The Class Learn",
+      "Class Clown that Won\'t Shut Up:",
       "Melting Businessman",
       "Wax Museum Figure on a Very Hot Day",
       "Soggy Burlap Sack",
@@ -843,11 +864,11 @@ monikers = {
       "Man-Shaped Asbestos Insulation Board",
       "Hair Plug Swollen with Rancid Egg Whites",
       "Inside-Out Lower Intestine",
-      "Dusty Barrel of Fermented Peepee",
-      "Usually Reasonable Burlap Sack Full of Rancid Peeps",
-      "Presidential Candidate and Bargain Bin Full of Yellowing Jean-Claude Van Damme Movies",
+      "Dusty Barrel of Fermented Pee",
+      "Burlap Sack Full of Rancid Peeps",
+      "Bargain Bin Full of Yellowing Jean-Claude Van Damme Movies",
       "Hairpiece Come to Life",
-      "Normal-Looking Human Man and Entirely Credible Choice as Future Leader of the Free World",
+      "Normal-Looking Human Man and Entirely Credible Choice as Leader of the Free World",
       "Decomposing Pumpkin Pie Inhabited by Vicious Albino Squirrels",
       "Dishrag that on Closer Inspection is Alive with Maggots",
       "Lead Paint Factory Explosion",
@@ -959,12 +980,13 @@ monikers = {
       "Deplorables Coach",
       "Putin Puppet",
       "Projector-in-Chief",
+      "Bullshitter-in-Chief",
       "Soon-to-be-Fired Reality Show Contestant",
       "Unreliable Narrator of Awful Story",
       "Biff Tannen",
       "Swirling Black Hole that Eats Good Sense",
       "Self-Avowed Perpetrator of Sexual Assault",
-      "President Worse Than W, Despite How Improbable That Used to Sound",
+      "President Much Worse Than W, Despite How Improbable That Used to Sound",
       "Sociopathic Operating System Installed on a Frightened Child",
       "Everything Wrong with America, Made into Living Flesh",
       "Manchurian Combover",
@@ -1217,6 +1239,11 @@ monikers = {
       'Oily Humanoid Garfield',
       'Bunker Boy',
       'Mashed Potato Head',
+      'Genetically Modified Citrus',
+      'Deformed Peanut M&M',
+      'Convicted Felon',
+      'Taint Tumor',
+      'Orange Anus',
     ],
     'dirty': [
       "Fuckface von Clownstick",
@@ -1281,34 +1308,7 @@ monikers = {
       'Pendejo Naranja',
       'Baby Dick',
       'Smegma Pudding Pop',
-      'Taint Tumor',
-    ],
-    'loser': [ 
-      'Loser',
-      'Presidential Failure',
-      'Unemployed Man, Fired for Incompetence',
-      'Dissipating Oval Office Fart',
-      "Biggest Loser",
-      "Reject-in-Chief",
-      "Discharged Discharge",
-      "Canceled Caeser",
-      "Expired Block of Cheese",
-      "Deposed Dictator",
-      "Fired Contestant",
-      "Epic Loser",
-      "Unprecedented Failure",
-      "Defeated Dimwit",
-      "One-Term Loser",
-      "Unemployed Criminal",
-      "Fat Flop",
-      "Electoral Reject",
-      "Crybaby",
-      "Democratically Deflated Gas Bag",
-      "Orange-Hued Has-Been",
-      "Man With Door Imprint on His Ass",
-      "Former Uncivil Servant",
-      'Done, Old Lump',
-      'Abusive Ex',
+      "Putin's Bitch",
     ],
   },
   'alt-right': {
@@ -1341,7 +1341,6 @@ monikers = {
       "Fucking-Scary-Right",
       'Anal-Rot',
     ],
-    'loser': [],
   },
   'pence': {
     'clean': [
@@ -1376,7 +1375,6 @@ monikers = {
       'Norman Bates Double',
     ],
     'dirty' : [],
-    'loser': [],
   },
   'bannon': {
     'clean' : [
@@ -1441,7 +1439,6 @@ monikers = {
       'Reeking Smegma',
       'Tanker Truck of Ass Sweat',
     ],
-    'loser': [],
   },
   'sessions': {
     'clean': [
@@ -1460,11 +1457,10 @@ monikers = {
       'Apple-Cheeked Hate Goblin',
       'Blob of Raw Cookie Dough',
     ],
-    'dirty': [ ],
-    'loser': [ ],
+    'dirty': [],
   },
   'conway': {
-    'clean' : [
+    'clean': [
       'Empty Shell That Might Once Have Been Occupied by a Human',
       'Alternative Fact Peddler',
       'Kellyanne Con-Artist',
@@ -1480,10 +1476,9 @@ monikers = {
       'Lying Ear of Dessicated Corn',
       'Con-Job',
     ],
-    'dirty' : [
+    'dirty': [
       "Shitstorm's Chamber Maid",
     ],
-    'loser' : [],
   },
   'spicer': {
     'clean': [
@@ -1502,7 +1497,6 @@ monikers = {
       'Sean Sphincter',
       'Bullshit Spice',
     ],
-    'loser': [],
   },
   'ryan': {
     'clean': [
@@ -1518,14 +1512,12 @@ monikers = {
       'The Honorable Mr. Fuck You I Got Mine',
       'Spineless Shitweasel',
     ],
-    'loser': [],
   },
   'gorsuch': {
     'clean': [
       'Asterisk',
     ],
     'dirty': [],
-    'loser': [],
   },
   'mcconnell': {
     'clean': [
@@ -1541,7 +1533,6 @@ monikers = {
       'McTraitor',
     ],
     'dirty': [],
-    'loser': [],
   },
   'breitbart': {
     'clean': [
@@ -1551,7 +1542,6 @@ monikers = {
       'Not-So-Brightbart',
     ],
     'dirty': [],
-    'loser': [],
   },
   'shuckabee': {
     'clean': [
@@ -1565,7 +1555,6 @@ monikers = {
       'Lying White House Spokesperson Number n+1',
       'Another Mendacious Sack of Shit',
     ],
-    'loser': [],
   },
   'kelly': {
     'clean': [
@@ -1573,7 +1562,6 @@ monikers = {
         'Man Who Lectures Gold Star Families With Heartfelt Bullshit',
     ],
     'dirty': [],
-    'loser': [],
   },
   'devos': {
     'clean': [
@@ -1585,7 +1573,6 @@ monikers = {
       'Calvinist Thief',
     ],
     'dirty': [],
-    'loser': [],
   },
   'pai': {
     'clean': [
@@ -1599,7 +1586,6 @@ monikers = {
         'Comcast Fellator',
         'A Shit Pie',
     ],
-    'loser': [],
   },
   'kavanaugh': {
     'clean': [
@@ -1628,7 +1614,6 @@ monikers = {
         'Just Another Shitbag from Yale',
         'Sexist, Drunk Jackass',
     ],
-    'loser': [],
   },
   'giuliani': {
     'clean': [
@@ -1640,9 +1625,9 @@ monikers = {
       'Prosecutor Turned Mobster',
       'Shakedown Man',
       'Dollar Store Nosferatu',
+      'Bankrupt Man',
     ],
     'dirty': [],
-    'loser': [],
   },
   'ivanka': {
     'clean': [
@@ -1660,7 +1645,6 @@ monikers = {
     'dirty': [
       "Person Who's Pussy has Special No-Grab Privileges"
     ],
-    'loser': [],
   },
   'hannity': {
     'clean': [
@@ -1673,7 +1657,6 @@ monikers = {
     'dirty': [
       "Ted Koppel's Bitch",
     ],
-    'loser': [],
   },
   'zuckerberg': {
     'clean': [
@@ -1682,11 +1665,12 @@ monikers = {
       'Man Whose Virgin Level, In A Sane Universe, Would Be Over 9000',
       'Just Another CIA Agent With A Particular Set Of H4CK0R $K1LLZ',
       'Dead-Eyed Zombie',
+      'Meta-stacized Tumor',
+      'Space Alien Uncomfortable in Human Disguise',
     ],
     'dirty': [
       'Facefuck',
     ],
-    'loser': [],
   },
   'dorsey': {
     'clean': [
@@ -1698,7 +1682,6 @@ monikers = {
       '#asshole',
       '#motherfucker',
     ],
-    'loser': [],
   },
   'putin': {
     'clean': [
@@ -1734,7 +1717,6 @@ monikers = {
       'Xуйло́', 'Dickhead',
       'Tонкошкірний Гандон', 'Thin-skinned Condom',
     ],
-    'loser': [],
   },
   'owens': {
     'clean': [
@@ -1743,7 +1725,6 @@ monikers = {
     ],
     'dirty': [
     ],
-    'loser': [],
   },
   'carlson': {
     'clean': [
@@ -1760,7 +1741,6 @@ monikers = {
    'dirty': [
         'Guy Who Always Looks Like You Just Fucked His Girlfriend'
     ],
-   'loser': [],
   },
   'musk': {
     'clean': [
@@ -1773,9 +1753,76 @@ monikers = {
       'Space Karen',
       'Phony Stark',
       'Worthless Billionaire',
+      'Fascist Billionaire',
+      'Huge Piece of X',
+      'Social Media Menace',
+      'Punchable Dipshit',
+      'Xitterer',
+      'Elongated Muskrat',
+      '"Accidental" Sieg-Heiler',
+    ],
+    'dirty': [
+      'World\'s Wealthiest Floppy Penis',
+    ],
+  },
+  'boebert': {
+    'clean': [
+        'Common Clay of the West (You know, Moron)',
+        'Public Masturbation Proponent',
     ],
     'dirty': [],
-    'loser': [],
+  },
+  'mtg': {
+    'clean': [
+        'Boebert Stupidity Contest Challenger',
+    ],
+    'dirty': [],
+  },
+  'jdv': {
+    'clean': [
+        'Hillbilly Effigy',
+        'Eyeliner Expert',
+    ],
+    'dirty': [],
+  },
+  'rfk': {
+    'clean': [
+        'Whale Carcass Aficionado',
+        'Preventable Disease Proponent',
+        'Polio Monger',
+        'Heroin User',
+        'Worst Kennedy',
+        'Protector of Precious Bodily Fluids',
+        'Death Merchant',
+        'Roadkill Gourmet',
+    ],
+    'dirty': [],
+  },
+  'miller': {
+    'clean': [
+      'Joseph Goebbels',
+      'Kapo',
+    ],
+    'dirty': [
+    ],
+  },
+  'hegseth': {
+    'clean': [
+        'Alcoholic Philanderer',
+        'White Nationalist Tattoo\'d Domestic Abuser',
+        'A Mother\'s Disappointment',
+        'Unqualified Alcoholic',
+        'Least Qualified DoD Head Imaginable',
+    ],
+    'dirty': [],
+  },
+  'bondi': {
+    'clean': [
+      'Bondi Villain',
+      'Dianetics AG',
+      'Private Prison Lobbyist',
+    ],
+    'dirty': [],
   },
 }
 
@@ -1791,13 +1838,13 @@ combos = {
         },
     },
     'combined.json': {
-        'monikers': ['clean', 'dirty', 'loser'],
-        'matic': { 
-            'a': ['clean', 'dirty'], 
-            'b': ['clean', 'dirty', 'loser' ],
-            'shka': ['clean', 'dirty' ],
-            'shkb': ['clean', 'dirty' ],
-            'shkc': ['clean', 'dirty' ],
+        'monikers': ['clean', 'dirty'],
+        'matic': {
+            'a': ['clean', 'dirty'],
+            'b': ['clean', 'dirty', ],
+            'shka': ['clean', 'dirty'],
+            'shkb': ['clean', 'dirty'],
+            'shkc': ['clean', 'dirty'],
         },
         'button': {
           'name': 'clean + NSFW insults',
@@ -1806,9 +1853,9 @@ combos = {
     },
     'clean.json': {
         'monikers': ['clean', ],
-        'matic': { 
-            'a' : ['clean', ], 
-            'b': ['clean', 'loser'],
+        'matic': {
+            'a': ['clean', ],
+            'b': ['clean', ],
             'shka': ['clean', ],
             'shkb': ['clean', ],
             'shkc': ['clean', ],
@@ -1820,18 +1867,10 @@ combos = {
     },
     'dirty.json': {
         'monikers': ['dirty', ],
-        'matic': { 'a' : ['clean', 'dirty'], 'b': ['dirty','loser' ] },
+        'matic': {'a': ['clean', 'dirty'], 'b': ['dirty']},
         'button': {
           'name': 'NSFW insults',
           'description': 'Only curseword names.'
-        },
-    },
-    'loser.json': {
-        'monikers': ['loser', ],
-        'matic': { 'a' : ['clean', 'dirty'], 'b': ['loser' ] },
-        'button': {
-          'name': 'Loser insults',
-          'description': 'Only Loser-Based'
         },
     },
 }
@@ -1877,12 +1916,12 @@ for comboname in combos:
 
     # remove actions with no insults
     for person in empty_actions:
-      outdata['actions'].pop(person,None)
+        outdata['actions'].pop(person, None)
 
     if False:
         # remove actions that are not quite ready for prime time
-        for person in ['conway','spicer']:
-            outdata['actions'].pop(person,None)
+        for person in ['conway', 'spicer']:
+            outdata['actions'].pop(person, None)
 
     jsd = json.dumps(outdata)
     ofile = open(comboname, 'w')
@@ -1891,49 +1930,33 @@ for comboname in combos:
 
 ofile = open("insults.txt", "wb")
 for moniker in sorted(monikers['trump']['clean']):
-    ofile.write(''.join(['"',moniker,'",',"\n"]).encode('utf-8'))
+    ofile.write(''.join(['"', moniker, '",', "\n"]).encode('utf-8'))
 ofile.close()
 
-
-## button config file
+# button config file
 bconfig = []
 for comboname in combos:
-  combos[comboname]['button']['url'] = url_base + comboname
-  bconfig.append(combos[comboname]['button'])
+    combos[comboname]['button']['url'] = url_base + comboname
+    bconfig.append(combos[comboname]['button'])
 
 bconfig.append({
   'name': 'Drumpf',
   'url': url_base + 'drumpf.json',
   'description': 'Always Drumpf (John Oliver mode)'
-});
-bconfig.append({
-  'name': 'Drumpf',
-  'url': url_base + 'individual1.json',
-  'description': 'Individual 1'
-});
+})
 bconfig.append({
   'name': 'Lord Dampnut',
   'url': url_base + 'dampnut.json',
   'description': 'Always "Lord Dampnut"'
-});
+})
 bconfig.append({
   'name': 'Just Pictures',
   'url': url_base + 'justpictures.json',
   'description': 'No Insults -- Just Pictures',
-});
-bconfig.append({
-  'name': 'Loser',
-  'url': url_base + 'loser.json',
-  'description': 'Epic Loser',
-});
-bconfig.append({
-  'name': 'NZ Black it Out - Counter Hate',
-  'url': url_base + 'blackout.json',
-  'description': 'NZ Black it Out - Counter Hate',
-});
+})
 
-
-ofile = open('buttons_config.json',"w")
+ofile = open('buttons_config.json', "w")
 ofile.write(json.dumps(bconfig))
 ofile.close()
+
 
