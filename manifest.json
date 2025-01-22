@@ -55,7 +55,7 @@
         "200":"icons/dt-200.png",
         "400":"icons/dt-400.png"
     },
-    "applications":{
+    "browser_specific_settings":{
         "gecko":{
             "id":"@detrumpify"
         }
