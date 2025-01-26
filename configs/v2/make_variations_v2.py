@@ -300,7 +300,7 @@ base = {
             ],
             'randomize_mode': 'always',
         },
-        'rfk': {
+        'rfkjr': {
             'default_enabled': True,
             'find_regex': [
                 "((RFK\s+Jr\\.?)|((R(obert)?\\s+F\\.?\\s)?Kennedy,?\s+Jr\\.?))(?!\\w)", "g"
@@ -325,6 +325,13 @@ base = {
             'default_enabled': True,
             'find_regex': [
                 "(((Pam)?ela)?\\sBondi)(?!\\w)", "g"
+            ],
+            'randomize_mode': 'always',
+        },
+        'gabbard': {
+            'default_enabled': True,
+            'find_regex': [
+                "(Tulsi\\s)?Gabbard(?!\\w)", "g"
             ],
             'randomize_mode': 'always',
         },
@@ -1244,6 +1251,13 @@ monikers = {
       'Convicted Felon',
       'Taint Tumor',
       'Orange Anus',
+      'Custard-Flavored Jobby',
+      'Leather-Faced Piss Jar',
+      'Apricot Hellbeast',
+      'Knuckle-brained Fart Lozenge',
+      'Blinkered Plum',
+      'Rug-Wearing Thunder Nugget',
+      'Uncooked Pastry',
     ],
     'dirty': [
       "Fuckface von Clownstick",
@@ -1309,6 +1323,12 @@ monikers = {
       'Baby Dick',
       'Smegma Pudding Pop',
       "Putin's Bitch",
+      'Bawbag-Eyed Fuck Bumper',
+      'Huffy Wee Fuckin Bampot',
+      'Utter Cockwomble',
+      'Degenerate Corned Beef-Face Syrup Wearing Wankstain',
+      'Rotten Orange Fucknut',
+      'Witless Cocksplat',
     ],
   },
   'alt-right': {
@@ -1431,6 +1451,7 @@ monikers = {
       'Bannon Hackonnen',
       'Three Day Old Corpse Just Pulled from River',
       'Diseased Bullfrog',
+      'Matryoshka of Dirty Shirts',
     ],
     'dirty': [
       'Neo Nazi Dickhead',
@@ -1552,7 +1573,7 @@ monikers = {
       'Sneer of Sauron',
     ],
     'dirty': [
-      'Lying White House Spokesperson Number n+1',
+      'Lying White House Spokesperson Number n+1, Emeritus',
       'Another Mendacious Sack of Shit',
     ],
   },
@@ -1626,6 +1647,7 @@ monikers = {
       'Shakedown Man',
       'Dollar Store Nosferatu',
       'Bankrupt Man',
+      'Melting Can of Shoe Polish',
     ],
     'dirty': [],
   },
@@ -1739,7 +1761,7 @@ monikers = {
       'Performatively Outraged Wedge Salad',
     ],
    'dirty': [
-        'Guy Who Always Looks Like You Just Fucked His Girlfriend'
+      'Guy Who Always Looks Like You Just Fucked His Girlfriend'
     ],
   },
   'musk': {
@@ -1760,6 +1782,7 @@ monikers = {
       'Xitterer',
       'Elongated Muskrat',
       '"Accidental" Sieg-Heiler',
+      'Nazi Immigrant',
     ],
     'dirty': [
       'World\'s Wealthiest Floppy Penis',
@@ -1770,51 +1793,73 @@ monikers = {
         'Common Clay of the West (You know, Moron)',
         'Public Masturbation Proponent',
     ],
-    'dirty': [],
+    'dirty': [
+    ],
   },
   'mtg': {
     'clean': [
-        'Boebert Stupidity Contest Challenger',
+        'Boebert Stupidity Contest Runner-Up',
     ],
     'dirty': [],
   },
   'jdv': {
     'clean': [
-        'Hillbilly Effigy',
-        'Eyeliner Expert',
+      'Hillbilly Effigy',
+      'Eyeliner Expert',
     ],
-    'dirty': [],
+    'dirty': [
+    ],
   },
-  'rfk': {
+  'rfkjr': {
     'clean': [
-        'Whale Carcass Aficionado',
-        'Preventable Disease Proponent',
-        'Polio Monger',
-        'Heroin User',
-        'Worst Kennedy',
-        'Protector of Precious Bodily Fluids',
-        'Death Merchant',
-        'Roadkill Gourmet',
+      'Whale Carcass Aficionado',
+      'Preventable Disease Proponent',
+      'Polio Monger',
+      'Heroin User',
+      'Worst Kennedy',
+      'Protector of Precious Bodily Fluids',
+      'Death Merchant',
+      'Roadkill Gourmet',
+      'Shrunken Head',
+      'Brainworm Habitat',
     ],
-    'dirty': [],
+    'dirty': [
+      'This Fucking Kennedy',
+    ],
   },
   'miller': {
     'clean': [
       'Joseph Goebbels',
       'Kapo',
+      'Family Separator',
+      'Bulging, Angry Forehead',
     ],
     'dirty': [
+      'Racist Glans',
     ],
   },
   'hegseth': {
     'clean': [
-        'Alcoholic Philanderer',
-        'White Nationalist Tattoo\'d Domestic Abuser',
-        'A Mother\'s Disappointment',
-        'Unqualified Alcoholic',
-        'Least Qualified DoD Head Imaginable',
+      'Alcoholic Philanderer',
+      'White Nationalist Tattoo\'d Domestic Abuser',
+      'A Mother\'s Disappointment',
+      'Unqualified Alcoholic',
+      'Least Qualified DoD Head Imaginable',
+      'Boring Drunk',
     ],
-    'dirty': [],
+    'dirty': [
+      'DoD Asswipe',
+    ],
+  },
+  'gabbard': {
+    'clean': [
+      'Putin\'s DNI',
+      'Director of Nationalist Intransigence',
+    ],
+    'dirty': [
+      'White Shocked Shit-For-Brains',
+      'Ho Gabba Gabbard',
+    ]
   },
   'bondi': {
     'clean': [
