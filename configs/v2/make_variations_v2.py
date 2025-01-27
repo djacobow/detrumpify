@@ -16,9 +16,9 @@ base = {
     },
     'whitelist': [
         "www.foxnews.com", "cnn.com", "www.bbc.com/news",
-        "www.bbc.co.uk/news", "www.theguardian.com", "www.theguardian.co.uk",
+        "www.bbc.co.uk/news", "theguardian.com", "www.theguardian.co.uk",
         "nytimes.com", "facebook.com", "washingtonpost.com", "salon.com",
-        "slate.com", "buzzfeed.com", "vox.com", "huffingtonpost.com",
+        "slate.com", "buzzfeed.com", "vox.com", "huffpost.com", "huffingtonpost.com",
         "wsj.com", "economist.com", "latimes.com", "dallasnews.com",
         "usatoday.com", "denverpost.com", "insidedenver.com", "philly.com",
         "chron.com", "detroitnews.com", "freep.com", "boston.com",
@@ -33,7 +33,7 @@ base = {
         "pjmedia.com", "hotair.com", "cnsnews.com", "westernjournalism.com",
         "washingtonexaminer.com", "tpnn.com", "newsbusters.org",
         "twitchy.com", "news.google.com", "npr.org", "cnbc.com", "reuters.com",
-        "tiktok.com",
+        "tiktok.com", "mediaite.com", "thehill.com"
     ],
     'breaking': [
         'Trump just a big, fat tardigrade.',

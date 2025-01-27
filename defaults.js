@@ -53,7 +53,7 @@ var defaults = {
         "www.foxnews.com", "cnn.com", "www.bbc.com/news",
         "www.bbc.co.uk/news", "www.theguardian.com", "www.theguardian.co.uk",
         "nytimes.com", "facebook.com", "washingtonpost.com", "salon.com",
-        "slate.com", "buzzfeed.com", "vox.com", "huffingtonpost.com",
+        "slate.com", "buzzfeed.com", "vox.com", "huffpost.com", "huffingtonpost.com",
         "wsj.com", "economist.com", "latimes.com", "dallasnews.com",
         "usatoday.com", "denverpost.com", "insidedenver.com", "philly.com",
         "chron.com", "detroitnews.com", "freep.com", "boston.com",
@@ -67,6 +67,7 @@ var defaults = {
         "nationalreview.com", "townhall.com", "freerepublic.com",
         "pjmedia.com", "hotair.com", "cnsnews.com", "westernjournalism.com",
         "washingtonexaminer.com", "tpnn.com", "newsbusters.org",
-        "twitchy.com", "news.google.com", "npr.org", "cnbc.com", "reuters.com"
+        "twitchy.com", "news.google.com", "npr.org", "cnbc.com", "reuters.com",
+        "thehill.com", "mediaite.com"
     ].join(' '),
 };
