@@ -1853,11 +1853,13 @@ monikers = {
   },
   'gabbard': {
     'clean': [
-      'Putin\'s DNI',
+      'Pooty\'s DNI',
       'Director of Nationalist Intransigence',
+      'Repulsi Gabbard',
+      'Loony-Tunes Cultist ',
     ],
     'dirty': [
-      'White Shocked Shit-For-Brains',
+      'White-Shocked Shit-For-Brains',
       'Ho Gabba Gabbard',
     ]
   },
