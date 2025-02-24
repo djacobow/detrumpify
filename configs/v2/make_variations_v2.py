@@ -1772,7 +1772,6 @@ monikers = {
       'Melon Husk',
       'Keno Slum',
       'Mole Sunk',
-      'Space Karen',
       'Phony Stark',
       'Worthless Billionaire',
       'Fascist Billionaire',
@@ -1783,9 +1782,13 @@ monikers = {
       'Elongated Muskrat',
       '"Accidental" Sieg-Heiler',
       'Nazi Immigrant',
+      'Dunning-Krugerrand',
+      'Ketamine Junky',
     ],
     'dirty': [
       'World\'s Wealthiest Floppy Penis',
+      'Huge Dick With A Small Penis',
+      'Botched Penile Implant',
     ],
   },
   'boebert': {

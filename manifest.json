@@ -7,7 +7,7 @@
     "options_ui":{
         "page":"options.html"
     },
-    "version":"1.4.1",
+    "version":"1.4.2",
     "permissions":[
         "storage",
         "tabs"
@@ -58,6 +58,9 @@
     "browser_specific_settings":{
         "gecko":{
             "id":"@detrumpify"
+        },
+        "gecko_android":{
+            "strict_min_version":"113.0"
         }
     },
     "web_accessible_resources": [{

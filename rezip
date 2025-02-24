@@ -1,2 +1,2 @@
-zip a.zip *.* icons/*.* -x *.zip
+zip a.zip *.* icons/*.* -x *.zip -x *.py
 
