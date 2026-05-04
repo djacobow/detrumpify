@@ -107,7 +107,7 @@ base = {
             'randomize_mode': 'always',
         },
         'bannon': {
-            'default_enabled': True,
+            'default_enabled': False,
             'find_regex': [
                 # first name and/or middle initial may be present
                 "((Steve|Steven|Stephen|STEVE|STEVEN|STEPHEN)\\s*((K\\.?|Kevin|KEVIN)\\s*)?)?(Bannon|BANNON)(?!\\w)", "g"
@@ -317,14 +317,14 @@ base = {
         'hegseth': {
             'default_enabled': True,
             'find_regex': [
-                "((Pete)r?)?\\sHegseth(?!\\w)", "g"
+                "((Pete(r)?|PETE(R)?)\\s)?Hegseth(?!\\w)", "g"
             ],
             'randomize_mode': 'always',
         },
         'bondi': {
             'default_enabled': True,
             'find_regex': [
-                "(((Pam)?ela)?\\sBondi)(?!\\w)", "g"
+                "((Pam(ela)?|Pamela)\\s)?Bondi(?!\\w)", "g"
             ],
             'randomize_mode': 'always',
         },
@@ -332,6 +332,78 @@ base = {
             'default_enabled': True,
             'find_regex': [
                 "(Tulsi\\s)?Gabbard(?!\\w)", "g"
+            ],
+            'randomize_mode': 'always',
+        },
+        'kashpatel': {
+            'default_enabled': True,
+            'find_regex': [
+                # Patel is a common surname, so require first name
+                "Kash\\sPatel(?!\\w)", "g"
+            ],
+            'randomize_mode': 'always',
+        },
+        'leavitt': {
+            'default_enabled': True,
+            'find_regex': [
+                "((Caroline|Karoline)\\s)?Leavitt(?!\\w)", "g"
+            ],
+            'randomize_mode': 'always',
+        },
+        'rubio': {
+            'default_enabled': True,
+            'find_regex': [
+                "(Marco\\s)?Rubio(?!\\w)", "g"
+            ],
+            'randomize_mode': 'always',
+        },
+        'homan': {
+            'default_enabled': True,
+            'find_regex': [
+                "(Tom\\s)?Homan(?!\\w)", "g"
+            ],
+            'randomize_mode': 'always',
+        },
+        'navarro': {
+            'default_enabled': True,
+            'find_regex': [
+                "(Peter\\s)?Navarro(?!\\w)", "g"
+            ],
+            'randomize_mode': 'always',
+        },
+        'gaetz': {
+            'default_enabled': True,
+            'find_regex': [
+                "(Matt\\s)?Gaetz(?!\\w)", "g"
+            ],
+            'randomize_mode': 'always',
+        },
+        'vought': {
+            'default_enabled': True,
+            'find_regex': [
+                "(Russell\\s)?Vought(?!\\w)", "g"
+            ],
+            'randomize_mode': 'always',
+        },
+        'ramaswamy': {
+            'default_enabled': True,
+            'find_regex': [
+                "(Vivek\\s)?Ramaswamy(?!\\w)", "g"
+            ],
+            'randomize_mode': 'always',
+        },
+        'mcmahon': {
+            'default_enabled': True,
+            'find_regex': [
+                # McMahon is too common (Vince McMahon), require first name
+                "Linda\\sMcMahon(?!\\w)", "g"
+            ],
+            'randomize_mode': 'always',
+        },
+        'zeldin': {
+            'default_enabled': True,
+            'find_regex': [
+                "(Lee\\s)?Zeldin(?!\\w)", "g"
             ],
             'randomize_mode': 'always',
         },
@@ -1258,6 +1330,21 @@ monikers = {
       'Blinkered Plum',
       'Rug-Wearing Thunder Nugget',
       'Uncooked Pastry',
+      "Manchurian Cantelope",
+      "YMCA Enthusiast",
+      "Ballroom Strongman",
+      "Victory Ball Habitué",
+      "Coveter of Greenland",
+      "America's True Gulf",
+      "Commander of Imaginary Conquests",
+      "Greenland Bidder",
+      "TACO President",
+      "Tariff Bluffer",
+      "Gas Price Hiker",
+      "He Who Always Chickens Out",
+      "Jeffrey Epstein's 'Lot of Fun' Companion",
+      "Epstein File Redactor",
+      "Epstein's Former Mar-a-Lago Regular",
     ],
     'dirty': [
       "Fuckface von Clownstick",
@@ -1784,6 +1871,10 @@ monikers = {
       'Nazi Immigrant',
       'Dunning-Krugerrand',
       'Ketamine Junky',
+      'DOGE Dummer',
+      'Apartheid Fan',
+      'AfD\'s American Backer',
+      'Former Deputy President',
     ],
     'dirty': [
       'World\'s Wealthiest Floppy Penis',
@@ -1809,8 +1900,14 @@ monikers = {
     'clean': [
       'Hillbilly Effigy',
       'Eyeliner Expert',
+      'Man Who Lectured Europe About Democracy',
+      'Expert Catholic Theologian',
+      'Peter Thiel\'s Investment',
+      'Signal Chat Diplomat',
+      'Mamaw\'s Disappointment',
     ],
     'dirty': [
+      'Couch Fucker',
     ],
   },
   'rfkjr': {
@@ -1825,6 +1922,11 @@ monikers = {
       'Roadkill Gourmet',
       'Shrunken Head',
       'Brainworm Habitat',
+      'Dumbest Health Influencer',
+      'Measles Tour Promoter',
+      'Man Who Thinks Fluoride is a Conspiracy',
+      'America\'s Least Healthy Health Secretary',
+      'CDC Dismantler',
     ],
     'dirty': [
       'This Fucking Kennedy',
@@ -1845,13 +1947,27 @@ monikers = {
     'clean': [
       'Alcoholic Philanderer',
       'White Nationalist Tattoo\'d Domestic Abuser',
-      'A Mother\'s Disappointment',
       'Unqualified Alcoholic',
       'Least Qualified DoD Head Imaginable',
-      'Boring Drunk',
+      'Kegsbreath',
+      'Hagueseth',
+      'Pentagon\'s Drunk Uncle',
+      'Signal Group Leaker',
+      'Secretary of Getting Loaded',
+      'War Criminal',
+      'Secrettary Double-Tap',
+      'Boozy War Planner',
+      'Secretary of Dereliction',
+      'Yemen Strike Happy Hour Coordinator',
+      'Classified Info Happy Hour Host',
+      'Walking Court Martial',
+      'Man Who Made the Pentagon Miss Mattis',
+      'SecDef\'s Empty Flask',
+      'Tattoo\'d Disgrace to the Uniform',
     ],
     'dirty': [
       'DoD Asswipe',
+      'Drunken Warmongering Shit',
     ],
   },
   'gabbard': {
@@ -1859,7 +1975,13 @@ monikers = {
       'Pooty\'s DNI',
       'Director of Nationalist Intransigence',
       'Repulsi Gabbard',
-      'Loony-Tunes Cultist ',
+      'Putin\'s American Mouthpiece',
+      'Assad Apologist',
+      'Russia\'s Favorite American Politician',
+      'MAGA\'s Token Veteran',
+      'Director of Intel Destruction',
+      'America\'s Manchurian Candidate',
+      'Former Democrat, Current Disaster',
     ],
     'dirty': [
       'White-Shocked Shit-For-Brains',
@@ -1871,6 +1993,139 @@ monikers = {
       'Bondi Villain',
       'Dianetics AG',
       'Private Prison Lobbyist',
+    ],
+    'dirty': [],
+  },
+  'kashpatel': {
+    'clean': [
+      'Enemy-List Enthusiast',
+      'Director of Revenge',
+      'FBI\'s New Worst Enemy',
+      'Kash-and-Burn',
+      'Deep State Deleter',
+      'Professional Score Settler',
+      'Author of Paranoid Mythology',
+      'Intelligence Community\'s New Undertaker',
+      'Patel the Purger',
+      'Career Grievance Collector',
+      'Sworn Enemy of the Free Press',
+      'Man Who Turned a Grudge List Into a Job Description',
+    ],
+    'dirty': [],
+  },
+  'leavitt': {
+    'clean': [
+      'Baghdad Barbie 2.0',
+      'Miss Deflection',
+      'Professional Truth-Mangler',
+      'Spin Cycle',
+      'Weaponized Spokesperson',
+      'Leavitt or Believe It',
+      'Youngest Propagandist on Record',
+      'Press Room\'s Resident Fiction Writer',
+      'Spokesbot 3000',
+      'Serial Question-Dodger',
+      'Official White House Reality-Distorter',
+      'Press Secretary of Prevarication',
+    ],
+    'dirty': [],
+  },
+  'rubio': {
+    'clean': [
+      'Little Marco',
+      'Political Weather Vane',
+      'Perpetual Presidential Candidate',
+      'Thirsty Marco',
+      'Water Bottle Warrior',
+      'Gang of Eight Betrayer',
+      'Broken Record in a Suit',
+      'Scripted Robot Who Forgot His Lines',
+      'Man Who Called Trump a Con Man Then Became His Secretary of State',
+      'Sweaty Little Senator',
+    ],
+    'dirty': [],
+  },
+  'homan': {
+    'clean': [
+      'Border Czar of Broken Families',
+      'Professional Child Separator',
+      'ICE Man Cometh',
+      'America\'s Deportation Machine',
+      'Cruelty-as-Policy Architect',
+      'Man Who Thinks Ripping Families Apart is Just Good Policy',
+      'Coldest Cop in America',
+    ],
+    'dirty': [
+      'ICE-Cold Bastard',
+    ],
+  },
+  'navarro': {
+    'clean': [
+      'Ron Vara',
+      'Jailbird Trade Advisor',
+      'Pardoned Contempt Artist',
+      'Man Who Invented a Fictional Expert to Validate His Own Trade Theories',
+      'Trade War Architect Who Made China Richer',
+      'Ex-Con Trade Czar',
+      'Tariff Fetishist',
+    ],
+    'dirty': [
+      'Contemptuous Little Prick',
+    ],
+  },
+  'gaetz': {
+    'clean': [
+      'Florida Man',
+      'Bipartisan House Ethics Investigee',
+      'Failed AG Nominee',
+      'Friend to Joel Greenberg',
+      'Ethics Committee\'s Most Colorful Subject',
+      'Venmo Vengeance Seeker',
+      'Matt the Unconfirmed',
+    ],
+    'dirty': [
+      'Sex Tourist',
+    ],
+  },
+  'vought': {
+    'clean': [
+      'Project 2025\'s Chief Architect',
+      'Administrative State\'s Undertaker',
+      'Christian Nationalist Budget Hawk',
+      'OMB\'s Wrecking Ball',
+      'Man Who Broke the Federal Government',
+    ],
+    'dirty': [],
+  },
+  'ramaswamy': {
+    'clean': [
+      'DOGE Dropout',
+      'Pharma Bro Turned Political Grifter',
+      'DOGE\'s Less Interesting Half',
+      'Man Who Burned His MAGA Card to Run for Ohio Governor',
+      'Would-Be Trump Who Couldn\'t Even Keep His DOGE Job',
+    ],
+    'dirty': [],
+  },
+  'mcmahon': {
+    'clean': [
+      'WWE\'s Gift to American Education',
+      'SmackDown Secretary of Education',
+      'Body Slam Bureaucrat',
+      'Department of Education\'s Undertaker',
+      'Two-Time Connecticut Senate Loser',
+      'Chairwoman of the Education Bored',
+    ],
+    'dirty': [],
+  },
+  'zeldin': {
+    'clean': [
+      'EPA Arsonist',
+      'Long Island\'s Gift to Polluters',
+      'Administrator of Pollution',
+      'Friend to Big Oil, Enemy to Clean Air',
+      'EPA\'s Demolition Man',
+      'Coastal Congressman Who Sold Out His Own Coastline',
     ],
     'dirty': [],
   },
